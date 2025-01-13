@@ -1,0 +1,122 @@
+{
+  "extension_name": {
+    "message": "인증채우기",
+    "description": "The display name for the extension."
+  },
+  "extension_description": {
+    "message": "대한민국 본인인증 자동 채우기 브라우저 확장 프로그램",
+    "description": "Description of what the extension does."
+  },
+  "developer": {
+    "message": "오지민",
+    "description": ""
+  },
+  "auth_autofill": {
+    "message": "인증채우기",
+    "description": ""
+  },
+  "add_profile": {
+    "message": "프로필 추가",
+    "description": ""
+  },
+  "carrier": {
+    "message": "통신사",
+    "description": ""
+  },
+  "carrier_SKT": {
+    "message": "SKT",
+    "description": ""
+  },
+  "carrier_KT": {
+    "message": "KT",
+    "description": ""
+  },
+  "carrier_LGU": {
+    "message": "LGU+",
+    "description": ""
+  },
+  "carrier_SKT_MNVO": {
+    "message": "SKT망 알뜰폰",
+    "description": ""
+  },
+  "carrier_KT_MNVO": {
+    "message": "KT망 알뜰폰",
+    "description": ""
+  },
+  "carrier_LGU_MNVO": {
+    "message": "LGU+망 알뜰폰",
+    "description": ""
+  },
+  "full_name": {
+    "message": "이름",
+    "description": ""
+  },
+  "phone_number": {
+    "message": "휴대폰 번호",
+    "description": ""
+  },
+  "birthday": {
+    "message": "생년월일",
+    "description": ""
+  },
+  "citizen": {
+    "message": "내국인",
+    "description": ""
+  },
+  "foreigner": {
+    "message": "외국인",
+    "description": ""
+  },
+  "gender": {
+    "message": "성별",
+    "description": ""
+  },
+  "male": {
+    "message": "남성",
+    "description": ""
+  },
+  "female": {
+    "message": "여성",
+    "description": ""
+  },
+  "auth_method": {
+    "message": "인증방식",
+    "description": ""
+  },
+  "sms": {
+    "message": "SMS 문자메시지",
+    "description": ""
+  },
+  "pass": {
+    "message": "통신사 PASS앱",
+    "description": ""
+  },
+  "enter_name": {
+    "message": "이름을 입력하시오",
+    "description": ""
+  },
+  "select_carrier": {
+    "message": "통신사를 선택하시오",
+    "description": ""
+  },
+  "check_number": {
+    "message": "휴대폰번호를 확인하시오",
+    "description": ""
+  },
+  "check_birthday": {
+    "message": "생일을 확인하시오 (8자리) (예, 19990204)",
+    "description": ""
+  },
+  "select_gender": {
+    "message": "성별을 선택하시오",
+    "description": ""
+  },
+  "select_auth_method": {
+    "message": "인증방식을 선택하시오",
+    "description": ""
+  },
+  "skt_MNVO_do_not_support_pass": {
+    "message": "SKT망 알뜰폰은 PASS앱 인증을 지원하지 않습니다.\nSMS인증을 이용해주세요.",
+    "description": ""
+  }
+}

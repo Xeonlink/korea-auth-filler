@@ -1,0 +1,122 @@
+{
+  "extension_name": {
+    "message": "Korea Auth Filler",
+    "description": "The display name for the extension."
+  },
+  "extension_description": {
+    "message": "A browser extension that autofills identity verification services in South Korea",
+    "description": "Description of what the extension does."
+  },
+  "developer": {
+    "message": "OH jimin",
+    "description": ""
+  },
+  "auth_autofill": {
+    "message": "Auth Autofill",
+    "description": ""
+  },
+  "add_profile": {
+    "message": "Add profile",
+    "description": ""
+  },
+  "carrier": {
+    "message": "Carrier",
+    "description": ""
+  },
+  "carrier_SKT": {
+    "message": "SKT",
+    "description": ""
+  },
+  "carrier_KT": {
+    "message": "KT",
+    "description": ""
+  },
+  "carrier_LGU": {
+    "message": "LGU+",
+    "description": ""
+  },
+  "carrier_SKT_MNVO": {
+    "message": "SKT network MVNO",
+    "description": ""
+  },
+  "carrier_KT_MNVO": {
+    "message": "KT network MVNO",
+    "description": ""
+  },
+  "carrier_LGU_MNVO": {
+    "message": "LGU+ network MVNO",
+    "description": ""
+  },
+  "full_name": {
+    "message": "Full name written on alien registration card",
+    "description": ""
+  },
+  "phone_number": {
+    "message": "Mobile number",
+    "description": ""
+  },
+  "birthday": {
+    "message": "Birthday",
+    "description": ""
+  },
+  "citizen": {
+    "message": "Korean citizen",
+    "description": ""
+  },
+  "foreigner": {
+    "message": "Foreigner",
+    "description": ""
+  },
+  "gender": {
+    "message": "Gender",
+    "description": ""
+  },
+  "male": {
+    "message": "Male",
+    "description": ""
+  },
+  "female": {
+    "message": "Female",
+    "description": ""
+  },
+  "auth_method": {
+    "message": "Auth Method",
+    "description": ""
+  },
+  "sms": {
+    "message": "SMS text message",
+    "description": ""
+  },
+  "pass": {
+    "message": "Carrier's PASS app",
+    "description": ""
+  },
+  "enter_name": {
+    "message": "Please enter a name",
+    "description": ""
+  },
+  "select_carrier": {
+    "message": "Please select a carrier",
+    "description": ""
+  },
+  "check_number": {
+    "message": "Please check your mobile phone number",
+    "description": ""
+  },
+  "check_birthday": {
+    "message": "Please check your birthday (8 digits) (eg 19990204)",
+    "description": ""
+  },
+  "select_gender": {
+    "message": "Please select a gender",
+    "description": ""
+  },
+  "select_auth_method": {
+    "message": "Please select an authentication method",
+    "description": ""
+  },
+  "skt_MNVO_do_not_support_pass": {
+    "message": "SKT network MVNO does not support PASS app authentication.\nYou can only use SMS authentication.",
+    "description": ""
+  }
+}
