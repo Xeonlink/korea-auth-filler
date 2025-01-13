@@ -5,9 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node dev.ts",
-    "build": "ts-node build.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ts-node build.ts"
   },
   "keywords": [],
   "author": "",
