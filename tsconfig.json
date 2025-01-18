@@ -13,12 +13,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.json"],
   "exclude": ["node_modules"],
   "ts-node": {
     "transpileOnly": true,
     "esm": true
+  },
+  "tsc": {
+    "resolveJsonModule": true
   }
 }

@@ -1,11 +1,14 @@
 import postcssPlugin from "@chialab/esbuild-plugin-postcss";
+import { htmlPlugin } from "@craftamap/esbuild-plugin-html";
 import autoPrefixer from "autoprefixer";
 import esbuild, { BuildOptions } from "esbuild";
 import { clean } from "esbuild-plugin-clean";
 import { copy } from "esbuild-plugin-copy";
+import { writeFile } from "fs/promises";
+import path from "path";
 import { Plugin } from "postcss";
 import tailwindcss from "tailwindcss";
-import { htmlPlugin } from "@craftamap/esbuild-plugin-html";
+import { manifest } from "./src/manifest.ts";
 
 const htmlTemplate = `
 <!DOCTYPE html>
@@ -57,7 +60,14 @@ const options: BuildOptions = {
   ],
 };
 
-esbuild
-  .build(options)
-  .then(() => console.log("Build success"))
-  .catch(() => console.log("Build failed"));
+async function build() {
+  try {
+    await esbuild.build(options);
+
+    await writeFile(path.resolve("dist", "manifest.json"), JSON.stringify(manifest, null, 2));
+    console.log("Build success");
+  } catch (error) {
+    console.log("Build failed");
+  }
+}
+build();
