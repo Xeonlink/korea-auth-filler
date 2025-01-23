@@ -15,16 +15,16 @@ export const okname1: Handler = {
       const tcInput = q<HTMLInputElement>("input[name='tc']");
       if (tcInput) {
         let tcValue = "";
-        if (profile.통신사.is3사 && profile.인증방식.raw === way.PASS) {
+        if (profile.통신3사 && profile.인증방식 === way.PASS) {
           tcValue = "kcb.oknm.online.pass.popup.push.cmd.mno.PS02_PushMno011Cmd";
         }
-        if (!profile.통신사.is3사 && profile.인증방식.raw === way.PASS) {
+        if (!profile.통신3사 && profile.인증방식 === way.PASS) {
           tcValue = "kcb.oknm.online.pass.popup.push.cmd.mvno.PS02_PushMvno011Cmd";
         }
-        if (profile.통신사.is3사 && profile.인증방식.raw === way.SMS) {
+        if (profile.통신3사 && profile.인증방식 === way.SMS) {
           tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mno.PS02_SmsMno011Cmd";
         }
-        if (!profile.통신사.is3사 && profile.인증방식.raw === way.SMS) {
+        if (!profile.통신3사 && profile.인증방식 === way.SMS) {
           tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mvno.PS02_SmsMvno011Cmd";
         }
         tcInput.value = tcValue;
@@ -32,7 +32,7 @@ export const okname1: Handler = {
 
       const 통신사Input = q<HTMLInputElement>("input[name='mbl_tel_cmm_cd']");
       if (통신사Input) {
-        통신사Input.value = profile.통신사.매핑(["", "01", "02", "03", "04", "05", "06"]);
+        통신사Input.value = profile.map.통신사(["", "01", "02", "03", "04", "05", "06"]);
       }
 
       const 폼 = q<HTMLFormElement>("#ct > form");

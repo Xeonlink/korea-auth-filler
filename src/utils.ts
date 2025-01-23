@@ -130,28 +130,34 @@ export class Profile implements IProfile {
   }
 
   public get 통신사(): IProfile["통신사"] {
-    return {
-      raw: this.rawProfile.carrier,
-      매핑: (mapper: string[]) => mapper[Number(this.rawProfile.carrier)],
-      is3사: Number(this.rawProfile.carrier) < 4,
-    };
+    return this.rawProfile.carrier;
   }
 
   public get 인증방식(): IProfile["인증방식"] {
-    return {
-      raw: this.rawProfile.way,
-      매핑: (mapper: string[]) => mapper[Number(this.rawProfile.way)],
-    };
+    return this.rawProfile.way;
   }
 
-  public get is내국인(): boolean {
+  public get 통신3사(): boolean {
+    return is_MNO(this.rawProfile.carrier);
+  }
+
+  public get 내국인(): boolean {
     return this.rawProfile.foreigner === "0";
   }
 
+  public get 외국인(): boolean {
+    return this.rawProfile.foreigner === "1";
+  }
+
   public get 성별(): IProfile["성별"] {
+    return this.rawProfile.gender;
+  }
+
+  public get map(): IProfile["map"] {
     return {
-      raw: this.rawProfile.gender,
-      매핑: (남자: string, 여자: string) => (this.rawProfile.gender === "1" ? 남자 : 여자),
+      통신사: (mapper: string[]) => mapper[Number(this.rawProfile.carrier)],
+      인증방식: (mapper: string[]) => mapper[Number(this.rawProfile.way)],
+      성별: (남자: string, 여자: string) => (this.rawProfile.gender === "1" ? 남자 : 여자),
     };
   }
 }

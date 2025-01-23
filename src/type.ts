@@ -32,19 +32,16 @@ export interface IProfile {
     앞3자리: string;
     뒷8자리: string;
   };
-  통신사: {
-    raw: string;
-    매핑: (mapper: string[]) => string;
-    is3사: boolean;
-  };
-  인증방식: {
-    raw: string;
-    매핑: (mapper: string[]) => string;
-  };
-  is내국인: boolean;
-  성별: {
-    raw: string;
-    매핑: (남자: string, 여자: string) => string;
+  통신사: string;
+  통신3사: boolean;
+  인증방식: string;
+  내국인: boolean;
+  외국인: boolean;
+  성별: string;
+  map: {
+    통신사: (mapper: string[]) => string;
+    인증방식: (mapper: string[]) => string;
+    성별: (남자: string, 여자: string) => string;
   };
 }
 

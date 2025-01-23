@@ -1,12 +1,12 @@
 import postcssPlugin from "@chialab/esbuild-plugin-postcss";
 import { htmlPlugin } from "@craftamap/esbuild-plugin-html";
 import autoPrefixer from "autoprefixer";
-import esbuild, { BuildOptions } from "esbuild";
+import esbuild, { type BuildOptions } from "esbuild";
 import { clean } from "esbuild-plugin-clean";
 import { copy } from "esbuild-plugin-copy";
 import { writeFile } from "fs/promises";
 import path from "path";
-import { Plugin } from "postcss";
+import { type Plugin } from "postcss";
 import tailwindcss from "tailwindcss";
 import { manifest } from "./src/manifest.ts";
 
@@ -23,7 +23,7 @@ const htmlTemplate = `
 `;
 
 const options: BuildOptions = {
-  entryPoints: ["./src/popup/App", "./src/content_scripts/autofill"],
+  entryPoints: ["./src/popup/App", "./src/content_scripts/autofill", "./src/manifest"],
   bundle: true,
   sourcemap: true,
   metafile: true,

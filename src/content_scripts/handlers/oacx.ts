@@ -39,12 +39,12 @@ export const oacx: Handler = {
 
       const 통신사Input = q<HTMLInputElement>("input[data-id='oacx_phone']");
       if (통신사Input) {
-        통신사Input.value = profile.통신사.매핑(["", "S", "K", "L", "S", "K", "L"]);
+        통신사Input.value = profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]);
       }
 
       const 인증방법Input = q<HTMLInputElement>("input[data-id='oacx_auth']");
       if (인증방법Input) {
-        인증방법Input.value = profile.인증방식.매핑(["", "SMS", "EMAIL"]);
+        인증방법Input.value = profile.map.인증방식(["", "SMS", "EMAIL"]);
       }
 
       const 전체동의Input = q<HTMLInputElement>("#totalAgree");
@@ -53,13 +53,13 @@ export const oacx: Handler = {
       }
 
       const 약관동의Input = q<HTMLInputElement>("#oacx_total");
-      if (약관동의Input) {
-        약관동의Input.checked = true;
+      if (약관동의Input && !약관동의Input.checked) {
+        약관동의Input.click();
       }
 
       const 정책동의Input = q<HTMLInputElement>("#policy4");
-      if (정책동의Input) {
-        정책동의Input.checked = true;
+      if (정책동의Input && !정책동의Input.checked) {
+        정책동의Input.click();
       }
     }, 500);
   },

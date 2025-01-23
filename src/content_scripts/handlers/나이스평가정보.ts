@@ -12,7 +12,7 @@ export const 나이스평가정보1: Handler = {
   fill: (profile) => {
     setInterval(() => {
       const 통신사Button = q<HTMLButtonElement>(
-        profile.통신사.매핑([
+        profile.map.통신사([
           "",
           "#telcomSK",
           "#telcomKT",
@@ -37,7 +37,7 @@ export const 나이스평가정보2: Handler = {
   fill: (profile) => {
     setInterval(() => {
       const 인증방식Button = q<HTMLButtonElement>(
-        profile.인증방식.매핑(["", "button[value=SMS]", "button[value=APP_PUSH]"]),
+        profile.map.인증방식(["", "button[value=SMS]", "button[value=APP_PUSH]"]),
       );
       if (인증방식Button) {
         인증방식Button.click();

@@ -9,22 +9,22 @@ export const 비즈신용정보1: Handler = {
     setInterval(() => {
       const 통신사Input = q<HTMLInputElement>("#cellCorp");
       if (통신사Input) {
-        통신사Input.value = profile.통신사.매핑(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
+        통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
       }
 
       const 폼 = q<HTMLFormElement>("#cplogn");
       if (폼) {
         let actionHref = "";
-        if (profile.통신사.is3사 && profile.인증방식.raw === way.PASS) {
+        if (profile.통신3사 && profile.인증방식 === way.PASS) {
           actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpTiApp01.jsp";
         }
-        if (profile.통신사.is3사 && profile.인증방식.raw === way.SMS) {
+        if (profile.통신3사 && profile.인증방식 === way.SMS) {
           actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpTi01.jsp";
         }
-        if (!profile.통신사.is3사 && profile.인증방식.raw === way.PASS) {
+        if (!profile.통신3사 && profile.인증방식 === way.PASS) {
           actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpMvnoTiApp01.jsp";
         }
-        if (!profile.통신사.is3사 && profile.인증방식.raw === way.SMS) {
+        if (!profile.통신3사 && profile.인증방식 === way.SMS) {
           actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpMvnoTi01.jsp";
         }
 

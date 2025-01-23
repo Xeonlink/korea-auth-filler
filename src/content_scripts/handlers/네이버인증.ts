@@ -18,10 +18,10 @@ export const 네이버인증: Handler = {
 
     const 외국인Input = q<HTMLInputElement>("#foreignYn");
     if (외국인Input) {
-      외국인Input.value = profile.is내국인 ? "N" : "Y";
+      외국인Input.value = profile.내국인 ? "N" : "Y";
     }
 
-    const 성별Input = q<HTMLInputElement>(profile.성별.매핑("#male", "#female"));
+    const 성별Input = q<HTMLInputElement>(profile.map.성별("#male", "#female"));
     if (성별Input) {
       성별Input.click();
     }
@@ -43,12 +43,12 @@ export const 네이버인증: Handler = {
 
     const 통신사Input = q<HTMLInputElement>("#mobile_cd");
     if (통신사Input) {
-      통신사Input.value = profile.통신사.매핑(["", "SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO"]);
+      통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO"]);
     }
 
-    if (!profile.통신사.is3사) {
+    if (!profile.통신3사) {
       const 통신사Input = q<HTMLInputElement>(
-        profile.통신사.매핑(["", "", "", "", "mvno_skLb", "mvno_ktLb", "mvno_lgLb"]),
+        profile.map.통신사(["", "", "", "", "mvno_skLb", "mvno_ktLb", "mvno_lgLb"]),
       );
       if (통신사Input) {
         통신사Input.click();

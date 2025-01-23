@@ -5,7 +5,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "ts-node build.ts"
+    "build": "ts-node build.ts",
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build:wxt": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "postinstall": "wxt prepare"
   },
   "keywords": [],
   "author": "",
@@ -44,6 +51,7 @@
     "prettier-plugin-organize-attributes": "^1.0.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "wxt": "^0.19.25"
   }
 }
