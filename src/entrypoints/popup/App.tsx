@@ -1,6 +1,6 @@
 import ReactDom from "react-dom/client";
 import { Popup } from "./Popup";
-import "./index.css";
+import "./main.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { Loading } from "./Loading";

@@ -1,13 +1,18 @@
-import { Handler } from "../../type";
-import { q, way } from "../../utils";
+import type { Handler } from "@/utils/type";
+import { q, way } from "@/utils/utils";
+
+/**
+ * 테스트 주소
+ * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
+ */
 
 // 한국모바일인증 - 통신사 선택 & 약관동의 & 인증방식 선택
 export const 한국모바일인증1: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisHp00.jsp");
   },
-  fill: (profile) => {
-    setInterval(() => {
+  fill: (ctx, profile) => {
+    ctx.setInterval(() => {
       const test = q<HTMLButtonElement>(".step1header");
       if (!test) {
         return;
@@ -15,18 +20,18 @@ export const 한국모바일인증1: Handler = {
 
       const 통신사Input = q<HTMLInputElement>('input[name="reqCommIdStated"]');
       if (통신사Input) {
-        통신사Input.value = profile.통신사.매핑(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
+        통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
       }
 
       const 통신사Input2 = q<HTMLInputElement>('input[name="CommId"]');
       if (통신사Input2) {
-        통신사Input2.value = profile.통신사.매핑(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
+        통신사Input2.value = profile.map.통신사(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
       }
 
       const 폼 = q<HTMLFormElement>("#cplogn");
       if (폼) {
         let actionHref = "";
-        if (profile.인증방식.raw === way.SMS) {
+        if (profile.인증방식 === way.SMS) {
           actionHref = "https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp";
         } else {
           actionHref = "https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp";
@@ -44,8 +49,8 @@ export const 한국모바일인증2: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp");
   },
-  fill: (profile) => {
-    setInterval(() => {
+  fill: (ctx, profile) => {
+    ctx.setInterval(() => {
       const 이름Input = q<HTMLInputElement>("#userName");
       if (이름Input) {
         이름Input.value = profile.이름;
@@ -74,8 +79,8 @@ export const 한국모바일인증3: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp");
   },
-  fill: (profile) => {
-    setInterval(() => {
+  fill: (ctx, profile) => {
+    ctx.setInterval(() => {
       const 이름Input = q<HTMLInputElement>("#userName");
       if (이름Input) {
         이름Input.value = profile.이름;

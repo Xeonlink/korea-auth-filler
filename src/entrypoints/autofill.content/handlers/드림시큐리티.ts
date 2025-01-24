@@ -1,20 +1,26 @@
-import { Handler } from "../../type";
-import { q, way } from "../../utils";
+import type { Handler } from "@/utils/type";
+import { q, way } from "@/utils/utils";
+
+/**
+ * 테스트 주소
+ * 1. mock : https://cert.mobile-ok.com/ptb_mokauth.html
+ * 2. TODO : mock말고 뭐 제대로 적용된 사이트가 있기는 한거냐...
+ */
 
 export const 드림시큐리티: Handler = {
   isMatch: (url) => {
     return url.includes("https://cert.mobile-ok.com/ptb_mokauth.html?");
   },
-  fill: (profile) => {
-    setInterval(() => {
+  fill: (ctx, profile) => {
+    ctx.setInterval(() => {
       const 통신사Button = q<HTMLButtonElement>(
-        "#agency-" + profile.통신사.매핑(["", "sk", "kt", "lgu", "skmvno", "ktmvno", "lgumvno"]),
+        "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "skmvno", "ktmvno", "lgumvno"]),
       );
       if (통신사Button) {
         통신사Button.click();
       }
 
-      if (!profile.통신사.is3사) {
+      if (!profile.통신3사) {
         const 통신사Check = q<HTMLInputElement>("#checkMvno");
         if (통신사Check) {
           통신사Check.click();
@@ -26,14 +32,14 @@ export const 드림시큐리티: Handler = {
         전체동의Check.click();
       }
 
-      if (profile.인증방식.raw === way.SMS) {
+      if (profile.인증방식 === way.SMS) {
         const 인증하기Button = q<HTMLButtonElement>("#smsstart");
         if (인증하기Button) {
           인증하기Button.click();
         }
       }
 
-      if (profile.인증방식.raw === way.PASS) {
+      if (profile.인증방식 === way.PASS) {
         const 인증하기Button = q<HTMLButtonElement>("#start");
         if (인증하기Button) {
           인증하기Button.click();

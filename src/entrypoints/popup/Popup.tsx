@@ -1,25 +1,39 @@
+import type { CarrierCode, GenderCode, IsForeigner, RawProfile, WayCode } from "@/utils/type";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
-import React from "react";
-import { CarrierCode, GenderCode, IsForeigner, RawProfile, WayCode } from "../type";
-import { browser, getCarrierName, getWay, toHyphenPhone } from "../utils";
-import { useStorageData, useUpdateStorage } from "./storage";
+import { browser } from "wxt/browser";
+import { toHyphenPhone } from "../../utils/utils";
+import { useStorage } from "./storage";
+
+export function getCarrierName(carrierCode: CarrierCode) {
+  if (carrierCode === "1") return browser.i18n.getMessage("carrier_SKT");
+  if (carrierCode === "2") return browser.i18n.getMessage("carrier_KT");
+  if (carrierCode === "3") return browser.i18n.getMessage("carrier_LGU");
+  if (carrierCode === "4") return browser.i18n.getMessage("carrier_SKT_MNVO");
+  if (carrierCode === "5") return browser.i18n.getMessage("carrier_KT_MNVO");
+  if (carrierCode === "6") return browser.i18n.getMessage("carrier_LGU_MNVO");
+}
+
+export function getWay(wayCode: WayCode) {
+  if (wayCode === "1") return browser.i18n.getMessage("sms");
+  if (wayCode === "2") return browser.i18n.getMessage("pass");
+}
 
 export function Popup() {
-  const { data: storage } = useStorageData();
-  const { on, profiles, selectedProfile } = storage!;
-  const { mutate: updateStorage, isLoading } = useUpdateStorage();
+  const storage = useStorage();
+  const { on, profiles, selectedProfile } = storage.data!;
 
   const onEnabledChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateStorage({ on: e.target.checked });
+    storage.mutate({ on: e.target.checked });
   };
   const removeProfile = (index: number) => {
-    updateStorage({ profiles: profiles.filter((_, i) => i !== index) });
+    storage.mutate({ profiles: profiles.filter((_, i) => i !== index) });
   };
+
   const selectProfile = (index: number) => {
     if (index === selectedProfile) return;
-    updateStorage({ selectedProfile: index });
+    storage.mutate({ selectedProfile: index });
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,7 +49,7 @@ export function Popup() {
       way: formData.get("way") as WayCode,
     };
 
-    updateStorage(
+    storage.mutate(
       {
         profiles: [...profiles, profile],
       },
@@ -52,7 +66,7 @@ export function Popup() {
           className="checkbox"
           checked={on}
           onChange={onEnabledChange}
-          disabled={isLoading}
+          disabled={storage.isPending}
         />
         <h1 className="text-lg font-bold">{browser.i18n.getMessage("auth_autofill")} ON/OFF</h1>
       </label>
@@ -69,7 +83,7 @@ export function Popup() {
               className="join-item flex-1 space-y-1 p-2 text-left"
               type="button"
               onClick={() => selectProfile(index)}
-              disabled={isLoading}
+              disabled={storage.isPending}
             >
               <h5 className="ml-2 text-sm">
                 {profile.name} ( {toHyphenPhone(profile.phone_number)} )
@@ -83,7 +97,7 @@ export function Popup() {
               type="button"
               className="btn btn-ghost btn-lg"
               onClick={() => removeProfile(index)}
-              disabled={isLoading}
+              disabled={storage.isPending}
             >
               <FontAwesomeIcon icon={faTrash} />
             </button>
@@ -103,7 +117,7 @@ export function Popup() {
           name="name"
           placeholder={browser.i18n.getMessage("full_name")}
           className="input input-bordered w-full"
-          disabled={isLoading}
+          disabled={storage.isPending}
         />
 
         <div className="join w-full">
@@ -111,7 +125,7 @@ export function Popup() {
             id="carrier"
             name="carrier"
             className="join-item select select-bordered w-1/2"
-            disabled={isLoading}
+            disabled={storage.isPending}
           >
             <option value="-1">{browser.i18n.getMessage("carrier")}</option>
             <option value="1">{browser.i18n.getMessage("carrier_SKT")}</option>
@@ -129,7 +143,7 @@ export function Popup() {
             placeholder={browser.i18n.getMessage("phone_number")}
             required
             className="input join-item input-bordered max-w-min"
-            disabled={isLoading}
+            disabled={storage.isPending}
             onChange={(e) => (e.target.value = toHyphenPhone(e.target.value))}
           />
         </div>
@@ -145,7 +159,7 @@ export function Popup() {
           max={Number(dayjs().format("YYYYMMDD"))}
           placeholder={browser.i18n.getMessage("birthday")}
           className="input input-bordered w-full"
-          disabled={isLoading}
+          disabled={storage.isPending}
         />
 
         <div className="join w-full">
@@ -153,7 +167,7 @@ export function Popup() {
             className="join-item select select-bordered flex-1"
             id="foreigner"
             name="foreigner"
-            disabled={isLoading}
+            disabled={storage.isPending}
           >
             <option value="0">{browser.i18n.getMessage("citizen")}</option>
             <option value="1">{browser.i18n.getMessage("foreigner")}</option>
@@ -163,7 +177,7 @@ export function Popup() {
             className="join-item select select-bordered flex-1"
             id="gender"
             name="gender"
-            disabled={isLoading}
+            disabled={storage.isPending}
           >
             <option value="-1">{browser.i18n.getMessage("gender")}</option>
             <option value="1">{browser.i18n.getMessage("male")}</option>
@@ -171,14 +185,19 @@ export function Popup() {
           </select>
         </div>
 
-        <select id="way" className="select select-bordered w-full" name="way" disabled={isLoading}>
+        <select
+          id="way"
+          className="select select-bordered w-full"
+          name="way"
+          disabled={storage.isPending}
+        >
           <option value="-1">{browser.i18n.getMessage("auth_method")}</option>
           <option value="1">{browser.i18n.getMessage("sms")}</option>
           <option value="2">{browser.i18n.getMessage("pass")}</option>
         </select>
 
         <div>
-          <button className="btn" disabled={isLoading}>
+          <button type="submit" className="btn" disabled={storage.isPending}>
             {browser.i18n.getMessage("add_profile")}
           </button>
         </div>
