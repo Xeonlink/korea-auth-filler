@@ -137,3 +137,5 @@ iOSInjectionProject/
 node_modules
 dist
 .vscode
+.output
+.wxt

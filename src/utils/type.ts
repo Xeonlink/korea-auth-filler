@@ -1,3 +1,5 @@
+import type { ContentScriptContext } from "wxt/client";
+
 export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6";
 export type WayCode = "1" | "2";
 export type GenderCode = "1" | "2";
@@ -47,5 +49,5 @@ export interface IProfile {
 
 export type Handler = {
   isMatch: (url: string) => boolean;
-  fill: (profile: IProfile) => void;
+  fill: (ctx: ContentScriptContext, profile: IProfile) => void;
 };

@@ -1,12 +1,12 @@
-import { Handler } from "../../type";
-import { q } from "../../utils";
+import type { Handler } from "@/utils/type";
+import { q } from "@/utils/utils";
 
 // TODO: 확인필요
 export const 다날: Handler = {
   isMatch: (url) => {
     return url.includes("https://wauth.teledit.com/");
   },
-  fill: (profile) => {
+  fill: (_, profile) => {
     const 통신사Button = q<HTMLButtonElement>(
       "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "and", "and", "and"]),
     );

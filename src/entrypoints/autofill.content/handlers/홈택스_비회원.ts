@@ -1,11 +1,11 @@
-import type { Handler, IProfile } from "../../type";
-import { q } from "../../utils";
+import { Handler, IProfile } from "@/utils/type";
+import { q } from "@/utils/utils";
 
 export const 홈택스_비회원: Handler = {
   isMatch: (url: string) => {
     return ["https://www.hometax.go.kr/websquare/"].some((t) => url.includes(t));
   },
-  fill: (profile: IProfile) => {
+  fill: (ctx, profile: IProfile) => {
     setInterval(() => {
       const 이름Input = q<HTMLInputElement>("#iptUserNm");
       if (이름Input) {
