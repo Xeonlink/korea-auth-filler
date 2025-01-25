@@ -15,17 +15,22 @@ function main() {
       contexts: ["all"],
     });
 
-    browser.storage.sync.get(null).then((data) => {
-      if (Object.keys(data).length !== 0) {
-        return;
-      }
+    browser.storage.sync
+      .get(null)
+      .then((data) => {
+        if (Object.keys(data).length !== 0) {
+          return;
+        }
 
-      browser.storage.sync.set({
-        profiles: [],
-        selectedProfile: 0,
-        on: false,
-      } satisfies StorageData);
-    });
+        browser.storage.sync
+          .set({
+            profiles: [],
+            selectedProfile: 0,
+            on: false,
+          } satisfies StorageData)
+          .catch(() => {});
+      })
+      .catch(() => {});
   });
 
   browser.contextMenus.onClicked.addListener((info, tab) => {
@@ -34,9 +39,11 @@ function main() {
       return;
     }
 
-    browser.scripting.executeScript({
-      target: { tabId },
-      files: ["content-scripts/autofill.js"],
-    });
+    browser.scripting
+      .executeScript({
+        target: { tabId },
+        files: ["content-scripts/autofill.js"],
+      })
+      .catch(() => {});
   });
 }

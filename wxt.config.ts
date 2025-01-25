@@ -4,7 +4,7 @@ export default defineConfig({
   srcDir: "src",
   manifest: async (_) => {
     return {
-      default_locale: "en",
+      default_locale: "ko",
       permissions: ["storage", "contextMenus", "scripting", "activeTab"],
     };
   },

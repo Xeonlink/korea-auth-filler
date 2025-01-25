@@ -5,19 +5,22 @@ import { browser } from "wxt/browser";
 import { toHyphenPhone } from "../../utils/utils";
 import { useStorage } from "./storage";
 
-export function getCarrierName(carrierCode: CarrierCode) {
+export function getCarrierName(carrierCode: CarrierCode): string {
   if (carrierCode === "1") return browser.i18n.getMessage("carrier_SKT");
   if (carrierCode === "2") return browser.i18n.getMessage("carrier_KT");
   if (carrierCode === "3") return browser.i18n.getMessage("carrier_LGU");
   if (carrierCode === "4") return browser.i18n.getMessage("carrier_SKT_MNVO");
   if (carrierCode === "5") return browser.i18n.getMessage("carrier_KT_MNVO");
   if (carrierCode === "6") return browser.i18n.getMessage("carrier_LGU_MNVO");
+  return "";
 }
 
 export function getWay(wayCode: WayCode) {
   if (wayCode === "1") return browser.i18n.getMessage("sms");
   if (wayCode === "2") return browser.i18n.getMessage("pass");
 }
+
+const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
 
 export function Popup() {
   const storage = useStorage();
@@ -151,9 +154,9 @@ export function Popup() {
           className="input input-bordered w-full"
           disabled={storage.isPending}
           id="birth"
-          max={Number(dayjs().format("YYYYMMDD"))}
+          max={YYYYMMDD}
           maxLength={9}
-          min={Number(dayjs().format("YYYYMMDD")) - 1000000}
+          min={YYYYMMDD - 1000000}
           minLength={8}
           name="birth"
           placeholder={browser.i18n.getMessage("birthday")}

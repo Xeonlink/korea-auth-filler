@@ -13,7 +13,7 @@ export const oacx: Handler = {
     return q("#oacxDiv") !== null;
   },
   fill: (ctx, profile) => {
-    setInterval(() => {
+    ctx.setInterval(() => {
       const 이름Input = q<HTMLInputElement>("input[data-id='oacx_name']");
       if (이름Input) {
         이름Input.value = profile.이름;
