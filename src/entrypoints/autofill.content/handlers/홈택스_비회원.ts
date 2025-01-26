@@ -1,4 +1,4 @@
-import { Handler, IProfile } from "@/utils/type";
+import type { Handler, IProfile } from "@/utils/type";
 import { q } from "@/utils/utils";
 
 export const 홈택스_비회원: Handler = {

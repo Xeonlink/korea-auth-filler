@@ -4,8 +4,10 @@ export default defineConfig({
   srcDir: "src",
   manifest: async (_) => {
     return {
-      default_locale: "en",
-      permissions: ["storage", "contextMenus", "scripting", "activeTab"],
+      name: "__MSG_extension_name__",
+      description: "__MSG_extension_description__",
+      default_locale: "ko",
+      permissions: ["storage", "contextMenus", "scripting", "activeTab", "tabs"],
     };
   },
   imports: false,

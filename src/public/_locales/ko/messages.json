@@ -5,118 +5,126 @@
   },
   "extension_description": {
     "message": "대한민국 본인인증 자동 채우기 브라우저 확장 프로그램",
-    "description": "Description of what the extension does."
+    "description": "The extension automatically fills in Korean identity verification forms"
   },
   "developer": {
     "message": "오지민",
-    "description": ""
+    "description": "개발자 이름 오지민"
   },
   "auth_autofill": {
     "message": "인증채우기",
-    "description": ""
+    "description": "인증채우기 버튼 이름"
   },
   "add_profile": {
     "message": "프로필 추가",
-    "description": ""
+    "description": "프로필이 추가됩니다."
   },
   "carrier": {
     "message": "통신사",
-    "description": ""
+    "description": "통신사"
   },
   "carrier_SKT": {
     "message": "SKT",
-    "description": ""
+    "description": "SKT"
   },
   "carrier_KT": {
     "message": "KT",
-    "description": ""
+    "description": "KT"
   },
   "carrier_LGU": {
     "message": "LGU+",
-    "description": ""
+    "description": "LGU+"
   },
-  "carrier_SKT_MNVO": {
-    "message": "SKT망 알뜰폰",
-    "description": ""
+  "carrier_SKT_MVNO": {
+    "message": "SKT 알뜰통신사",
+    "description": "SKT 알뜰통신사"
   },
-  "carrier_KT_MNVO": {
-    "message": "KT망 알뜰폰",
-    "description": ""
+  "carrier_KT_MVNO": {
+    "message": "KT 알뜰통신사",
+    "description": "KT 알뜰통신사"
   },
-  "carrier_LGU_MNVO": {
-    "message": "LGU+망 알뜰폰",
-    "description": ""
+  "carrier_LGU_MVNO": {
+    "message": "LGU+ 알뜰통신사",
+    "description": "LGU+ 알뜰통신사"
   },
   "full_name": {
     "message": "이름",
-    "description": ""
+    "description": "이름"
   },
   "phone_number": {
     "message": "휴대폰 번호",
-    "description": ""
+    "description": "휴대폰 번호"
   },
   "birthday": {
     "message": "생년월일",
-    "description": ""
+    "description": "생년월일"
   },
   "citizen": {
     "message": "내국인",
-    "description": ""
+    "description": "내국인"
   },
   "foreigner": {
     "message": "외국인",
-    "description": ""
+    "description": "외국인"
   },
   "gender": {
     "message": "성별",
-    "description": ""
+    "description": "성별"
   },
   "male": {
     "message": "남성",
-    "description": ""
+    "description": "남성"
   },
   "female": {
     "message": "여성",
-    "description": ""
+    "description": "여성"
   },
   "auth_method": {
     "message": "인증방식",
-    "description": ""
+    "description": "인증방식"
   },
   "sms": {
     "message": "SMS 문자메시지",
-    "description": ""
+    "description": "SMS 문자메시지"
   },
   "pass": {
     "message": "통신사 PASS앱",
-    "description": ""
+    "description": "통신사 PASS앱"
   },
   "enter_name": {
     "message": "이름을 입력하시오",
-    "description": ""
+    "description": "이름을 입력하시오"
   },
   "select_carrier": {
     "message": "통신사를 선택하시오",
-    "description": ""
+    "description": "통신사를 선택하시오"
   },
   "check_number": {
     "message": "휴대폰번호를 확인하시오",
-    "description": ""
+    "description": "휴대폰번호를 확인하시오"
   },
   "check_birthday": {
     "message": "생일을 확인하시오 (8자리) (예, 19990204)",
-    "description": ""
+    "description": "생일을 확인하시오 (8자리) (예, 19990204)"
   },
   "select_gender": {
     "message": "성별을 선택하시오",
-    "description": ""
+    "description": "성별을 선택하시오"
   },
   "select_auth_method": {
     "message": "인증방식을 선택하시오",
-    "description": ""
+    "description": "인증방식을 선택하시오"
   },
-  "skt_MNVO_do_not_support_pass": {
+  "skt_MVNO_do_not_support_pass": {
     "message": "SKT망 알뜰폰은 PASS앱 인증을 지원하지 않습니다.\nSMS인증을 이용해주세요.",
-    "description": ""
+    "description": "SKT망 알뜰폰은 PASS앱 인증을 지원하지 않습니다.\nSMS인증을 이용해주세요."
+  },
+  "bug_report": {
+    "message": "버그제보",
+    "description": "버그제보"
+  },
+  "feature_request": {
+    "message": "기능수정 요청",
+    "description": "기능수정 요청"
   }
 }

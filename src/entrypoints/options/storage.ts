@@ -1,6 +1,5 @@
 import type { StorageData } from "@/utils/type";
-import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { browser } from "wxt/browser";
 
 /**
@@ -45,8 +44,8 @@ export function useUpdateStorage() {
       if (!context) return;
       queryClient.setQueryData(["storage"], context.oldData);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: ["storage"],
       });
     },
@@ -57,41 +56,4 @@ export function useStorage() {
   const { data } = useStorageData();
   const { mutate, isPending } = useUpdateStorage();
   return { data, mutate, isPending };
-}
-
-export function useStorage2() {
-  const [isPending, setIsPending] = useState(true);
-  const [data, setData] = useState<StorageData | null>(null);
-
-  const update = async (items: Partial<StorageData>) => {
-    if (data == null) return;
-    const original = { ...data };
-    try {
-      setIsPending(true);
-      setData({ ...data, ...items });
-      await browser.storage.sync.set(original);
-      const result = (await browser.storage.sync.get(null)) as StorageData;
-      setData(result);
-    } catch (error) {
-      setData(original);
-    } finally {
-      setIsPending(false);
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsPending(true);
-        const result = (await browser.storage.sync.get(null)) as StorageData;
-        setData(result);
-      } catch (error) {
-      } finally {
-        setIsPending(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  return { isPending, update, data };
 }
