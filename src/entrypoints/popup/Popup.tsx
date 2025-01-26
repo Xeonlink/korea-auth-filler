@@ -57,11 +57,11 @@ export function Popup() {
   };
 
   return (
-    <main className="w-96 space-y-2 bg-base-300 p-4">
+    <main className="w-96 space-y-2 p-4 bg-base-200">
       <label className="flex items-center gap-2" htmlFor="onoff">
         <input
           checked={on}
-          className="checkbox"
+          className="checkbox "
           disabled={storage.isPending}
           id="onoff"
           onChange={onEnabledChange}
@@ -110,7 +110,7 @@ export function Popup() {
         <h3 className="text-lg font-bold">{browser.i18n.getMessage("add_profile")}</h3>
 
         <input
-          className="input input-bordered w-full"
+          className="input w-full input-bordered"
           disabled={storage.isPending}
           id="name"
           name="name"
@@ -195,12 +195,46 @@ export function Popup() {
           <option value="2">{browser.i18n.getMessage("pass")}</option>
         </select>
 
-        <div>
+        <div className="text-right">
           <button className="btn" disabled={storage.isPending} type="submit">
             {browser.i18n.getMessage("add_profile")}
           </button>
         </div>
       </form>
+
+      <div className="divider"></div>
+
+      <form action="" className="space-y-2">
+        <h3 className="text-lg font-bold">버그제보 및 기능추가 요청하기</h3>
+        {/* <textarea className="textarea textarea-bordered w-full" id="log" name="log" rows={10}>
+          {reportTemplate}
+        </textarea> */}
+        <div className="text-right">
+          <a
+            className="btn"
+            href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=버그-리포트"
+            onClick={() => {
+              browser.tabs.create({
+                url: "https://github.com/Xeonlink/korea-auth-filler/issues/new?template=버그-리포트",
+              });
+            }}
+          >
+            제보 및 요청하기
+          </a>
+        </div>
+      </form>
     </main>
   );
 }
+
+// const reportTemplate = `<<Example Report>>
+// ## bug report
+// - where: https://**/*
+// - what: at login
+// - how: some info is not filled or filled wrong
+
+// ## feature request
+// - what: add some awesome feature
+// - why: for user convenience and better UX
+// - how: by simply automate something
+// `;

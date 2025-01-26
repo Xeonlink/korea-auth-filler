@@ -13,7 +13,7 @@ export default [
     },
   },
   jsxA11y.flatConfigs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.recommended,
   {
     rules: {
       "@typescript-eslint/no-unused-vars": [
@@ -22,6 +22,13 @@ export default [
           argsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          prefer: "type-imports",
+        },
+      ],
+      // "@typescript-eslint/consistent-type-exports": "error",
     },
     languageOptions: {
       parserOptions: {
