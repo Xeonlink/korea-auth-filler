@@ -86,10 +86,18 @@ function main() {
   });
 
   browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    const messageData = message as { type: string };
+    const messageData = message as Action;
     if (messageData.type === "get-storage-data") {
       browser.runtime.openOptionsPage();
       sendResponse(defaultStorageData);
+    }
+
+    if (messageData.type === "open-options-page") {
+      browser.runtime.openOptionsPage();
+    }
+
+    if (messageData.type === "open-link") {
+      browser.tabs.create({ url: messageData.data });
     }
 
     return true;
@@ -118,4 +126,15 @@ type UpdateStorageAction = {
 
 type StorageAction = UpdateStorageAction | GetStorageAction;
 
-// type Action = StorageAction;
+type OptionsOpenAction = {
+  type: "open-options-page";
+};
+
+type LinkOpenAction = {
+  type: "open-link";
+  data: string;
+};
+
+type OpenAction = OptionsOpenAction | LinkOpenAction;
+
+type Action = StorageAction | OpenAction;

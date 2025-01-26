@@ -9,9 +9,9 @@ export function getCarrierName(carrierCode: CarrierCode): string {
   if (carrierCode === "1") return browser.i18n.getMessage("carrier_SKT");
   if (carrierCode === "2") return browser.i18n.getMessage("carrier_KT");
   if (carrierCode === "3") return browser.i18n.getMessage("carrier_LGU");
-  if (carrierCode === "4") return browser.i18n.getMessage("carrier_SKT_MNVO");
-  if (carrierCode === "5") return browser.i18n.getMessage("carrier_KT_MNVO");
-  if (carrierCode === "6") return browser.i18n.getMessage("carrier_LGU_MNVO");
+  if (carrierCode === "4") return browser.i18n.getMessage("carrier_SKT_MVNO");
+  if (carrierCode === "5") return browser.i18n.getMessage("carrier_KT_MVNO");
+  if (carrierCode === "6") return browser.i18n.getMessage("carrier_LGU_MVNO");
   return "";
 }
 
@@ -133,9 +133,9 @@ export function Popup() {
             <option value="1">{browser.i18n.getMessage("carrier_SKT")}</option>
             <option value="2">{browser.i18n.getMessage("carrier_KT")}</option>
             <option value="3">{browser.i18n.getMessage("carrier_LGU")}</option>
-            <option value="4">{browser.i18n.getMessage("carrier_SKT_MNVO")}</option>
-            <option value="5">{browser.i18n.getMessage("carrier_KT_MNVO")}</option>
-            <option value="6">{browser.i18n.getMessage("carrier_LGU_MNVO")}</option>
+            <option value="4">{browser.i18n.getMessage("carrier_SKT_MVNO")}</option>
+            <option value="5">{browser.i18n.getMessage("carrier_KT_MVNO")}</option>
+            <option value="6">{browser.i18n.getMessage("carrier_LGU_MVNO")}</option>
           </select>
 
           <input

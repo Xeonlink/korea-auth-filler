@@ -1,7 +1,7 @@
 {
   "name": "korea-auth-filler",
   "version": "1.0.2",
-  "description": "__MSG_extension_description__",
+  "description": "대한민국 본인인증 자동 채우기 브라우저 확장 프로그램",
   "type": "module",
   "main": "index.js",
   "scripts": {
