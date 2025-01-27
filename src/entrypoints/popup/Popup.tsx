@@ -1,11 +1,12 @@
 import type { CarrierCode, GenderCode, IsForeigner, RawProfile, WayCode } from "@/utils/type";
-import { faCake, faMobile, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCake, faMobile, faPlus, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
 import { Anchor } from "../../components/ui/Anchor";
 import { useStorage } from "../../hooks/useStorage";
 import { useTranslation } from "../../hooks/useTranslation";
-import { cn, toPhoneStyle, toHyphenPhone } from "../../utils/utils";
+import { cn, toHyphenPhone } from "../../utils/utils";
+import { useEffect } from "react";
 
 export function getCarrierCodeTranslationKey(carrierCode: CarrierCode) {
   switch (carrierCode) {
@@ -39,19 +40,26 @@ const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
 
 export function Popup() {
   const storage = useStorage();
-  const { on, profiles, selectedProfile } = storage.data;
+  const { on, profiles, selectedProfile, isSideMenuOpen } = storage.data;
   const { t } = useTranslation();
+
   const onEnabledChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     storage.mutate({ on: e.target.checked });
   };
   const removeProfile = (index: number) => {
     storage.mutate({ profiles: profiles.filter((_, i) => i !== index) });
   };
-
   const selectProfile = (index: number) => {
     if (index === selectedProfile) return;
     storage.mutate({ selectedProfile: index });
   };
+  const openSideMenu = () => {
+    storage.mutate({ isSideMenuOpen: true });
+  };
+  const toggleSideMenu = () => {
+    storage.mutate({ isSideMenuOpen: !isSideMenuOpen });
+  };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -98,39 +106,58 @@ export function Popup() {
     );
   };
 
+  useEffect(() => {
+    if (profiles.length === 0) {
+      storage.mutate({ isSideMenuOpen: true });
+    }
+  }, [profiles.length]);
+
   return (
     <>
-      <header className="w-full bg-base-200">
-        <div className="form-control p-4">
-          <label className="label cursor-pointer justify-start gap-2 p-0" htmlFor="onoff">
-            <input
-              checked={on}
-              className="toggle toggle-sm"
-              //
-              id="onoff"
-              onChange={onEnabledChange}
-              type="checkbox"
-            />
-            <h1 className="label-text font-bold text-lg">{t("auth_autofill")} ON/OFF</h1>
-          </label>
-        </div>
+      <header className="w-full bg-base-200 flex">
+        <label className="label cursor-pointer justify-start gap-2 flex-1 px-6" htmlFor="onoff">
+          <input
+            checked={on}
+            className="toggle toggle-sm"
+            id="onoff"
+            onChange={onEnabledChange}
+            type="checkbox"
+          />
+          <h1 className="label-text font-bold text-lg">{t("auth_autofill")} ON/OFF</h1>
+        </label>
+        <button className="btn btn-ghost m-2" onClick={toggleSideMenu}>
+          <FontAwesomeIcon className="h-4 w-4" icon={faPlus} />
+        </button>
       </header>
-      <main className="w-full space-y-2 p-4">
-        {profiles.length > 0 ? (
-          <ul>
+      <main className="flex h-96">
+        <section className="overflow-scroll">
+          {profiles.length < 1 ? (
+            <div className="p-4 text-center space-y-2">
+              <h4 className="text-center text-base">프로필이 없습니다.</h4>
+              <button className="btn btn-ghost" onClick={openSideMenu} type="button">
+                <FontAwesomeIcon className="h-4 w-4" icon={faPlus} /> 프로필 추가하기
+              </button>
+            </div>
+          ) : null}
+          <ul className="w-96 p-2">
             {profiles.map((profile, index) => (
               <li className="w-full flex items-center" key={profile.id}>
                 <button
-                  className={cn(
-                    { outline: selectedProfile === index },
-                    "flex-1 btn font-normal justify-start btn-ghost gap-1 flex-wrap",
-                  )}
+                  className={cn("flex-1 btn font-normal justify-start btn-ghost gap-1 flex-wrap")}
                   onClick={() => selectProfile(index)}
                   type="button"
                 >
+                  <input
+                    checked={selectedProfile === index}
+                    className="checkbox checkbox-xs mr-1"
+                    id={profile.id}
+                    name="selected-profile"
+                    readOnly
+                    type="checkbox"
+                  />
                   <h5 className="text-sm">{profile.name}</h5>
                   <span className="badge badge-sm border-none">
-                    {toPhoneStyle(profile.phone_number, "$2-$3")}
+                    {toHyphenPhone(profile.phone_number).slice(4)}
                   </span>
                   <span className="badge badge-sm border-none">
                     {t(getCarrierCodeTranslationKey(profile.carrier))}
@@ -149,20 +176,27 @@ export function Popup() {
               </li>
             ))}
           </ul>
-        ) : null}
+        </section>
 
-        {profiles.length > 0 ? <div className="divider"></div> : null}
+        <section
+          className={cn("overflow-scroll transition-all w-96 duration-500 ease-in", {
+            "w-0": !isSideMenuOpen,
+          })}
+        >
+          <form className="space-y-2 w-96 p-4" onSubmit={onSubmit}>
+            <h3 className="text-lg font-bold ml-2">{t("add_profile")}</h3>
 
-        <form className="space-y-2" onSubmit={onSubmit}>
-          <h3 className="text-lg font-bold">{t("add_profile")}</h3>
-          <div className="w-96 join join-vertical">
-            <label className="input w-full input-bordered flex items-center gap-2 join-item">
-              <FontAwesomeIcon className="h-4 w-4" icon={faUser} />
-              <input id="name" name="name" placeholder={t("full_name")} required type="text" />
-            </label>
+            <fieldset className="grid grid-cols-12">
+              <label className="input input-bordered flex items-center gap-2 col-span-12 rounded-b-none border-b-0">
+                <FontAwesomeIcon className="h-4 w-4" icon={faUser} />
+                <input id="name" name="name" placeholder={t("full_name")} required type="text" />
+              </label>
 
-            <div className="join w-full join-item">
-              <select className="join-item select select-bordered w-36" id="carrier" name="carrier">
+              <select
+                className="select select-bordered col-span-5 rounded-none border-r-0"
+                id="carrier"
+                name="carrier"
+              >
                 <option value="-1">{t("carrier")}</option>
                 <option value="1">{t("carrier_SKT")}</option>
                 <option value="2">{t("carrier_KT")}</option>
@@ -172,7 +206,7 @@ export function Popup() {
                 <option value="6">{t("carrier_LGU_MVNO")}</option>
               </select>
 
-              <label className="input join-item input-bordered flex items-center gap-2 w-full">
+              <label className="input input-bordered flex items-center gap-2 rounded-none col-span-7">
                 <FontAwesomeIcon className="h-4 w-4" icon={faMobile} />
                 <input
                   id="phone_number"
@@ -183,27 +217,25 @@ export function Popup() {
                   type="tel"
                 />
               </label>
-            </div>
 
-            <label className="input input-bordered flex items-center gap-2 join-item">
-              <FontAwesomeIcon className="h-4 w-4" icon={faCake} />
-              <input
-                className="grow"
-                id="birth"
-                max={YYYYMMDD}
-                maxLength={9}
-                min={YYYYMMDD - 1000000}
-                minLength={8}
-                name="birth"
-                placeholder={t("birthday")}
-                required
-                type="number"
-              />
-            </label>
+              <label className="input input-bordered flex items-center gap-2 col-span-12 rounded-none border-y-0">
+                <FontAwesomeIcon className="h-4 w-4" icon={faCake} />
+                <input
+                  className="grow"
+                  id="birth"
+                  max={YYYYMMDD}
+                  maxLength={9}
+                  min={YYYYMMDD - 1000000}
+                  minLength={8}
+                  name="birth"
+                  placeholder={t("birthday")}
+                  required
+                  type="number"
+                />
+              </label>
 
-            <div className="join w-full join-item">
               <select
-                className="join-item select select-bordered w-36"
+                className="join-item select select-bordered col-span-3 rounded-t-none rounded-br-none pr-0"
                 id="foreigner"
                 name="foreigner"
               >
@@ -211,32 +243,40 @@ export function Popup() {
                 <option value="1">{t("foreigner")}</option>
               </select>
 
-              <select className="join-item select select-bordered flex-1" id="gender" name="gender">
+              <select
+                className="join-item select select-bordered col-span-4 rounded-none border-x-0 pr-0"
+                id="gender"
+                name="gender"
+              >
                 <option value="-1">{t("gender")}</option>
                 <option value="1">{t("male")}</option>
                 <option value="2">{t("female")}</option>
               </select>
-            </div>
 
-            <select className="w-full select select-bordered join-item" id="way" name="way">
-              <option value="-1">{t("auth_method")}</option>
-              <option value="1">{t("sms")}</option>
-              <option value="2">{t("pass")}</option>
-              <option value="3">{t("qr")}</option>
-            </select>
-          </div>
-          <div className="text-right">
-            <button className="btn" type="submit">
-              {t("add_profile")}
-            </button>
-          </div>
-        </form>
+              <select
+                className="join-item select select-bordered col-span-5 rounded-t-none rounded-bl-none pr-0"
+                id="way"
+                name="way"
+              >
+                <option value="-1">{t("auth_method")}</option>
+                <option value="1">{t("sms")}</option>
+                <option value="2">{t("pass")}</option>
+                <option value="3">{t("qr")}</option>
+              </select>
+            </fieldset>
+            <div className="text-right">
+              <button className="btn" type="submit">
+                {t("add_profile")}
+              </button>
+            </div>
+          </form>
+        </section>
       </main>
       <footer className="w-full bg-base-200">
         <ul className="flex">
           <li className="contents">
             <Anchor
-              className="btn btn-ghost btn-md rounded-none flex-1"
+              className="btn btn-ghost btn-md flex-1"
               href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=버그-리포트.md"
             >
               {t("bug_report")}
@@ -244,7 +284,7 @@ export function Popup() {
           </li>
           <li className="contents">
             <Anchor
-              className="btn btn-ghost btn-md rounded-none flex-1"
+              className="btn btn-ghost btn-md flex-1"
               href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=수정-요청.md"
             >
               {t("feature_request")}

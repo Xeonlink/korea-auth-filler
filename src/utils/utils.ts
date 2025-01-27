@@ -2,13 +2,21 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { CarrierCode, GenderCode, IsForeigner } from "./type";
 
-// TODO: ?? "" 개선
+/**
+ * 전화번호 하이픈 처리
+ * @param str - 전화번호 11자리
+ * @returns 하이픈 처리된 전화번호
+ */
 export function toHyphenPhone(str: string): string {
-  return str.replace(/(\d{0,3})(\d{0,4})(\d{0,4})/, "$1-$2-$3");
-}
-
-export function toPhoneStyle(str: string, replaceValue: string) {
-  return str.replace(/(\d{0,3})(\d{0,4})(\d{0,4})/, replaceValue);
+  return (
+    str
+      .match(/\d*/g)
+      ?.join("")
+      .match(/(\d{0,3})(\d{0,4})(\d{0,4})/)
+      ?.slice(1)
+      .join("-")
+      .replace(/-*$/g, "") ?? ""
+  );
 }
 
 /**

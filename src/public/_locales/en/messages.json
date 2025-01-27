@@ -124,11 +124,11 @@
     "description": "SKT MVNO does not support PASS app authentication.\nYou can only use SMS authentication."
   },
   "bug_report": {
-    "message": "버그제보",
-    "description": "버그제보"
+    "message": "Bug Report",
+    "description": "Bug Report"
   },
   "feature_request": {
-    "message": "기능수정 요청",
-    "description": "기능수정 요청"
+    "message": "Feature Request",
+    "description": "Feature Request"
   }
 }
