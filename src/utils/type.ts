@@ -1,7 +1,7 @@
 import type { ContentScriptContext } from "wxt/client";
 
 export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6";
-export type WayCode = "1" | "2";
+export type WayCode = "1" | "2" | "3";
 export type GenderCode = "1" | "2";
 export type IsForeigner = "0" | "1";
 
@@ -36,7 +36,11 @@ export interface IProfile {
   };
   통신사: string;
   통신3사: boolean;
-  인증방식: string;
+  인증방식: {
+    SMS: boolean;
+    PASS: boolean;
+    QR: boolean;
+  };
   내국인: boolean;
   외국인: boolean;
   성별: string;

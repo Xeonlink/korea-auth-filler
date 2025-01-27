@@ -1,9 +1,10 @@
 import type { StorageData } from "@/utils/type";
-import { log, Profile, wait } from "@/utils/utils";
+import { log, wait } from "@/utils/utils";
 import { browser } from "wxt/browser";
 import type { ContentScriptContext } from "wxt/client";
 import { defineContentScript } from "wxt/sandbox";
 import { handlers } from "./handlers";
+import { Profile } from "@/utils/Profile";
 
 export default defineContentScript({
   matches: ["https://*/*"],

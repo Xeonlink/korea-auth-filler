@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { q, way } from "@/utils/utils";
+import { q } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -31,7 +31,7 @@ export const 한국모바일인증1: Handler = {
       const 폼 = q<HTMLFormElement>("#cplogn");
       if (폼) {
         let actionHref = "";
-        if (profile.인증방식 === way.SMS) {
+        if (profile.인증방식.SMS) {
           actionHref = "https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp";
         } else {
           actionHref = "https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp";

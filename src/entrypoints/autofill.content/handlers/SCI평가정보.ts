@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { dispatchEvent, q, way } from "@/utils/utils";
+import { dispatchEvent, q } from "@/utils/utils";
 
 /**
  * 테스트 사이트
@@ -21,19 +21,9 @@ export const SCI평가정보1: Handler = {
 
       const 폼 = q<HTMLFormElement>("form[name='cplogn']");
       if (폼) {
-        let actionHref = "";
-        if (profile.통신3사 && profile.인증방식 === way.PASS) {
-          actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpTiApp01.jsp";
-        }
-        if (profile.통신3사 && profile.인증방식 === way.SMS) {
-          actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpTi01.jsp";
-        }
-        if (!profile.통신3사 && profile.인증방식 === way.PASS) {
-          actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpMvnoTiApp01.jsp";
-        }
-        if (!profile.통신3사 && profile.인증방식 === way.SMS) {
-          actionHref = "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpMvnoTi01.jsp";
-        }
+        const 통신3사 = profile.통신3사 ? "" : "Mvno";
+        const 인증방식 = profile.map.인증방식(["", "App", "", ""]);
+        const actionHref = `https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHp${통신3사}Ti${인증방식}01.jsp`;
 
         폼.setAttribute("action", actionHref);
         폼.submit();
