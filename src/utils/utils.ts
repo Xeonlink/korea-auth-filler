@@ -1,6 +1,12 @@
-import type { CarrierCode, GenderCode, IProfile, IsForeigner, RawProfile } from "./type";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import type { CarrierCode, GenderCode, IsForeigner } from "./type";
 
-// TODO: ?? "" 개선
+/**
+ * 전화번호 하이픈 처리
+ * @param str - 전화번호 11자리
+ * @returns 하이픈 처리된 전화번호
+ */
 export function toHyphenPhone(str: string): string {
   return (
     str
@@ -34,6 +40,7 @@ export const carrier = {
 export const way = {
   SMS: "1",
   PASS: "2",
+  QR: "3",
 } as const;
 
 /**
@@ -73,6 +80,12 @@ export function get_RRN_GenderNum(birth: string, gender: GenderCode, foreigner: 
   return null;
 }
 
+/**
+ * 이동통신망사업자 여부 \
+ * MNO(통신3사)와 MVNO(알뜰통신사)를 구분할 목적으로 사용
+ * @param carrier_code - 통신사 코드
+ * @returns 이동통신망사업자 여부
+ */
 export function is_MNO(carrier_code: CarrierCode) {
   // MNO(Mobile Network Operator)
   // 이동통신망사업자
@@ -80,81 +93,31 @@ export function is_MNO(carrier_code: CarrierCode) {
   return Number(carrier_code) < 4;
 }
 
-export class Profile implements IProfile {
-  private rawProfile: RawProfile;
-
-  constructor(rawProfile: RawProfile) {
-    this.rawProfile = rawProfile;
-  }
-
-  public get 이름(): string {
-    return this.rawProfile.name;
-  }
-
-  public get 생년월일(): string {
-    return this.rawProfile.birth;
-  }
-
-  public get 출생년도(): string {
-    return this.rawProfile.birth.substring(0, 4);
-  }
-
-  public get 주민번호(): IProfile["주민번호"] {
-    return {
-      앞자리: this.rawProfile.birth.substring(2),
-      성별숫자: get_RRN_GenderNum(
-        this.rawProfile.birth,
-        this.rawProfile.gender,
-        this.rawProfile.foreigner,
-      ),
-    };
-  }
-
-  public get 전화번호(): IProfile["전화번호"] {
-    return {
-      전체: this.rawProfile.phone_number,
-      앞3자리: this.rawProfile.phone_number.substring(0, 3),
-      뒷8자리: this.rawProfile.phone_number.substring(3),
-    };
-  }
-
-  public get 통신사(): IProfile["통신사"] {
-    return this.rawProfile.carrier;
-  }
-
-  public get 인증방식(): IProfile["인증방식"] {
-    return this.rawProfile.way;
-  }
-
-  public get 통신3사(): boolean {
-    return is_MNO(this.rawProfile.carrier);
-  }
-
-  public get 내국인(): boolean {
-    return this.rawProfile.foreigner === "0";
-  }
-
-  public get 외국인(): boolean {
-    return this.rawProfile.foreigner === "1";
-  }
-
-  public get 성별(): IProfile["성별"] {
-    return this.rawProfile.gender;
-  }
-
-  public get map(): IProfile["map"] {
-    return {
-      통신사: (mapper: string[]) => mapper[Number(this.rawProfile.carrier)],
-      인증방식: (mapper: string[]) => mapper[Number(this.rawProfile.way)],
-      성별: (남자: string, 여자: string) => (this.rawProfile.gender === "1" ? 남자 : 여자),
-    };
-  }
-}
-
+/**
+ * 요소 선택 \
+ * document.querySelector의 간단한 버전
+ * @param selector - 선택할 요소의 선택자
+ * @returns 선택한 요소, 없으면 null
+ */
 export function q<T extends HTMLElement>(selector: string): T | null {
   return document.querySelector(selector);
 }
 
+/**
+ * 요소 모두 선택 \
+ * document.querySelectorAll의 간단한 버전
+ * @param selector - 선택할 요소의 선택자
+ * @returns 선택한 요소 모두, 없으면 빈 배열
+ */
+export function qAll<T extends HTMLElement>(selector: string): T[] {
+  return Array.from(document.querySelectorAll(selector));
+}
+
+/**
+ * 지연 함수
+ * @param delay - 지연할 시간
+ * @returns 지연 함수
+ */
 export async function wait(delay: number) {
   return new Promise((resolve) => setTimeout(resolve, delay));
 }
@@ -166,7 +129,34 @@ const EVENT = {
   },
 };
 
+/**
+ * 이벤트 발송 \
+ * 이벤트를 일으키지 않으면 이벤트 리스너가 동작하지 않아서 제대로 입력이 완료되지 않는 경우가 있음.
+ * @param target - 이벤트를 발송할 요소
+ */
 export function dispatchEvent(target: HTMLElement) {
   target.dispatchEvent(EVENT.CHANGE.VALUE);
   target.dispatchEvent(EVENT.CHANGE.CHECK);
 }
+
+/**
+ * 클래스 병합
+ * @param inputs - 병합할 클래스
+ * @returns 병합된 클래스
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+/**
+ * 이벤트 함수 \
+ * 이벤트 함수를 여러 개 받아서 하나로 합치는 함수 \
+ * 이벤트 객체를 여러개의 이벤트 함수로 뿌려서 처리
+ * @param fns - 이벤트 함수
+ * @returns 이벤트 함수
+ */
+export const events =
+  <E extends Event>(...fns: ((e: E) => void)[]) =>
+  (e: E) => {
+    fns.forEach((fn) => fn(e));
+  };

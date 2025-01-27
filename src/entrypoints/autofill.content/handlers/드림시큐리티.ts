@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { q, way } from "@/utils/utils";
+import { q } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -32,14 +32,14 @@ export const 드림시큐리티: Handler = {
         전체동의Check.click();
       }
 
-      if (profile.인증방식 === way.SMS) {
+      if (profile.인증방식.SMS) {
         const 인증하기Button = q<HTMLButtonElement>("#smsstart");
         if (인증하기Button) {
           인증하기Button.click();
         }
       }
 
-      if (profile.인증방식 === way.PASS) {
+      if (profile.인증방식.PASS) {
         const 인증하기Button = q<HTMLButtonElement>("#start");
         if (인증하기Button) {
           인증하기Button.click();

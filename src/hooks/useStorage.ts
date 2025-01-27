@@ -7,7 +7,7 @@ import { browser } from "wxt/browser";
  *
  * @returns 스토리지 데이터를 포함하는 쿼리 결과
  */
-export function useStorageData() {
+function useStorageData() {
   return useSuspenseQuery({
     queryKey: ["storage"],
     queryFn: async () => {
@@ -25,7 +25,7 @@ export function useStorageData() {
  *
  * @returns 스토리지 업데이트를 위한 뮤테이션 객체
  */
-export function useUpdateStorage() {
+function useUpdateStorage() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -44,8 +44,8 @@ export function useUpdateStorage() {
       if (!context) return;
       queryClient.setQueryData(["storage"], context.oldData);
     },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
         queryKey: ["storage"],
       });
     },

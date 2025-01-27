@@ -84,12 +84,16 @@
     "description": "인증방식"
   },
   "sms": {
-    "message": "SMS 문자메시지",
-    "description": "SMS 문자메시지"
+    "message": "문자",
+    "description": "문자"
   },
   "pass": {
-    "message": "통신사 PASS앱",
-    "description": "통신사 PASS앱"
+    "message": "PASS앱",
+    "description": "PASS앱"
+  },
+  "qr": {
+    "message": "QR코드",
+    "description": "QR코드"
   },
   "enter_name": {
     "message": "이름을 입력하시오",

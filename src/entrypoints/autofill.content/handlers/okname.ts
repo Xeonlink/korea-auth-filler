@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { dispatchEvent, q, way } from "@/utils/utils";
+import { dispatchEvent, q } from "@/utils/utils";
 
 export const okname1: Handler = {
   isMatch: (url) => {
@@ -15,16 +15,16 @@ export const okname1: Handler = {
       const tcInput = q<HTMLInputElement>("input[name='tc']");
       if (tcInput) {
         let tcValue = "";
-        if (profile.통신3사 && profile.인증방식 === way.PASS) {
+        if (profile.통신3사 && profile.인증방식.PASS) {
           tcValue = "kcb.oknm.online.pass.popup.push.cmd.mno.PS02_PushMno011Cmd";
         }
-        if (!profile.통신3사 && profile.인증방식 === way.PASS) {
+        if (!profile.통신3사 && profile.인증방식.PASS) {
           tcValue = "kcb.oknm.online.pass.popup.push.cmd.mvno.PS02_PushMvno011Cmd";
         }
-        if (profile.통신3사 && profile.인증방식 === way.SMS) {
+        if (profile.통신3사 && profile.인증방식.SMS) {
           tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mno.PS02_SmsMno011Cmd";
         }
-        if (!profile.통신3사 && profile.인증방식 === way.SMS) {
+        if (!profile.통신3사 && profile.인증방식.SMS) {
           tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mvno.PS02_SmsMvno011Cmd";
         }
         tcInput.value = tcValue;

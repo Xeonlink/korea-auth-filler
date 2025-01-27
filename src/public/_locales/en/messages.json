@@ -16,8 +16,8 @@
     "description": "Auth Autofill button name"
   },
   "add_profile": {
-    "message": "Add profile",
-    "description": "Add profile"
+    "message": "Add Profile",
+    "description": "Add Profile"
   },
   "carrier": {
     "message": "Carrier",
@@ -48,8 +48,8 @@
     "description": "LGU+ MVNO"
   },
   "full_name": {
-    "message": "Full name written on alien registration card",
-    "description": "Full name written on alien registration card"
+    "message": "full name",
+    "description": "full name"
   },
   "phone_number": {
     "message": "Mobile number",
@@ -60,8 +60,8 @@
     "description": "Birthday"
   },
   "citizen": {
-    "message": "Korean citizen",
-    "description": "Korean citizen"
+    "message": "Korean",
+    "description": "Korean"
   },
   "foreigner": {
     "message": "Foreigner",
@@ -84,12 +84,16 @@
     "description": "Auth Method"
   },
   "sms": {
-    "message": "SMS text message",
-    "description": "SMS text message"
+    "message": "SMS",
+    "description": "SMS"
   },
   "pass": {
-    "message": "Carrier's PASS app",
-    "description": "Carrier's PASS app"
+    "message": "PUSH",
+    "description": "PUSH"
+  },
+  "qr": {
+    "message": "QR",
+    "description": "QR"
   },
   "enter_name": {
     "message": "Please enter a name",
@@ -120,11 +124,11 @@
     "description": "SKT MVNO does not support PASS app authentication.\nYou can only use SMS authentication."
   },
   "bug_report": {
-    "message": "버그제보",
-    "description": "버그제보"
+    "message": "Bug Report",
+    "description": "Bug Report"
   },
   "feature_request": {
-    "message": "기능수정 요청",
-    "description": "기능수정 요청"
+    "message": "Feature Request",
+    "description": "Feature Request"
   }
 }
