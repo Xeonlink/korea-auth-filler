@@ -1,5 +1,6 @@
 import MainIcon from "@/assets/icons/128.png";
 import { Anchor } from "@/components/ui/anchor";
+import { Tooltip } from "@/components/ui/tooltip";
 import { useStorage } from "@/hooks/useStorage";
 import { useTranslation } from "@/hooks/useTranslation";
 import type { CarrierCode, GenderCode, IsForeigner, RawProfile, WayCode } from "@/utils/type";
@@ -133,16 +134,13 @@ export function Popup() {
             <FontAwesomeIcon className="swap-off h-4 w-4" icon={faSun} />
             <FontAwesomeIcon className="swap-on h-4 w-4" icon={faMoon} />
           </label> */}
-          <div
-            className="tooltip tooltip-left"
-            data-tip={isSideMenuOpen ? "닫기" : t("add_profile")}
-          >
+          <Tooltip dir="left" tip={isSideMenuOpen ? "닫기" : t("add_profile")}>
             <label className="btn btn-ghost swap swap-rotate">
               <input checked={isSideMenuOpen} onChange={toggleSideMenu} type="checkbox" />
               <FontAwesomeIcon className="h-4 w-4 swap-on" icon={faMinus} />
               <FontAwesomeIcon className="h-4 w-4 swap-off" icon={faPlus} />
             </label>
-          </div>
+          </Tooltip>
         </div>
       </header>
       <main className="flex h-96">
@@ -179,7 +177,7 @@ export function Popup() {
                     {t(getWayCodeTranslationKey(profile.way))}
                   </span>
                 </button>
-                <div className="tooltip tooltip-left" data-tip="삭제하기">
+                <Tooltip dir="left" tip="삭제하기">
                   <button
                     className="btn btn-ghost"
                     onClick={() => removeProfile(index)}
@@ -187,7 +185,7 @@ export function Popup() {
                   >
                     <FontAwesomeIcon className="h-4 w-4" icon={faTrash} />
                   </button>
-                </div>
+                </Tooltip>
               </li>
             ))}
           </ul>
