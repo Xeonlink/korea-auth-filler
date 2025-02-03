@@ -1,40 +1,25 @@
+import MainIcon from "@/assets/icons/128.png";
+import { Anchor } from "@/components/ui/anchor";
+import { useStorage } from "@/hooks/useStorage";
+import { useTranslation } from "@/hooks/useTranslation";
 import type { CarrierCode, GenderCode, IsForeigner, RawProfile, WayCode } from "@/utils/type";
-import { faCake, faMobile, faPlus, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  cn,
+  getCarrierCodeTranslationKey,
+  getWayCodeTranslationKey,
+  toHyphenPhone,
+} from "@/utils/utils";
+import {
+  faCake,
+  faMinus,
+  faMobile,
+  faPlus,
+  faTrash,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
-import { Anchor } from "../../components/ui/Anchor";
-import { useStorage } from "../../hooks/useStorage";
-import { useTranslation } from "../../hooks/useTranslation";
-import { cn, toHyphenPhone } from "../../utils/utils";
 import { useEffect } from "react";
-
-export function getCarrierCodeTranslationKey(carrierCode: CarrierCode) {
-  switch (carrierCode) {
-    case "1":
-      return "carrier_SKT";
-    case "2":
-      return "carrier_KT";
-    case "3":
-      return "carrier_LGU";
-    case "4":
-      return "carrier_SKT_MVNO";
-    case "5":
-      return "carrier_KT_MVNO";
-    case "6":
-      return "carrier_LGU_MVNO";
-  }
-}
-
-export function getWayCodeTranslationKey(wayCode: WayCode) {
-  switch (wayCode) {
-    case "1":
-      return "sms";
-    case "2":
-      return "pass";
-    case "3":
-      return "qr";
-  }
-}
 
 const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
 
@@ -47,7 +32,11 @@ export function Popup() {
     storage.mutate({ on: e.target.checked });
   };
   const removeProfile = (index: number) => {
-    storage.mutate({ profiles: profiles.filter((_, i) => i !== index) });
+    storage.mutate({
+      profiles: profiles.filter((_, i) => i !== index),
+      selectedProfile:
+        profiles.length - 1 === selectedProfile ? selectedProfile - 1 : selectedProfile,
+    });
   };
   const selectProfile = (index: number) => {
     if (index === selectedProfile) return;
@@ -112,49 +101,73 @@ export function Popup() {
     }
   }, [profiles.length]);
 
+  // const onThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.checked) {
+  //     document.documentElement.setAttribute("data-theme", "light");
+  //   } else {
+  //     document.documentElement.setAttribute("data-theme", "night");
+  //   }
+  // };
+
   return (
     <>
-      <header className="w-full bg-base-200 flex">
-        <label className="label cursor-pointer justify-start gap-2 flex-1 px-6" htmlFor="onoff">
-          <input
-            checked={on}
-            className="toggle toggle-sm"
-            id="onoff"
-            onChange={onEnabledChange}
-            type="checkbox"
-          />
-          <h1 className="label-text font-bold text-lg">{t("auth_autofill")} ON/OFF</h1>
-        </label>
-        <button className="btn btn-ghost m-2" onClick={toggleSideMenu}>
-          <FontAwesomeIcon className="h-4 w-4" icon={faPlus} />
-        </button>
+      <header className="w-full bg-base-200 flex p-2">
+        <div className="flex-1 flex justify-start">
+          <label className="label cursor-pointer gap-2 pl-4" htmlFor="onoff">
+            <input
+              checked={on}
+              className="toggle toggle-sm"
+              id="onoff"
+              onChange={onEnabledChange}
+              type="checkbox"
+            />
+            <span className="font-bold text-lg">ON/OFF</span>
+          </label>
+        </div>
+        <div className="flex items-center">
+          <img alt="logo" className="w-10 h-10" src={MainIcon} />
+        </div>
+        <div className="flex-1 flex justify-end">
+          {/* <label className="btn btn-ghost swap swap-rotate">
+            <input onChange={onThemeChange} type="checkbox" />
+            <FontAwesomeIcon className="swap-off h-4 w-4" icon={faSun} />
+            <FontAwesomeIcon className="swap-on h-4 w-4" icon={faMoon} />
+          </label> */}
+          <div
+            className="tooltip tooltip-left"
+            data-tip={isSideMenuOpen ? "닫기" : t("add_profile")}
+          >
+            <label className="btn btn-ghost swap swap-rotate">
+              <input checked={isSideMenuOpen} onChange={toggleSideMenu} type="checkbox" />
+              <FontAwesomeIcon className="h-4 w-4 swap-on" icon={faMinus} />
+              <FontAwesomeIcon className="h-4 w-4 swap-off" icon={faPlus} />
+            </label>
+          </div>
+        </div>
       </header>
       <main className="flex h-96">
         <section className="overflow-scroll">
           {profiles.length < 1 ? (
             <div className="p-4 text-center space-y-2">
-              <h4 className="text-center text-base">프로필이 없습니다.</h4>
+              <h4 className="text-center text-base">{t("no_profile")}</h4>
               <button className="btn btn-ghost" onClick={openSideMenu} type="button">
-                <FontAwesomeIcon className="h-4 w-4" icon={faPlus} /> 프로필 추가하기
+                <FontAwesomeIcon className="h-4 w-4" icon={faPlus} /> {t("add_profile")}
               </button>
             </div>
           ) : null}
-          <ul className="w-96 p-2">
+          <ul className="w-96 p-2 pl-4">
             {profiles.map((profile, index) => (
               <li className="w-full flex items-center" key={profile.id}>
+                <div
+                  className={cn("w-1 h-4 rounded-full", {
+                    "bg-base-content": selectedProfile === index,
+                  })}
+                ></div>
                 <button
-                  className={cn("flex-1 btn font-normal justify-start btn-ghost gap-1 flex-wrap")}
+                  className="flex-1 btn btn-ghost font-normal justify-start gap-1"
                   onClick={() => selectProfile(index)}
                   type="button"
                 >
-                  <input
-                    checked={selectedProfile === index}
-                    className="checkbox checkbox-xs mr-1"
-                    id={profile.id}
-                    name="selected-profile"
-                    readOnly
-                    type="checkbox"
-                  />
                   <h5 className="text-sm">{profile.name}</h5>
                   <span className="badge badge-sm border-none">
                     {toHyphenPhone(profile.phone_number).slice(4)}
@@ -166,20 +179,22 @@ export function Popup() {
                     {t(getWayCodeTranslationKey(profile.way))}
                   </span>
                 </button>
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => removeProfile(index)}
-                  type="button"
-                >
-                  <FontAwesomeIcon className="h-4 w-4" icon={faTrash} />
-                </button>
+                <div className="tooltip tooltip-left" data-tip="삭제하기">
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => removeProfile(index)}
+                    type="button"
+                  >
+                    <FontAwesomeIcon className="h-4 w-4" icon={faTrash} />
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         </section>
 
         <section
-          className={cn("overflow-scroll transition-all w-96 duration-500 ease-in", {
+          className={cn("overflow-scroll w-96", {
             "w-0": !isSideMenuOpen,
           })}
         >
@@ -273,10 +288,10 @@ export function Popup() {
         </section>
       </main>
       <footer className="w-full bg-base-200">
-        <ul className="flex">
+        <ul className="flex p-2">
           <li className="contents">
             <Anchor
-              className="btn btn-ghost btn-md flex-1"
+              className="btn btn-ghost min-h-0 h-10 flex-1"
               href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=버그-리포트.md"
             >
               {t("bug_report")}
@@ -284,7 +299,7 @@ export function Popup() {
           </li>
           <li className="contents">
             <Anchor
-              className="btn btn-ghost btn-md flex-1"
+              className="btn btn-ghost min-h-0 h-10 flex-1"
               href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=수정-요청.md"
             >
               {t("feature_request")}

@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import type { CarrierCode, GenderCode, IsForeigner } from "./type";
+import type { CarrierCode, GenderCode, IsForeigner, WayCode } from "./type";
 
 /**
  * 전화번호 하이픈 처리
@@ -160,3 +160,31 @@ export const events =
   (e: E) => {
     fns.forEach((fn) => fn(e));
   };
+
+export function getCarrierCodeTranslationKey(carrierCode: CarrierCode) {
+  switch (carrierCode) {
+    case "1":
+      return "carrier_SKT";
+    case "2":
+      return "carrier_KT";
+    case "3":
+      return "carrier_LGU";
+    case "4":
+      return "carrier_SKT_MVNO";
+    case "5":
+      return "carrier_KT_MVNO";
+    case "6":
+      return "carrier_LGU_MVNO";
+  }
+}
+
+export function getWayCodeTranslationKey(wayCode: WayCode) {
+  switch (wayCode) {
+    case "1":
+      return "sms";
+    case "2":
+      return "pass";
+    case "3":
+      return "qr";
+  }
+}

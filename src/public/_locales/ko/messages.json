@@ -130,5 +130,9 @@
   "feature_request": {
     "message": "기능수정 요청",
     "description": "기능수정 요청"
+  },
+  "no_profile": {
+    "message": "프로필이 없습니다.",
+    "description": "프로필이 없습니다."
   }
 }
