@@ -130,5 +130,9 @@
   "feature_request": {
     "message": "Feature Request",
     "description": "Feature Request"
+  },
+  "no_profile": {
+    "message": "No profiles",
+    "description": "No profiles"
   }
 }
