@@ -5,9 +5,10 @@ export function Anchor(props: ComponentProps<"a">) {
   const { href, onClick, ...rest } = props;
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    onClick?.(e);
+    e.preventDefault();
     if (!href) return;
     browser.tabs.create({ url: href });
+    onClick?.(e);
   };
 
   return (

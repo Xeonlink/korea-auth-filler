@@ -10,7 +10,7 @@ export default defineBackground({
 const defaultStorageData: StorageData = {
   profiles: [],
   selectedProfile: 0,
-  on: false,
+  on: true,
   isSideMenuOpen: false,
 };
 

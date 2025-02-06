@@ -1,5 +1,6 @@
 import MainIcon from "@/assets/icons/128.png";
 import { Anchor } from "@/components/ui/anchor";
+import { ScrollArea } from "@/components/ui/scrollarea";
 import { Tooltip } from "@/components/ui/tooltip";
 import { useStorage } from "@/hooks/useStorage";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -143,8 +144,8 @@ export function Popup() {
           </Tooltip>
         </div>
       </header>
-      <main className="flex h-96">
-        <section className="overflow-scroll">
+      <main className="flex">
+        <ScrollArea className="w-96 h-96">
           {profiles.length < 1 ? (
             <div className="p-4 text-center space-y-2">
               <h4 className="text-center text-base">{t("no_profile")}</h4>
@@ -153,11 +154,11 @@ export function Popup() {
               </button>
             </div>
           ) : null}
-          <ul className="w-96 p-2 pl-4">
+          <ul className="w-96 p-2 pl-3">
             {profiles.map((profile, index) => (
               <li className="w-full flex items-center" key={profile.id}>
                 <div
-                  className={cn("w-1 h-4 rounded-full", {
+                  className={cn("w-1 h-4 rounded-full opacity-80", {
                     "bg-base-content": selectedProfile === index,
                   })}
                 ></div>
@@ -189,14 +190,14 @@ export function Popup() {
               </li>
             ))}
           </ul>
-        </section>
+        </ScrollArea>
 
-        <section
-          className={cn("overflow-scroll w-96", {
+        <ScrollArea
+          className={cn("w-96 h-96", {
             "w-0": !isSideMenuOpen,
           })}
         >
-          <form className="space-y-2 w-96 p-4" onSubmit={onSubmit}>
+          <form className="space-y-2 p-4" onSubmit={onSubmit}>
             <h3 className="text-lg font-bold ml-2">{t("add_profile")}</h3>
 
             <fieldset className="grid grid-cols-12">
@@ -283,7 +284,7 @@ export function Popup() {
               </button>
             </div>
           </form>
-        </section>
+        </ScrollArea>
       </main>
       <footer className="w-full bg-base-200">
         <ul className="flex p-2">

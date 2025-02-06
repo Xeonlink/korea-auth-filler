@@ -15,12 +15,30 @@ export default defineContentScript({
 
 async function main(ctx: ContentScriptContext) {
   const data = (await browser.storage.sync.get(null)) as StorageData;
-  if (!data.on) return log("OFF");
-  if (!data.profiles) return log("No profiles");
+  if (!data.on) {
+    log("OFF");
+    return;
+  }
+  if (!data.profiles) {
+    log("No profiles array");
+    return;
+  }
 
   const profiles = data.profiles;
+  if (profiles.length === 0) {
+    log("No profiles");
+    return;
+  }
+  if (profiles.length <= data.selectedProfile) {
+    log("Selected profile is out of range");
+    return;
+  }
+
   const rawProfile = profiles[data.selectedProfile];
-  if (!rawProfile) return log("No selected profile");
+  if (!rawProfile) {
+    log("No selected profile");
+    return;
+  }
 
   log("Korea Auth Filler");
 
