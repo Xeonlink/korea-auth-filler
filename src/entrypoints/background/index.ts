@@ -76,6 +76,7 @@ const defaultStorageData: StorageData = {
   selectedProfile: 0,
   on: true,
   isSideMenuOpen: false,
+  delay: 1000,
 };
 
 async function initStorage() {

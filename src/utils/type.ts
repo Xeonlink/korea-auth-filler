@@ -21,6 +21,7 @@ export type StorageData = {
   selectedProfile: number; // profiles의 index
   on: boolean;
   isSideMenuOpen: boolean;
+  delay: number;
 };
 
 export interface IProfile {

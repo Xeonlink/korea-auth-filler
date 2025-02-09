@@ -49,6 +49,6 @@ async function main(ctx: ContentScriptContext) {
         return;
       }
     }
-    await wait(1000);
+    await wait(data.delay ?? 1000);
   }
 }

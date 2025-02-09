@@ -105,211 +105,219 @@ export function ProfilesPage(_: PageProps) {
   };
 
   return (
-    <main className="p-10 flex justify-center gap-10 flex-wrap">
-      <section>
-        <table className="table table-zebra">
-          <thead>
-            <tr>
-              <th>선택</th>
-              <th>이름</th>
-              <th>생년월일</th>
-              <th>통신사</th>
-              <th>전화번호</th>
-              <th className="text-center">외국인</th>
-              <th className="text-center">성별</th>
-              <th className="text-center">방법</th>
-              <th className="text-center">삭제</th>
-            </tr>
-          </thead>
-          <tbody>
-            {profiles.map((profile, index) => (
-              <tr className="border-none" key={profile.id}>
-                <td className="rounded-l-md overflow-hidden">
-                  <input
-                    checked={selectedProfile === index}
-                    className="checkbox checkbox-sm"
-                    onChange={selectProfile(index)}
-                    type="checkbox"
-                  />
-                </td>
-
-                <td className="px-2">{profile.name}</td>
-                <td>{toBirth(profile.birth)}</td>
-                <td className="px-2 py-0">
-                  {profile.carrier === carrier.KT ? (
-                    <div className="flex gap-1 flex-col items-start">
-                      <img alt="KT" className="h-4 inline-block dark:hidden" src={KTCI} />
-                      <img alt="KT" className="h-4 hidden dark:inline-block" src={KTCI_LIGHT} />
-                    </div>
-                  ) : null}
-                  {profile.carrier === carrier.KT_MVNO ? (
-                    <div className="flex gap-1 flex-col items-start">
-                      <img alt="KT" className="h-4 inline-block dark:hidden" src={KTCI} />
-                      <img alt="KT" className="h-4 hidden dark:inline-block" src={KTCI_LIGHT} />
-                      <span className="badge text-xs">{t("mvno")}</span>
-                    </div>
-                  ) : null}
-
-                  {profile.carrier === carrier.SKT ? (
-                    <div className="flex gap-1 flex-col items-start">
-                      <img alt="SKT" className="h-6" src={SKTCI} />
-                    </div>
-                  ) : null}
-                  {profile.carrier === carrier.SKT_MVNO ? (
-                    <div className="flex gap-1 flex-col items-start">
-                      <img alt="SKT" className="h-6 inline-block" src={SKTCI} />
-                      <span className="badge text-xs">{t("mvno")}</span>
-                    </div>
-                  ) : null}
-
-                  {profile.carrier === carrier.LGU ? (
-                    <div className="flex gap-1 flex-col items-start">
-                      <img alt="LGU" className="h-5 inline-block" src={LGUCI} />
-                    </div>
-                  ) : null}
-                  {profile.carrier === carrier.LGU_MVNO ? (
-                    <div className="flex gap-1 flex-col items-start">
-                      <img alt="LGU" className="h-5 inline-block" src={LGUCI} />
-                      <span className="badge text-xs">{t("mvno")}</span>
-                    </div>
-                  ) : null}
-
-                  {/* {t(getCarrierCodeTranslationKey(profile.carrier))} */}
-                </td>
-                <td>{toHyphenPhone(profile.phone_number)}</td>
-                <td className="p-0">
-                  <div className="text-center">
-                    {profile.foreigner === "0" ? (
-                      <img alt="내국인" className="inline-block" src={GovernmentIcon} />
-                    ) : (
-                      <FontAwesomeIcon icon={faPlane} />
-                    )}
-                    <br />
-                    <span className="text-xs">
-                      {profile.foreigner === "0" ? "내국인" : "외국인"}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-0">
-                  {profile.gender === gender.MALE ? (
-                    <div className="text-center">
-                      <FontAwesomeIcon icon={faMars} />
-                      <br />
-                      <span className="text-xs">남자</span>
-                    </div>
-                  ) : (
-                    <div className="text-center">
-                      <FontAwesomeIcon icon={faVenus} />
-                      <br />
-                      <span className="text-xs">여자</span>
-                    </div>
-                  )}
-                </td>
-                <td className="p-0">
-                  <div className="text-center">
-                    <FontAwesomeIcon icon={getWayIcon(profile.way)} />
-                    <br />
-                    <span className="text-xs">{t(getWayCodeTranslationKey(profile.way))}</span>
-                  </div>
-                </td>
-                <td className="rounded-r-md overflow-hidden">
-                  <button className="btn btn-ghost" onClick={removeProfile(index)}>
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </td>
+    <div className="pt-10">
+      <h1 className="text-center font-bold text-2xl">프로필 관리</h1>
+      <div className="text-center text-sm mt-2">
+        프로필을 추가하고 관리할 수 있습니다.
+        <br />
+        선택된 프로필은 자동으로 본인인증 양식을 채워줍니다.
+      </div>
+      <main className="p-10 flex justify-center gap-10 flex-wrap">
+        <section>
+          <table className="table table-zebra">
+            <thead>
+              <tr>
+                <th>선택</th>
+                <th>이름</th>
+                <th>생년월일</th>
+                <th>통신사</th>
+                <th>전화번호</th>
+                <th className="text-center">외국인</th>
+                <th className="text-center">성별</th>
+                <th className="text-center">방법</th>
+                <th className="text-center">삭제</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-      <section className="self-end">
-        <form className="space-y-6" onSubmit={onSubmit}>
-          <fieldset className="grid grid-cols-12">
-            <label className="input input-bordered flex items-center gap-2 col-span-12 rounded-b-none border-b-0">
-              <FontAwesomeIcon className="h-4 w-4" icon={faUser} />
-              <input id="name" name="name" placeholder={t("full_name")} required type="text" />
-            </label>
+            </thead>
+            <tbody>
+              {profiles.map((profile, index) => (
+                <tr className="border-none" key={profile.id}>
+                  <td className="rounded-l-md overflow-hidden">
+                    <input
+                      checked={selectedProfile === index}
+                      className="checkbox checkbox-sm"
+                      onChange={selectProfile(index)}
+                      type="checkbox"
+                    />
+                  </td>
 
-            <select
-              className="select select-bordered col-span-5 rounded-none border-r-0"
-              id="carrier"
-              name="carrier"
-            >
-              <option value="-1">{t("carrier")}</option>
-              <option value="1">{t("carrier_SKT")}</option>
-              <option value="2">{t("carrier_KT")}</option>
-              <option value="3">{t("carrier_LGU")}</option>
-              <option value="4">{t("carrier_SKT_MVNO")}</option>
-              <option value="5">{t("carrier_KT_MVNO")}</option>
-              <option value="6">{t("carrier_LGU_MVNO")}</option>
-            </select>
+                  <td className="px-2">{profile.name}</td>
+                  <td>{toBirth(profile.birth)}</td>
+                  <td className="px-2 py-0">
+                    {profile.carrier === carrier.KT ? (
+                      <div className="flex gap-1 flex-col items-start">
+                        <img alt="KT" className="h-4 inline-block dark:hidden" src={KTCI} />
+                        <img alt="KT" className="h-4 hidden dark:inline-block" src={KTCI_LIGHT} />
+                      </div>
+                    ) : null}
+                    {profile.carrier === carrier.KT_MVNO ? (
+                      <div className="flex gap-1 flex-col items-start">
+                        <img alt="KT" className="h-4 inline-block dark:hidden" src={KTCI} />
+                        <img alt="KT" className="h-4 hidden dark:inline-block" src={KTCI_LIGHT} />
+                        <span className="badge text-xs">{t("mvno")}</span>
+                      </div>
+                    ) : null}
 
-            <label className="input input-bordered flex items-center gap-2 rounded-none col-span-7">
-              <FontAwesomeIcon className="h-4 w-4" icon={faMobile} />
-              <input
-                id="phone_number"
-                name="phone_number"
-                onChange={(e) => (e.target.value = toHyphenPhone(e.target.value))}
-                placeholder={t("phone_number")}
-                required
-                type="tel"
-              />
-            </label>
+                    {profile.carrier === carrier.SKT ? (
+                      <div className="flex gap-1 flex-col items-start">
+                        <img alt="SKT" className="h-6" src={SKTCI} />
+                      </div>
+                    ) : null}
+                    {profile.carrier === carrier.SKT_MVNO ? (
+                      <div className="flex gap-1 flex-col items-start">
+                        <img alt="SKT" className="h-6 inline-block" src={SKTCI} />
+                        <span className="badge text-xs">{t("mvno")}</span>
+                      </div>
+                    ) : null}
 
-            <label className="input input-bordered flex items-center gap-2 col-span-12 rounded-none border-y-0">
-              <FontAwesomeIcon className="h-4 w-4" icon={faCake} />
-              <input
-                className="grow"
-                id="birth"
-                max={YYYYMMDD}
-                maxLength={9}
-                min={YYYYMMDD - 1000000}
-                minLength={8}
-                name="birth"
-                placeholder={t("birthday")}
-                required
-                type="number"
-              />
-            </label>
+                    {profile.carrier === carrier.LGU ? (
+                      <div className="flex gap-1 flex-col items-start">
+                        <img alt="LGU" className="h-5 inline-block" src={LGUCI} />
+                      </div>
+                    ) : null}
+                    {profile.carrier === carrier.LGU_MVNO ? (
+                      <div className="flex gap-1 flex-col items-start">
+                        <img alt="LGU" className="h-5 inline-block" src={LGUCI} />
+                        <span className="badge text-xs">{t("mvno")}</span>
+                      </div>
+                    ) : null}
 
-            <select
-              className="join-item select select-bordered col-span-3 rounded-t-none rounded-br-none pr-0"
-              id="foreigner"
-              name="foreigner"
-            >
-              <option value="0">{t("citizen")}</option>
-              <option value="1">{t("foreigner")}</option>
-            </select>
+                    {/* {t(getCarrierCodeTranslationKey(profile.carrier))} */}
+                  </td>
+                  <td>{toHyphenPhone(profile.phone_number)}</td>
+                  <td className="p-0">
+                    <div className="text-center">
+                      {profile.foreigner === "0" ? (
+                        <img alt="내국인" className="inline-block" src={GovernmentIcon} />
+                      ) : (
+                        <FontAwesomeIcon icon={faPlane} />
+                      )}
+                      <br />
+                      <span className="text-xs">
+                        {profile.foreigner === "0" ? "내국인" : "외국인"}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="p-0">
+                    {profile.gender === gender.MALE ? (
+                      <div className="text-center">
+                        <FontAwesomeIcon icon={faMars} />
+                        <br />
+                        <span className="text-xs">남자</span>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <FontAwesomeIcon icon={faVenus} />
+                        <br />
+                        <span className="text-xs">여자</span>
+                      </div>
+                    )}
+                  </td>
+                  <td className="p-0">
+                    <div className="text-center">
+                      <FontAwesomeIcon icon={getWayIcon(profile.way)} />
+                      <br />
+                      <span className="text-xs">{t(getWayCodeTranslationKey(profile.way))}</span>
+                    </div>
+                  </td>
+                  <td className="rounded-r-md overflow-hidden">
+                    <button className="btn btn-ghost" onClick={removeProfile(index)}>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+        <section className="self-end">
+          <form className="space-y-6" onSubmit={onSubmit}>
+            <fieldset className="grid grid-cols-12">
+              <label className="input input-bordered flex items-center gap-2 col-span-12 rounded-b-none border-b-0">
+                <FontAwesomeIcon className="h-4 w-4" icon={faUser} />
+                <input id="name" name="name" placeholder={t("full_name")} required type="text" />
+              </label>
 
-            <select
-              className="join-item select select-bordered col-span-4 rounded-none border-x-0 pr-0"
-              id="gender"
-              name="gender"
-            >
-              <option value="-1">{t("gender")}</option>
-              <option value="1">{t("male")}</option>
-              <option value="2">{t("female")}</option>
-            </select>
+              <select
+                className="select select-bordered col-span-5 rounded-none border-r-0"
+                id="carrier"
+                name="carrier"
+              >
+                <option value="-1">{t("carrier")}</option>
+                <option value="1">{t("carrier_SKT")}</option>
+                <option value="2">{t("carrier_KT")}</option>
+                <option value="3">{t("carrier_LGU")}</option>
+                <option value="4">{t("carrier_SKT_MVNO")}</option>
+                <option value="5">{t("carrier_KT_MVNO")}</option>
+                <option value="6">{t("carrier_LGU_MVNO")}</option>
+              </select>
 
-            <select
-              className="join-item select select-bordered col-span-5 rounded-t-none rounded-bl-none pr-0"
-              id="way"
-              name="way"
-            >
-              <option value="-1">{t("auth_method")}</option>
-              <option value="1">{t("sms")}</option>
-              <option value="2">{t("pass")}</option>
-              <option value="3">{t("qr")}</option>
-            </select>
-          </fieldset>
-          <div className="text-right">
-            <button className="btn" type="submit">
-              <FontAwesomeIcon icon={faPlus} />
-              {t("add_profile")}
-            </button>
-          </div>
-        </form>
-      </section>
-    </main>
+              <label className="input input-bordered flex items-center gap-2 rounded-none col-span-7">
+                <FontAwesomeIcon className="h-4 w-4" icon={faMobile} />
+                <input
+                  id="phone_number"
+                  name="phone_number"
+                  onChange={(e) => (e.target.value = toHyphenPhone(e.target.value))}
+                  placeholder={t("phone_number")}
+                  required
+                  type="tel"
+                />
+              </label>
+
+              <label className="input input-bordered flex items-center gap-2 col-span-12 rounded-none border-y-0">
+                <FontAwesomeIcon className="h-4 w-4" icon={faCake} />
+                <input
+                  className="grow"
+                  id="birth"
+                  max={YYYYMMDD}
+                  maxLength={9}
+                  min={YYYYMMDD - 1000000}
+                  minLength={8}
+                  name="birth"
+                  placeholder={t("birthday")}
+                  required
+                  type="number"
+                />
+              </label>
+
+              <select
+                className="join-item select select-bordered col-span-3 rounded-t-none rounded-br-none pr-0"
+                id="foreigner"
+                name="foreigner"
+              >
+                <option value="0">{t("citizen")}</option>
+                <option value="1">{t("foreigner")}</option>
+              </select>
+
+              <select
+                className="join-item select select-bordered col-span-4 rounded-none border-x-0 pr-0"
+                id="gender"
+                name="gender"
+              >
+                <option value="-1">{t("gender")}</option>
+                <option value="1">{t("male")}</option>
+                <option value="2">{t("female")}</option>
+              </select>
+
+              <select
+                className="join-item select select-bordered col-span-5 rounded-t-none rounded-bl-none pr-0"
+                id="way"
+                name="way"
+              >
+                <option value="-1">{t("auth_method")}</option>
+                <option value="1">{t("sms")}</option>
+                <option value="2">{t("pass")}</option>
+                <option value="3">{t("qr")}</option>
+              </select>
+            </fieldset>
+            <div className="text-right">
+              <button className="btn" type="submit">
+                <FontAwesomeIcon icon={faPlus} />
+                {t("add_profile")}
+              </button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
   );
 }
