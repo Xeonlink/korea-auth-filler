@@ -26,6 +26,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.64.2
     version: 5.64.2(react@18.2.0)
+  class-variance-authority:
+    specifier: ^0.7.1
+    version: 0.7.1
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
@@ -2172,6 +2175,12 @@ packages:
     dependencies:
       consola: 3.4.0
     dev: true
+
+  /class-variance-authority@0.7.1:
+    resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
+    dependencies:
+      clsx: 2.1.1
+    dev: false
 
   /cli-boxes@3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}

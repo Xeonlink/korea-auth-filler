@@ -47,6 +47,14 @@
     "message": "LGU+ 알뜰통신사",
     "description": "LGU+ 알뜰통신사"
   },
+  "carrier_MVNO": {
+    "message": "알뜰통신사",
+    "description": "알뜰통신사"
+  },
+  "mvno": {
+    "message": "알뜰",
+    "description": "알뜰"
+  },
   "full_name": {
     "message": "이름",
     "description": "이름"
@@ -123,10 +131,6 @@
     "message": "SKT망 알뜰폰은 PASS앱 인증을 지원하지 않습니다.\nSMS인증을 이용해주세요.",
     "description": "SKT망 알뜰폰은 PASS앱 인증을 지원하지 않습니다.\nSMS인증을 이용해주세요."
   },
-  "bug_report": {
-    "message": "버그제보",
-    "description": "버그제보"
-  },
   "feature_request": {
     "message": "기능수정 요청",
     "description": "기능수정 요청"
@@ -134,5 +138,13 @@
   "no_profile": {
     "message": "프로필이 없습니다.",
     "description": "프로필이 없습니다."
+  },
+  "github": {
+    "message": "깃허브",
+    "description": "깃허브"
+  },
+  "ask_and_request": {
+    "message": "문의 및 요청",
+    "description": "문의 및 요청"
   }
 }

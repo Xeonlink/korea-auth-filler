@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { CarrierCode, GenderCode, IsForeigner, WayCode } from "./type";
+import dayjs from "dayjs";
 
 /**
  * 전화번호 하이픈 처리
@@ -20,6 +21,31 @@ export function toHyphenPhone(str: string): string {
 }
 
 /**
+ * 생년월일 .(닷) 처리
+ * @param str - 생년월일 8자리
+ * @returns 생년월일 .(닷) 처리된 문자열
+ */
+export function toDotBirth(str: string) {
+  return str.replace(/(\d{4})(\d{2})(\d{2})/, "$1.$2.$3");
+}
+
+/**
+ * 생년월일을 국가에 맞는 형식으로 변환, 생년월일을 년 월 일로 분리하고, Date 객체로 변환하여 toLocaleDateString() 메서드를 호출하여 국가에 맞는 형식으로 변환
+ * @param str - 생년월일 8자리
+ * @param country - 국가 코드
+ * @returns 생년월일 형식으로 변환된 문자열
+ */
+export function toBirth(str: string, country?: Intl.LocalesArgument) {
+  const dotBirth = toDotBirth(str);
+  const [year, month, day] = dotBirth.split(".").map(Number);
+  const date = new Date();
+  date.setFullYear(year);
+  date.setMonth(month - 1);
+  date.setDate(day);
+  return date.toLocaleDateString(country);
+}
+
+/**
  * 개발진행시 console.log()
  * @param {string} string - 출력할 문자열
  */
@@ -27,6 +53,11 @@ export function log(string: string) {
   if (!import.meta.env.DEV) return;
   console.log(string);
 }
+
+export const gender = {
+  MALE: "1",
+  FEMALE: "2",
+} as const;
 
 export const carrier = {
   SKT: "1",
@@ -188,3 +219,5 @@ export function getWayCodeTranslationKey(wayCode: WayCode) {
       return "qr";
   }
 }
+
+export const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));

@@ -1,0 +1,41 @@
+---
+description: 새로운 리엑트 컴포넌트를 만들거나 수정할 때
+globs: *.tsx
+---
+## 컴포넌트의 Props는 새로운 타입으로 분리한다.
+컴포넌트 props의 타입은 인라인으로 작성하지 않으며, 항상 type alias를 사용하여 분리해야한다. 아래는 예시이다.
+
+```tsx
+// ❌ 부적절한
+export function Component(props: {childen: React.ReractNode, className?: string}) {
+  const { children, className = "" } = props;
+  
+  return ...
+}
+
+// ✅ 알맞은
+type Props = {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Component(props: Props) {
+  const { children, className = "" } = props;
+
+  return ...
+}
+```
+
+```tsx
+// ❌ 부적절한
+export function Component(props: ComponentProps<"a">) {
+  ...
+}
+
+// ✅ 알맞은
+type Props = ComponentProps<"a">;
+
+export function Component(props: Props) {
+  ...
+}
+```

@@ -1,0 +1,20 @@
+---
+description: 새로운 리엑트 컴포넌트를 만들거나 수정할 때
+globs: *.tsx
+---
+## Arrow Function을 사용하여 컴포넌트를 만들지 않는다.
+새로운 컴포넌트를 만들 때는 항상 function 키워드를 사용하여 만들어야하며, arrow function을 사용하여 컴포넌트를 만들지 않습니다.
+아래는 이를 구현한 간단한 예시입니다.
+
+
+```tsx
+// ❌ 부적절한
+export const NewComponent = (props: Props) = {
+  return (<div></div>)
+}
+
+// ✅ 알맞은
+export function NewComponent(props: Props) {
+  return (<div></div>)
+}
+```

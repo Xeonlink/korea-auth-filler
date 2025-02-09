@@ -4,7 +4,7 @@ import { browser } from "wxt/browser";
 export function Anchor(props: ComponentProps<"a">) {
   const { href, onClick, ...rest } = props;
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
     if (!href) return;
     browser.tabs.create({ url: href });

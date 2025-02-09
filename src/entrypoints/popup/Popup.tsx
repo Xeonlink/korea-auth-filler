@@ -10,20 +10,20 @@ import {
   getCarrierCodeTranslationKey,
   getWayCodeTranslationKey,
   toHyphenPhone,
+  YYYYMMDD,
 } from "@/utils/utils";
 import {
   faCake,
   faMinus,
   faMobile,
   faPlus,
+  faQuestionCircle,
   faTrash,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import dayjs from "dayjs";
 import { useEffect } from "react";
-
-const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export function Popup() {
   const storage = useStorage();
@@ -291,17 +291,19 @@ export function Popup() {
           <li className="contents">
             <Anchor
               className="btn btn-ghost min-h-0 h-10 flex-1"
-              href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=버그-리포트.md"
+              href="https://github.com/Xeonlink/korea-auth-filler"
             >
-              {t("bug_report")}
+              <FontAwesomeIcon className="h-4 w-4" icon={faGithub} />
+              {t("github")}
             </Anchor>
           </li>
           <li className="contents">
             <Anchor
               className="btn btn-ghost min-h-0 h-10 flex-1"
-              href="https://github.com/Xeonlink/korea-auth-filler/issues/new?template=수정-요청.md"
+              href="https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support"
             >
-              {t("feature_request")}
+              <FontAwesomeIcon className="h-4 w-4" icon={faQuestionCircle} />
+              {t("ask_and_request")}
             </Anchor>
           </li>
         </ul>

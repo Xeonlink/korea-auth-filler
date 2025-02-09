@@ -47,6 +47,14 @@
     "message": "LGU+ MVNO",
     "description": "LGU+ MVNO"
   },
+  "carrier_MVNO": {
+    "message": "MVNO",
+    "description": "MVNO"
+  },
+  "mvno": {
+    "message": "MVNO",
+    "description": "MVNO"
+  },
   "full_name": {
     "message": "full name",
     "description": "full name"
@@ -123,10 +131,6 @@
     "message": "SKT MVNO does not support PASS app authentication.\nYou can only use SMS authentication.",
     "description": "SKT MVNO does not support PASS app authentication.\nYou can only use SMS authentication."
   },
-  "bug_report": {
-    "message": "Bug Report",
-    "description": "Bug Report"
-  },
   "feature_request": {
     "message": "Feature Request",
     "description": "Feature Request"
@@ -134,5 +138,13 @@
   "no_profile": {
     "message": "No profiles",
     "description": "No profiles"
+  },
+  "github": {
+    "message": "Github",
+    "description": "Github"
+  },
+  "ask_and_request": {
+    "message": "Ask & Request",
+    "description": "Ask & Request"
   }
 }

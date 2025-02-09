@@ -22,7 +22,7 @@ export const SCI평가정보1: Handler = {
       const 폼 = q<HTMLFormElement>("form[name='cplogn']");
       if (폼) {
         const 통신3사 = profile.통신3사 ? "" : "Mvno";
-        const 인증방식 = profile.map.인증방식(["", "App", "", ""]);
+        const 인증방식 = profile.map.인증방식(["", "", "App", ""]);
         const actionHref = `https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHp${통신3사}Ti${인증방식}01.jsp`;
 
         폼.setAttribute("action", actionHref);
@@ -50,7 +50,7 @@ export const SCI평가정보2: Handler = {
 
     const 전화번호Input = q<HTMLInputElement>("#No");
     if (전화번호Input) {
-      전화번호Input.value = profile.전화번호.뒷8자리;
+      전화번호Input.value = profile.전화번호.전체;
       dispatchEvent(전화번호Input);
     }
 

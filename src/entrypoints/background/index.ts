@@ -1,4 +1,5 @@
 import type { StorageData } from "@/utils/type";
+import { carrier, gender, way } from "@/utils/utils";
 import { browser, type Runtime, type Tabs } from "wxt/browser";
 import { defineBackground } from "wxt/sandbox";
 
@@ -8,7 +9,70 @@ export default defineBackground({
 });
 
 const defaultStorageData: StorageData = {
-  profiles: [],
+  profiles: import.meta.env.DEV
+    ? [
+        {
+          id: "a-a-a-a-b",
+          name: "오지민",
+          carrier: carrier.KT,
+          phone_number: "01012345678",
+          birth: "19900101",
+          gender: gender.FEMALE,
+          foreigner: "0",
+          way: way.SMS,
+        },
+        {
+          id: "a-a-a-a-c",
+          name: "오지민",
+          carrier: carrier.KT_MVNO,
+          phone_number: "01012345678",
+          birth: "19900101",
+          gender: gender.FEMALE,
+          foreigner: "0",
+          way: way.PASS,
+        },
+        {
+          id: "a-a-a-a-d",
+          name: "오지민",
+          carrier: carrier.SKT,
+          phone_number: "01012345678",
+          birth: "19900101",
+          gender: gender.FEMALE,
+          foreigner: "0",
+          way: way.QR,
+        },
+        {
+          id: "a-a-a-a-e",
+          name: "오지민",
+          carrier: carrier.SKT_MVNO,
+          phone_number: "01012345678",
+          birth: "19900101",
+          gender: gender.FEMALE,
+          foreigner: "0",
+          way: way.SMS,
+        },
+        {
+          id: "a-a-a-a-f",
+          name: "오지민",
+          carrier: carrier.LGU,
+          phone_number: "01012345678",
+          birth: "19900101",
+          gender: gender.FEMALE,
+          foreigner: "0",
+          way: way.SMS,
+        },
+        {
+          id: "a-a-a-a-g",
+          name: "오지민",
+          carrier: carrier.LGU_MVNO,
+          phone_number: "01012345678",
+          birth: "19900101",
+          gender: gender.FEMALE,
+          foreigner: "0",
+          way: way.PASS,
+        },
+      ]
+    : [],
   selectedProfile: 0,
   on: true,
   isSideMenuOpen: false,
@@ -49,9 +113,11 @@ async function injectAutofillScript(tab?: Tabs.Tab | undefined) {
 const cache = new Map<string, (data: StorageData) => void>();
 
 function main() {
-  browser.runtime.onInstalled.addListener((_) => {
+  browser.runtime.onInstalled.addListener((details) => {
+    if (details.reason === "install") {
+      initStorage();
+    }
     createContextMenu();
-    initStorage();
   });
 
   browser.contextMenus.onClicked.addListener((info, tab) => {
