@@ -19,9 +19,10 @@ export function FillSettingsPage(_: PageProps) {
       <div className="text-center text-sm mt-2">일하기 싫다.</div>
       <section className="mt-10 max-w-2xl mx-auto space-y-8">
         <div className="flex items-start gap-8 bg-base-200 p-4 rounded-lg">
-          <div className="flex items-center gap-3 w-40">
+          <div className="flex items-center gap-2 w-40">
+            <span className="font-bold text-base">OFF</span>
             <input checked={on} className="toggle" onChange={toggleEnabled} type="checkbox" />
-            <span className="font-medium">자동 채우기</span>
+            <span className="font-bold text-base">ON</span>
           </div>
           <div className="flex-1">
             <p className="text-sm text-gray-500">

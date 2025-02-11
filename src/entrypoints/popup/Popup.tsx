@@ -116,6 +116,7 @@ export function Popup() {
       <header className="w-full bg-base-200 flex p-2">
         <div className="flex-1 flex justify-start">
           <label className="label cursor-pointer gap-2 pl-4" htmlFor="onoff">
+            <span className="font-bold text-base">OFF</span>
             <input
               checked={on}
               className="toggle toggle-sm"
@@ -123,7 +124,7 @@ export function Popup() {
               onChange={onEnabledChange}
               type="checkbox"
             />
-            <span className="font-bold text-lg">ON/OFF</span>
+            <span className="font-bold text-base">ON</span>
           </label>
         </div>
         <div className="flex items-center">
