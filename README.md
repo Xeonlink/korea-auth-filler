@@ -1,13 +1,13 @@
 <a id="readme-top"></a>
 
 <div align="center">
-  <img src="publish/icons/512.png" alt="Logo" width="80" height="80">
+  <img src="publish/icons/512.png" alt="Logo" width="100">
 <h3>한국인증채우기</h3>
 </div>
 
 # 개요
 
-![product-gif](publish/readme/홈택스-oacx.gif)
+<img src="publish/readme/홈택스-oacx.gif" width="500" />
 
 한국에서 사용되는 모바일 본인인증, 휴대폰 인증, 민간인증서 인증 등을 사용할 때 필요한 정보를 자동으로 채워주는 브라우저 확장프로그램 입니다.
 
@@ -23,14 +23,15 @@
 
 ### 1. 확장프로그램 설치
 
-![크롬 웹스토어 이미지](publish/readme/chrome-web-store.png)
+<img src="publish/readme/chrome-web-store.png" width="500" />
+
 [크롬 웹스토어](https://chromewebstore.google.com/detail/%ED%95%9C%EA%B5%AD%EC%9D%B8%EC%A6%9D%EC%B1%84%EC%9A%B0%EA%B8%B0/eonnjagalbjlklfjnfpgdeaajkghpnjc) 에 접속하여 크롬에 추가합니다.
 
 ### 2. 확장프로그램 고정
 
 이 확장프로그램은 브라우저에 추가된 즉시 활성화됩니다. 확장프로그램의 채우기 기능이 실행되기 위해 사용자의 프로필 정보를 등록해야합니다. 아래는 확장프로그램의 사용을 편리하게 하기 위해 확장프로그램을 주소창 옆에 항상 표시하도록 하는 방법입니다.
 
-![확장프로그램 핀](publish/readme/extension-pin.png)
+<img src="publish/readme/extension-pin.png" width="500" />
 
 1. 크롬 브라우저 오른쪽 상단에 확장프로그램 퍼즐 이미지를 클릭하여 브라우저에 추가된 확장프로그램의 목록을 표시합니다.
 
@@ -40,11 +41,11 @@
 
 확장프로그램을 사용하기 위해서는 인증정보 채우기에 사용될 사용자의 정보를 프로필에 추가해야합니다. 다음은 사용자의 프로필을 추가하는 과정입니다.
 
-![프로필 추가 전](publish/readme/before-profile-add.png)
+<img src="publish/readme/before-profile-add.png" width="500" />
 
 주소창 옆에 고정된 확장프로그램 아이콘을 클릭하여 확장프로그램의 팝업창을 표시합니다.
 
-<img src="publish/readme/profile-add.png" width="300" />
+<img src="publish/readme/profile-add.png" width="400" />
 
 프로필 추가에 사용자의 정보를 입력하고 프로필 추가 버튼을 누릅니다.
 
@@ -74,7 +75,7 @@
 
 ### 1. OneAccess CX (oacx)
 
-![oacx-gif](publish/readme/홈택스-oacx.gif)
+<img src="publish/readme/홈택스-oacx.gif" width="500" />
 
 아래의 주소에서 테스트를 진행했습니다.
 
@@ -91,6 +92,9 @@
 ### 2. NICE 평가정보
 
 <img src="publish/readme/서울시-모바일인증.gif" width="300" />
+
+> **Warning** \
+> 마지막 페이지에서 채우기가 작동하기는 하지만 사용자의 입력이 없으면 채워진 UI가 나타나지 않습니다. 이름이 채워지고 나면 Tab을 눌러 다음 입력창으로 넘어가야 채워진 UI가 나타납니다.
 
 아래의 주소에서 테스트를 진행했습니다.
 
@@ -114,7 +118,7 @@
 
 ### 5. 모바일 신분증
 
-<img src="publish/readme/모바일신분증.gif" width="600" />
+<img src="publish/readme/모바일신분증.gif" width="500" />
 
 아래의 주소에서 테스트를 진행했습니다.
 
