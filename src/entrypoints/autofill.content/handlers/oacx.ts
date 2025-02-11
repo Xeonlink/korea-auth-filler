@@ -1,13 +1,16 @@
 import type { Handler, IProfile } from "@/utils/type";
 import { dispatchEvent, q, qAll } from "@/utils/utils";
 
-// 뭐야 oacx가 OmniOne CX의 줄임말이야??? 뭐지 OneAccess CX는 뭐지???
+// 뭐야 oacx가 OneAccess CX의 줄임말이야???
 /**
  * **일반 테스트 주소**
  * - 홈택스 로그인
  * - 한전ON : https://online.kepco.co.kr/
  * - 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
  * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
+ * - 국가평생교육진흥원 : https://oacx.cb.or.kr:8089/oacx/oacx.jsp
+ * - 특허로 : https://www.patent.go.kr/smart/oacx.jsp
+ * - 1365자원봉사포털 : https://www.1365.go.kr/vols/cmmn/oacx/popup.do
  *
  * **Raon 테스트 주소** \
  * Raon에서 제공하는 oacx는 어떤 걸로 인증할지 선택하지 않으면, 각종 약관동의를 눌렀을 때, 인증서를 먼저 선택하라는 팝업이 뜸.
