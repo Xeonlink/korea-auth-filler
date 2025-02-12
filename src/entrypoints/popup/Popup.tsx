@@ -1,4 +1,4 @@
-import MainIcon from "@/assets/icons/128.png";
+import Logo from "@/assets/icon.png";
 import { Anchor } from "@/components/ui/anchor";
 import { ScrollArea } from "@/components/ui/scrollarea";
 import { Tooltip } from "@/components/ui/tooltip";
@@ -128,7 +128,7 @@ export function Popup() {
           </label>
         </div>
         <div className="flex items-center">
-          <img alt="logo" className="w-10 h-10" src={MainIcon} />
+          <img alt="logo" className="w-10 h-10" src={Logo} />
         </div>
         <div className="flex-1 flex justify-end">
           {/* <label className="btn btn-ghost swap swap-rotate">

@@ -1,4 +1,4 @@
-import Logo from "@/assets/icons/128.png";
+import Logo from "@/assets/icon.png";
 import { cn } from "@/utils/utils";
 import {
   faArrowLeft,

@@ -1,7 +1,7 @@
 <a id="readme-top"></a>
 
 <div align="center">
-  <img src="publish/icons/512.png" alt="Logo" width="100">
+  <img src="src/assets/icon.png" alt="Logo" width="100">
 <h3>한국인증채우기</h3>
 </div>
 

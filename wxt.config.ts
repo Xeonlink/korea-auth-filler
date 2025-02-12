@@ -2,6 +2,7 @@ import { defineConfig } from "wxt";
 
 export default defineConfig({
   srcDir: "src",
+  modules: ["@wxt-dev/auto-icons"],
   manifest: async (_) => {
     return {
       name: "__MSG_extension_name__",
@@ -11,4 +12,9 @@ export default defineConfig({
     };
   },
   imports: false,
+
+  // auto-icons
+  autoIcons: {
+    sizes: [128, 48, 32, 16],
+  },
 });
