@@ -14,6 +14,7 @@ import {
 } from "@/utils/utils";
 import {
   faCake,
+  faGear,
   faMinus,
   faMobile,
   faPlus,
@@ -24,6 +25,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { browser } from "wxt/browser";
 
 export function Popup() {
   const storage = useStorage();
@@ -49,6 +51,9 @@ export function Popup() {
   };
   const toggleSideMenu = () => {
     storage.mutate({ isSideMenuOpen: !isSideMenuOpen });
+  };
+  const openOptions = () => {
+    browser.runtime.openOptionsPage();
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -290,8 +295,14 @@ export function Popup() {
       <footer className="w-full bg-base-200">
         <ul className="flex p-2">
           <li className="contents">
+            <button className="btn btn-ghost min-h-0 h-10 flex-grow" onClick={openOptions}>
+              <FontAwesomeIcon className="h-4 w-4" icon={faGear} />
+              {t("options")}
+            </button>
+          </li>
+          <li className="contents">
             <Anchor
-              className="btn btn-ghost min-h-0 h-10 flex-1"
+              className="btn btn-ghost min-h-0 h-10 flex-grow"
               href="https://github.com/Xeonlink/korea-auth-filler"
             >
               <FontAwesomeIcon className="h-4 w-4" icon={faGithub} />
@@ -300,7 +311,7 @@ export function Popup() {
           </li>
           <li className="contents">
             <Anchor
-              className="btn btn-ghost min-h-0 h-10 flex-1"
+              className="btn btn-ghost min-h-0 h-10 flex-grow"
               href="https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support"
             >
               <FontAwesomeIcon className="h-4 w-4" icon={faQuestionCircle} />

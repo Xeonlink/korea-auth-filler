@@ -146,5 +146,9 @@
   "ask_and_request": {
     "message": "Ask & Request",
     "description": "Ask & Request"
+  },
+  "options": {
+    "message": "Options",
+    "description": "Options"
   }
 }

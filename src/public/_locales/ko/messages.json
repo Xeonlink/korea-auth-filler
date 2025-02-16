@@ -146,5 +146,9 @@
   "ask_and_request": {
     "message": "문의 및 요청",
     "description": "문의 및 요청"
+  },
+  "options": {
+    "message": "설정",
+    "description": "설정"
   }
 }
