@@ -22,7 +22,17 @@ export const oacx: Handler = {
     return q("#oacxDiv #oacxEmbededContents") !== null;
   },
   fill: (ctx, profile) => {
-    const 인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .provider-list li");
+    let 인증주체Lis: HTMLLIElement[] = [];
+
+    // 대부분의 경우 .provider-list 를 사용함
+    if (인증주체Lis.length === 0) {
+      인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .provider-list li");
+    }
+    // 예비군 홈페이지에서는 ul.oacx_providerList 를 사용함
+    if (인증주체Lis.length === 0) {
+      인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .oacx_providerList li");
+    }
+
     for (const 인증주체Li of 인증주체Lis) {
       인증주체Li.addEventListener("click", () => {
         fill(profile);
@@ -71,6 +81,14 @@ function fill(profile: IProfile) {
 
   const 전화번호Input = q<HTMLInputElement>("input[data-id='oacx_phone2']");
   if (전화번호Input) {
+    /**
+     * maxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
+     * ** 테스트 주소 **
+     * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
+     */
+    if (전화번호Input.maxLength < 0) {
+      전화번호Input.setAttribute("maxlength", 전화번호Input.placeholder.length.toString());
+    }
     const start = profile.전화번호.전체.length - 전화번호Input.maxLength;
     전화번호Input.value = profile.전화번호.전체.slice(start < 0 ? 0 : start);
     dispatchEvent(전화번호Input);

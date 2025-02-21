@@ -21,7 +21,7 @@ export type PageProps = {
 };
 
 export function Options() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [route, setRoute] = useState<Route>("/profiles");
 
   const toggleNav = () => {
