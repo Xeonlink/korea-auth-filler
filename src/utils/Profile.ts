@@ -1,5 +1,6 @@
 import type { IProfile, RawProfile } from "./type";
-import { get_RRN_GenderNum, is_MNO, way } from "./utils";
+import { get_RRN_GenderNum, is_MNO } from "./utils";
+import { way } from "./constants";
 
 export class Profile implements IProfile {
   private rawProfile: RawProfile;

@@ -1,15 +1,8 @@
 import { useStorage } from "@/hooks/useStorage";
 import type { PageProps } from "../Options";
 import { useTranslation } from "@/hooks/useTranslation";
-import {
-  carrier,
-  gender,
-  getWayCodeTranslationKey,
-  toBirth,
-  toHyphenPhone,
-  way,
-  YYYYMMDD,
-} from "@/utils/utils";
+import { getWayCodeTranslationKey, toBirth, toHyphenPhone, YYYYMMDD } from "@/utils/utils";
+import { carrier, gender, way } from "@/utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,

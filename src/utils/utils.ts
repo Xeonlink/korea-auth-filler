@@ -54,26 +54,6 @@ export function log(string: string) {
   console.log(string);
 }
 
-export const gender = {
-  MALE: "1",
-  FEMALE: "2",
-} as const;
-
-export const carrier = {
-  SKT: "1",
-  KT: "2",
-  LGU: "3",
-  SKT_MVNO: "4",
-  KT_MVNO: "5",
-  LGU_MVNO: "6",
-} as const;
-
-export const way = {
-  SMS: "1",
-  PASS: "2",
-  QR: "3",
-} as const;
-
 /**
  * 주민등록번호 7번째 자리(성별) 가져오기
  * @param birth - 생년월일 8자리

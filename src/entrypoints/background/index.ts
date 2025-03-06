@@ -1,5 +1,5 @@
 import type { StorageData } from "@/utils/type";
-import { carrier, gender, way } from "@/utils/utils";
+import { carrier, gender, way } from "@/utils/constants";
 import { browser, type Runtime, type Tabs } from "wxt/browser";
 import { defineBackground } from "wxt/sandbox";
 

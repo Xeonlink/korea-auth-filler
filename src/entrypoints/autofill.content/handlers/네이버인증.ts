@@ -1,4 +1,4 @@
-import type { Handler } from "@/utils/type";
+import type { Handler, IProfile } from "@/utils/type";
 import { dispatchEvent, q } from "@/utils/utils";
 
 export const 네이버인증: Handler = {
@@ -72,5 +72,55 @@ export const 네이버인증: Handler = {
       인증번호Input.value = profile.전화번호.전체;
       dispatchEvent(인증번호Input);
     }
+
+    NHNCloudPlatform(profile);
   },
 };
+
+function NHNCloudPlatform(profile: IProfile) {
+  const 전체동의Checkbox = q<HTMLInputElement>(".all_check_box");
+  if (전체동의Checkbox) {
+    전체동의Checkbox.click();
+  }
+
+  const 이름Input = q<HTMLInputElement>("#name");
+  if (이름Input) {
+    이름Input.value = profile.이름;
+    dispatchEvent(이름Input);
+  }
+
+  const 생년월일Input = q<HTMLInputElement>("#birth");
+  if (생년월일Input) {
+    생년월일Input.value = profile.생년월일;
+    dispatchEvent(생년월일Input);
+  }
+
+  const 성별Button = q<HTMLInputElement>(profile.map.성별("#gender01", "#gender02"));
+  if (성별Button) {
+    성별Button.click();
+  }
+
+  const 통신사Button = q<HTMLInputElement>(
+    `a[data-tel="${profile.map.통신사(["", "SKT", "KTF", "LGT", "SKR", "KTR", "LGR"])}"]`,
+  );
+  if (통신사Button) {
+    통신사Button.click();
+  }
+
+  const 내외국인Button = q<HTMLInputElement>(profile.내국인 ? "#nationality01" : "#nationality02");
+  if (내외국인Button) {
+    내외국인Button.click();
+  }
+
+  const 전화번호Input = q<HTMLInputElement>("#phone");
+  if (전화번호Input) {
+    전화번호Input.value = profile.전화번호.전체;
+    dispatchEvent(전화번호Input);
+  }
+
+  const 통신사Input = q<HTMLInputElement>("#mobile_cd");
+  if (통신사Input) {
+    통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO"]);
+    dispatchEvent(통신사Input);
+  }
+}
