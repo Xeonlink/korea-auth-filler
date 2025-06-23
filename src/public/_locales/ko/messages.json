@@ -104,28 +104,32 @@
     "description": "QR코드"
   },
   "enter_name": {
-    "message": "이름을 입력하시오",
-    "description": "이름을 입력하시오"
+    "message": "이름을 입력해주세요.",
+    "description": "이름을 입력해주세요"
   },
   "select_carrier": {
-    "message": "통신사를 선택하시오",
-    "description": "통신사를 선택하시오"
+    "message": "통신사를 선택해주세요",
+    "description": "통신사를 선택해주세요"
   },
   "check_number": {
-    "message": "휴대폰번호를 확인하시오",
-    "description": "휴대폰번호를 확인하시오"
+    "message": "휴대폰번호를 확인해주세요",
+    "description": "휴대폰번호를 확인해주세요"
   },
   "check_birthday": {
-    "message": "생일을 확인하시오 (8자리) (예, 19990204)",
-    "description": "생일을 확인하시오 (8자리) (예, 19990204)"
+    "message": "생일을 확인해주세요 (8자리) (예, 19990204)",
+    "description": "생일을 확인해주세요 (8자리) (예, 19990204)"
   },
   "select_gender": {
-    "message": "성별을 선택하시오",
-    "description": "성별을 선택하시오"
+    "message": "성별을 선택해주세요",
+    "description": "성별을 선택해주세요"
+  },
+  "select_foreigner": {
+    "message": "외국인 여부를 선택해주세요",
+    "description": "외국인 여부를 선택해주세요"
   },
   "select_auth_method": {
-    "message": "인증방식을 선택하시오",
-    "description": "인증방식을 선택하시오"
+    "message": "인증방식을 선택해주세요",
+    "description": "인증방식을 선택해주세요"
   },
   "skt_MVNO_do_not_support_pass": {
     "message": "SKT망 알뜰폰은 PASS앱 인증을 지원하지 않습니다.\nSMS인증을 이용해주세요.",

@@ -1,9 +1,9 @@
 import type { ContentScriptContext } from "wxt/client";
 
-export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6";
+export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6"; // SKT, KTF, LGT, SKM, KTM, LGM
 export type WayCode = "1" | "2" | "3"; // SMS, PASS, QR
-export type GenderCode = "1" | "2";
-export type IsForeigner = "0" | "1";
+export type GenderCode = "1" | "2"; // 남자, 여자
+export type IsForeigner = "0" | "1"; // 내국인, 외국인
 
 export type RawProfile = {
   id: `${string}-${string}-${string}-${string}-${string}`;

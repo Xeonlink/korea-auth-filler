@@ -123,6 +123,10 @@
     "message": "Please select a gender",
     "description": "Please select a gender"
   },
+  "select_foreigner": {
+    "message": "Please select a foreigner",
+    "description": "Please select a foreigner"
+  },
   "select_auth_method": {
     "message": "Please select an authentication method",
     "description": "Please select an authentication method"

@@ -63,32 +63,32 @@ export function Popup() {
     const name = formData.get("name") as string;
     const carrier = formData.get("carrier") as CarrierCode;
     if (Number(carrier) < 1 || Number(carrier) > 6) {
-      alert("통신사를 선택해주세요.");
+      alert(t("select_carrier"));
       return;
     }
     const phone_number = (formData.get("phone_number") as string).replaceAll("-", "");
     if (phone_number.length !== 11) {
-      alert("전화번호를 11자리로 입력해주세요.");
+      alert(t("check_number"));
       return;
     }
     const birth = formData.get("birth") as string;
     if (birth.length !== 8) {
-      alert("생년월일을 8자리로 입력해주세요.");
+      alert(t("check_birthday"));
       return;
     }
     const gender = formData.get("gender") as GenderCode;
     if (Number(gender) < 1 || Number(gender) > 2) {
-      alert("성별을 선택해주세요.");
+      alert(t("select_gender"));
       return;
     }
     const foreigner = formData.get("foreigner") as IsForeigner;
     if (Number(foreigner) < 0 || Number(foreigner) > 1) {
-      alert("외국인 여부를 선택해주세요.");
+      alert(t("select_foreigner"));
       return;
     }
     const way = formData.get("way") as WayCode;
-    if (Number(way) < 1 || Number(way) > 2) {
-      alert("인증방식을 선택해주세요.");
+    if (Number(way) < 1 || Number(way) > 3) {
+      alert(t("select_auth_method"));
       return;
     }
 
