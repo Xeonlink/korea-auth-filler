@@ -82,7 +82,7 @@ export function ProfilesPage(_: PageProps) {
       return;
     }
     const way = formData.get("way") as WayCode;
-    if (Number(way) < 1 || Number(way) > 2) {
+    if (Number(way) < 1 || Number(way) > 3) {
       alert("인증방식을 선택해주세요.");
       return;
     }
