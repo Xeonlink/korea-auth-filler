@@ -9,7 +9,7 @@ import { 드림시큐리티 } from "./드림시큐리티";
 import { 모바일신분증 } from "./모바일신분증";
 import { 한국모바일인증_v4_1, 한국모바일인증_v4_2, 한국모바일인증_v4_3 } from "./한국모바일인증/v4";
 import { 한국모바일인증_v5_1, 한국모바일인증_v5_2 } from "./한국모바일인증/v5";
-import { 한국사이버결제1, 한국사이버결제2 } from "./한국사이버결제";
+import { NHN_KCP1, NHN_KCP2 } from "./NHN_KCP";
 
 export const handlers = [
   // oacx
@@ -38,9 +38,9 @@ export const handlers = [
   네이버인증,
   // 다날
   다날,
-  // 한국사이버결제
-  한국사이버결제1,
-  한국사이버결제2,
+  // NHN KCP
+  NHN_KCP1,
+  NHN_KCP2,
   // 모바일신분증
   모바일신분증,
   // 드림시큐리티

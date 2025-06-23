@@ -1,13 +1,12 @@
 import type { Handler } from "@/utils/type";
 import { dispatchEvent, q } from "@/utils/utils";
 
-// 한국사이버결제가 KCP였어?
 /**
  * 테스트 주소
  * - 스마일패드 회원가입 : http://www.smilepad.co.kr/
  * - 골든브라운 본인인증 샘플페이지 : https://www.goldenbrown.co.kr/_api/_nhnkcp/kcpcert_api/index.html
  */
-export const 한국사이버결제1: Handler = {
+export const NHN_KCP1: Handler = {
   isMatch: (url) => {
     return url.includes("https://cert.kcp.co.kr/cert/pc/telcomSelect.jsp");
   },
@@ -34,7 +33,7 @@ export const 한국사이버결제1: Handler = {
   },
 };
 
-export const 한국사이버결제2: Handler = {
+export const NHN_KCP2: Handler = {
   isMatch: (url) => {
     return [
       "https://cert.kcp.co.kr/cert/pc/smsForm.jsp",
