@@ -1,7 +1,7 @@
 import type { ContentScriptContext } from "wxt/client";
 
 export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6";
-export type WayCode = "1" | "2" | "3";
+export type WayCode = "1" | "2" | "3"; // SMS, PASS, QR
 export type GenderCode = "1" | "2";
 export type IsForeigner = "0" | "1";
 

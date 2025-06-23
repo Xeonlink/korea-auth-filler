@@ -1,15 +1,9 @@
 import type { Handler } from "@/utils/type";
 import { dispatchEvent, q } from "@/utils/utils";
 
-/**
- * 테스트 사이트
- * 1. https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j10.jsp
- * 2. 대전광역시 : https://www.daejeon.go.kr/integ/integNonmemberLoginProc.do?siteCd=drh&rtUrl=
- */
-
-export const SCI평가정보1: Handler = {
+export const SCI평가정보_v2_1: Handler = {
   isMatch: (url) => {
-    return ["https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j10.jsp"].some((t) => url.includes(t));
+    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j10\.jsp$/g.test(url);
   },
   fill: (ctx, profile) => {
     ctx.setInterval(() => {
@@ -32,14 +26,11 @@ export const SCI평가정보1: Handler = {
   },
 };
 
-export const SCI평가정보2: Handler = {
+export const SCI평가정보_v2_3: Handler = {
   isMatch: (url) => {
-    return [
-      "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpTiApp01.jsp",
-      "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpTi01.jsp",
-      "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpMvnoTiApp01.jsp",
-      "https://pcc.siren24.com/pcc_V3/passWebV2/pcc_V3_j30_certHpMvnoTi01.jsp",
-    ].some((t) => url.includes(t));
+    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j30_certHp(Mvno)?Ti(App)?01\.jsp$/g.test(
+      url,
+    );
   },
   fill: (_, profile) => {
     const 이름Input = q<HTMLInputElement>("#userName");
