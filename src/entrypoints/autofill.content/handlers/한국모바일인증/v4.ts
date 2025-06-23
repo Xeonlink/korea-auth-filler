@@ -1,13 +1,8 @@
 import type { Handler } from "@/utils/type";
 import { q } from "@/utils/utils";
 
-/**
- * 테스트 주소
- * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
- */
-
 // 한국모바일인증 - 통신사 선택 & 약관동의 & 인증방식 선택
-export const 한국모바일인증1: Handler = {
+export const 한국모바일인증_v4_1: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisHp00.jsp");
   },
@@ -45,7 +40,7 @@ export const 한국모바일인증1: Handler = {
 };
 
 // 한국모바일인증 - SMS 인증
-export const 한국모바일인증2: Handler = {
+export const 한국모바일인증_v4_2: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp");
   },
@@ -75,7 +70,7 @@ export const 한국모바일인증2: Handler = {
 };
 
 // 한국모바일인증 - PASS 인증
-export const 한국모바일인증3: Handler = {
+export const 한국모바일인증_v4_3: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp");
   },

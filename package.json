@@ -1,6 +1,6 @@
 {
   "name": "korea-auth-filler",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "description": "대한민국 본인인증 자동 채우기 브라우저 확장 프로그램",
   "type": "module",
   "main": "index.js",
@@ -13,8 +13,7 @@
     "build:firefox": "wxt build -b firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
-    "postinstall": "wxt prepare",
-    "test": "tsx test.ts"
+    "postinstall": "wxt prepare"
   },
   "keywords": [],
   "author": "",
