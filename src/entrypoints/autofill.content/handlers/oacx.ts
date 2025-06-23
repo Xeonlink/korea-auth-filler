@@ -35,7 +35,9 @@ export const oacx: Handler = {
 
     for (const 인증주체Li of 인증주체Lis) {
       인증주체Li.addEventListener("click", () => {
-        fill(profile);
+        setTimeout(() => {
+          fill(profile);
+        }, 50);
       });
     }
     인증주체Lis[0].click();
