@@ -12,13 +12,7 @@ import {
   toHyphenPhone,
 } from "@/utils/utils";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import {
-  faGear,
-  faMinus,
-  faPlus,
-  faQuestionCircle,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBug, faGear, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
@@ -182,8 +176,8 @@ export function Popup() {
               className="btn btn-ghost min-h-0 h-10 flex-grow"
               href="https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support"
             >
-              <FontAwesomeIcon className="h-4 w-4" icon={faQuestionCircle} />
-              {t("ask_and_request")}
+              <FontAwesomeIcon className="h-4 w-4" icon={faBug} />
+              {t("bug_report")}
             </Anchor>
           </li>
         </ul>
