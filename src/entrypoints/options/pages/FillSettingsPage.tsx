@@ -1,7 +1,9 @@
 import { useStorage } from "@/hooks/useStorage";
+import { useTranslation } from "@/hooks/useTranslation";
 import type { PageProps } from "../Options";
 
 export function FillSettingsPage(_: PageProps) {
+  const { t } = useTranslation();
   const storage = useStorage();
   const { on, delay } = storage.data;
 
@@ -15,7 +17,7 @@ export function FillSettingsPage(_: PageProps) {
 
   return (
     <main className="p-10">
-      <h1 className="text-center font-bold text-2xl">설정</h1>
+      <h1 className="text-center font-bold text-2xl">{t("settings")}</h1>
       <div className="text-center text-sm mt-2">일하기 싫다.</div>
       <section className="mt-10 max-w-2xl mx-auto space-y-8">
         <div className="flex items-start gap-8 bg-base-200 p-4 rounded-lg">
@@ -26,9 +28,9 @@ export function FillSettingsPage(_: PageProps) {
           </div>
           <div className="flex-1">
             <p className="text-sm text-gray-500">
-              본인인증 페이지에 접속했을 때 선택된 프로필의 정보가 자동으로 입력됩니다.
+              {t("on_off_description_1")}
               <br />
-              프로필 정보는 프로필 관리 페이지에서 설정할 수 있습니다.
+              {t("on_off_description_2")}
             </p>
           </div>
         </div>
@@ -43,15 +45,15 @@ export function FillSettingsPage(_: PageProps) {
               step="100"
               type="number"
             />
-            <span className="font-medium">검사 주기 (ms)</span>
+            <span className="font-medium">{t("check_period")} (ms)</span>
           </div>
           <div className="flex-1">
             <p className="text-sm text-gray-500">
-              본인인증 페이지를 감지하는 주기를 설정합니다.
+              {t("check_period_description_1")}
               <br />
-              값이 작을수록 빠르게 감지하지만 브라우저 성능에 영향을 줄 수 있습니다.
+              {t("check_period_description_2")}
               <br />
-              100ms ~ 10,000ms 사이의 값을 입력할 수 있습니다.
+              {t("check_period_description_3")}
             </p>
           </div>
         </div>

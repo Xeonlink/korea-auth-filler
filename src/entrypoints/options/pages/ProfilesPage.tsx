@@ -63,12 +63,12 @@ export function ProfilesPage(_: PageProps) {
             <thead>
               <tr>
                 <th>선택</th>
-                <th>이름</th>
-                <th>생년월일</th>
-                <th>통신사</th>
-                <th>전화번호</th>
-                <th className="text-center">외국인</th>
-                <th className="text-center">성별</th>
+                <th>{t("full_name")}</th>
+                <th>{t("birthday")}</th>
+                <th>{t("carrier")}</th>
+                <th>{t("phone_number")}</th>
+                <th className="text-center">{t("foreigner")}</th>
+                <th className="text-center">{t("gender")}</th>
                 <th className="text-center">방법</th>
                 <th className="text-center">삭제</th>
               </tr>
@@ -132,13 +132,13 @@ export function ProfilesPage(_: PageProps) {
                   <td className="p-0">
                     <div className="text-center">
                       {profile.foreigner === "0" ? (
-                        <img alt="내국인" className="inline-block" src={GovernmentIcon} />
+                        <img alt={t("citizen")} className="inline-block" src={GovernmentIcon} />
                       ) : (
                         <FontAwesomeIcon icon={faPlane} />
                       )}
                       <br />
                       <span className="text-xs">
-                        {profile.foreigner === "0" ? "내국인" : "외국인"}
+                        {profile.foreigner === "0" ? t("citizen") : t("foreigner")}
                       </span>
                     </div>
                   </td>
@@ -147,13 +147,13 @@ export function ProfilesPage(_: PageProps) {
                       <div className="text-center">
                         <FontAwesomeIcon icon={faMars} />
                         <br />
-                        <span className="text-xs">남자</span>
+                        <span className="text-xs">{t("male")}</span>
                       </div>
                     ) : (
                       <div className="text-center">
                         <FontAwesomeIcon icon={faVenus} />
                         <br />
-                        <span className="text-xs">여자</span>
+                        <span className="text-xs">{t("female")}</span>
                       </div>
                     )}
                   </td>

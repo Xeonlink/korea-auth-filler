@@ -154,5 +154,53 @@
   "options": {
     "message": "Options",
     "description": "Options"
+  },
+  "intro": {
+    "message": "Intro",
+    "description": "Intro"
+  },
+  "how_to_use": {
+    "message": "How to Use",
+    "description": "How to Use"
+  },
+  "profiles": {
+    "message": "Profiles",
+    "description": "Profiles"
+  },
+  "settings": {
+    "message": "Fill Settings",
+    "description": "Fill Settings"
+  },
+  "fill_settings": {
+    "message": "Fill Settings",
+    "description": "Fill Settings"
+  },
+  "close": {
+    "message": "Close",
+    "description": "Close"
+  },
+  "on_off_description_1": {
+    "message": "When you access the identity verification page, the information of the selected profile is automatically filled in.",
+    "description": "When you access the identity verification page, the information of the selected profile is automatically filled in."
+  },
+  "on_off_description_2": {
+    "message": "The profile information can be set in the profile management page.",
+    "description": "The profile information can be set in the profile management page."
+  },
+  "check_period": {
+    "message": "Check Period",
+    "description": "Check Period"
+  },
+  "check_period_description_1": {
+    "message": "Set the period to detect the identity verification page.",
+    "description": "Set the period to detect the identity verification page."
+  },
+  "check_period_description_2": {
+    "message": "The smaller the value, the faster the detection, but it may affect browser performance.",
+    "description": "The smaller the value, the faster the detection, but it may affect browser performance."
+  },
+  "check_period_description_3": {
+    "message": "You can enter a value between 100ms and 10,000ms.",
+    "description": "You can enter a value between 100ms and 10,000ms."
   }
 }

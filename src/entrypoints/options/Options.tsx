@@ -8,6 +8,7 @@ import {
   faGear,
   faHouse,
   faListUl,
+  faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -63,7 +64,7 @@ export function Options() {
                 <div className="w-32 space-x-4">
                   <FontAwesomeIcon icon={faHouse} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
-                    소개
+                    {t("intro")}
                   </span>
                 </div>
               </button>
@@ -81,7 +82,7 @@ export function Options() {
                 <div className="w-32 space-x-4">
                   <FontAwesomeIcon icon={faBookOpenReader} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
-                    사용법
+                    {t("how_to_use")}
                   </span>
                 </div>
               </button>
@@ -99,7 +100,7 @@ export function Options() {
                 <div className="w-32 space-x-4">
                   <FontAwesomeIcon icon={faListUl} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
-                    프로필
+                    {t("profiles")}
                   </span>
                 </div>
               </button>
@@ -117,7 +118,7 @@ export function Options() {
                 <div className="w-32 space-x-4">
                   <FontAwesomeIcon icon={faGear} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
-                    채우기 설정
+                    {t("fill_settings")}
                   </span>
                 </div>
               </button>
@@ -126,6 +127,25 @@ export function Options() {
                   "bg-base-content": route === "/fill-settings",
                 })}
               ></div>
+            </li>
+            <li className="flex items-center">
+              <button
+                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                onClick={() => {
+                  window.open(
+                    "https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support",
+                    "_blank",
+                  );
+                }}
+              >
+                <div className="w-32 space-x-4">
+                  <FontAwesomeIcon className="h-4 w-4" icon={faQuestionCircle} />
+                  <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
+                    {t("ask_and_request")}
+                  </span>
+                </div>
+              </button>
+              <div className={cn("w-1 h-4 rounded-full opacity-80")}></div>
             </li>
           </ul>
         </div>
@@ -142,7 +162,7 @@ export function Options() {
                 icon={faArrowLeft}
               />
               <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
-                닫기
+                {t("close")}
               </span>
             </div>
           </button>
