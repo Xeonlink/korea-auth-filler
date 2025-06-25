@@ -1,12 +1,12 @@
-import type { PageProps } from "../Options";
 import KTCI from "@/assets/ci/kt_dark.png";
-import SKTCI from "@/assets/ci/skt.png";
 import LGUCI from "@/assets/ci/lgu.png";
-import BeforeProfileAdd from "@/assets/readme/before-profile-add.png";
-import ProfileAddImg from "@/assets/readme/profile-add.png";
+import SKTCI from "@/assets/ci/skt.png";
 import AfterProfileAdd from "@/assets/readme/after-profile-add.png";
+import BeforeProfileAdd from "@/assets/readme/before-profile-add.png";
 import ExtensionPinImg from "@/assets/readme/extension-pin.png";
+import ProfileAddImg from "@/assets/readme/profile-add.png";
 import HomtaxGif from "@/assets/readme/홈택스-oacx.gif";
+import type { PageProps } from "../Options";
 
 export function HowToUsePage(_: PageProps) {
   return (

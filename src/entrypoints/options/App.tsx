@@ -1,11 +1,11 @@
-import ReactDom from "react-dom/client";
-import "./main.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
+import ReactDom from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
-import { Options } from "./Options";
-import { Loading } from "./Loading";
 import { ErrorFallback } from "./ErrorFallback";
+import { Loading } from "./Loading";
+import "./main.css";
+import { Options } from "./Options";
 
 const rootElement = document.querySelector("#root");
 if (rootElement === null) {

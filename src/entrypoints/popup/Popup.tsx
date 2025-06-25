@@ -21,6 +21,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { browser } from "wxt/browser";
 
 export function Popup() {
@@ -68,6 +69,9 @@ export function Popup() {
 
   return (
     <>
+      <Helmet>
+        <title>{t("extension_name")}</title>
+      </Helmet>
       <header className="w-full bg-base-200 flex p-2">
         <div className="flex-1 flex justify-start">
           <label className="label cursor-pointer gap-2 pl-4" htmlFor="onoff">

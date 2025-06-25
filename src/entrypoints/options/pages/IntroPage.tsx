@@ -1,9 +1,9 @@
-import type { PageProps } from "../Options";
-import 홈택스OacxGif from "@/assets/gif/홈택스-oacx.gif";
+import extra2모바일인증Gif from "@/assets/gif/extra2-모바일인증.gif";
+import 대전시모바일인증Gif from "@/assets/gif/대전시-모바일인증.gif";
 import 부산시모바일인증Gif from "@/assets/gif/부산시-모바일인증.gif";
 import 서울시모바일인증Gif from "@/assets/gif/서울시-모바일인증.gif";
-import 대전시모바일인증Gif from "@/assets/gif/대전시-모바일인증.gif";
-import extra2모바일인증Gif from "@/assets/gif/extra2-모바일인증.gif";
+import 홈택스OacxGif from "@/assets/gif/홈택스-oacx.gif";
+import type { PageProps } from "../Options";
 
 export function IntroPage(_: PageProps) {
   return (

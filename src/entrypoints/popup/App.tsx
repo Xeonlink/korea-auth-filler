@@ -1,11 +1,11 @@
-import ReactDom from "react-dom/client";
-import { Popup } from "./Popup";
-import "./main.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
-import { Loading } from "./Loading";
+import ReactDom from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./ErrorFallback";
+import { Loading } from "./Loading";
+import { Popup } from "./Popup";
+import "./main.css";
 
 const rootElement = document.querySelector("#root");
 if (rootElement === null) {

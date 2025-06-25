@@ -1,4 +1,6 @@
 import Logo from "@/assets/icon.png";
+import { ScrollArea } from "@/components/ui/scrollarea";
+import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/utils/utils";
 import {
   faArrowLeft,
@@ -9,11 +11,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { IntroPage } from "./pages/IntroPage";
-import { HowToUsePage } from "./pages/HowToUsePage";
-import { ProfilesPage } from "./pages/ProfilesPage";
+import { Helmet } from "react-helmet";
 import { FillSettingsPage } from "./pages/FillSettingsPage";
-import { ScrollArea } from "@/components/ui/scrollarea";
+import { HowToUsePage } from "./pages/HowToUsePage";
+import { IntroPage } from "./pages/IntroPage";
+import { ProfilesPage } from "./pages/ProfilesPage";
 
 type Route = "/intro" | "/how-to-use" | "/profiles" | "/fill-settings";
 export type PageProps = {
@@ -21,6 +23,7 @@ export type PageProps = {
 };
 
 export function Options() {
+  const { t } = useTranslation();
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [route, setRoute] = useState<Route>("/profiles");
 
@@ -33,6 +36,9 @@ export function Options() {
 
   return (
     <>
+      <Helmet>
+        <title>{t("extension_name")}</title>
+      </Helmet>
       <nav
         className={cn("w-64 bg-base-200 h-full flex flex-col transition-all duration-500", {
           "w-16": !isNavOpen,
