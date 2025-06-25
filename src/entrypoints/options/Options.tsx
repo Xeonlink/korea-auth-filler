@@ -5,6 +5,7 @@ import { cn } from "@/utils/utils";
 import {
   faArrowLeft,
   faBookOpenReader,
+  faBug,
   faGear,
   faHouse,
   faListUl,
@@ -127,6 +128,25 @@ export function Options() {
                   "bg-base-content": route === "/fill-settings",
                 })}
               ></div>
+            </li>
+            <li className="flex items-center">
+              <button
+                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                onClick={() => {
+                  window.open(
+                    "https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support",
+                    "_blank",
+                  );
+                }}
+              >
+                <div className="w-32 space-x-4">
+                  <FontAwesomeIcon className="h-4 w-4" icon={faBug} />
+                  <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
+                    {t("bug_report")}
+                  </span>
+                </div>
+              </button>
+              <div className={cn("w-1 h-4 rounded-full opacity-80")}></div>
             </li>
             <li className="flex items-center">
               <button

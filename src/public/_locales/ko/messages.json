@@ -151,6 +151,10 @@
     "message": "문의 및 요청",
     "description": "문의 및 요청"
   },
+  "bug_report": {
+    "message": "버그 신고",
+    "description": "버그 신고"
+  },
   "options": {
     "message": "설정",
     "description": "설정"

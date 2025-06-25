@@ -151,6 +151,10 @@
     "message": "Ask & Request",
     "description": "Ask & Request"
   },
+  "bug_report": {
+    "message": "Bug Report",
+    "description": "Bug Report"
+  },
   "options": {
     "message": "Options",
     "description": "Options"
