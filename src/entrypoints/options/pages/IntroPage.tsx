@@ -3,6 +3,7 @@ import 대전시모바일인증Gif from "@/assets/gif/대전시-모바일인증.
 import 부산시모바일인증Gif from "@/assets/gif/부산시-모바일인증.gif";
 import 서울시모바일인증Gif from "@/assets/gif/서울시-모바일인증.gif";
 import 홈택스OacxGif from "@/assets/gif/홈택스-oacx.gif";
+import tossGif from "@/assets/gif/toss.gif";
 import type { PageProps } from "../Options";
 
 export function IntroPage(_: PageProps) {
@@ -37,6 +38,20 @@ export function IntroPage(_: PageProps) {
         <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
           <div className="group relative break-inside-avoid mb-6">
             <img
+              alt="토스로 인증하기 데모"
+              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
+              src={tossGif}
+            />
+            <div
+              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
+                 group-hover:opacity-100 transition-opacity duration-300 flex 
+                 items-center justify-center rounded-xl"
+            >
+              <span className="text-white font-semibold text-lg">토스로 인증하기</span>
+            </div>
+          </div>
+          <div className="group relative break-inside-avoid mb-6">
+            <img
               alt="부산시 모바일 인증 데모"
               className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
               src={부산시모바일인증Gif}
@@ -65,7 +80,7 @@ export function IntroPage(_: PageProps) {
           </div>
           <div className="group relative break-inside-avoid mb-6">
             <img
-              alt="대전시 모바일 인증 데모"
+              alt="SCI 평가정보 데모"
               className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
               src={대전시모바일인증Gif}
             />
@@ -74,7 +89,7 @@ export function IntroPage(_: PageProps) {
                  group-hover:opacity-100 transition-opacity duration-300 flex 
                  items-center justify-center rounded-xl"
             >
-              <span className="text-white font-semibold text-lg">대전시 모바일 인증</span>
+              <span className="text-white font-semibold text-lg">SCI 평가정보</span>
             </div>
           </div>
           <div className="group relative break-inside-avoid mb-6">

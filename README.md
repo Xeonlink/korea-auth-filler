@@ -124,3 +124,11 @@
 
 - [모바일 신분증](https://sp.epeople.go.kr/web/pcView)
 - [강원도 모바일 신분증](https://state.gwd.go.kr/portal/minwon/epeople/counsel)
+
+### 6. 토스 인증
+
+<img src="publish/readme/toss.gif" width="300" />
+
+아래의 주소에서 테스트를 진행했습니다.
+
+- [디지털 원패스](https://www.onepass.go.kr/membership/find/id)

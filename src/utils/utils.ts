@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { CarrierCode, GenderCode, IsForeigner, WayCode } from "./type";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 
 /**
  * 전화번호 하이픈 처리
@@ -125,6 +125,16 @@ export function qAll<T extends HTMLElement>(selector: string): T[] {
 }
 
 /**
+ * 요소 선택 \
+ * document.getElementById의 간단한 버전
+ * @param id - 선택할 요소의 id
+ * @returns 선택한 요소, 없으면 null
+ */
+export function qById<T extends HTMLElement>(id: string): T | null {
+  return document.getElementById(id) as T | null;
+}
+
+/**
  * 지연 함수
  * @param delay - 지연할 시간
  * @returns 지연 함수
@@ -200,4 +210,41 @@ export function getWayCodeTranslationKey(wayCode: WayCode) {
   }
 }
 
-export const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
+// export const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
+
+/**
+ * 디바운스 함수
+ * @param func - 디바운스 함수
+ * @param wait - 디바운스 시간
+ * @returns 디바운스 함수
+ */
+export function debounce(func: () => void, wait: number) {
+  let timeoutId: ReturnType<typeof setTimeout>;
+
+  return () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(func, wait);
+  };
+}
+
+/**
+ * 문서가 아이드 상태가 될 때까지 대기하고 함수 실행
+ * @param func - 실행할 함수
+ * @param wait - 대기 시간
+ */
+export function waitUntilDomIdle(func: () => void, wait: number) {
+  const debouncedFunc = debounce(() => {
+    observer?.disconnect();
+    observer = null;
+    func();
+  }, wait);
+
+  let observer: MutationObserver | null = new MutationObserver(debouncedFunc);
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    characterData: true,
+  });
+}

@@ -10,6 +10,7 @@ import { 모바일신분증 } from "./모바일신분증";
 import { 한국모바일인증_v4_1, 한국모바일인증_v4_2, 한국모바일인증_v4_3 } from "./한국모바일인증/v4";
 import { 한국모바일인증_v5_1, 한국모바일인증_v5_2 } from "./한국모바일인증/v5";
 import { NHN_KCP1, NHN_KCP2 } from "./NHN_KCP";
+import { toss } from "./toss";
 
 export const handlers = [
   // oacx
@@ -34,6 +35,8 @@ export const handlers = [
   한국모바일인증_v4_3,
   한국모바일인증_v5_1,
   한국모바일인증_v5_2,
+  // Toss
+  toss,
   // 네이버인증
   네이버인증,
   // 다날

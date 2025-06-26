@@ -1,61 +1,61 @@
 import type { Handler } from "@/utils/type";
 import { dispatchEvent, q } from "@/utils/utils";
 
+/**
+ * 테스트 주소
+ * - 디지털원패스 : https://www.onepass.go.kr/membership/find/id
+ */
+
 export const okname1: Handler = {
   isMatch: (url) => {
-    return url.includes("https://safe.ok-name.co.kr/CommonSvl");
+    const isUrlMatch = url.includes("https://safe.ok-name.co.kr/CommonSvl");
+    const isStep1 = !!q<HTMLElement>(".step1header");
+    return isUrlMatch && isStep1;
   },
-  fill: (ctx, profile) => {
-    ctx.setInterval(() => {
-      const test = q<HTMLElement>(".step1header");
-      if (!test) {
-        return; // 존재여부 확인용
+  fill: (_, profile) => {
+    const tcInput = q<HTMLInputElement>("input[name='tc']");
+    if (tcInput) {
+      let tcValue = "";
+      if (profile.통신3사 && (profile.인증방식.PASS || profile.인증방식.QR)) {
+        tcValue = "kcb.oknm.online.pass.popup.push.cmd.mno.PS02_PushMno011Cmd";
       }
+      if (!profile.통신3사 && (profile.인증방식.PASS || profile.인증방식.QR)) {
+        tcValue = "kcb.oknm.online.pass.popup.push.cmd.mvno.PS02_PushMvno011Cmd";
+      }
+      if (profile.통신3사 && profile.인증방식.SMS) {
+        tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mno.PS02_SmsMno011Cmd";
+      }
+      if (!profile.통신3사 && profile.인증방식.SMS) {
+        tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mvno.PS02_SmsMvno011Cmd";
+      }
+      tcInput.value = tcValue;
+      dispatchEvent(tcInput);
+    }
 
-      const tcInput = q<HTMLInputElement>("input[name='tc']");
-      if (tcInput) {
-        let tcValue = "";
-        if (profile.통신3사 && profile.인증방식.PASS) {
-          tcValue = "kcb.oknm.online.pass.popup.push.cmd.mno.PS02_PushMno011Cmd";
-        }
-        if (!profile.통신3사 && profile.인증방식.PASS) {
-          tcValue = "kcb.oknm.online.pass.popup.push.cmd.mvno.PS02_PushMvno011Cmd";
-        }
-        if (profile.통신3사 && profile.인증방식.SMS) {
-          tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mno.PS02_SmsMno011Cmd";
-        }
-        if (!profile.통신3사 && profile.인증방식.SMS) {
-          tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mvno.PS02_SmsMvno011Cmd";
-        }
-        tcInput.value = tcValue;
-        dispatchEvent(tcInput);
-      }
+    const 통신사Input = q<HTMLInputElement>("input[name='mbl_tel_cmm_cd']");
+    if (통신사Input) {
+      통신사Input.value = profile.map.통신사(["", "01", "02", "03", "04", "05", "06"]);
+      dispatchEvent(통신사Input);
+    }
 
-      const 통신사Input = q<HTMLInputElement>("input[name='mbl_tel_cmm_cd']");
-      if (통신사Input) {
-        통신사Input.value = profile.map.통신사(["", "01", "02", "03", "04", "05", "06"]);
-        dispatchEvent(통신사Input);
-      }
-
-      const 폼 = q<HTMLFormElement>("#ct > form");
-      if (폼) {
-        폼.submit();
-      }
-    }, 500);
+    const 폼 = q<HTMLFormElement>("#ct > form");
+    if (폼) {
+      폼.submit();
+    }
   },
 };
 
 export const okname2: Handler = {
   isMatch: (url) => {
-    return url.includes("https://safe.ok-name.co.kr/CommonSvl");
+    const isUrlMatch = url.includes("https://safe.ok-name.co.kr/CommonSvl");
+    const isStep2 = !!q<HTMLElement>("section.certify_user2.certifyWrap.certifyWrap_02");
+    return isUrlMatch && isStep2;
   },
-  fill: (ctx, profile) => {
-    ctx.setInterval(() => {
-      const test = q<HTMLElement>("section.certify_user2.certifyWrap.certifyWrap_02");
-      if (!test) {
-        return; // 존재여부 확인용
-      }
-
+  fill: (_, profile) => {
+    /**
+     * 인증방식 PASS | SMS 일 때
+     */
+    if (profile.인증방식.PASS || profile.인증방식.SMS) {
       const 이름Input = q<HTMLInputElement>("#nm");
       if (이름Input) {
         이름Input.value = profile.이름;
@@ -79,6 +79,16 @@ export const okname2: Handler = {
         전화번호Input.value = profile.전화번호.뒷8자리;
         dispatchEvent(전화번호Input);
       }
-    }, 500);
+    }
+
+    /**
+     * 인증방식 QR 일 때
+     */
+    if (profile.인증방식.QR) {
+      const QR인증Button = q<HTMLButtonElement>("#qr_auth");
+      if (QR인증Button) {
+        QR인증Button.click();
+      }
+    }
   },
 };

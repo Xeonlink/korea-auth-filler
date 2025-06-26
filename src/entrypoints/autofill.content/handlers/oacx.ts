@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { dispatchEvent, q, qAll } from "@/utils/utils";
+import { waitUntilDomIdle, dispatchEvent, q, qAll } from "@/utils/utils";
 
 /**
  * **일반 테스트 주소**
@@ -34,9 +34,7 @@ export const oacx: Handler = {
 
     for (const 인증주체Li of 인증주체Lis) {
       인증주체Li.addEventListener("click", () => {
-        setTimeout(() => {
-          fill(profile);
-        }, 100);
+        waitUntilDomIdle(() => fill(profile), 50);
       });
     }
 
