@@ -241,6 +241,7 @@ export function waitUntilDomIdle(func: () => void, wait: number) {
 
   let observer: MutationObserver | null = new MutationObserver(debouncedFunc);
 
+  debouncedFunc();
   observer.observe(document.body, {
     childList: true,
     subtree: true,
