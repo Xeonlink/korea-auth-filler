@@ -34,6 +34,9 @@ export function Options() {
   };
   const navigate = (path: Route) => {
     setRoute(path);
+    // const url = new URL(window.location.href);
+    // url.hash = path;
+    // window.history.pushState({}, "", url.toString());
   };
 
   return (

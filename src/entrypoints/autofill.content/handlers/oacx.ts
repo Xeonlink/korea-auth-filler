@@ -1,7 +1,6 @@
 import type { Handler, IProfile } from "@/utils/type";
 import { dispatchEvent, q, qAll } from "@/utils/utils";
 
-// 뭐야 oacx가 OneAccess CX의 줄임말이야???
 /**
  * **일반 테스트 주소**
  * - 홈택스 로그인
@@ -37,16 +36,26 @@ export const oacx: Handler = {
       인증주체Li.addEventListener("click", () => {
         setTimeout(() => {
           fill(profile);
-        }, 50);
+        }, 100);
       });
     }
+
     인증주체Lis[0].click();
   },
 };
 
+/**
+ * 인증주체 선택 후 자동으로 호출되는 함수
+ * @param profile 프로필 정보
+ */
 function fill(profile: IProfile) {
-  const 이름Input = q<HTMLInputElement>("input[data-id='oacx_name']");
-  if (이름Input) {
+  /**
+   * 중간중간 qAll인 이유는, 예비군 홈페이지처럼 오래된 oacx 페이지에서는 디바이스 사이즈에 따라 여러개의 인풋이 있을 수 있음.
+   * 따라서 모든 인풋에 대해 처리하기 위해 qAll을 사용함.
+   */
+
+  const 이름Inputs = qAll<HTMLInputElement>("input[data-id='oacx_name']");
+  for (const 이름Input of 이름Inputs) {
     이름Input.value = profile.이름;
     dispatchEvent(이름Input);
   }
@@ -57,14 +66,14 @@ function fill(profile: IProfile) {
     dispatchEvent(생년월일Input);
   }
 
-  const 주민번호앞Input = q<HTMLInputElement>("input[data-id='oacx_num1']");
-  if (주민번호앞Input) {
+  const 주민번호앞Inputs = qAll<HTMLInputElement>("input[data-id='oacx_num1']");
+  for (const 주민번호앞Input of 주민번호앞Inputs) {
     주민번호앞Input.value = profile.주민번호.앞자리;
     dispatchEvent(주민번호앞Input);
   }
 
-  const 주민번호뒤Input = q<HTMLInputElement>("input[data-id='oacx_num2']");
-  if (주민번호뒤Input && 주민번호뒤Input.maxLength < 1) {
+  const 주민번호뒤Inputs = qAll<HTMLInputElement>("input[data-id='oacx_num2']");
+  for (const 주민번호뒤Input of 주민번호뒤Inputs) {
     주민번호뒤Input.value = profile.주민번호.성별숫자 ?? "";
     dispatchEvent(주민번호뒤Input);
   }
@@ -75,14 +84,29 @@ function fill(profile: IProfile) {
     dispatchEvent(통신사Select);
   }
 
-  const 전화번호앞Input = q<HTMLInputElement>("input[data-id='oacx_phone1']");
-  if (전화번호앞Input) {
+  const 전화번호앞Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone1']");
+  for (const 전화번호앞Input of 전화번호앞Inputs) {
     전화번호앞Input.value = profile.전화번호.앞3자리;
     dispatchEvent(전화번호앞Input);
   }
 
-  const 전화번호Input = q<HTMLInputElement>("input[data-id='oacx_phone2']");
-  if (전화번호Input) {
+  const 전화번호Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone2']");
+  for (const 전화번호Input of 전화번호Inputs) {
+    /**
+     * maxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
+     * ** 테스트 주소 **
+     * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
+     */
+    if (전화번호Input.maxLength < 0) {
+      전화번호Input.setAttribute("maxlength", 전화번호Input.placeholder.length.toString());
+    }
+    const start = profile.전화번호.전체.length - 전화번호Input.maxLength;
+    전화번호Input.value = profile.전화번호.전체.slice(start < 0 ? 0 : start);
+    dispatchEvent(전화번호Input);
+  }
+
+  const 전화번호2Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone3']");
+  for (const 전화번호Input of 전화번호2Inputs) {
     /**
      * maxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
      * ** 테스트 주소 **

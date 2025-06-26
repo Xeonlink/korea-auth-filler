@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCake, faMobile, faUser } from "@fortawesome/free-solid-svg-icons";
 import { toHyphenPhone } from "@/utils/utils";
-import { YYYYMMDD } from "@/utils/utils";
 import { useTranslation } from "@/hooks/useTranslation";
 import type { CarrierCode, GenderCode, IsForeigner, RawProfile, WayCode } from "@/utils/type";
 import { useStorage } from "@/hooks/useStorage";
@@ -28,6 +27,16 @@ export function ProfileForm() {
     }
     const birth = formData.get("birth") as string;
     if (birth.length !== 8) {
+      alert(t("check_birthday"));
+      return;
+    }
+    const birthMonth = parseInt(birth.slice(4, 6));
+    if (birthMonth < 1 || birthMonth > 12) {
+      alert(t("check_birthday"));
+      return;
+    }
+    const birthDay = parseInt(birth.slice(6, 8));
+    if (birthDay < 1 || birthDay > 31) {
       alert(t("check_birthday"));
       return;
     }
@@ -102,14 +111,12 @@ export function ProfileForm() {
           <input
             className="grow"
             id="birth"
-            max={YYYYMMDD}
-            maxLength={9}
-            min={YYYYMMDD - 1000000}
+            maxLength={8}
             minLength={8}
             name="birth"
             placeholder={t("birthday")}
             required
-            type="number"
+            type="text"
           />
         </label>
 
