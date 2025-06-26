@@ -38,6 +38,49 @@ type InferPath<T extends Route<string>[]> = T extends (infer R)[]
         : never
   : never;
 
+class Router<T extends string> {
+  private routeMap: Map<T, () => React.ReactNode>;
+  private subscribers: (() => void)[];
+  private currentPath: T;
+
+  constructor(routeMap: Map<T, () => React.ReactNode>) {
+    this.subscribers = [];
+    this.routeMap = routeMap;
+    this.currentPath = window.location.hash as T;
+  }
+
+  public subscribe(callback: () => void) {
+    this.subscribers.push(callback);
+
+    return () => {
+      this.subscribers = this.subscribers.filter((subscriber) => subscriber !== callback);
+    };
+  }
+
+  public notify() {
+    for (const subscriber of this.subscribers) {
+      subscriber();
+    }
+  }
+
+  public getRouteMap() {
+    return this.routeMap;
+  }
+
+  public navigate(path: T) {
+    this.currentPath = path;
+
+    const url = new URL(window.location.href);
+    url.hash = path;
+    window.history.pushState({}, "", url.toString());
+    this.notify();
+  }
+
+  public getCurrentPath() {
+    return this.currentPath;
+  }
+}
+
 export function createRouter<T extends string, R extends Route<T>[] = Route<T>[]>(routes: R) {
   const routeMap = new Map<string, () => React.ReactNode>();
 
@@ -51,24 +94,12 @@ export function createRouter<T extends string, R extends Route<T>[] = Route<T>[]
       }
     }
   };
-
   dfs("", routes);
 
-  const useNavigate = () => {
-    const navigate = (path: InferPath<R>) => {
-      window.history.pushState({}, "", path as string);
-    };
-
-    return navigate;
-  };
-
-  return {
-    router: routeMap as Map<InferPath<R>, () => React.ReactNode>,
-    useNavigate,
-  };
+  return new Router(routeMap as Map<InferPath<R>, () => React.ReactNode>);
 }
 
-// const { useNavigate, router } = createRouter([
+// const router = createRouter([
 //   {
 //     path: "test",
 //     routes: [
@@ -95,25 +126,34 @@ export function createRouter<T extends string, R extends Route<T>[] = Route<T>[]
 //   },
 // ]);
 
+export function useNavigate<T extends string>(router: Router<T>) {
+  const navigate = (path: T) => {
+    router.navigate(path);
+  };
+
+  return navigate;
+}
+
 type RouterProps<T extends string> = {
-  router: Map<T, () => React.ReactNode>;
+  router: Router<T>;
   defaultPath: T;
 };
 
-export function Router<T extends string>(props: RouterProps<T>) {
-  const { router } = props;
-  console.log(window.location.hash);
-  const [currentPath, setCurrentPath] = useState<T>(
-    router.has(window.location.hash as T) ? (window.location.hash as T) : props.defaultPath,
-  );
+export function RouteProvider<T extends string>(props: RouterProps<T>) {
+  const { router, defaultPath } = props;
+
+  const routeMap = router.getRouteMap();
+  const [currentPath, setCurrentPath] = useState<T>(defaultPath);
 
   useEffect(() => {
-    const ctrl = new AbortController();
-    const onLocationChange = () => setCurrentPath(window.location.hash as T);
-    window.addEventListener("popstate", onLocationChange, { signal: ctrl.signal });
-
-    return () => ctrl.abort();
+    return router.subscribe(() => {
+      setCurrentPath(router.getCurrentPath());
+    });
   }, []);
 
-  return router.get(currentPath) ? createElement(router.get(currentPath)!) : null;
+  return routeMap.get(currentPath) ? createElement(routeMap.get(currentPath)!) : null;
 }
+
+// export function Test() {
+//   return <RouteProvider defaultPath="/test/profile" router={router} />;
+// }
