@@ -12,20 +12,19 @@ export const 한국모바일인증_v5_1: Handler = {
     return url.includes("https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp");
   },
   fill: (_, profile) => {
-    const 통신사Button = q<HTMLButtonElement>(
-      "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "skm", "ktm", "lgm"]),
-    );
-    if (통신사Button) {
-      통신사Button.click();
-    }
-
     const 폼 = q<HTMLFormElement>("form[name='cplogn']");
     if (폼) {
+      const 통신사Input = q<HTMLInputElement>("#reqCommIdStated");
+      if (통신사Input) {
+        통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
+        dispatchEvent(통신사Input);
+      }
+
       const actionHref = profile.map.인증방식([
         "",
-        "https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
-        "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
-        "https://www.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
+        "/kmcis/web_v5/kmcisSms01.jsp",
+        "/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
+        "/kmcis/qr_web_v5/kmcisQr01.jsp",
       ]);
 
       폼.setAttribute("action", actionHref);

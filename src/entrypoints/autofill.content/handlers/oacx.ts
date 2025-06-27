@@ -15,19 +15,20 @@ import { waitUntilDomIdle, dispatchEvent, q, qAll } from "@/utils/utils";
  * Raon에서 제공하는 oacx는 어떤 걸로 인증할지 선택하지 않으면, 각종 약관동의를 눌렀을 때, 인증서를 먼저 선택하라는 팝업이 뜸.
  * - 서울시 민간인증서 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
  * - 삼성서울병원 민간인증서 : https://www.samsunghospital.com/home/member/login.do
+ * - 숲나들e : https://www.foresttrip.go.kr/com/login.do
  */
 export const oacx: Handler = {
   isMatch: (_) => {
     return q("#oacxDiv #oacxEmbededContents") !== null;
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     let 인증주체Lis: HTMLLIElement[] = [];
 
     // 대부분의 경우 .provider-list 를 사용함
     if (인증주체Lis.length === 0) {
       인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .provider-list li");
     }
-    // 예비군 홈페이지에서는 ul.oacx_providerList 를 사용함
+    // 예비군, 숲나들e 홈페이지에서는 ul.oacx_providerList 를 사용함
     if (인증주체Lis.length === 0) {
       인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .oacx_providerList li");
     }
@@ -38,7 +39,12 @@ export const oacx: Handler = {
       });
     }
 
-    인증주체Lis[0].click();
+    for (const 인증주체Li of 인증주체Lis) {
+      if (인증주체Li.click) {
+        인증주체Li.click();
+        return;
+      }
+    }
   },
 };
 
