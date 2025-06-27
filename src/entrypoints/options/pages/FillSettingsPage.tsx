@@ -1,8 +1,7 @@
 import { useStorage } from "@/hooks/useStorage";
 import { useTranslation } from "@/hooks/useTranslation";
-import type { PageProps } from "../Options";
 
-export function FillSettingsPage(_: PageProps) {
+export function FillSettingsPage() {
   const { t } = useTranslation();
   const storage = useStorage();
   const { on, delay } = storage.data;

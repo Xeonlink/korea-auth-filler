@@ -4,9 +4,8 @@ import 부산시모바일인증Gif from "@/assets/gif/부산시-모바일인증.
 import 서울시모바일인증Gif from "@/assets/gif/서울시-모바일인증.gif";
 import 홈택스OacxGif from "@/assets/gif/홈택스-oacx.gif";
 import tossGif from "@/assets/gif/toss.gif";
-import type { PageProps } from "../Options";
 
-export function IntroPage(_: PageProps) {
+export function IntroPage() {
   return (
     <div className="w-full flex">
       <main className="container mx-auto p-10">

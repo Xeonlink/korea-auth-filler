@@ -11,7 +11,7 @@ export const 한국모바일인증_v5_1: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp");
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 통신사Button = q<HTMLButtonElement>(
       "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "skm", "ktm", "lgm"]),
     );
@@ -42,11 +42,12 @@ export const 한국모바일인증_v5_2: Handler = {
       "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
     ].some((l) => url.includes(l));
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 이름Input = q<HTMLInputElement>(".userName");
-    if (!이름Input) return;
-    이름Input.value = profile.이름;
-    dispatchEvent(이름Input);
+    if (이름Input) {
+      이름Input.value = profile.이름;
+      dispatchEvent(이름Input);
+    }
 
     const 이름다음Button = q<HTMLButtonElement>(".btnUserName");
     if (이름다음Button) {

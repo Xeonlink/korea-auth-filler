@@ -46,7 +46,7 @@ class Router<T extends string> {
   constructor(routeMap: Map<T, () => React.ReactNode>) {
     this.subscribers = [];
     this.routeMap = routeMap;
-    this.currentPath = window.location.hash as T;
+    this.currentPath = Array.from(routeMap.keys())[0] as T;
   }
 
   public subscribe(callback: () => void) {
@@ -77,6 +77,7 @@ class Router<T extends string> {
   }
 
   public getCurrentPath() {
+    console.log(this.currentPath);
     return this.currentPath;
   }
 }
@@ -99,39 +100,28 @@ export function createRouter<T extends string, R extends Route<T>[] = Route<T>[]
   return new Router(routeMap as Map<InferPath<R>, () => React.ReactNode>);
 }
 
-// const router = createRouter([
-//   {
-//     path: "test",
-//     routes: [
-//       {
-//         path: "profile",
-//         render: () => <div>Profile</div>,
-//       },
-//     ],
-//   },
-//   {
-//     path: "tes1",
-//     render: () => <div>Home</div>,
-//     routes: [
-//       {
-//         path: "profile1",
-//         routes: [
-//           {
-//             path: "profile2",
-//             render: () => <div>Profile2</div>,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ]);
-
 export function useNavigate<T extends string>(router: Router<T>) {
   const navigate = (path: T) => {
     router.navigate(path);
   };
 
   return navigate;
+}
+
+export function useLocation<T extends string>(router: Router<T>, defaultPath: T) {
+  const [currentPath, setCurrentPath] = useState<T>(defaultPath);
+
+  useEffect(() => {
+    const unsubscribe = router.subscribe(() => {
+      setCurrentPath(router.getCurrentPath());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [router]);
+
+  return currentPath;
 }
 
 type RouterProps<T extends string> = {
@@ -146,14 +136,27 @@ export function RouteProvider<T extends string>(props: RouterProps<T>) {
   const [currentPath, setCurrentPath] = useState<T>(defaultPath);
 
   useEffect(() => {
-    return router.subscribe(() => {
+    const ctrl = new AbortController();
+
+    window.addEventListener(
+      "popstate",
+      () => {
+        const url = new URL(window.location.href);
+        const hash = url.hash.slice(1);
+        setCurrentPath(hash.length === 0 ? defaultPath : (hash as T));
+      },
+      { signal: ctrl.signal },
+    );
+
+    const unsubscribe = router.subscribe(() => {
       setCurrentPath(router.getCurrentPath());
     });
-  }, []);
+
+    return () => {
+      ctrl.abort();
+      unsubscribe();
+    };
+  }, [router]);
 
   return routeMap.get(currentPath) ? createElement(routeMap.get(currentPath)!) : null;
 }
-
-// export function Test() {
-//   return <RouteProvider defaultPath="/test/profile" router={router} />;
-// }

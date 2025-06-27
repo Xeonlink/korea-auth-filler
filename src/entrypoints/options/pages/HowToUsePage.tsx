@@ -6,9 +6,8 @@ import BeforeProfileAdd from "@/assets/readme/before-profile-add.png";
 import ExtensionPinImg from "@/assets/readme/extension-pin.png";
 import ProfileAddImg from "@/assets/readme/profile-add.png";
 import HomtaxGif from "@/assets/readme/홈택스-oacx.gif";
-import type { PageProps } from "../Options";
 
-export function HowToUsePage(_: PageProps) {
+export function HowToUsePage() {
   return (
     <main className="p-10 text-sm">
       <h1 className="text-center font-bold text-2xl">사용법</h1>

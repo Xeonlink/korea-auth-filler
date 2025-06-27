@@ -49,9 +49,10 @@ export const SCI평가정보_v3_3: Handler = {
   },
   fill: (_, profile) => {
     const 이름Input = q<HTMLInputElement>(".userName");
-    if (!이름Input) return;
-    이름Input.value = profile.이름;
-    dispatchEvent(이름Input);
+    if (이름Input) {
+      이름Input.value = profile.이름;
+      dispatchEvent(이름Input);
+    }
 
     const 이름다음Button = q<HTMLButtonElement>(".btnUserName");
     if (이름다음Button) {
@@ -70,10 +71,20 @@ export const SCI평가정보_v3_3: Handler = {
       dispatchEvent(주민번호뒤Input);
     }
 
+    const 전화번호단계Li = q<HTMLLIElement>(".step_item.step_tel");
+    if (전화번호단계Li) {
+      전화번호단계Li.classList.add("on");
+    }
+
     const 전화번호Input = q<HTMLInputElement>(".mobileNo");
     if (전화번호Input) {
       전화번호Input.value = profile.전화번호.전체;
       dispatchEvent(전화번호Input);
+    }
+
+    const 보안문자단계Li = q<HTMLLIElement>(".step_item.step_captcha");
+    if (보안문자단계Li) {
+      보안문자단계Li.classList.add("on");
     }
 
     const 보안문자Input = q<HTMLInputElement>(".captchaAnswer");

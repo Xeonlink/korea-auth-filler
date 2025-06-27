@@ -18,25 +18,35 @@ import { FillSettingsPage } from "./pages/FillSettingsPage";
 import { HowToUsePage } from "./pages/HowToUsePage";
 import { IntroPage } from "./pages/IntroPage";
 import { ProfilesPage } from "./pages/ProfilesPage";
+import { createRouter, RouteProvider, useLocation, useNavigate } from "@/components/Router";
 
-type Route = "/intro" | "/how-to-use" | "/profiles" | "/fill-settings";
-export type PageProps = {
-  navigate: (path: Route) => void;
-};
+export const router = createRouter([
+  {
+    path: "intro",
+    render: () => <IntroPage />,
+  },
+  {
+    path: "how-to-use",
+    render: () => <HowToUsePage />,
+  },
+  {
+    path: "profiles",
+    render: () => <ProfilesPage />,
+  },
+  {
+    path: "fill-settings",
+    render: () => <FillSettingsPage />,
+  },
+]);
 
 export function Options() {
   const { t } = useTranslation();
   const [isNavOpen, setIsNavOpen] = useState(true);
-  const [route, setRoute] = useState<Route>("/profiles");
+  const navigate = useNavigate(router);
+  const currentPath = useLocation(router, "/intro");
 
   const toggleNav = () => {
     setIsNavOpen((prev) => !prev);
-  };
-  const navigate = (path: Route) => {
-    setRoute(path);
-    // const url = new URL(window.location.href);
-    // url.hash = path;
-    // window.history.pushState({}, "", url.toString());
   };
 
   return (
@@ -74,7 +84,7 @@ export function Options() {
               </button>
               <div
                 className={cn("w-1 h-4 rounded-full opacity-80", {
-                  "bg-base-content": route === "/intro",
+                  "bg-base-content": currentPath === "/intro",
                 })}
               ></div>
             </li>
@@ -92,7 +102,7 @@ export function Options() {
               </button>
               <div
                 className={cn("w-1 h-4 rounded-full opacity-80", {
-                  "bg-base-content": route === "/how-to-use",
+                  "bg-base-content": currentPath === "/how-to-use",
                 })}
               ></div>
             </li>
@@ -110,7 +120,7 @@ export function Options() {
               </button>
               <div
                 className={cn("w-1 h-4 rounded-full opacity-80", {
-                  "bg-base-content": route === "/profiles",
+                  "bg-base-content": currentPath === "/profiles",
                 })}
               ></div>
             </li>
@@ -128,7 +138,7 @@ export function Options() {
               </button>
               <div
                 className={cn("w-1 h-4 rounded-full opacity-80", {
-                  "bg-base-content": route === "/fill-settings",
+                  "bg-base-content": currentPath === "/fill-settings",
                 })}
               ></div>
             </li>
@@ -192,10 +202,7 @@ export function Options() {
         </div>
       </nav>
       <ScrollArea className="flex-1">
-        {route === "/intro" ? <IntroPage navigate={navigate} /> : null}
-        {route === "/how-to-use" ? <HowToUsePage navigate={navigate} /> : null}
-        {route === "/profiles" ? <ProfilesPage navigate={navigate} /> : null}
-        {route === "/fill-settings" ? <FillSettingsPage navigate={navigate} /> : null}
+        <RouteProvider defaultPath="/intro" router={router} />
       </ScrollArea>
     </>
   );

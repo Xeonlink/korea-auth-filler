@@ -19,7 +19,6 @@ import {
   faVenus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import type { PageProps } from "../Options";
 
 function getWayIcon(wayCode: WayCode) {
   switch (wayCode) {
@@ -32,7 +31,7 @@ function getWayIcon(wayCode: WayCode) {
   }
 }
 
-export function ProfilesPage(_: PageProps) {
+export function ProfilesPage() {
   const { t } = useTranslation();
   const storage = useStorage();
   const { profiles, selectedProfile } = storage.data;
