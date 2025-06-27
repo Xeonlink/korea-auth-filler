@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { dispatchEvent, q } from "@/utils/utils";
+import { triggerEvent, q } from "@/utils/utils";
 
 /**
  * 테스트 사이트
@@ -19,7 +19,7 @@ export const NICE평가정보1: Handler = {
     const 통신사Input = q<HTMLInputElement>("input[name='selectMobileCo']");
     if (통신사Input) {
       통신사Input.value = profile.map.통신사(["", "SK", "KT", "LG", "SM", "KM", "LM"]);
-      dispatchEvent(통신사Input);
+      triggerEvent(통신사Input);
     }
 
     const 폼Form = q<HTMLFormElement>("#frm");
@@ -39,7 +39,7 @@ export const NICE평가정보2: Handler = {
     const 동의Input = q<HTMLInputElement>("input[name='mobileCertAgree']");
     if (동의Input) {
       동의Input.checked = true;
-      dispatchEvent(동의Input);
+      triggerEvent(동의Input);
     }
 
     const 폼Form = q<HTMLFormElement>("#frm");
@@ -64,7 +64,7 @@ export const NICE평가정보3: Handler = {
     const 이름Input = q<HTMLInputElement>("#userName");
     if (이름Input) {
       이름Input.value = profile.이름;
-      dispatchEvent(이름Input);
+      triggerEvent(이름Input);
     }
 
     const 제출버튼 = q<HTMLButtonElement>("#btnSubmit");
@@ -75,19 +75,19 @@ export const NICE평가정보3: Handler = {
     const 주민번호앞자리Input = q<HTMLInputElement>("#myNum1");
     if (주민번호앞자리Input) {
       주민번호앞자리Input.value = profile.주민번호.앞자리;
-      dispatchEvent(주민번호앞자리Input);
+      triggerEvent(주민번호앞자리Input);
     }
 
     const 주민번호뒷자리Input = q<HTMLInputElement>("#myNum2");
     if (주민번호뒷자리Input) {
       주민번호뒷자리Input.value = profile.주민번호.성별숫자 ?? "";
-      dispatchEvent(주민번호뒷자리Input);
+      triggerEvent(주민번호뒷자리Input);
     }
 
     const 전화번호Input = q<HTMLInputElement>("#mobileNo");
     if (전화번호Input) {
       전화번호Input.value = profile.전화번호.전체;
-      dispatchEvent(전화번호Input);
+      triggerEvent(전화번호Input);
     }
   },
 };
@@ -103,7 +103,7 @@ export const NICE평가정보4: Handler = {
     const 이름Input = q<HTMLInputElement>("#userName");
     if (이름Input) {
       이름Input.value = profile.이름;
-      dispatchEvent(이름Input);
+      triggerEvent(이름Input);
     }
 
     const 제출버튼 = q<HTMLButtonElement>("#btnSubmit");
@@ -114,19 +114,19 @@ export const NICE평가정보4: Handler = {
     const 전화번호Input = q<HTMLInputElement>("#mobileNo");
     if (전화번호Input) {
       전화번호Input.value = profile.전화번호.전체;
-      dispatchEvent(전화번호Input);
+      triggerEvent(전화번호Input);
     }
 
     const 주민번호앞자리Input = q<HTMLInputElement>("#myNum1");
     if (주민번호앞자리Input) {
       주민번호앞자리Input.value = profile.주민번호.앞자리;
-      dispatchEvent(주민번호앞자리Input);
+      triggerEvent(주민번호앞자리Input);
     }
 
     const 주민번호뒷자리Input = q<HTMLInputElement>("#myNum2");
     if (주민번호뒷자리Input) {
       주민번호뒷자리Input.value = profile.주민번호.성별숫자 ?? "";
-      dispatchEvent(주민번호뒷자리Input);
+      triggerEvent(주민번호뒷자리Input);
     }
   },
 };

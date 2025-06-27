@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { dispatchEvent, q, qAll, qById, waitUntilDomIdle } from "@/utils/utils";
+import { triggerEvent, q, qAll, qById, waitUntilDomIdle } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -27,19 +27,19 @@ function fill(profile: IProfile) {
   const 이름Input = q<HTMLInputElement>("#text-field-line-1");
   if (이름Input) {
     이름Input.value = profile.이름;
-    dispatchEvent(이름Input);
+    triggerEvent(이름Input);
   }
 
   const 전화번호Input = q<HTMLInputElement>("#text-field-line-2");
   if (전화번호Input) {
     전화번호Input.value = profile.전화번호.전체;
-    dispatchEvent(전화번호Input);
+    triggerEvent(전화번호Input);
   }
 
   const 생년월일Input = q<HTMLInputElement>("#text-field-line-3");
   if (생년월일Input) {
     생년월일Input.value = profile.생년월일.substring(2);
-    dispatchEvent(생년월일Input);
+    triggerEvent(생년월일Input);
   }
 
   const 개인정보동의Input = qById<HTMLInputElement>("checkbox-circle-:r9:");

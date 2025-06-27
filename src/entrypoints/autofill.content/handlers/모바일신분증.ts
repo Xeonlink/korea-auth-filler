@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { dispatchEvent, q } from "@/utils/utils";
+import { triggerEvent, q } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -14,13 +14,13 @@ export const 모바일신분증: Handler = {
     const 이름Input = q<HTMLInputElement>("input[name='name']");
     if (이름Input) {
       이름Input.value = profile.이름;
-      dispatchEvent(이름Input);
+      triggerEvent(이름Input);
     }
 
     const 전화번호Input = q<HTMLInputElement>("input[name='telno']");
     if (전화번호Input) {
       전화번호Input.value = profile.전화번호.전체;
-      dispatchEvent(전화번호Input);
+      triggerEvent(전화번호Input);
     }
 
     // const 전체동의Input = q<HTMLInputElement>("#allAgree");
@@ -32,19 +32,19 @@ export const 모바일신분증: Handler = {
     const policy0Input = q<HTMLInputElement>("#svcUseStplatChk");
     if (policy0Input) {
       policy0Input.checked = true;
-      dispatchEvent(policy0Input);
+      triggerEvent(policy0Input);
     }
 
     const policy1Input = q<HTMLInputElement>("#lndvdlInfoColctUseAgreChk");
     if (policy1Input) {
       policy1Input.checked = true;
-      dispatchEvent(policy1Input);
+      triggerEvent(policy1Input);
     }
 
     const policy2Input = q<HTMLInputElement>("#lndvdlInfoThptyProvdAgreChk");
     if (policy2Input) {
       policy2Input.checked = true;
-      dispatchEvent(policy2Input);
+      triggerEvent(policy2Input);
     }
   },
 };

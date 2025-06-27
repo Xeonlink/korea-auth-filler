@@ -27,9 +27,9 @@ export const 드림시큐리티: Handler = {
         }
       }
 
-      const 전체동의Check = q<HTMLInputElement>("#allchk");
-      if (전체동의Check) {
-        전체동의Check.click();
+      const 전체동의Input = q<HTMLInputElement>("#allchk");
+      if (전체동의Input) {
+        전체동의Input.click();
       }
 
       if (profile.인증방식.SMS) {

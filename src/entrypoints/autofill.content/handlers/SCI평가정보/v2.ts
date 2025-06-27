@@ -1,5 +1,5 @@
 import type { Handler } from "@/utils/type";
-import { dispatchEvent, q } from "@/utils/utils";
+import { triggerEvent, q } from "@/utils/utils";
 
 export const SCI평가정보_v2_1: Handler = {
   isMatch: (url) => {
@@ -10,7 +10,7 @@ export const SCI평가정보_v2_1: Handler = {
       const 통신사Input = q<HTMLInputElement>("input[name='cellCorp']");
       if (통신사Input) {
         통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
-        dispatchEvent(통신사Input);
+        triggerEvent(통신사Input);
       }
 
       const 폼 = q<HTMLFormElement>("form[name='cplogn']");
@@ -36,25 +36,25 @@ export const SCI평가정보_v2_3: Handler = {
     const 이름Input = q<HTMLInputElement>("#userName");
     if (이름Input) {
       이름Input.value = profile.이름;
-      dispatchEvent(이름Input);
+      triggerEvent(이름Input);
     }
 
     const 전화번호Input = q<HTMLInputElement>("#No");
     if (전화번호Input) {
       전화번호Input.value = profile.전화번호.전체;
-      dispatchEvent(전화번호Input);
+      triggerEvent(전화번호Input);
     }
 
     const 주민번호앞Input = q<HTMLInputElement>("#birthDay1");
     if (주민번호앞Input) {
       주민번호앞Input.value = profile.주민번호.앞자리;
-      dispatchEvent(주민번호앞Input);
+      triggerEvent(주민번호앞Input);
     }
 
     const 주민번호뒤Input = q<HTMLInputElement>("#birthDay2");
     if (주민번호뒤Input) {
       주민번호뒤Input.value = profile.주민번호.성별숫자 ?? "";
-      dispatchEvent(주민번호뒤Input);
+      triggerEvent(주민번호뒤Input);
     }
 
     const 보안문자Input = q<HTMLInputElement>("#secur");

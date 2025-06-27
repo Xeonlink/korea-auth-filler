@@ -7,6 +7,9 @@ import { 네이버인증 } from "./네이버인증";
 import { 다날 } from "./다날";
 import { 드림시큐리티 } from "./드림시큐리티";
 import { 모바일신분증 } from "./모바일신분증";
+import { 한국모바일인증_v2_1 } from "./한국모바일인증/v2";
+import { 한국모바일인증_v2_2 } from "./한국모바일인증/v2";
+import { 한국모바일인증_v3_3 } from "./한국모바일인증/v3";
 import { 한국모바일인증_v4_1, 한국모바일인증_v4_2, 한국모바일인증_v4_3 } from "./한국모바일인증/v4";
 import { 한국모바일인증_v5_1, 한국모바일인증_v5_2 } from "./한국모바일인증/v5";
 import { NHN_KCP1, NHN_KCP2 } from "./NHN_KCP";
@@ -30,11 +33,14 @@ export const handlers = [
   okname1,
   okname2,
   // 한국모바일인증
+  한국모바일인증_v2_1,
+  한국모바일인증_v2_2,
   한국모바일인증_v4_1,
   한국모바일인증_v4_2,
   한국모바일인증_v4_3,
   한국모바일인증_v5_1,
   한국모바일인증_v5_2,
+  한국모바일인증_v3_3,
   // Toss
   toss,
   // 네이버인증

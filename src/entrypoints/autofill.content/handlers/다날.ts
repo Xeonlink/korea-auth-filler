@@ -36,9 +36,9 @@ export const 다날: Handler = {
       }
     }
 
-    const 전체동의Check = q<HTMLInputElement>("#agree_all");
-    if (전체동의Check) {
-      전체동의Check.click();
+    const 전체동의Input = q<HTMLInputElement>("#agree_all");
+    if (전체동의Input) {
+      전체동의Input.click();
     }
 
     const 인증방식Button = q<HTMLButtonElement>(profile.map.인증방식(["", "#btnSms", "#btnPass"]));

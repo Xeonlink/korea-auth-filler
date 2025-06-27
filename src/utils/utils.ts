@@ -155,7 +155,7 @@ const EVENT = {
  * 이벤트를 일으키지 않으면 이벤트 리스너가 동작하지 않아서 제대로 입력이 완료되지 않는 경우가 있음.
  * @param target - 이벤트를 발송할 요소
  */
-export function dispatchEvent(target: HTMLElement) {
+export function triggerEvent(target: HTMLElement) {
   target.dispatchEvent(EVENT.CHANGE.VALUE);
   target.dispatchEvent(EVENT.CHANGE.CHECK);
 }

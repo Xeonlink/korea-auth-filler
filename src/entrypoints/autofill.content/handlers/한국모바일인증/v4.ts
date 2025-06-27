@@ -14,23 +14,24 @@ export const 한국모바일인증_v4_1: Handler = {
       }
 
       const 통신사Input = q<HTMLInputElement>('input[name="reqCommIdStated"]');
+      const 통신사 = profile.map.통신사(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
       if (통신사Input) {
-        통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
+        통신사Input.value = 통신사;
       }
 
       const 통신사Input2 = q<HTMLInputElement>('input[name="CommId"]');
       if (통신사Input2) {
-        통신사Input2.value = profile.map.통신사(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
+        통신사Input2.value = 통신사;
       }
 
       const 폼 = q<HTMLFormElement>("#cplogn");
       if (폼) {
-        let actionHref = "";
-        if (profile.인증방식.SMS) {
-          actionHref = "https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp";
-        } else {
-          actionHref = "https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp";
-        }
+        const actionHref = profile.map.인증방식([
+          "",
+          "/kmcis/web_v4/kmcisSms01.jsp",
+          "/kmcis/simpleCert_web_v3/kmcisApp01.jsp",
+          "/kmcis/qr_web/kmcisQr01.jsp", // QR을 지원하지 않는 버전이므로, 대신 QR 인증 페이지로 이동 - 사실 지원하는거 같은데 확인할만한 사이트를 못찾았음
+        ]);
 
         폼.setAttribute("action", actionHref);
         폼.submit();
