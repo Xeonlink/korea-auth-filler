@@ -4,13 +4,13 @@ import { dispatchEvent, q } from "@/utils/utils";
 /**
  * 테스트 주소
  * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
+ * 2. 홈택스 모바일 신분증
  */
-
 export const 모바일신분증: Handler = {
-  isMatch: (url) => {
-    return url.includes("https://sp.epeople.go.kr/web/pcView");
+  isMatch: (_) => {
+    return q(".mid-crtfc #contents") !== null;
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 이름Input = q<HTMLInputElement>("input[name='name']");
     if (이름Input) {
       이름Input.value = profile.이름;
@@ -23,11 +23,11 @@ export const 모바일신분증: Handler = {
       dispatchEvent(전화번호Input);
     }
 
-    const 전체동의Input = q<HTMLInputElement>("#allAgree");
-    if (전체동의Input) {
-      전체동의Input.checked = true;
-      dispatchEvent(전체동의Input);
-    }
+    // const 전체동의Input = q<HTMLInputElement>("#allAgree");
+    // if (전체동의Input) {
+    //   전체동의Input.checked = true;
+    //   dispatchEvent(전체동의Input);
+    // }
 
     const policy0Input = q<HTMLInputElement>("#svcUseStplatChk");
     if (policy0Input) {

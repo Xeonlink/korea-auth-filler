@@ -3,7 +3,7 @@ import { waitUntilDomIdle, dispatchEvent, q, qAll } from "@/utils/utils";
 
 /**
  * **일반 테스트 주소**
- * - 홈택스 로그인
+ * - 홈택스 간편인증
  * - 한전ON : https://online.kepco.co.kr/
  * - 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
  * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
