@@ -40,7 +40,7 @@ function useUpdateStorage() {
       });
       return { oldData };
     },
-    onError: (error, items, context) => {
+    onError: (_, __, context) => {
       if (!context) return;
       queryClient.setQueryData(["storage"], context.oldData);
     },

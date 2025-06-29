@@ -9,7 +9,7 @@ import { q } from "@/utils/utils";
 
 export const 드림시큐리티: Handler = {
   isMatch: (url) => {
-    return url.includes("https://cert.mobile-ok.com/ptb_mokauth.html?");
+    return url.includes("https://cert.mobile-ok.com/ptb_mokauth.html");
   },
   fill: (ctx, profile) => {
     ctx.setInterval(() => {

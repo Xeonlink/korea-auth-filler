@@ -121,7 +121,7 @@ function main() {
     createContextMenu();
   });
 
-  browser.contextMenus.onClicked.addListener((info, tab) => {
+  browser.contextMenus.onClicked.addListener((_, tab) => {
     injectAutofillScript(tab);
   });
 
@@ -153,7 +153,7 @@ function main() {
     });
   });
 
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  browser.runtime.onMessage.addListener((message, _, sendResponse) => {
     const messageData = message as Action;
     if (messageData.type === "get-storage-data") {
       browser.runtime.openOptionsPage();

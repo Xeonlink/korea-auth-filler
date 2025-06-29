@@ -12,6 +12,7 @@ function createFormWithData(data: Record<string, string>) {
     input.type = "hidden";
     input.name = key;
     input.value = value;
+    form.appendChild(input);
   }
 
   return form;

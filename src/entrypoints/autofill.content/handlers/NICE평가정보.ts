@@ -15,13 +15,12 @@ export const NICE평가정보1: Handler = {
       "https://nice.checkplus.co.kr/cert/mobileCert/main",
     ].some((t) => url.includes(t));
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 통신사Input = q<HTMLInputElement>("input[name='selectMobileCo']");
     if (통신사Input) {
       통신사Input.value = profile.map.통신사(["", "SK", "KT", "LG", "SM", "KM", "LM"]);
       triggerEvent(통신사Input);
     }
-
     const 폼Form = q<HTMLFormElement>("#frm");
     if (폼Form) {
       폼Form.setAttribute("action", "/cert/mobileCert/method");
@@ -35,7 +34,7 @@ export const NICE평가정보2: Handler = {
   isMatch: (url) => {
     return url.includes("https://nice.checkplus.co.kr/cert/mobileCert/method");
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 동의Input = q<HTMLInputElement>("input[name='mobileCertAgree']");
     if (동의Input) {
       동의Input.checked = true;
@@ -46,7 +45,7 @@ export const NICE평가정보2: Handler = {
     if (폼Form) {
       폼Form.setAttribute(
         "action",
-        `/cert/mobileCert/${profile.map.인증방식(["", "sms", "push"])}/certification`,
+        `/cert/mobileCert/${profile.map.인증방식(["", "sms", "push", "qr"])}/certification`,
       );
       폼Form.submit();
     }
@@ -60,7 +59,7 @@ export const NICE평가정보3: Handler = {
       url.includes(t),
     );
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 이름Input = q<HTMLInputElement>("#userName");
     if (이름Input) {
       이름Input.value = profile.이름;
@@ -99,7 +98,7 @@ export const NICE평가정보4: Handler = {
       url.includes(t),
     );
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     const 이름Input = q<HTMLInputElement>("#userName");
     if (이름Input) {
       이름Input.value = profile.이름;

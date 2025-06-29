@@ -51,7 +51,7 @@ export const 다날: Handler = {
     );
     if (tab변경Button) {
       if (tab변경Button.title == "선택됨") return;
-      const tab = q<HTMLButtonElement>(profile.map.인증방식(["0", "#authTabSms", "#authTabPass"]));
+      const tab = q<HTMLButtonElement>(profile.map.인증방식(["", "#authTabSms", "#authTabPass"]));
       tab?.click();
     }
 

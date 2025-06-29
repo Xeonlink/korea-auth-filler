@@ -43,7 +43,7 @@ export const NHN_KCP2: Handler = {
       "https://cert.kcp.co.kr/cert/mo/pushQRForm.jsp",
     ].some((l) => url.includes(l));
   },
-  fill: (ctx, profile) => {
+  fill: (_, profile) => {
     /**
      * 인증방식 PASS | SMS 일 때
      */
@@ -85,12 +85,10 @@ export const NHN_KCP2: Handler = {
      * 2. a 태그라서 보안에러가 계속 발생함.
      */
     if (profile.인증방식.QR) {
-      // waitUntilDomIdle(() => {
-      //   const QR로인증A = q<HTMLButtonElement>(".qrCodeLink");
-      //   if (QR로인증A) {
-      //     QR로인증A.click();
-      //   }
-      // }, 50);
+      // const QR로인증A = q<HTMLButtonElement>(".qrCodeLink");
+      // if (QR로인증A) {
+      //   QR로인증A.click();
+      // }
     }
   },
 };
