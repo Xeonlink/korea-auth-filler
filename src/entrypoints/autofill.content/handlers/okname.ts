@@ -48,7 +48,7 @@ export const okname1: Handler = {
 export const okname2: Handler = {
   isMatch: (url) => {
     const isUrlMatch = url.includes("https://safe.ok-name.co.kr/CommonSvl");
-    const isStep2 = !!q<HTMLElement>("section.certify_user2.certifyWrap.certifyWrap_02");
+    const isStep2 = !!q<HTMLElement>("section.certifyWrap");
     return isUrlMatch && isStep2;
   },
   fill: (_, profile) => {

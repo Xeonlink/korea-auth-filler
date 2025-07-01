@@ -19,6 +19,7 @@ test("SMS", async ({ page, extensionId }) => {
 
   page = await goto_okname(page);
   await expect(page).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
+  await expect(page.locator("section.certifyWrap")).toBeVisible();
 
   const profile = new Profile(rawProfile);
   const 이름Input = page.locator("#nm");
@@ -51,6 +52,7 @@ test("PASS", async ({ page, extensionId }) => {
 
   page = await goto_okname(page);
   await expect(page).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
+  await expect(page.locator("section.certifyWrap")).toBeVisible();
 
   const profile = new Profile(rawProfile);
   const 이름Input = page.locator("#nm");
@@ -73,4 +75,5 @@ test("QR", async ({ page, extensionId }) => {
 
   page = await goto_okname(page);
   await expect(page).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
+  await expect(page.locator("section.certifyWrap")).toBeVisible();
 });

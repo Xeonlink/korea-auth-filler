@@ -2,17 +2,17 @@ import { test, expect, mockRawProfile } from "./index";
 import { usePopup } from "./usePopup";
 import { way } from "@/utils/constants";
 import { Profile } from "@/utils/Profile";
-import { BrowserContext, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 
-async function goto한국모바일인증(page: Page, context: BrowserContext) {
+async function goto한국모바일인증(page: Page) {
   await page.goto("https://state.gwd.go.kr/portal/minwon/epeople/counsel");
-  const pagePromise = context.waitForEvent("page");
+  const pagePromise = page.context().waitForEvent("page");
   await page.frameLocator(`iframe[title="민원상담신청"]`).locator("a.be_03").click();
   const newPage = await pagePromise;
   return newPage;
 }
 
-test("SMS", async ({ page, context, extensionId }) => {
+test("SMS", async ({ page, extensionId }) => {
   // 프로필 선택
   const popup = await usePopup(page, extensionId);
   const rawProfile = { ...mockRawProfile, way: way.SMS };
@@ -20,8 +20,7 @@ test("SMS", async ({ page, context, extensionId }) => {
   await popup.selectProfile(0);
 
   // 채우기 확인
-  page = await goto한국모바일인증(page, context);
-  await expect(page).toHaveURL(/kmcert\.com/);
+  page = await goto한국모바일인증(page);
   await expect(page).toHaveURL("https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp");
   const profile = new Profile(rawProfile);
   const 이름Input = page.locator(`input[name="userName"]`);
@@ -46,7 +45,7 @@ test("SMS", async ({ page, context, extensionId }) => {
   }
 });
 
-test("PASS", async ({ page, context, extensionId }) => {
+test("PASS", async ({ page, extensionId }) => {
   // 프로필 선택
   const popup = await usePopup(page, extensionId);
   const rawProfile = { ...mockRawProfile, way: way.PASS };
@@ -54,8 +53,7 @@ test("PASS", async ({ page, context, extensionId }) => {
   await popup.selectProfile(0);
 
   // 채우기 확인
-  page = await goto한국모바일인증(page, context);
-  await expect(page).toHaveURL(/kmcert\.com/);
+  page = await goto한국모바일인증(page);
   await expect(page).toHaveURL("https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp");
   const profile = new Profile(rawProfile);
   const 이름Input = page.locator(`input[name="userName"]`);
@@ -70,7 +68,7 @@ test("PASS", async ({ page, context, extensionId }) => {
   }
 });
 
-test("QR", async ({ page, context, extensionId }) => {
+test("QR", async ({ page, extensionId }) => {
   // 프로필 선택
   const popup = await usePopup(page, extensionId);
   const rawProfile = { ...mockRawProfile, way: way.QR };
@@ -78,7 +76,6 @@ test("QR", async ({ page, context, extensionId }) => {
   await popup.selectProfile(0);
 
   // 채우기 확인
-  page = await goto한국모바일인증(page, context);
-  await expect(page).toHaveURL(/kmcert\.com/);
+  page = await goto한국모바일인증(page);
   await expect(page).toHaveURL("https://www.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp");
 });
