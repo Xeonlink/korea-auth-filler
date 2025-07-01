@@ -11,7 +11,8 @@
     "build": "wxt build",
     "zip": "wxt zip",
     "postinstall": "wxt prepare",
-    "package": "rm -rf .output && wxt build && wxt zip && wxt build -b firefox && wxt zip -b firefox"
+    "package": "rm -rf .output && wxt build && wxt zip && wxt build -b firefox && wxt zip -b firefox",
+    "test": "playwright test --ui"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@playwright/test": "^1.53.1",
     "@types/chrome": "^0.0.256",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
     "@types/node": "^20.10.6",

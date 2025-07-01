@@ -10,12 +10,12 @@ import { waitUntilDomIdle, triggerEvent, q, qAll } from "@/utils/utils";
  * - 국가평생교육진흥원 : https://oacx.cb.or.kr:8089/oacx/oacx.jsp
  * - 특허로 : https://www.patent.go.kr/smart/oacx.jsp
  * - 1365자원봉사포털 : https://www.1365.go.kr/vols/cmmn/oacx/popup.do
+ * - 숲나들e : https://www.foresttrip.go.kr/com/login.do
  *
  * **Raon 테스트 주소** \
  * Raon에서 제공하는 oacx는 어떤 걸로 인증할지 선택하지 않으면, 각종 약관동의를 눌렀을 때, 인증서를 먼저 선택하라는 팝업이 뜸.
  * - 서울시 민간인증서 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
  * - 삼성서울병원 민간인증서 : https://www.samsunghospital.com/home/member/login.do
- * - 숲나들e : https://www.foresttrip.go.kr/com/login.do
  */
 export const oacx: Handler = {
   isMatch: (_) => {
@@ -64,8 +64,8 @@ function fill(profile: IProfile) {
     triggerEvent(이름Input);
   }
 
-  const 생년월일Input = q<HTMLInputElement>("input[data-id='oacx_birth']");
-  if (생년월일Input) {
+  const 생년월일Inputs = qAll<HTMLInputElement>("input[data-id='oacx_birth']");
+  for (const 생년월일Input of 생년월일Inputs) {
     생년월일Input.value = profile.생년월일;
     triggerEvent(생년월일Input);
   }
@@ -82,8 +82,8 @@ function fill(profile: IProfile) {
     triggerEvent(주민번호뒤Input);
   }
 
-  const 통신사Select = q<HTMLSelectElement>("select[data-id='oacx_phone0']");
-  if (통신사Select) {
+  const 통신사Selects = qAll<HTMLSelectElement>("select[data-id='oacx_phone0']");
+  for (const 통신사Select of 통신사Selects) {
     통신사Select.value = profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]);
     triggerEvent(통신사Select);
   }
@@ -124,14 +124,14 @@ function fill(profile: IProfile) {
     triggerEvent(전화번호Input);
   }
 
-  const 통신사Input = q<HTMLInputElement>("input[data-id='oacx_phone']");
-  if (통신사Input) {
+  const 통신사Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone']");
+  for (const 통신사Input of 통신사Inputs) {
     통신사Input.value = profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]);
     triggerEvent(통신사Input);
   }
 
-  const 인증방법Input = q<HTMLInputElement>("input[data-id='oacx_auth']");
-  if (인증방법Input) {
+  const 인증방법Inputs = qAll<HTMLInputElement>("input[data-id='oacx_auth']");
+  for (const 인증방법Input of 인증방법Inputs) {
     인증방법Input.value = profile.map.인증방식(["", "SMS", "EMAIL"]);
     triggerEvent(인증방법Input);
   }

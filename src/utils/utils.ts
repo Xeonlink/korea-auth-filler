@@ -156,6 +156,7 @@ const EVENT = {
  * @param target - 이벤트를 발송할 요소
  */
 export function triggerEvent(target: HTMLElement) {
+  target.onchange?.(EVENT.CHANGE.VALUE);
   target.dispatchEvent(EVENT.CHANGE.VALUE);
   target.dispatchEvent(EVENT.CHANGE.CHECK);
 }

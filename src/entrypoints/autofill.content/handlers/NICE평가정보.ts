@@ -3,8 +3,7 @@ import { triggerEvent, q } from "@/utils/utils";
 
 /**
  * 테스트 사이트
- * 1. https://nice.checkplus.co.kr/cert/main/menu
- * 2. 서울시
+ * 1. 서울시 로그인 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
  */
 
 // NICE평가정보

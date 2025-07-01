@@ -140,3 +140,9 @@ dist
 .output
 .wxt
 .cursor
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
