@@ -11,6 +11,7 @@ import { waitUntilDomIdle, triggerEvent, q, qAll } from "@/utils/utils";
  * - 특허로 : https://www.patent.go.kr/smart/oacx.jsp
  * - 1365자원봉사포털 : https://www.1365.go.kr/vols/cmmn/oacx/popup.do
  * - 숲나들e : https://www.foresttrip.go.kr/com/login.do
+ * - 서울특별시 평생교육원 : https://www.lllcard.kr/reg/seoul/main/crtfctPage.do
  *
  * **Raon 테스트 주소** \
  * Raon에서 제공하는 oacx는 어떤 걸로 인증할지 선택하지 않으면, 각종 약관동의를 눌렀을 때, 인증서를 먼저 선택하라는 팝업이 뜸.
@@ -60,26 +61,34 @@ function fill(profile: IProfile) {
 
   const 이름Inputs = qAll<HTMLInputElement>("input[data-id='oacx_name']");
   for (const 이름Input of 이름Inputs) {
-    이름Input.value = profile.이름;
-    triggerEvent(이름Input);
+    if (!이름Input.readOnly) {
+      이름Input.value = profile.이름;
+      triggerEvent(이름Input);
+    }
   }
 
   const 생년월일Inputs = qAll<HTMLInputElement>("input[data-id='oacx_birth']");
   for (const 생년월일Input of 생년월일Inputs) {
-    생년월일Input.value = profile.생년월일;
-    triggerEvent(생년월일Input);
+    if (!생년월일Input.readOnly) {
+      생년월일Input.value = profile.생년월일;
+      triggerEvent(생년월일Input);
+    }
   }
 
   const 주민번호앞Inputs = qAll<HTMLInputElement>("input[data-id='oacx_num1']");
   for (const 주민번호앞Input of 주민번호앞Inputs) {
-    주민번호앞Input.value = profile.주민번호.앞자리;
-    triggerEvent(주민번호앞Input);
+    if (!주민번호앞Input.readOnly) {
+      주민번호앞Input.value = profile.주민번호.앞자리;
+      triggerEvent(주민번호앞Input);
+    }
   }
 
   const 주민번호뒤Inputs = qAll<HTMLInputElement>("input[data-id='oacx_num2']");
   for (const 주민번호뒤Input of 주민번호뒤Inputs) {
-    주민번호뒤Input.value = profile.주민번호.성별숫자 ?? "";
-    triggerEvent(주민번호뒤Input);
+    if (!주민번호뒤Input.readOnly) {
+      주민번호뒤Input.value = profile.주민번호.성별숫자 ?? "";
+      triggerEvent(주민번호뒤Input);
+    }
   }
 
   const 통신사Selects = qAll<HTMLSelectElement>("select[data-id='oacx_phone0']");

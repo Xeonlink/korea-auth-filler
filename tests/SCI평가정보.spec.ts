@@ -5,7 +5,9 @@ import { RawProfile } from "@/utils/type";
 import { Page } from "@playwright/test";
 
 const goto대전시_SCI평가정보 = async (page: Page) => {
-  await page.goto("https://www.daejeon.go.kr/integ/integNonmemberLoginProc.do?siteCd=drh&rtUrl=");
+  await page.goto("https://www.daejeon.go.kr/integ/integNonmemberLoginProc.do?siteCd=drh&rtUrl=", {
+    waitUntil: "networkidle",
+  });
   const pagePromise = page.context().waitForEvent("page");
   await page.getByRole("link", { name: "인증하기" }).first().click();
   const newPage = await pagePromise;
@@ -13,7 +15,9 @@ const goto대전시_SCI평가정보 = async (page: Page) => {
 };
 
 const _goto롯데홈쇼핑_회원가입 = async (page: Page) => {
-  await page.goto("https://www.lotteimall.com/member/regist/forward.MemberRegist.lotte");
+  await page.goto("https://www.lotteimall.com/member/regist/forward.MemberRegist.lotte", {
+    waitUntil: "networkidle",
+  });
   const pagePromise = page.context().waitForEvent("page");
   await page.locator("#info_chk").check();
   await page.locator(`button[onclick="fn_cert('auth');"]`).click();

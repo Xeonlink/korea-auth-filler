@@ -5,7 +5,9 @@ import { Profile } from "@/utils/Profile";
 import { Page } from "@playwright/test";
 
 async function goto한국모바일인증(page: Page) {
-  await page.goto("https://state.gwd.go.kr/portal/minwon/epeople/counsel");
+  await page.goto("https://state.gwd.go.kr/portal/minwon/epeople/counsel", {
+    waitUntil: "networkidle",
+  });
   const pagePromise = page.context().waitForEvent("page");
   await page.frameLocator(`iframe[title="민원상담신청"]`).locator("a.be_03").click();
   const newPage = await pagePromise;

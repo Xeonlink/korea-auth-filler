@@ -4,7 +4,9 @@ import { carrier, way } from "@/utils/constants";
 import { Profile } from "@/utils/Profile";
 
 const goto_NICE평가정보 = async (page: Page) => {
-  await page.goto("https://www.seoul.go.kr/member/userlogin/loginCheck.do");
+  await page.goto("https://www.seoul.go.kr/member/userlogin/loginCheck.do", {
+    waitUntil: "networkidle",
+  });
   await page.getByRole("link", { name: "본인확인 로그인" }).click();
   const pagePromise = page.context().waitForEvent("page");
   await page.locator(`button[onclick="setPhoneBase('PHONE','');"]`).click();

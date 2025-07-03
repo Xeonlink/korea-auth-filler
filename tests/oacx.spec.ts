@@ -12,6 +12,9 @@ test("normal iframe", async ({ page, extensionId }) => {
 
   await page.goto(
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&menuCd=index3",
+    {
+      waitUntil: "networkidle",
+    },
   );
   await page.getByRole("link", { name: "간편인증", exact: true }).click();
   const frameLocator = page.frameLocator(`iframe[name="simple_iframeView"]`);
@@ -49,7 +52,7 @@ test("normal iframe", async ({ page, extensionId }) => {
 
   // 통신사PASS
   {
-    await frameLocator.getByText("통신사PASS").click();
+    await frameLocator.locator(".provider-list li", { hasText: "통신사PASS" }).click();
     const 이름Input = frameLocator.locator(`input[data-id="oacx_name"]`);
     {
       await expect(이름Input).toBeVisible();
@@ -91,7 +94,9 @@ test("old embeded", async ({ page, extensionId }) => {
     way: way.SMS,
   });
 
-  await page.goto("https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do");
+  await page.goto("https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do", {
+    waitUntil: "networkidle",
+  });
   await page.getByRole("button", { name: "간편인증" }).click();
   await page.waitForSelector("#oacxEmbededContents");
   await page.waitForTimeout(1000 * 3);
@@ -226,7 +231,9 @@ test("raon", async ({ page, extensionId }) => {
     way: way.SMS,
   });
 
-  await page.goto("https://www.seoul.go.kr/member/userlogin/loginCheck.do");
+  await page.goto("https://www.seoul.go.kr/member/userlogin/loginCheck.do", {
+    waitUntil: "networkidle",
+  });
   await page.getByRole("link", { name: "본인확인 로그인" }).click();
   const pagePromise = page.context().waitForEvent("page");
   await page.locator(`button[onclick="getCardMin('CARDMIN','');"]`).click();

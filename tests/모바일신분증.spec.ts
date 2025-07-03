@@ -8,7 +8,9 @@ test("새 창에 열기", async ({ page, context, extensionId }) => {
   await popup.addProfile(rawProfile);
   await popup.selectProfile(0);
 
-  await page.goto("https://state.gwd.go.kr/portal/minwon/epeople/counsel");
+  await page.goto("https://state.gwd.go.kr/portal/minwon/epeople/counsel", {
+    waitUntil: "networkidle",
+  });
   const pagePromise = context.waitForEvent("page");
   await page.frameLocator(`iframe[title="민원상담신청"]`).locator("a.be_06").click();
   page = await pagePromise;
@@ -39,9 +41,12 @@ test("iframe", async ({ page, extensionId }) => {
 
   await page.goto(
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&initPage=agitxLogin",
+    {
+      waitUntil: "networkidle",
+    },
   );
-  await page.getByRole("button", { name: "모바일신분증" }).first().click();
-  await page.getByRole("button", { name: "모바일신분증" }).last().click();
+  await page.locator("#mf_txppWframe_anchor16").click();
+  await page.locator("#mf_txppWframe_anchor24").click();
   const frameLocator = page.frameLocator("iframe[title='모바일신분증 인증']");
   const profile = new Profile(rawProfile);
   const 이름Input = frameLocator.locator("input[name='name']");

@@ -4,7 +4,9 @@ import { Page } from "@playwright/test";
 import { expect, setProfileToUse, test } from ".";
 
 const goto_NHN_KCP = async (page: Page) => {
-  await page.goto("https://www.goldenbrown.co.kr/_api/_nhnkcp/kcpcert_api/sample/make_hash.php");
+  await page.goto("https://www.goldenbrown.co.kr/_api/_nhnkcp/kcpcert_api/sample/make_hash.php", {
+    waitUntil: "networkidle",
+  });
   await page.getByRole("link", { name: "hash 생성요청" }).click();
   const pagePromise = page.context().waitForEvent("page");
   await page.locator(`input[value="인증요청"]`).click();

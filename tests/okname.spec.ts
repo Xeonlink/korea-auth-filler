@@ -4,7 +4,9 @@ import { expect, setProfileToUse, test } from ".";
 import { Profile } from "@/utils/Profile";
 
 const goto_okname = async (page: Page) => {
-  await page.goto("https://www.onepass.go.kr/membership/find/id");
+  await page.goto("https://www.onepass.go.kr/membership/find/id", {
+    waitUntil: "networkidle",
+  });
   const pagePromise = page.context().waitForEvent("page");
   await page.getByRole("link", { name: "휴대폰 인증" }).click();
   const newPage = await pagePromise;

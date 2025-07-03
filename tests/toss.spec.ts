@@ -5,7 +5,9 @@ import { way } from "@/utils/constants";
 import { Profile } from "@/utils/Profile";
 
 const goto_toss = async (page: Page) => {
-  await page.goto("https://www.onepass.go.kr/membership/find/id");
+  await page.goto("https://www.onepass.go.kr/membership/find/id", {
+    waitUntil: "networkidle",
+  });
   const pagePromise = page.context().waitForEvent("page");
   await page.getByRole("link", { name: "토스인증" }).click();
   const newPage = await pagePromise;
