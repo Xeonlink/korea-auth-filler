@@ -19,10 +19,10 @@ test.describe("from 대전시", () => {
       await page.expectSmsAuthPage("MNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect주민번호앞자리Filled();
-      await page.expect주민번호성별Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect주민번호앞자리filled();
+      await page.expect주민번호성별filled();
+      await page.expect전화번호filled();
     });
 
     test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -40,8 +40,8 @@ test.describe("from 대전시", () => {
       await page.expectPassAuthPage("MNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect전화번호filled();
     });
 
     test("QR", async ({ popupPage, gate, mockRawProfile }) => {
@@ -78,10 +78,10 @@ test.describe("from 대전시", () => {
       await page.expectSmsAuthPage("MVNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect주민번호앞자리Filled();
-      await page.expect주민번호성별Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect주민번호앞자리filled();
+      await page.expect주민번호성별filled();
+      await page.expect전화번호filled();
     });
 
     test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -100,8 +100,8 @@ test.describe("from 대전시", () => {
       await page.expectPassAuthPage("MVNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect전화번호filled();
     });
 
     test("QR", async ({ popupPage, gate, mockRawProfile }) => {
@@ -139,10 +139,10 @@ test.describe("from 롯데홈쇼핑", () => {
       await page.expectSmsAuthPage("MNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect주민번호앞자리Filled();
-      await page.expect주민번호성별Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect주민번호앞자리filled();
+      await page.expect주민번호성별filled();
+      await page.expect전화번호filled();
     });
 
     test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -160,8 +160,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await page.expectPassAuthPage("MNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect전화번호filled();
     });
 
     test("QR", async ({ popupPage, gate, mockRawProfile }) => {
@@ -198,10 +198,10 @@ test.describe("from 롯데홈쇼핑", () => {
       await page.expectSmsAuthPage("MVNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect주민번호앞자리Filled();
-      await page.expect주민번호성별Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect주민번호앞자리filled();
+      await page.expect주민번호성별filled();
+      await page.expect전화번호filled();
     });
 
     test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -220,8 +220,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await page.expectPassAuthPage("MVNO");
 
       await page.prepare(rawProfile);
-      await page.expect이름Filled();
-      await page.expect전화번호Filled();
+      await page.expect이름filled();
+      await page.expect전화번호filled();
     });
 
     test("QR", async ({ popupPage, gate, mockRawProfile }) => {

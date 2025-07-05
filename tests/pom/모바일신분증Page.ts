@@ -2,7 +2,7 @@ import { expect, Locator } from "@playwright/test";
 import { BaseAuthPage } from "./base";
 
 export class 모바일신분증Page extends BaseAuthPage {
-  public async expect이름Filled() {
+  public async expect이름filled() {
     expect(this.profile).toBeDefined();
 
     const 이름Input1 = this.root.locator("input[name='name']");
@@ -14,7 +14,7 @@ export class 모바일신분증Page extends BaseAuthPage {
     }
   }
 
-  public async expect전화번호앞자리Filled() {
+  public async expect전화번호앞자리filled() {
     expect(this.profile).toBeDefined();
 
     const 전화번호앞자리Select = this.root.locator("select[data-id='phone1']");
@@ -24,7 +24,7 @@ export class 모바일신분증Page extends BaseAuthPage {
     }
   }
 
-  public async expect전화번호뒷자리Filled() {
+  public async expect전화번호뒷자리filled() {
     expect(this.profile).toBeDefined();
 
     const 전화번호뒷자리Input = this.root.locator("input[data-id='phone2']");
@@ -34,7 +34,7 @@ export class 모바일신분증Page extends BaseAuthPage {
     }
   }
 
-  public async expect전화번호Filled() {
+  public async expect전화번호filled() {
     expect(this.profile).toBeDefined();
 
     const 전화번호Input = this.root.locator("input[name='telno']");

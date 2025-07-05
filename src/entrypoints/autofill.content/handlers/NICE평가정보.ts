@@ -87,6 +87,11 @@ export const NICE평가정보3: Handler = {
       전화번호Input.value = profile.전화번호.전체;
       triggerEvent(전화번호Input);
     }
+
+    const 보안문자Input = q<HTMLInputElement>("#captchaAnswer");
+    if (보안문자Input) {
+      보안문자Input.focus();
+    }
   },
 };
 
@@ -104,7 +109,7 @@ export const NICE평가정보4: Handler = {
       triggerEvent(이름Input);
     }
 
-    const 제출버튼 = q<HTMLButtonElement>("#btnSubmit");
+    const 제출버튼 = q<HTMLButtonElement>(".btn_pass.btnUserName");
     if (제출버튼) {
       제출버튼.click();
     }
@@ -125,6 +130,11 @@ export const NICE평가정보4: Handler = {
     if (주민번호뒷자리Input) {
       주민번호뒷자리Input.value = profile.주민번호.성별숫자 ?? "";
       triggerEvent(주민번호뒷자리Input);
+    }
+
+    const 보안문자Input = q<HTMLInputElement>("#captchaAnswer");
+    if (보안문자Input) {
+      보안문자Input.focus();
     }
   },
 };

@@ -16,8 +16,8 @@ test("새 창에 열기", async ({ popupPage, gate, mockRawProfile }) => {
 
   const page = await gate.강원도Login.open모바일신분증();
   await page.prepare(rawProfile);
-  await page.expect이름Filled();
-  await page.expect전화번호Filled();
+  await page.expect이름filled();
+  await page.expect전화번호filled();
   await page.expect모든동의Checked();
 });
 
@@ -35,8 +35,8 @@ test("iframe", async ({ popupPage, gate, mockRawProfile }) => {
 
   const page = await gate.홈택스Login.open모바일신분증();
   await page.prepare(rawProfile);
-  await page.expect이름Filled();
-  await page.expect전화번호Filled();
+  await page.expect이름filled();
+  await page.expect전화번호filled();
   await page.expect모든동의Checked();
 });
 
@@ -54,8 +54,8 @@ test("embedded", async ({ popupPage, gate, mockRawProfile }) => {
 
   const page = await gate.고용24Login.open모바일신분증();
   await page.prepare(rawProfile);
-  await page.expect이름Filled();
-  await page.expect전화번호앞자리Filled();
-  await page.expect전화번호뒷자리Filled();
+  await page.expect이름filled();
+  await page.expect전화번호앞자리filled();
+  await page.expect전화번호뒷자리filled();
   await page.expect모든동의Checked();
 });

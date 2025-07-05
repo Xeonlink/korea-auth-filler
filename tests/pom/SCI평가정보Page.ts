@@ -20,7 +20,7 @@ export class SCI평가정보Page extends BaseAuthPage<Page> {
     );
   }
 
-  public async expect이름Filled() {
+  public async expect이름filled() {
     expect(this.profile).toBeDefined();
 
     const 이름Input = this.root.getByPlaceholder("이름");
@@ -30,7 +30,7 @@ export class SCI평가정보Page extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect주민번호앞자리Filled() {
+  public async expect주민번호앞자리filled() {
     expect(this.profile).toBeDefined();
 
     const 주민번호앞자리Input = this.root.getByPlaceholder("생년월일 6자리");
@@ -40,7 +40,7 @@ export class SCI평가정보Page extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect주민번호성별Filled() {
+  public async expect주민번호성별filled() {
     expect(this.profile).toBeDefined();
 
     const 주민번호성별Input = this.root.locator(".myNum.myNum2");
@@ -50,7 +50,7 @@ export class SCI평가정보Page extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect전화번호Filled() {
+  public async expect전화번호filled() {
     expect(this.profile).toBeDefined();
 
     const 전화번호Input = this.root.getByPlaceholder("휴대폰번호");

@@ -18,10 +18,10 @@ test.describe("from 디지털원패스", () => {
     await page.expectSmsAuthPage();
 
     await page.prepare(rawProfile);
-    await page.expect이름Filled();
-    await page.expect주민번호앞자리Filled();
-    await page.expect주민번호성별Filled();
-    await page.expect전화번호Filled();
+    await page.expect이름filled();
+    await page.expect주민번호앞자리filled();
+    await page.expect주민번호성별filled();
+    await page.expect전화번호filled();
   });
 
   test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -39,8 +39,8 @@ test.describe("from 디지털원패스", () => {
     await page.expectPassAuthPage();
 
     await page.prepare(rawProfile);
-    await page.expect이름Filled();
-    await page.expect전화번호Filled();
+    await page.expect이름filled();
+    await page.expect전화번호filled();
   });
 
   test("QR", async ({ popupPage, gate, mockRawProfile }) => {

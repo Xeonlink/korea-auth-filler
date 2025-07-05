@@ -142,22 +142,17 @@ export async function wait(delay: number) {
   return new Promise((resolve) => setTimeout(resolve, delay));
 }
 
-const EVENT = {
-  CHANGE: {
-    VALUE: new Event("input", { bubbles: true, cancelable: true }),
-    CHECK: new Event("change", { bubbles: true, cancelable: true }),
-  },
-};
-
 /**
  * 이벤트 발송 \
  * 이벤트를 일으키지 않으면 이벤트 리스너가 동작하지 않아서 제대로 입력이 완료되지 않는 경우가 있음.
  * @param target - 이벤트를 발송할 요소
  */
 export function triggerEvent(target: HTMLElement) {
-  target.onchange?.(EVENT.CHANGE.VALUE);
-  target.dispatchEvent(EVENT.CHANGE.VALUE);
-  target.dispatchEvent(EVENT.CHANGE.CHECK);
+  target.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
+  target.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
+  target.dispatchEvent(new Event("keydown", { bubbles: true, cancelable: true }));
+  target.dispatchEvent(new Event("keypress", { bubbles: true, cancelable: true }));
+  target.dispatchEvent(new Event("keyup", { bubbles: true, cancelable: true }));
 }
 
 /**

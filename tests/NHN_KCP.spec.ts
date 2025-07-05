@@ -18,10 +18,10 @@ test.describe("from goldenbrown", () => {
 
     await page.prepare(rawProfile);
     await page.expectSmsAuthPage();
-    await page.expect이름Filled();
-    await page.expect주민번호앞자리Filled();
-    await page.expect주민번호성별Filled();
-    await page.expect전화번호Filled();
+    await page.expect이름filled();
+    await page.expect주민번호앞자리filled();
+    await page.expect주민번호성별filled();
+    await page.expect전화번호filled();
   });
 
   test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -39,8 +39,8 @@ test.describe("from goldenbrown", () => {
 
     await page.prepare(rawProfile);
     await page.expectPassAuthPage();
-    await page.expect이름Filled();
-    await page.expect전화번호Filled();
+    await page.expect이름filled();
+    await page.expect전화번호filled();
   });
 
   test("QR", async ({ popupPage, gate, mockRawProfile }) => {
@@ -76,10 +76,10 @@ test.describe("from cafe24", () => {
 
     await page.prepare(rawProfile);
     await page.expectSmsAuthPage();
-    await page.expect이름Filled();
-    await page.expect주민번호앞자리Filled();
-    await page.expect주민번호성별Filled();
-    await page.expect전화번호Filled();
+    await page.expect이름filled();
+    await page.expect주민번호앞자리filled();
+    await page.expect주민번호성별filled();
+    await page.expect전화번호filled();
   });
 
   test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -97,8 +97,8 @@ test.describe("from cafe24", () => {
 
     await page.prepare(rawProfile);
     await page.expectPassAuthPage();
-    await page.expect이름Filled();
-    await page.expect전화번호Filled();
+    await page.expect이름filled();
+    await page.expect전화번호filled();
   });
 
   test("QR", async ({ popupPage, gate, mockRawProfile }) => {

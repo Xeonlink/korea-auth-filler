@@ -20,7 +20,7 @@ export class NICE평가정보Page extends BaseAuthPage<Page> {
     );
   }
 
-  public async expect이름Filled(strict: boolean = true) {
+  public async expect이름filled(strict: boolean = true) {
     expect(this.profile).toBeDefined();
 
     const 이름Input = this.root.getByPlaceholder("이름");
@@ -32,7 +32,7 @@ export class NICE평가정보Page extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect주민번호앞자리Filled() {
+  public async expect주민번호앞자리filled() {
     expect(this.profile).toBeDefined();
 
     const 주민번호앞자리Input = this.root.getByPlaceholder("생년월일 6자리");
@@ -42,7 +42,7 @@ export class NICE평가정보Page extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect주민번호성별Filled() {
+  public async expect주민번호성별filled() {
     expect(this.profile).toBeDefined();
 
     const 주민번호성별Input = this.root.getByLabel("주민등록번호 뒤 첫번째 자리");
@@ -52,13 +52,21 @@ export class NICE평가정보Page extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect전화번호Filled() {
+  public async expect전화번호filled() {
     expect(this.profile).toBeDefined();
 
     const 전화번호Input = this.root.getByPlaceholder("휴대폰번호");
     {
-      //   await expect(전화번호Input).toBeVisible();
+      await expect(전화번호Input).toBeVisible();
       await expect(전화번호Input).toHaveValue(this.profile!.전화번호.전체);
+    }
+  }
+
+  public async expect보안문자Focuced() {
+    const 보안문자Input = this.root.getByPlaceholder("보안문자 입력");
+    {
+      await expect(보안문자Input).toBeVisible();
+      await expect(보안문자Input).toBeFocused();
     }
   }
 }

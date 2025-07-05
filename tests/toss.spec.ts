@@ -20,8 +20,10 @@ test.describe("from 디지털원패스", () => {
     await page.expect토스인증Page();
 
     await page.prepare(rawProfile);
-    await page.expec이름Filled();
-    await page.expect전화번호Filled();
-    await page.expect생년월일Filled();
+    await page.expec이름filled();
+    await page.expect전화번호filled();
+    await page.expect생년월일filled();
+    await page.expect개인정보동의checked();
+    await page.expect인증하기active();
   });
 });

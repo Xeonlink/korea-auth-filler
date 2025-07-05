@@ -17,7 +17,7 @@ export class OKnamePage extends BaseAuthPage<Page> {
     await expect(this.root.locator("section.certifyWrap")).toBeVisible();
   }
 
-  public async expect이름Filled() {
+  public async expect이름filled() {
     expect(this.profile).toBeDefined();
 
     const 이름Input = this.root.getByPlaceholder("성명입력");
@@ -27,7 +27,7 @@ export class OKnamePage extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect주민번호앞자리Filled() {
+  public async expect주민번호앞자리filled() {
     expect(this.profile).toBeDefined();
 
     const 주민번호앞자리Input = this.root.getByTitle("주민등록번호 앞 6자리");
@@ -37,7 +37,7 @@ export class OKnamePage extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect주민번호성별Filled() {
+  public async expect주민번호성별filled() {
     expect(this.profile).toBeDefined();
 
     const 주민번호뒷자리Input = this.root.getByTitle("주민등록번호 뒤 첫번째자리");
@@ -47,7 +47,7 @@ export class OKnamePage extends BaseAuthPage<Page> {
     }
   }
 
-  public async expect전화번호Filled() {
+  public async expect전화번호filled() {
     expect(this.profile).toBeDefined();
 
     const 전화번호Input = this.root.getByPlaceholder("숫자만 입력");
