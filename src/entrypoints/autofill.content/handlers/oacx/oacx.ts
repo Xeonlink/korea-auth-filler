@@ -145,6 +145,12 @@ function fill(profile: IProfile) {
     triggerEvent(인증방법Input);
   }
 
+  // const 서비스동의Inputs = qAll<HTMLInputElement>(".agree dd>ul>li>input");
+  // for (const 서비스동의Input of 서비스동의Inputs) {
+  //   서비스동의Input.checked = true;
+  //   triggerEvent(서비스동의Input);
+  // }
+
   const 전체동의Input = q<HTMLInputElement>("#totalAgree");
   if (전체동의Input) {
     전체동의Input.checked = true;

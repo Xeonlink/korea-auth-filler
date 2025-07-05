@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { CarrierCode, GenderCode, IsForeigner, WayCode } from "./type";
-// import dayjs from "dayjs";
 
 /**
  * 전화번호 하이픈 처리

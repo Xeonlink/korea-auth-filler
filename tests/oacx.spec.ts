@@ -1,98 +1,59 @@
 import { carrier, way } from "@/utils/constants";
 import { expect } from "@playwright/test";
 import { test } from ".";
-import { setProfileToUse } from ".";
 import { Profile } from "@/utils/Profile";
+import { RawProfile } from "@/utils/type";
 
-test("normal iframe", async ({ page, extensionId }) => {
-  const rawProfile = await setProfileToUse(page, extensionId, {
+/**
+ * 홈택스 간편인증
+ */
+test("normal iframe", async ({ popupPage, _홈택스LoginPage, mockRawProfile }) => {
+  const rawProfile: Omit<RawProfile, "id"> = {
+    ...mockRawProfile,
     carrier: carrier.KT,
     way: way.SMS,
+  };
+  await popupPage.goto();
+  await popupPage.addProfile(rawProfile);
+  await popupPage.selectProfile(0);
+
+  await _홈택스LoginPage.goto();
+  const page = await _홈택스LoginPage.openOACX();
+  const root = await page.unvailRoot();
+  await page.prepare(rawProfile);
+
+  await test.step("드림인증", async () => {
+    await root.locator(".provider-list li", { hasText: "드림인증" }).click();
+    await page.expect이름filled();
+    await page.expect생년원일filled();
+    await page.expect전화번호앞자리filled();
+    await page.expect전화번호뒷자리filled();
+    await page.expect모든동의Checked();
   });
 
-  await page.goto(
-    "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&menuCd=index3",
-    {
-      waitUntil: "networkidle",
-    },
-  );
-  await page.getByRole("link", { name: "간편인증", exact: true }).click();
-  const frameLocator = page.frameLocator(`iframe[name="simple_iframeView"]`);
-  const profile = new Profile(rawProfile);
-
-  // 드림인증
-  {
-    await frameLocator.getByText("드림인증").click();
-    const 이름Input = frameLocator.locator(`input[data-id="oacx_name"]`);
-    {
-      await expect(이름Input).toBeVisible();
-      await expect(이름Input).toHaveValue(profile.이름);
-    }
-    const 생년원일Input = frameLocator.locator(`input[data-id="oacx_birth"]`);
-    {
-      await expect(생년원일Input).toBeVisible();
-      await expect(생년원일Input).toHaveValue(profile.생년월일);
-    }
-    const 전화번호앞자리Select = frameLocator.locator(`select[data-id="oacx_phone1"]`);
-    {
-      await expect(전화번호앞자리Select).toBeVisible();
-      await expect(전화번호앞자리Select).toHaveValue(profile.전화번호.앞3자리);
-    }
-    const 전화번호뒷자리Input = frameLocator.locator(`input[data-id="oacx_phone2"]`);
-    {
-      await expect(전화번호뒷자리Input).toBeVisible();
-      await expect(전화번호뒷자리Input).toHaveValue(profile.전화번호.뒷8자리);
-    }
-    const 동의Inputs = await frameLocator.locator(`.agree input`).all();
-    for (const 동의Input of 동의Inputs) {
-      await expect(동의Input).toBeVisible();
-      await expect(동의Input).toBeChecked();
-    }
-  }
-
-  // 통신사PASS
-  {
-    await frameLocator.locator(".provider-list li", { hasText: "통신사PASS" }).click();
-    const 이름Input = frameLocator.locator(`input[data-id="oacx_name"]`);
-    {
-      await expect(이름Input).toBeVisible();
-      await expect(이름Input).toHaveValue(profile.이름);
-    }
-    const 생년원일Input = frameLocator.locator(`input[data-id="oacx_birth"]`);
-    {
-      await expect(생년원일Input).toBeVisible();
-      await expect(생년원일Input).toHaveValue(profile.생년월일);
-    }
-    const 통신사Select = frameLocator.locator(`select[data-id="oacx_phone0"]`);
-    {
-      await expect(통신사Select).toBeVisible();
-      await expect(통신사Select).toHaveValue(
-        profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]),
-      );
-    }
-    const 전화번호앞자리Select = frameLocator.locator(`select[data-id="oacx_phone1"]`);
-    {
-      await expect(전화번호앞자리Select).toBeVisible();
-      await expect(전화번호앞자리Select).toHaveValue(profile.전화번호.앞3자리);
-    }
-    const 전화번호뒷자리Input = frameLocator.locator(`input[data-id="oacx_phone2"]`);
-    {
-      await expect(전화번호뒷자리Input).toBeVisible();
-      await expect(전화번호뒷자리Input).toHaveValue(profile.전화번호.뒷8자리);
-    }
-    const 동의Inputs = await frameLocator.locator(`.agree input`).all();
-    for (const 동의Input of 동의Inputs) {
-      await expect(동의Input).toBeVisible();
-      await expect(동의Input).toBeChecked();
-    }
-  }
+  await test.step("통신사PASS", async () => {
+    await root.locator(".provider-list li", { hasText: "통신사PASS" }).click();
+    await page.expect이름filled();
+    await page.expect생년원일filled();
+    await page.expect통신사filled();
+    await page.expect전화번호앞자리filled();
+    await page.expect전화번호뒷자리filled();
+    await page.expect모든동의Checked();
+  });
 });
 
-test("old embeded", async ({ page, extensionId }) => {
-  const rawProfile = await setProfileToUse(page, extensionId, {
+/**
+ * 예비군
+ */
+test("old embeded", async ({ page, popupPage, mockRawProfile }) => {
+  const rawProfile: Omit<RawProfile, "id"> = {
+    ...mockRawProfile,
     carrier: carrier.KT,
     way: way.SMS,
-  });
+  };
+  await popupPage.goto();
+  await popupPage.addProfile(rawProfile);
+  await popupPage.selectProfile(0);
 
   await page.goto("https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do", {
     waitUntil: "networkidle",
@@ -225,43 +186,37 @@ test("old embeded", async ({ page, extensionId }) => {
   }
 });
 
-test("raon", async ({ page, extensionId }) => {
-  const rawProfile = await setProfileToUse(page, extensionId, {
+/**
+ * 서울특별시 평생교육원
+ * - https://www.lllcard.kr/reg/seoul/main/crtfctPage.do
+ */
+// test("new embeded", async ({ page, extensionId }) => {
+//   const rawProfile = await setProfileToUse(page, extensionId, {
+//     carrier: carrier.KT,
+//     way: way.SMS,
+//   });
+
+// });
+
+/**
+ * 서울시 민간인증서
+ */
+test("raon", async ({ popupPage, _서울시LoginPage, mockRawProfile }) => {
+  const rawProfile: Omit<RawProfile, "id"> = {
+    ...mockRawProfile,
     carrier: carrier.KT,
     way: way.SMS,
-  });
+  };
+  await popupPage.goto();
+  await popupPage.addProfile(rawProfile);
+  await popupPage.selectProfile(0);
 
-  await page.goto("https://www.seoul.go.kr/member/userlogin/loginCheck.do", {
-    waitUntil: "networkidle",
-  });
-  await page.getByRole("link", { name: "본인확인 로그인" }).click();
-  const pagePromise = page.context().waitForEvent("page");
-  await page.locator(`button[onclick="getCardMin('CARDMIN','');"]`).click();
-  page = await pagePromise;
+  await _서울시LoginPage.goto();
+  const page = await _서울시LoginPage.openOACX();
+  await page.prepare(rawProfile);
 
-  await page.waitForTimeout(1000 * 3);
-  const profile = new Profile(rawProfile);
-
-  {
-    const 이름Input = page.locator(`input[data-id="oacx_name"]`);
-    {
-      await expect(이름Input).toBeVisible();
-      await expect(이름Input).toHaveValue(profile.이름);
-    }
-    const 생년원일Input = page.locator(`input[data-id="oacx_birth"]`);
-    {
-      await expect(생년원일Input).toBeVisible();
-      await expect(생년원일Input).toHaveValue(profile.생년월일);
-    }
-    const 전화번호Input = page.locator(`input[data-id="oacx_phone2"]`);
-    {
-      const 전화번호 = `${profile.전화번호.앞3자리}-${profile.전화번호.뒷8자리.substring(0, 4)}-${profile.전화번호.뒷8자리.substring(4)}`;
-      await expect(전화번호Input).toBeVisible();
-      await expect(전화번호Input).toHaveValue(전화번호);
-    }
-    const 동의Inputs = await page.locator(`.agree li:not(.hidden) input`).all();
-    for (const 동의Input of 동의Inputs) {
-      await expect(동의Input).toBeChecked();
-    }
-  }
+  await page.expect이름filled();
+  await page.expect생년원일filled();
+  await page.expect전화번호filled();
+  await page.expect모든동의Checked();
 });
