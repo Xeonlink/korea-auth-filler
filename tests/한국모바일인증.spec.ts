@@ -1,8 +1,8 @@
 import { carrier, way } from "@/utils/constants";
-import { mockRawProfile, test } from "./index";
+import { test } from "./index";
 import { RawProfile } from "@/utils/type";
 
-test("SMS", async ({ _강원도LoginPage, popupPage }) => {
+test("SMS", async ({ gate, popupPage, mockRawProfile }) => {
   const rawProfile: Omit<RawProfile, "id"> = {
     ...mockRawProfile,
     carrier: carrier.KT,
@@ -12,9 +12,9 @@ test("SMS", async ({ _강원도LoginPage, popupPage }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await _강원도LoginPage.goto();
+  await gate.강원도Login.goto();
 
-  const page = await _강원도LoginPage.open한국모바일인증();
+  const page = await gate.강원도Login.open한국모바일인증();
   await page.expectSmsAuthPage();
 
   await page.prepare(rawProfile);
@@ -24,7 +24,7 @@ test("SMS", async ({ _강원도LoginPage, popupPage }) => {
   await page.expect전화번호Filled();
 });
 
-test("PASS", async ({ _강원도LoginPage, popupPage }) => {
+test("PASS", async ({ gate, popupPage, mockRawProfile }) => {
   const rawProfile: Omit<RawProfile, "id"> = {
     ...mockRawProfile,
     carrier: carrier.KT,
@@ -34,9 +34,9 @@ test("PASS", async ({ _강원도LoginPage, popupPage }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await _강원도LoginPage.goto();
+  await gate.강원도Login.goto();
 
-  const page = await _강원도LoginPage.open한국모바일인증();
+  const page = await gate.강원도Login.open한국모바일인증();
   await page.expectPassAuthPage();
 
   await page.prepare(rawProfile);
@@ -44,7 +44,7 @@ test("PASS", async ({ _강원도LoginPage, popupPage }) => {
   await page.expect전화번호Filled();
 });
 
-test("QR", async ({ _강원도LoginPage, popupPage }) => {
+test("QR", async ({ gate, popupPage, mockRawProfile }) => {
   const rawProfile: Omit<RawProfile, "id"> = {
     ...mockRawProfile,
     carrier: carrier.KT,
@@ -54,8 +54,8 @@ test("QR", async ({ _강원도LoginPage, popupPage }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await _강원도LoginPage.goto();
+  await gate.강원도Login.goto();
 
-  const page = await _강원도LoginPage.open한국모바일인증();
+  const page = await gate.강원도Login.open한국모바일인증();
   await page.expectQrAuthPage();
 });

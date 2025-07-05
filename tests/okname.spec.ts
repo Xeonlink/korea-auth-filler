@@ -3,7 +3,7 @@ import { test } from ".";
 import { RawProfile } from "@/utils/type";
 
 test.describe("from 디지털원패스", () => {
-  test("SMS", async ({ popupPage, _디지털원패스FindIdPage, mockRawProfile }) => {
+  test("SMS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -13,8 +13,8 @@ test.describe("from 디지털원패스", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _디지털원패스FindIdPage.goto();
-    const page = await _디지털원패스FindIdPage.open_okname();
+    await gate.디지털원패스FindId.goto();
+    const page = await gate.디지털원패스FindId.openOKname();
     await page.expectSmsAuthPage();
 
     await page.prepare(rawProfile);
@@ -24,7 +24,7 @@ test.describe("from 디지털원패스", () => {
     await page.expect전화번호Filled();
   });
 
-  test("PASS", async ({ popupPage, _디지털원패스FindIdPage, mockRawProfile }) => {
+  test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -34,8 +34,8 @@ test.describe("from 디지털원패스", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _디지털원패스FindIdPage.goto();
-    const page = await _디지털원패스FindIdPage.open_okname();
+    await gate.디지털원패스FindId.goto();
+    const page = await gate.디지털원패스FindId.openOKname();
     await page.expectPassAuthPage();
 
     await page.prepare(rawProfile);
@@ -43,7 +43,7 @@ test.describe("from 디지털원패스", () => {
     await page.expect전화번호Filled();
   });
 
-  test("QR", async ({ popupPage, _디지털원패스FindIdPage, mockRawProfile }) => {
+  test("QR", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -53,8 +53,8 @@ test.describe("from 디지털원패스", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _디지털원패스FindIdPage.goto();
-    const page = await _디지털원패스FindIdPage.open_okname();
+    await gate.디지털원패스FindId.goto();
+    const page = await gate.디지털원패스FindId.openOKname();
     await page.expectQrAuthPage();
   });
 });

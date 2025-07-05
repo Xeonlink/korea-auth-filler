@@ -1,23 +1,19 @@
 import { Profile } from "@/utils/Profile";
 import type { RawProfile } from "@/utils/type";
 import type { FrameLocator, Locator, Page } from "@playwright/test";
-import { expect } from "@playwright/test";
 
-type WaitUntil = Required<Required<Parameters<Page["goto"]>>[1]>["waitUntil"];
+export type WaitUntil = Required<Required<Parameters<Page["goto"]>>[1]>["waitUntil"];
 
-export class BaseGatePage {
+export abstract class BaseGatePage {
   protected page: Page;
-  protected url: string | null;
+  protected abstract url: string;
 
   public constructor(page: Page) {
     this.page = page;
-    this.url = null;
   }
 
   public async goto(waitUntil: WaitUntil = "networkidle") {
-    expect(this.url).not.toBeNull();
-
-    await this.page.goto(this.url!, {
+    await this.page.goto(this.url, {
       waitUntil,
     });
   }

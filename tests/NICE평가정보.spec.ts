@@ -3,7 +3,7 @@ import { carrier, way } from "@/utils/constants";
 import { RawProfile } from "@/utils/type";
 
 test.describe("from 서울시", () => {
-  test("SMS", async ({ popupPage, _서울시LoginPage, mockRawProfile }) => {
+  test("SMS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -13,8 +13,8 @@ test.describe("from 서울시", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _서울시LoginPage.goto();
-    const page = await _서울시LoginPage.openNICE평가정보();
+    await gate.서울시Login.goto();
+    const page = await gate.서울시Login.openNICE평가정보();
     await page.expectSmsAuthPage();
 
     await page.prepare(rawProfile);
@@ -24,7 +24,7 @@ test.describe("from 서울시", () => {
     await page.expect전화번호Filled();
   });
 
-  test("PASS", async ({ popupPage, _서울시LoginPage, mockRawProfile }) => {
+  test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -34,8 +34,8 @@ test.describe("from 서울시", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _서울시LoginPage.goto();
-    const page = await _서울시LoginPage.openNICE평가정보();
+    await gate.서울시Login.goto();
+    const page = await gate.서울시Login.openNICE평가정보();
     await page.expectPassAuthPage();
 
     await page.prepare(rawProfile);
@@ -43,7 +43,7 @@ test.describe("from 서울시", () => {
     await page.expect전화번호Filled();
   });
 
-  test("QR", async ({ popupPage, _서울시LoginPage, mockRawProfile }) => {
+  test("QR", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -53,8 +53,8 @@ test.describe("from 서울시", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _서울시LoginPage.goto();
-    const page = await _서울시LoginPage.openNICE평가정보();
+    await gate.서울시Login.goto();
+    const page = await gate.서울시Login.openNICE평가정보();
     await page.expectQrAuthPage();
   });
 });

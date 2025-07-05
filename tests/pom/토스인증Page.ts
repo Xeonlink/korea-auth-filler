@@ -1,8 +1,8 @@
 import { BaseAuthPage } from "./base";
 import { expect, Page } from "@playwright/test";
 
-export class TossAuthPage extends BaseAuthPage<Page> {
-  public async expectTossAuthPage() {
+export class 토스인증Page extends BaseAuthPage<Page> {
+  public async expect토스인증Page() {
     await expect(this.root).toHaveURL("https://auth.cert.toss.im/type-info");
   }
 

@@ -3,7 +3,7 @@ import { test } from ".";
 import { RawProfile } from "@/utils/type";
 
 test.describe("from goldenbrown", () => {
-  test("SMS", async ({ popupPage, _GoldenBrownTestPage, mockRawProfile }) => {
+  test("SMS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -13,8 +13,8 @@ test.describe("from goldenbrown", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _GoldenBrownTestPage.goto();
-    const page = await _GoldenBrownTestPage.openNHN_KCP();
+    await gate.goldenBrownTest.goto();
+    const page = await gate.goldenBrownTest.openNHN_KCP();
 
     await page.prepare(rawProfile);
     await page.expectSmsAuthPage();
@@ -24,7 +24,7 @@ test.describe("from goldenbrown", () => {
     await page.expect전화번호Filled();
   });
 
-  test("PASS", async ({ popupPage, _GoldenBrownTestPage, mockRawProfile }) => {
+  test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -34,8 +34,8 @@ test.describe("from goldenbrown", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _GoldenBrownTestPage.goto();
-    const page = await _GoldenBrownTestPage.openNHN_KCP();
+    await gate.goldenBrownTest.goto();
+    const page = await gate.goldenBrownTest.openNHN_KCP();
 
     await page.prepare(rawProfile);
     await page.expectPassAuthPage();
@@ -43,7 +43,7 @@ test.describe("from goldenbrown", () => {
     await page.expect전화번호Filled();
   });
 
-  test("QR", async ({ popupPage, _GoldenBrownTestPage, mockRawProfile }) => {
+  test("QR", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -53,15 +53,15 @@ test.describe("from goldenbrown", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _GoldenBrownTestPage.goto();
+    await gate.goldenBrownTest.goto();
 
-    const page = await _GoldenBrownTestPage.openNHN_KCP();
+    const page = await gate.goldenBrownTest.openNHN_KCP();
     await page.expectQrAuthPage();
   });
 });
 
 test.describe("from cafe24", () => {
-  test("SMS", async ({ popupPage, _Cafe24SignUpPage, mockRawProfile }) => {
+  test("SMS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -71,8 +71,8 @@ test.describe("from cafe24", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _Cafe24SignUpPage.goto();
-    const page = await _Cafe24SignUpPage.openNHN_KCP();
+    await gate.cafe24SignUp.goto();
+    const page = await gate.cafe24SignUp.openNHN_KCP();
 
     await page.prepare(rawProfile);
     await page.expectSmsAuthPage();
@@ -82,7 +82,7 @@ test.describe("from cafe24", () => {
     await page.expect전화번호Filled();
   });
 
-  test("PASS", async ({ popupPage, _Cafe24SignUpPage, mockRawProfile }) => {
+  test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -92,8 +92,8 @@ test.describe("from cafe24", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _Cafe24SignUpPage.goto();
-    const page = await _Cafe24SignUpPage.openNHN_KCP();
+    await gate.cafe24SignUp.goto();
+    const page = await gate.cafe24SignUp.openNHN_KCP();
 
     await page.prepare(rawProfile);
     await page.expectPassAuthPage();
@@ -101,7 +101,7 @@ test.describe("from cafe24", () => {
     await page.expect전화번호Filled();
   });
 
-  test("QR", async ({ popupPage, _Cafe24SignUpPage, mockRawProfile }) => {
+  test("QR", async ({ popupPage, gate, mockRawProfile }) => {
     const rawProfile: Omit<RawProfile, "id"> = {
       ...mockRawProfile,
       carrier: carrier.KT,
@@ -111,9 +111,9 @@ test.describe("from cafe24", () => {
     await popupPage.addProfile(rawProfile);
     await popupPage.selectProfile(0);
 
-    await _Cafe24SignUpPage.goto();
+    await gate.cafe24SignUp.goto();
 
-    const page = await _Cafe24SignUpPage.openNHN_KCP();
+    const page = await gate.cafe24SignUp.openNHN_KCP();
     await page.expectQrAuthPage();
   });
 });

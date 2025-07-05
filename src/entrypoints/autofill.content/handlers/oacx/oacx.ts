@@ -6,12 +6,13 @@ import { waitUntilDomIdle, triggerEvent, q, qAll } from "@/utils/utils";
  * - 홈택스 간편인증
  * - 한전ON : https://online.kepco.co.kr/
  * - 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
- * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
- * - 국가평생교육진흥원 : https://oacx.cb.or.kr:8089/oacx/oacx.jsp
- * - 특허로 : https://www.patent.go.kr/smart/oacx.jsp
  * - 1365자원봉사포털 : https://www.1365.go.kr/vols/cmmn/oacx/popup.do
  * - 숲나들e : https://www.foresttrip.go.kr/com/login.do
  * - 서울특별시 평생교육원 : https://www.lllcard.kr/reg/seoul/main/crtfctPage.do
+ *
+ * **legacy 테스트 주소**
+ * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
+ * - 특허로 : https://www.patent.go.kr/smart/LoginForm.do
  *
  * **Raon 테스트 주소** \
  * Raon에서 제공하는 oacx는 어떤 걸로 인증할지 선택하지 않으면, 각종 약관동의를 눌렀을 때, 인증서를 먼저 선택하라는 팝업이 뜸.
@@ -128,6 +129,7 @@ function fill(profile: IProfile) {
     if (전화번호Input.maxLength < 0) {
       전화번호Input.setAttribute("maxlength", 전화번호Input.placeholder.length.toString());
     }
+
     const start = profile.전화번호.전체.length - 전화번호Input.maxLength;
     전화번호Input.value = profile.전화번호.전체.slice(start < 0 ? 0 : start);
     triggerEvent(전화번호Input);
@@ -145,63 +147,9 @@ function fill(profile: IProfile) {
     triggerEvent(인증방법Input);
   }
 
-  // const 서비스동의Inputs = qAll<HTMLInputElement>(".agree dd>ul>li>input");
-  // for (const 서비스동의Input of 서비스동의Inputs) {
-  //   서비스동의Input.checked = true;
-  //   triggerEvent(서비스동의Input);
-  // }
-
-  const 전체동의Input = q<HTMLInputElement>("#totalAgree");
-  if (전체동의Input) {
-    전체동의Input.checked = true;
-    triggerEvent(전체동의Input);
-  }
-
-  const 약관동의Input = q<HTMLInputElement>("#oacx_total");
-  if (약관동의Input) {
-    약관동의Input.checked = true;
-    triggerEvent(약관동의Input);
-  }
-
-  const 개인정보동의Input = q<HTMLInputElement>("#privacy");
-  if (개인정보동의Input) {
-    개인정보동의Input.checked = true;
-    triggerEvent(개인정보동의Input);
-  }
-
-  const 정책3동의Input = q<HTMLInputElement>("#policy3");
-  if (정책3동의Input) {
-    정책3동의Input.checked = true;
-    triggerEvent(정책3동의Input);
-  }
-
-  const 정책4동의Input = q<HTMLInputElement>("#policy4");
-  if (정책4동의Input) {
-    정책4동의Input.checked = true;
-    triggerEvent(정책4동의Input);
-  }
-
-  const oacxPolicy1Input = q<HTMLInputElement>("#oacx_policy1");
-  if (oacxPolicy1Input) {
-    oacxPolicy1Input.checked = true;
-    triggerEvent(oacxPolicy1Input);
-  }
-
-  const oacxPolicy2Input = q<HTMLInputElement>("#oacx_policy2");
-  if (oacxPolicy2Input) {
-    oacxPolicy2Input.checked = true;
-    triggerEvent(oacxPolicy2Input);
-  }
-
-  const oacxPolicy3Input = q<HTMLInputElement>("#oacx_policy3");
-  if (oacxPolicy3Input) {
-    oacxPolicy3Input.checked = true;
-    triggerEvent(oacxPolicy3Input);
-  }
-
-  const oacxPolicy4Input = q<HTMLInputElement>("#oacx_policy4");
-  if (oacxPolicy4Input) {
-    oacxPolicy4Input.checked = true;
-    triggerEvent(oacxPolicy4Input);
+  const 서비스동의Inputs = qAll<HTMLInputElement>(`:is(.agree, .pcAgree) input[type="checkbox"]`);
+  for (const 서비스동의Input of 서비스동의Inputs) {
+    서비스동의Input.checked = true;
+    triggerEvent(서비스동의Input);
   }
 }
