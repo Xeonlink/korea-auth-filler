@@ -12,6 +12,9 @@ export default defineConfig({
     };
   },
   imports: false,
+  zip: {
+    excludeSources: ["tests/**", "test-results/**", "playwright-report/**", "publish/**"],
+  },
 
   // auto-icons
   autoIcons: {
