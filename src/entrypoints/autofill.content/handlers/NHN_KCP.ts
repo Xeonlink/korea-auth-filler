@@ -3,7 +3,6 @@ import { triggerEvent, q } from "@/utils/utils";
 
 /**
  * 테스트 주소
- * - 스마일패드 회원가입 : http://www.smilepad.co.kr/
  * - 골든브라운 본인인증 샘플페이지 : https://www.goldenbrown.co.kr/_api/_nhnkcp/kcpcert_api/sample/make_hash.php
  * - 카페24 회원가입 : https://user.cafe24.com/join/hosting/general/?page=step1&landTime=1751035289
  */

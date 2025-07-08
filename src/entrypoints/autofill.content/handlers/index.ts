@@ -1,7 +1,9 @@
+import type { Handler } from "@/utils/type";
 import { NHN_KCP1, NHN_KCP2 } from "./NHN_KCP";
 import { NICE평가정보1, NICE평가정보2, NICE평가정보3, NICE평가정보4 } from "./NICE평가정보";
 import { SCI평가정보_v2_1, SCI평가정보_v2_3 } from "./SCI평가정보/v2";
 import { SCI평가정보_v3_1, SCI평가정보_v3_2, SCI평가정보_v3_3 } from "./SCI평가정보/v3";
+// import { YESKEY } from "./YESKEY";
 import { oacx } from "./oacx/oacx";
 import { okname1, okname2 } from "./okname";
 import { toss } from "./toss";
@@ -15,7 +17,7 @@ import { 한국모바일인증_v3_3 } from "./한국모바일인증/v3";
 import { 한국모바일인증_v4_1, 한국모바일인증_v4_2, 한국모바일인증_v4_3 } from "./한국모바일인증/v4";
 import { 한국모바일인증_v5_1, 한국모바일인증_v5_2 } from "./한국모바일인증/v5";
 
-export const handlers = [
+export const handlers: Handler[] = [
   // oacx
   oacx,
   // NICE
@@ -57,4 +59,6 @@ export const handlers = [
   드림시큐리티,
   // 넥스원소프트
   넥스원소프트,
+  // YESKEY
+  // YESKEY,
 ];
