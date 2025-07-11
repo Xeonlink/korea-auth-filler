@@ -134,6 +134,23 @@ export function qById<T extends HTMLElement>(id: string): T | null {
 }
 
 /**
+ * 요소 선택 \
+ * 요소를 선택하는 함수를 반환하는 함수
+ * @param root - 선택할 요소의 루트
+ * @returns 요소 선택 함수
+ */
+export function qRoot<T extends HTMLElement>(root: T) {
+  return {
+    q: <T extends HTMLElement>(selector: string): T | null => {
+      return root.querySelector(selector);
+    },
+    qAll: <T extends HTMLElement>(selector: string): T[] => {
+      return Array.from(root.querySelectorAll(selector));
+    },
+  };
+}
+
+/**
  * 지연 함수
  * @param delay - 지연할 시간
  * @returns 지연 함수

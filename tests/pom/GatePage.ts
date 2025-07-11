@@ -7,6 +7,7 @@ import { 한국모바일인증Page } from "./한국모바일인증Page";
 import { OACXPage } from "./OACXPage";
 import { NICE평가정보Page } from "./NICE평가정보Page";
 import { NHN_KCPPage } from "./NHN_KCPPage";
+import { 넥스원소프트Page } from "./넥스원소프트Page";
 
 type AuthMethod =
   | "OACX"
@@ -17,7 +18,8 @@ type AuthMethod =
   | "토스인증"
   | "SCI평가정보"
   | "OKname"
-  | "NICE평가정보";
+  | "NICE평가정보"
+  | "넥스원소프트";
 
 export const createGate = defineGate<AuthMethod>()({
   강원도Login: {
@@ -190,6 +192,22 @@ export const createGate = defineGate<AuthMethod>()({
         await page.locator(`input[value="인증요청"]`).click();
         const newPage = await pagePromise;
         return new NHN_KCPPage(newPage);
+      },
+    },
+  },
+  국회Signup: {
+    url: "https://member.assembly.go.kr/member/join/joinSelectPage.do",
+    method: {
+      넥스원소프트: async (page) => {
+        await page.getByText("일반회원", { exact: true }).first().click();
+        await page.waitForLoadState("load");
+        await page.getByLabel("모든 약관에 동의합니다.").click();
+        await page.getByRole("link", { name: "동의합니다", exact: true }).click();
+        await page.waitForLoadState("load");
+        await page.getByRole("link", { name: "민간인증서 인증" }).click();
+        await page.waitForLoadState("networkidle");
+        const locator = page.locator(`#dsh-root`);
+        return new 넥스원소프트Page(locator);
       },
     },
   },
