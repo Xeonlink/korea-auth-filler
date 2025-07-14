@@ -12,7 +12,7 @@ export const okname1: Handler = {
     const isStep1 = !!q<HTMLElement>(".step1header");
     return isUrlMatch && isStep1;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const tcInput = q<HTMLInputElement>("input[name='tc']");
     if (tcInput) {
       let tcValue = "";
@@ -51,7 +51,7 @@ export const okname2: Handler = {
     const isStep2 = !!q<HTMLElement>("section.certifyWrap");
     return isUrlMatch && isStep2;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     /**
      * 인증방식 PASS | SMS 일 때
      */

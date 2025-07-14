@@ -10,7 +10,7 @@ export const toss: Handler = {
   isMatch: (url) => {
     return url.includes("https://auth.cert.toss.im/type-info");
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 탭Items = qAll<HTMLLIElement>(".tab__item");
 
     for (const 탭Item of 탭Items) {

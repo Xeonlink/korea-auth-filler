@@ -10,7 +10,7 @@ export const 넥스원소프트: Handler = {
   isMatch: (_) => {
     return q(`#dsh-root form.ns-step2`) !== null;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 이름Input = q<HTMLInputElement>(`#name`);
     if (이름Input) {
       이름Input.value = profile.이름;

@@ -5,7 +5,7 @@ export const SCI평가정보_v2_1: Handler = {
   isMatch: (url) => {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j10\.jsp$/g.test(url);
   },
-  fill: (ctx, profile) => {
+  fill: async (ctx, profile) => {
     ctx.setInterval(() => {
       const 통신사Input = q<HTMLInputElement>("input[name='cellCorp']");
       if (통신사Input) {
@@ -32,7 +32,7 @@ export const SCI평가정보_v2_3: Handler = {
       url,
     );
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 이름Input = q<HTMLInputElement>("#userName");
     if (이름Input) {
       이름Input.value = profile.이름;

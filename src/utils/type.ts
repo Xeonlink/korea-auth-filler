@@ -55,5 +55,5 @@ export interface IProfile {
 
 export type Handler = {
   isMatch: (url: string) => boolean;
-  fill: (ctx: ContentScriptContext, profile: IProfile) => void;
+  fill: (ctx: ContentScriptContext, profile: IProfile) => Promise<void>;
 };

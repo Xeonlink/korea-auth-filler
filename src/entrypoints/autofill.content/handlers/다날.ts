@@ -6,7 +6,7 @@ export const 다날: Handler = {
   isMatch: (url) => {
     return url.includes("https://wauth.teledit.com/");
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 통신사Button = q<HTMLButtonElement>(
       "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "and", "and", "and"]),
     );

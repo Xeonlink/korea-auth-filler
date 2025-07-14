@@ -10,7 +10,7 @@ export const 모바일신분증1: Handler = {
   isMatch: (_) => {
     return q(".mid-crtfc #contents") !== null;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 이름Input = q<HTMLInputElement>("input[name='name']");
     if (이름Input) {
       이름Input.value = profile.이름;
@@ -39,7 +39,7 @@ export const 모바일신분증2: Handler = {
   isMatch: (_) => {
     return q("#mipEmbededContents") !== null;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 이름Input = q<HTMLInputElement>(`input[data-id="name"]`);
     if (이름Input) {
       이름Input.value = profile.이름;

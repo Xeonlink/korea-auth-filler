@@ -1,6 +1,5 @@
 import type { Handler } from "@/utils/type";
 import { triggerEvent, q } from "@/utils/utils";
-import { createWorker, OEM } from "tesseract.js";
 
 /**
  * 테스트 주소
@@ -12,7 +11,7 @@ export const 한국모바일인증_v5_1: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp");
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 폼 = q<HTMLFormElement>("form[name='cplogn']");
     if (폼) {
       const 통신사Input = q<HTMLInputElement>("#reqCommIdStated");
@@ -73,51 +72,7 @@ export const 한국모바일인증_v5_2: Handler = {
     }
 
     const 보안문자Input = q<HTMLInputElement>(".captchaAnswer");
-    console.log(보안문자Input);
     if (보안문자Input) {
-      const chaptchaImg = q<HTMLImageElement>("#simpleCaptchaImg");
-      if (chaptchaImg) {
-        const worker = await createWorker({
-          logger: (m) => console.log(m),
-        });
-
-        // chaptchaImg.addEventListener("load", async () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = chaptchaImg.width;
-        canvas.height = chaptchaImg.height;
-        const context = canvas.getContext("2d");
-        if (context) {
-          context.fillStyle = "white";
-          context.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        context?.drawImage(chaptchaImg, 0, 0);
-        const image = canvas.toDataURL();
-        chaptchaImg.src = image;
-        console.log(image);
-        console.log("loaded");
-        console.log(chaptchaImg.src);
-        await worker.loadLanguage();
-        await worker.initialize();
-        await worker.setParameters({
-          tessedit_char_whitelist: "0123456789",
-          tessedit_ocr_engine_mode: OEM.TESSERACT_ONLY,
-        });
-        // const { data } = await worker.recognize(chaptchaImg);
-        const { data } = await worker.recognize(image);
-        console.log(data.text);
-        보안문자Input.value = data.text.substring(0, data.text.length - 1);
-        triggerEvent(보안문자Input);
-
-        await worker.terminate();
-        // });
-
-        // const reloadImgButton = q<HTMLButtonElement>("#simpleCaptchaBtnReload");
-        // if (reloadImgButton) {
-        //   reloadImgButton.click();
-        // }
-      }
-
       보안문자Input.focus();
     }
   },

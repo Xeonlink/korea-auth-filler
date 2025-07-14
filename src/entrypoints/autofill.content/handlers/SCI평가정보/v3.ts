@@ -12,7 +12,7 @@ export const SCI평가정보_v3_1: Handler = {
   isMatch: (url) => {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/pcc_V\d_j10\.jsp$/g.test(url);
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 통신사 = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
     const 통신사Button = q<HTMLButtonElement>(`button[onclick="submitForm('${통신사}')"]`);
     if (통신사Button) {
@@ -25,7 +25,7 @@ export const SCI평가정보_v3_2: Handler = {
   isMatch: (url) => {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/bokdo(Mv)?\.jsp$/g.test(url);
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 인증방식 = profile.map.인증방식(["", "문자(SMS) 인증", "pass 인증", "QR코드 인증"]);
     const 인증방식Button = q<HTMLButtonElement>(`li[aria-label="${인증방식}"] > button`);
     if (!인증방식Button) return;
@@ -49,7 +49,7 @@ export const SCI평가정보_v3_3: Handler = {
       url,
     );
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 이름Input = q<HTMLInputElement>(".userName");
     if (이름Input) {
       이름Input.value = profile.이름;

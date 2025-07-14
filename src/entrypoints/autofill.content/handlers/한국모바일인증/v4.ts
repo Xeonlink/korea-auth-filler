@@ -6,7 +6,7 @@ export const 한국모바일인증_v4_1: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisHp00.jsp");
   },
-  fill: (ctx, profile) => {
+  fill: async (ctx, profile) => {
     ctx.setInterval(() => {
       const test = q<HTMLButtonElement>(".step1header");
       if (!test) {
@@ -45,7 +45,7 @@ export const 한국모바일인증_v4_2: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp");
   },
-  fill: (ctx, profile) => {
+  fill: async (ctx, profile) => {
     ctx.setInterval(() => {
       const 이름Input = q<HTMLInputElement>("#userName");
       if (이름Input) {

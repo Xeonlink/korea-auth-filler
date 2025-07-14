@@ -23,7 +23,7 @@ export const oacx: Handler = {
   isMatch: (_) => {
     return q("#oacxDiv #oacxEmbededContents") !== null;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     let 인증주체Lis: HTMLLIElement[] = [];
 
     // 대부분의 경우 .provider-list 를 사용함

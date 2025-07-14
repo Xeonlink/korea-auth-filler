@@ -10,7 +10,7 @@ export const NHN_KCP1: Handler = {
   isMatch: (url) => {
     return url.includes("https://cert.kcp.co.kr/cert/pc/telcomSelect.jsp");
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 통신사Input = q<HTMLInputElement>("input[name='comm_id']");
     if (통신사Input) {
       통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGU", "SKM", "KTM", "LGM"]);
@@ -42,7 +42,7 @@ export const NHN_KCP2: Handler = {
       "https://cert.kcp.co.kr/cert/mo/pushQRForm.jsp",
     ].some((l) => url.includes(l));
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     /**
      * 인증방식 PASS | SMS 일 때
      */

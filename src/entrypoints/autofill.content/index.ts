@@ -45,7 +45,7 @@ async function main(ctx: ContentScriptContext) {
   while (true) {
     for (const handler of handlers) {
       if (handler.isMatch(window.location.href)) {
-        handler.fill(ctx, new Profile(rawProfile));
+        await handler.fill(ctx, new Profile(rawProfile));
         return;
       }
     }

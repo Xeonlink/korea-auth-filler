@@ -5,7 +5,7 @@ export const 네이버인증: Handler = {
   isMatch: (url) => {
     return ["https://nid.naver.com/"].some((t) => url.includes(t));
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const agreeCheckbox = q<HTMLInputElement>("#chk_agree3Lb");
     if (agreeCheckbox) {
       agreeCheckbox.click();
