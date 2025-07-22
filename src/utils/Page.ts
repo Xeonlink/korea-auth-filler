@@ -2,18 +2,18 @@ import { ContentScriptContext } from "wxt/client";
 import { wait } from "./utils";
 
 interface PageOptions {
-  timeout?: number;
+  wait?: number;
   retry?: number;
 }
 
 export class Page {
   private readonly context: ContentScriptContext;
-  private readonly timeout: number;
+  private readonly wait: number;
   private readonly retry: number;
 
   public constructor(context: ContentScriptContext, pageOptions?: PageOptions) {
     this.context = context;
-    this.timeout = pageOptions?.timeout ?? 50;
+    this.wait = pageOptions?.wait ?? 100;
     this.retry = pageOptions?.retry ?? 20;
   }
 
@@ -23,7 +23,7 @@ export class Page {
       if (element) {
         return element as T;
       }
-      await wait(this.timeout);
+      await wait(this.wait);
     }
     return null;
   }
@@ -34,7 +34,7 @@ export class Page {
       if (elements.length > 0) {
         return Array.from(elements) as T[];
       }
-      await wait(this.timeout);
+      await wait(this.wait);
     }
     return [];
   }
@@ -45,7 +45,7 @@ export class Page {
       if (element) {
         return element as T;
       }
-      await wait(this.timeout);
+      await wait(this.wait);
     }
     return null;
   }

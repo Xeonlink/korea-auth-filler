@@ -261,3 +261,25 @@ export function waitUntilDomIdle(func: () => void, wait: number) {
     characterData: true,
   });
 }
+
+/**
+ * 이미지가 완전히 로드되었는지 확인
+ */
+export function isImageLoaded(image: HTMLImageElement): boolean {
+  return image.complete && image.naturalWidth > 0;
+}
+
+/**
+ * 이미지 로딩 완료를 기다리는 Promise
+ */
+export function waitForImageLoad(image: HTMLImageElement): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (isImageLoaded(image)) {
+      resolve();
+      return;
+    }
+
+    image.addEventListener("load", () => resolve());
+    image.addEventListener("error", () => reject(new Error("Image failed to load")));
+  });
+}

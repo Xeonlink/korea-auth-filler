@@ -1,7 +1,6 @@
+import { solveCaptch } from "@/utils/captcha";
 import type { Handler } from "@/utils/type";
-import { triggerEvent, q } from "@/utils/utils";
-import ort from "onnxruntime-web/wasm";
-import { browser } from "wxt/browser";
+import { triggerEvent, q, waitForImageLoad } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -75,50 +74,18 @@ export const 한국모바일인증_v5_2: Handler = {
 
     const 보안문자Image = q<HTMLImageElement>("#simpleCaptchaImg");
     const 보안문자Input = q<HTMLInputElement>(".captchaAnswer");
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (보안문자Image && 보안문자Input && ctx) {
-      ort.env.wasm.wasmPaths = {
-        wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
-        mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
-      };
-
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, 보안문자Image.width, 보안문자Image.height);
-      ctx.drawImage(보안문자Image, 0, 0, 보안문자Image.width, 보안문자Image.height);
-      const imageData = ctx.getImageData(0, 0, 보안문자Image.width, 보안문자Image.height);
-      const tensor = await ort.Tensor.fromImage(imageData);
-      const url = browser.runtime.getURL("/kmcert.onnx");
-      const session = await ort.InferenceSession.create(url);
-      const result = await session.run({ x: tensor });
-
-      const NUM_CLASSES = 11;
-      const y = Array.from(result.y.data as Float32Array);
-      const seq = Array.from({ length: y.length / NUM_CLASSES })
-        .map(() => y.splice(0, NUM_CLASSES))
-        .map((row) => row.indexOf(Math.max(...row)));
-
-      let out = "";
-      let prev = -1;
-      for (const p of seq) {
-        if (p !== prev && p !== 10) {
-          out += p.toString();
-        }
-        prev = p;
+    if (보안문자Image && 보안문자Input) {
+      await waitForImageLoad(보안문자Image);
+      const captchaText = await solveCaptch("/captcha/kmcert.onnx", 보안문자Image);
+      if (captchaText) {
+        보안문자Input.value = captchaText;
+        triggerEvent(보안문자Input);
       }
-
-      result.y.dispose();
-      session.release();
-      tensor.dispose();
-
-      // 보안문자Input.focus();
-      보안문자Input.value = out;
-      triggerEvent(보안문자Input);
     }
 
-    // const 확인Button = q<HTMLButtonElement>(".btn_confirm");
-    // if (확인Button) {
-    //   확인Button.click();
-    // }
+    const 확인Button = q<HTMLButtonElement>(".btn_confirm");
+    if (확인Button) {
+      확인Button.focus();
+    }
   },
 };
