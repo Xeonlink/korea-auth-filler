@@ -1,6 +1,8 @@
 // import { form } from "@/utils/form";
 import type { Handler } from "@/utils/type";
 import { triggerEvent, q } from "@/utils/utils";
+import ort from "onnxruntime-web";
+import { browser } from "wxt/browser";
 
 /**
  * 테스트 사이트
@@ -89,9 +91,47 @@ export const SCI평가정보_v3_3: Handler = {
       보안문자단계Li.classList.add("on");
     }
 
+    const 보안문자Image = q<HTMLImageElement>("#simpleCaptchaImg");
     const 보안문자Input = q<HTMLInputElement>(".captchaAnswer");
-    if (보안문자Input) {
-      보안문자Input.focus();
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (보안문자Image && 보안문자Input && ctx) {
+      ort.env.wasm.wasmPaths = {
+        wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
+        mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
+      };
+
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, 보안문자Image.width, 보안문자Image.height);
+      ctx.drawImage(보안문자Image, 0, 0, 보안문자Image.width, 보안문자Image.height);
+      const imageData = ctx.getImageData(0, 0, 보안문자Image.width, 보안문자Image.height);
+      const tensor = await ort.Tensor.fromImage(imageData);
+      const url = browser.runtime.getURL("/sci.onnx");
+      const session = await ort.InferenceSession.create(url);
+      const result = await session.run({ x: tensor });
+
+      const y = Array.from(result.y.data as Float32Array);
+      const NUM_CLASSES = 11;
+      const seq = Array.from({ length: y.length / NUM_CLASSES })
+        .map(() => y.splice(0, NUM_CLASSES))
+        .map((row) => row.indexOf(Math.max(...row)));
+
+      let out = "";
+      let prev = -1;
+      for (const p of seq) {
+        if (p !== prev && p !== 10) {
+          out += p.toString();
+        }
+        prev = p;
+      }
+
+      result.y.dispose();
+      session.release();
+      tensor.dispose();
+
+      // 보안문자Input.focus();
+      보안문자Input.value = out;
+      triggerEvent(보안문자Input);
     }
   },
 };

@@ -6,8 +6,8 @@ export const 한국모바일인증_v4_1: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisHp00.jsp");
   },
-  fill: async (ctx, profile) => {
-    ctx.setInterval(() => {
+  fill: async (page, profile) => {
+    page.setInterval(() => {
       const test = q<HTMLButtonElement>(".step1header");
       if (!test) {
         return;
@@ -45,8 +45,8 @@ export const 한국모바일인증_v4_2: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp");
   },
-  fill: async (ctx, profile) => {
-    ctx.setInterval(() => {
+  fill: async (page, profile) => {
+    page.setInterval(() => {
       const 이름Input = q<HTMLInputElement>("#userName");
       if (이름Input) {
         이름Input.value = profile.이름;
@@ -75,8 +75,8 @@ export const 한국모바일인증_v4_3: Handler = {
   isMatch: (url) => {
     return url.includes("https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp");
   },
-  fill: (ctx, profile) => {
-    ctx.setInterval(() => {
+  fill: async (page, profile) => {
+    page.setInterval(() => {
       const 이름Input = q<HTMLInputElement>("#userName");
       if (이름Input) {
         이름Input.value = profile.이름;

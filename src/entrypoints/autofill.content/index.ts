@@ -5,6 +5,7 @@ import type { ContentScriptContext } from "wxt/client";
 import { defineContentScript } from "wxt/sandbox";
 import { handlers } from "./handlers";
 import { Profile } from "@/utils/Profile";
+import { Page } from "@/utils/Page";
 
 export default defineContentScript({
   matches: ["https://*/*"],
@@ -45,7 +46,7 @@ async function main(ctx: ContentScriptContext) {
   while (true) {
     for (const handler of handlers) {
       if (handler.isMatch(window.location.href)) {
-        await handler.fill(ctx, new Profile(rawProfile));
+        await handler.fill(new Page(ctx), new Profile(rawProfile));
         return;
       }
     }

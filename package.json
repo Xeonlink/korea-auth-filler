@@ -12,7 +12,8 @@
     "zip": "wxt zip",
     "postinstall": "wxt prepare",
     "package": "rm -rf .output && wxt build && wxt zip && wxt build -b firefox && wxt zip -b firefox",
-    "test": "playwright test --ui"
+    "test": "playwright test --ui",
+    "tsx": "tsx"
   },
   "keywords": [],
   "author": "",
@@ -57,6 +58,7 @@
     "prettier-plugin-jsxattribute-sort": "^1.0.1",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "tsx": "^4.20.3",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.21.0",
     "wxt": "^0.19.25"

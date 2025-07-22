@@ -11,8 +11,8 @@ export const 드림시큐리티: Handler = {
   isMatch: (url) => {
     return url.includes("https://cert.mobile-ok.com/ptb_mokauth.html");
   },
-  fill: async (ctx, profile) => {
-    ctx.setInterval(() => {
+  fill: async (page, profile) => {
+    page.setInterval(() => {
       const 통신사Button = q<HTMLButtonElement>(
         "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "skmvno", "ktmvno", "lgumvno"]),
       );

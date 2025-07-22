@@ -11,7 +11,7 @@ export const YESKEY: Handler = {
   isMatch: (url) => {
     return url.includes("yeskey.or.kr") && q("#__fincert_root__") !== null;
   },
-  fill: (_, profile) => {
+  fill: async (_, profile) => {
     const 이름Input = q<HTMLInputElement>("#CLOUD_ID_1");
     if (이름Input) {
       이름Input.value = profile.이름;

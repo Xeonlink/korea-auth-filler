@@ -9,6 +9,18 @@ export default defineConfig({
       description: "__MSG_extension_description__",
       default_locale: "ko",
       permissions: ["storage", "contextMenus", "scripting", "activeTab", "tabs"],
+      web_accessible_resources: [
+        {
+          resources: [
+            "kmcert.onnx",
+            "sci.onnx",
+            "nice.onnx",
+            "ort-wasm-simd-threaded.wasm",
+            "ort-wasm-simd-threaded.mjs",
+          ],
+          matches: ["<all_urls>"],
+        },
+      ],
     };
   },
   imports: false,
