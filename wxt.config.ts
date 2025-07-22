@@ -12,9 +12,9 @@ export default defineConfig({
       web_accessible_resources: [
         {
           resources: [
-            "kmcert.onnx",
-            "sci.onnx",
-            "nice.onnx",
+            "captcha/kmcert.onnx",
+            "captcha/sci.onnx",
+            "captcha/nice.onnx",
             "ort-wasm-simd-threaded.wasm",
             "ort-wasm-simd-threaded.mjs",
           ],

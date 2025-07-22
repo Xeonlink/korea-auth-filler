@@ -27,12 +27,16 @@ export const createGate = defineGate<AuthMethod>()({
     method: {
       모바일신분증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
-        await page.frameLocator(`iframe[title="민원상담신청"]`).locator("a.be_06").click();
+        const frame = page.frames()[1]!;
+        await frame.waitForLoadState("networkidle");
+        await frame.locator("a.be_06").click();
         return new 모바일신분증Page(await pagePromise);
       },
       한국모바일인증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
-        await page.frameLocator(`iframe[title="민원상담신청"]`).locator("a.be_03").click();
+        const frame = page.frames()[1]!;
+        await frame.waitForLoadState("networkidle");
+        await frame.locator("a.be_03").click();
         return new 한국모바일인증Page(await pagePromise);
       },
     },

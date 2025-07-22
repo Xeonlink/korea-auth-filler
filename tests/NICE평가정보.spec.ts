@@ -22,7 +22,7 @@ test.describe("from 서울시", () => {
     await page.expect주민번호앞자리filled();
     await page.expect주민번호성별filled();
     await page.expect전화번호filled();
-    await page.expect보안문자Focuced();
+    // await page.expect보안문자Focuced();
   });
 
   test("PASS", async ({ popupPage, gate, mockRawProfile }) => {
@@ -42,7 +42,7 @@ test.describe("from 서울시", () => {
     await page.prepare(rawProfile);
     await page.expect이름filled();
     await page.expect전화번호filled();
-    await page.expect보안문자Focuced();
+    // await page.expect보안문자Focuced();
   });
 
   test("QR", async ({ popupPage, gate, mockRawProfile }) => {

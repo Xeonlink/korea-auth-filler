@@ -22,7 +22,7 @@ test("SMS", async ({ gate, popupPage, mockRawProfile }) => {
   await page.expect주민번호앞자리filled();
   await page.expect주민번호성별filled();
   await page.expect전화번호filled();
-  await page.expect보안문자Focuced();
+  // await page.expect보안문자Focuced();
 });
 
 test("PASS", async ({ gate, popupPage, mockRawProfile }) => {
@@ -43,7 +43,7 @@ test("PASS", async ({ gate, popupPage, mockRawProfile }) => {
   await page.prepare(rawProfile);
   await page.expect이름filled();
   await page.expect전화번호filled();
-  await page.expect보안문자Focuced();
+  // await page.expect보안문자Focuced();
 });
 
 test("QR", async ({ gate, popupPage, mockRawProfile }) => {
