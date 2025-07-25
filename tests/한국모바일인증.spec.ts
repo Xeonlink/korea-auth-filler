@@ -12,9 +12,9 @@ test("SMS", async ({ gate, popupPage, mockRawProfile }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await gate.강원도Login.goto();
+  await gate.ktSignUp.goto();
 
-  const page = await gate.강원도Login.open한국모바일인증();
+  const page = await gate.ktSignUp.open한국모바일인증();
   await page.expectSmsAuthPage();
 
   await page.prepare(rawProfile);
@@ -35,9 +35,9 @@ test("PASS", async ({ gate, popupPage, mockRawProfile }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await gate.강원도Login.goto();
+  await gate.ktSignUp.goto();
 
-  const page = await gate.강원도Login.open한국모바일인증();
+  const page = await gate.ktSignUp.open한국모바일인증();
   await page.expectPassAuthPage();
 
   await page.prepare(rawProfile);
@@ -56,8 +56,8 @@ test("QR", async ({ gate, popupPage, mockRawProfile }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await gate.강원도Login.goto();
+  await gate.ktSignUp.goto();
 
-  const page = await gate.강원도Login.open한국모바일인증();
+  const page = await gate.ktSignUp.open한국모바일인증();
   await page.expectQrAuthPage();
 });

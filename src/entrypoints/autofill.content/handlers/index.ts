@@ -3,7 +3,6 @@ import { NHN_KCP1, NHN_KCP2 } from "./NHN_KCP";
 import { NICE평가정보1, NICE평가정보2, NICE평가정보3, NICE평가정보4 } from "./NICE평가정보";
 import { SCI평가정보_v2_1, SCI평가정보_v2_3 } from "./SCI평가정보/v2";
 import { SCI평가정보_v3_1, SCI평가정보_v3_2, SCI평가정보_v3_3 } from "./SCI평가정보/v3";
-// import { YESKEY } from "./YESKEY";
 import { oacx } from "./oacx/oacx";
 import { okname1, okname2 } from "./okname";
 import { toss } from "./toss";
@@ -16,25 +15,21 @@ import { 한국모바일인증_v2_1, 한국모바일인증_v2_2 } from "./한국
 import { 한국모바일인증_v3_3 } from "./한국모바일인증/v3";
 import { 한국모바일인증_v4_1, 한국모바일인증_v4_2, 한국모바일인증_v4_3 } from "./한국모바일인증/v4";
 import { 한국모바일인증_v5_1, 한국모바일인증_v5_2 } from "./한국모바일인증/v5";
+import { KG모빌리언스 } from "./KG모빌리언스";
 
 export const handlers: Handler[] = [
-  // oacx
   oacx,
-  // NICE
   NICE평가정보1,
   NICE평가정보2,
   NICE평가정보3,
   NICE평가정보4,
-  // SCI
   SCI평가정보_v2_1,
   SCI평가정보_v2_3,
   SCI평가정보_v3_1,
   SCI평가정보_v3_2,
   SCI평가정보_v3_3,
-  // OKname
   okname1,
   okname2,
-  // 한국모바일인증
   한국모바일인증_v2_1,
   한국모바일인증_v2_2,
   한국모바일인증_v4_1,
@@ -43,22 +38,14 @@ export const handlers: Handler[] = [
   한국모바일인증_v5_1,
   한국모바일인증_v5_2,
   한국모바일인증_v3_3,
-  // Toss
   toss,
-  // 네이버인증
   네이버인증,
-  // 다날
   다날,
-  // NHN KCP
   NHN_KCP1,
   NHN_KCP2,
-  // 모바일신분증
   모바일신분증1,
   모바일신분증2,
-  // 드림시큐리티
   드림시큐리티,
-  // 넥스원소프트
   넥스원소프트,
-  // YESKEY
-  // YESKEY,
+  KG모빌리언스,
 ];

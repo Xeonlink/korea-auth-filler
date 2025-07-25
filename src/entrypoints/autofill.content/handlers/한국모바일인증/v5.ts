@@ -5,6 +5,7 @@ import { triggerEvent, q, waitForImageLoad } from "@/utils/utils";
 /**
  * 테스트 주소
  * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
+ * 2. kt 회원가입 : https://idmng.kt.com/identify/personal
  */
 
 // 한국모바일인증 - 통신사 선택 & 약관동의 & 인증방식 선택

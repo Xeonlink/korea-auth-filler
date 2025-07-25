@@ -25,6 +25,7 @@ export class Page {
       }
       await wait(this.wait);
     }
+    console.log("q", selector, "timeout not found");
     return null;
   }
 

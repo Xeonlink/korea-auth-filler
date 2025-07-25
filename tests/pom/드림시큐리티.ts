@@ -45,7 +45,7 @@ export class 드림시큐리티Page extends BaseAuthPage {
     const 생년월일Input = this.root.getByLabel("생년월일 6자리").filter({ visible: true });
     {
       await expect(생년월일Input).toBeVisible();
-      await expect(생년월일Input).toHaveValue(this.profile!.생년월일);
+      await expect(생년월일Input).toHaveValue(this.profile!.생년월일.substring(2));
     }
   }
 

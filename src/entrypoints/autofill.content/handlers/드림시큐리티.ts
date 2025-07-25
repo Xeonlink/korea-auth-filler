@@ -6,6 +6,7 @@ import { triggerEvent } from "@/utils/utils";
  * 테스트 주소
  * 1. mock : https://cert.mobile-ok.com/ptb_mokauth.html
  * 2. h.point 회원가입 : https://www.h-point.co.kr/cu/join/start.nhd
+ * 3. make# 회원가입 : https://www.makeshop.co.kr/newmakeshop/home/create_shop.html
  */
 
 // 드림시큐리티

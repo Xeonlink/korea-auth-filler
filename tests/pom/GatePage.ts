@@ -9,6 +9,7 @@ import { NICE평가정보Page } from "./NICE평가정보Page";
 import { NHN_KCPPage } from "./NHN_KCPPage";
 import { 넥스원소프트Page } from "./넥스원소프트Page";
 import { 드림시큐리티Page } from "./드림시큐리티";
+import { KG모빌리언스Page } from "./KG모빌리언스Page";
 
 type AuthMethod =
   | "OACX"
@@ -21,7 +22,8 @@ type AuthMethod =
   | "OKname"
   | "NICE평가정보"
   | "넥스원소프트"
-  | "드림시큐리티";
+  | "드림시큐리티"
+  | "KG모빌리언스";
 
 export const createGate = defineGate<AuthMethod>()({
   강원도Login: {
@@ -35,11 +37,15 @@ export const createGate = defineGate<AuthMethod>()({
         const newPage = await pagePromise;
         return new 모바일신분증Page(newPage);
       },
+    },
+  },
+  ktSignUp: {
+    url: "https://idmng.kt.com/identify/personal",
+    method: {
       한국모바일인증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
-        const frame = page.frames()[1]!;
-        await frame.waitForLoadState("networkidle");
-        await frame.locator("a.be_03").click();
+        await page.getByRole("button", { name: "PASS 또는 아이핀으로 인증하기" }).click();
+        await page.getByRole("button", { name: "PASS로 인증하기" }).click();
         const newPage = await pagePromise;
         return new 한국모바일인증Page(newPage);
       },
@@ -227,6 +233,31 @@ export const createGate = defineGate<AuthMethod>()({
         await page.getByRole("link", { name: "휴대폰 인증" }).click();
         const newPage = await pagePromise;
         return new 드림시큐리티Page(newPage);
+      },
+    },
+  },
+  make샵SignUp: {
+    url: "https://www.makeshop.co.kr/newmakeshop/home/create_shop.html",
+    method: {
+      드림시큐리티: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("button", { name: "본인인증" }).click();
+        const newPage = await pagePromise;
+        return new 드림시큐리티Page(newPage);
+      },
+    },
+  },
+  야놀자SignUp: {
+    url: "https://accounts.yanolja.com/?service=yanolja",
+    method: {
+      KG모빌리언스: async (page) => {
+        await page.getByRole("button", { name: "이메일로 시작하기" }).click();
+        await page.getByRole("button", { name: "이메일로 가입하기" }).click();
+        await page.getByRole("button", { name: "전체 동의" }).click();
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("button", { name: "본인 인증하기" }).click();
+        const newPage = await pagePromise;
+        return new KG모빌리언스Page(newPage);
       },
     },
   },
