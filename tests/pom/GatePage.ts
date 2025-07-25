@@ -8,6 +8,7 @@ import { OACXPage } from "./OACXPage";
 import { NICE평가정보Page } from "./NICE평가정보Page";
 import { NHN_KCPPage } from "./NHN_KCPPage";
 import { 넥스원소프트Page } from "./넥스원소프트Page";
+import { 드림시큐리티Page } from "./드림시큐리티";
 
 type AuthMethod =
   | "OACX"
@@ -19,7 +20,8 @@ type AuthMethod =
   | "SCI평가정보"
   | "OKname"
   | "NICE평가정보"
-  | "넥스원소프트";
+  | "넥스원소프트"
+  | "드림시큐리티";
 
 export const createGate = defineGate<AuthMethod>()({
   강원도Login: {
@@ -30,14 +32,16 @@ export const createGate = defineGate<AuthMethod>()({
         const frame = page.frames()[1]!;
         await frame.waitForLoadState("networkidle");
         await frame.locator("a.be_06").click();
-        return new 모바일신분증Page(await pagePromise);
+        const newPage = await pagePromise;
+        return new 모바일신분증Page(newPage);
       },
       한국모바일인증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
         const frame = page.frames()[1]!;
         await frame.waitForLoadState("networkidle");
         await frame.locator("a.be_03").click();
-        return new 한국모바일인증Page(await pagePromise);
+        const newPage = await pagePromise;
+        return new 한국모바일인증Page(newPage);
       },
     },
   },
@@ -79,7 +83,7 @@ export const createGate = defineGate<AuthMethod>()({
       },
     },
   },
-  롯데홈쇼핑Signup: {
+  롯데홈쇼핑SignUp: {
     url: "https://www.lotteimall.com/member/regist/forward.MemberRegist.lotte",
     method: {
       SCI평가정보: async (page) => {
@@ -199,7 +203,7 @@ export const createGate = defineGate<AuthMethod>()({
       },
     },
   },
-  국회Signup: {
+  국회SignUp: {
     url: "https://member.assembly.go.kr/member/join/joinSelectPage.do",
     method: {
       넥스원소프트: async (page) => {
@@ -212,6 +216,17 @@ export const createGate = defineGate<AuthMethod>()({
         await page.waitForLoadState("networkidle");
         const locator = page.locator(`#dsh-root`);
         return new 넥스원소프트Page(locator);
+      },
+    },
+  },
+  hPointSignUp: {
+    url: "https://www.h-point.co.kr/cu/join/start.nhd",
+    method: {
+      드림시큐리티: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("link", { name: "휴대폰 인증" }).click();
+        const newPage = await pagePromise;
+        return new 드림시큐리티Page(newPage);
       },
     },
   },

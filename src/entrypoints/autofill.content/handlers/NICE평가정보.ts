@@ -18,7 +18,7 @@ export const NICE평가정보1: Handler = {
   fill: async (_, profile) => {
     const 통신사Input = q<HTMLInputElement>("input[name='selectMobileCo']");
     if (통신사Input) {
-      통신사Input.value = profile.map.통신사(["", "SK", "KT", "LG", "SM", "KM", "LM"]);
+      통신사Input.value = profile.map.통신사("SK", "KT", "LG", "SM", "KM", "LM");
       triggerEvent(통신사Input);
     }
     const 폼Form = q<HTMLFormElement>("#frm");

@@ -37,7 +37,7 @@ export class OACXPage extends BaseAuthPage {
     {
       await expect(통신사Select).toBeVisible();
       await expect(통신사Select).toHaveValue(
-        this.profile!.map.통신사(["", "S", "K", "L", "S", "K", "L"]),
+        this.profile!.map.통신사("S", "K", "L", "S", "K", "L"),
       );
     }
   }

@@ -9,7 +9,7 @@ export const SCI평가정보_v2_1: Handler = {
     page.setInterval(() => {
       const 통신사Input = q<HTMLInputElement>("input[name='cellCorp']");
       if (통신사Input) {
-        통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
+        통신사Input.value = profile.map.통신사("SKT", "KTF", "LGT", "SKM", "KTM", "LGM");
         triggerEvent(통신사Input);
       }
 

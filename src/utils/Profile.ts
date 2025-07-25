@@ -74,7 +74,17 @@ export class Profile implements IProfile {
 
   public get map(): IProfile["map"] {
     return {
-      통신사: (mapper: string[]) => mapper[Number(this.rawProfile.carrier)],
+      통신사: (
+        skt: string,
+        kt: string,
+        lgu: string,
+        sk_nvmo: string,
+        kt_nvmo: string,
+        lgu_nvmo: string,
+      ) => {
+        const mapper = [skt, kt, lgu, sk_nvmo, kt_nvmo, lgu_nvmo];
+        return mapper[Number(this.rawProfile.carrier) - 1];
+      },
       인증방식: (mapper: string[]) => mapper[Number(this.rawProfile.way)],
       성별: (남자: string, 여자: string) => (this.rawProfile.gender === "1" ? 남자 : 여자),
     };

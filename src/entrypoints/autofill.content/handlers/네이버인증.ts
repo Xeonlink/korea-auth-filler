@@ -48,13 +48,13 @@ export const 네이버인증: Handler = {
 
     const 통신사Input = q<HTMLInputElement>("#mobile_cd");
     if (통신사Input) {
-      통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO"]);
+      통신사Input.value = profile.map.통신사("SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO");
       triggerEvent(통신사Input);
     }
 
     if (!profile.통신3사) {
       const 통신사Input = q<HTMLInputElement>(
-        profile.map.통신사(["", "", "", "", "mvno_skLb", "mvno_ktLb", "mvno_lgLb"]),
+        profile.map.통신사("", "", "", "mvno_skLb", "mvno_ktLb", "mvno_lgLb"),
       );
       if (통신사Input) {
         통신사Input.click();
@@ -101,7 +101,7 @@ function NHNCloudPlatform(profile: IProfile) {
   }
 
   const 통신사Button = q<HTMLInputElement>(
-    `a[data-tel="${profile.map.통신사(["", "SKT", "KTF", "LGT", "SKR", "KTR", "LGR"])}"]`,
+    `a[data-tel="${profile.map.통신사("SKT", "KTF", "LGT", "SKR", "KTR", "LGR")}"`,
   );
   if (통신사Button) {
     통신사Button.click();
@@ -120,7 +120,7 @@ function NHNCloudPlatform(profile: IProfile) {
 
   const 통신사Input = q<HTMLInputElement>("#mobile_cd");
   if (통신사Input) {
-    통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO"]);
+    통신사Input.value = profile.map.통신사("SKT", "KTF", "LGT", "MVNO", "MVNO", "MVNO");
     triggerEvent(통신사Input);
   }
 }

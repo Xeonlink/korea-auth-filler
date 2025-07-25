@@ -34,7 +34,7 @@ export const okname1: Handler = {
 
     const 통신사Input = q<HTMLInputElement>("input[name='mbl_tel_cmm_cd']");
     if (통신사Input) {
-      통신사Input.value = profile.map.통신사(["", "01", "02", "03", "04", "05", "06"]);
+      통신사Input.value = profile.map.통신사("01", "02", "03", "04", "05", "06");
       triggerEvent(통신사Input);
     }
 

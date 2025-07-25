@@ -8,7 +8,7 @@ export const 다날: Handler = {
   },
   fill: async (_, profile) => {
     const 통신사Button = q<HTMLButtonElement>(
-      "#agency-" + profile.map.통신사(["", "sk", "kt", "lgu", "and", "and", "and"]),
+      "#agency-" + profile.map.통신사("sk", "kt", "lgu", "and", "and", "and"),
     );
     if (통신사Button) {
       통신사Button.click();
@@ -16,15 +16,14 @@ export const 다날: Handler = {
 
     if (!profile.통신3사) {
       const 통신사Check = q<HTMLInputElement>(
-        profile.map.통신사([
-          "",
+        profile.map.통신사(
           "",
           "",
           "",
           "#layerPopupMvno > div.layer-pop > form > div.pop-con_02 > ul > li.first-item > div.licensee_title > a > label",
           "#layerPopupMvno > div.layer-pop > form > div.pop-con_02 > ul > li:nth-child(2) > div.licensee_title > a > label",
           "#layerPopupMvno > div.layer-pop > form > div.pop-con_02 > ul > li:nth-child(3) > div.licensee_title > a > label",
-        ]),
+        ),
       );
       if (통신사Check) {
         통신사Check.click();

@@ -47,7 +47,14 @@ export interface IProfile {
   외국인: boolean;
   성별: string;
   map: {
-    통신사: (mapper: string[]) => string;
+    통신사: (
+      skt: string,
+      kt: string,
+      lgu: string,
+      sk_mvno: string,
+      kt_mvno: string,
+      lgu_mvno: string,
+    ) => string;
     인증방식: (mapper: string[]) => string;
     성별: (남자: string, 여자: string) => string;
   };

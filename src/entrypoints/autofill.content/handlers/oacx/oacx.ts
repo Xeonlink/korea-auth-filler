@@ -94,7 +94,7 @@ function fill(profile: IProfile) {
 
   const 통신사Selects = qAll<HTMLSelectElement>("select[data-id='oacx_phone0']");
   for (const 통신사Select of 통신사Selects) {
-    통신사Select.value = profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]);
+    통신사Select.value = profile.map.통신사("S", "K", "L", "S", "K", "L");
     triggerEvent(통신사Select);
   }
 
@@ -137,7 +137,7 @@ function fill(profile: IProfile) {
 
   const 통신사Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone']");
   for (const 통신사Input of 통신사Inputs) {
-    통신사Input.value = profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]);
+    통신사Input.value = profile.map.통신사("S", "K", "L", "S", "K", "L");
     triggerEvent(통신사Input);
   }
 

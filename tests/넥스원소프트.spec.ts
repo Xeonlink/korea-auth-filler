@@ -7,8 +7,8 @@ test("normal", async ({ popupPage, gate, mockRawProfile }) => {
   await popupPage.addProfile(rawProfile);
   await popupPage.selectProfile(0);
 
-  await gate.국회Signup.goto();
-  const page = await gate.국회Signup.open넥스원소프트();
+  await gate.국회SignUp.goto();
+  const page = await gate.국회SignUp.open넥스원소프트();
   await page.expectProviderView();
   await page.selectProvider("신한인증서");
   await page.expect채우기View();

@@ -48,7 +48,7 @@ export const 모바일신분증2: Handler = {
 
     const 통신사Select = q<HTMLSelectElement>(`select[data-id="phone0"]`);
     if (통신사Select) {
-      통신사Select.value = profile.map.통신사(["", "S", "K", "L", "S", "K", "L"]);
+      통신사Select.value = profile.map.통신사("S", "K", "L", "S", "K", "L");
       triggerEvent(통신사Select);
     }
 

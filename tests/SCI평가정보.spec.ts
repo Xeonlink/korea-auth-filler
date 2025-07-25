@@ -134,8 +134,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await popupPage.addProfile(rawProfile);
       await popupPage.selectProfile(0);
 
-      await gate.롯데홈쇼핑Signup.goto("domcontentloaded");
-      const page = await gate.롯데홈쇼핑Signup.openSCI평가정보();
+      await gate.롯데홈쇼핑SignUp.goto("domcontentloaded");
+      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
       await page.expectSmsAuthPage("MNO");
 
       await page.prepare(rawProfile);
@@ -155,8 +155,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await popupPage.addProfile(rawProfile);
       await popupPage.selectProfile(0);
 
-      await gate.롯데홈쇼핑Signup.goto("domcontentloaded");
-      const page = await gate.롯데홈쇼핑Signup.openSCI평가정보();
+      await gate.롯데홈쇼핑SignUp.goto("domcontentloaded");
+      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
       await page.expectPassAuthPage("MNO");
 
       await page.prepare(rawProfile);
@@ -175,8 +175,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await popupPage.addProfile(rawProfile);
       await popupPage.selectProfile(0);
 
-      await gate.롯데홈쇼핑Signup.goto("domcontentloaded");
-      const page = await gate.롯데홈쇼핑Signup.openSCI평가정보();
+      await gate.롯데홈쇼핑SignUp.goto("domcontentloaded");
+      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
       await page.expectQrAuthPage("MNO");
     });
   });
@@ -193,8 +193,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await popupPage.addProfile(rawProfile);
       await popupPage.selectProfile(0);
 
-      await gate.롯데홈쇼핑Signup.goto("domcontentloaded");
-      const page = await gate.롯데홈쇼핑Signup.openSCI평가정보();
+      await gate.롯데홈쇼핑SignUp.goto("domcontentloaded");
+      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
       await page.expectSmsAuthPage("MVNO");
 
       await page.prepare(rawProfile);
@@ -215,8 +215,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await popupPage.addProfile(rawProfile);
       await popupPage.selectProfile(0);
 
-      await gate.롯데홈쇼핑Signup.goto("domcontentloaded");
-      const page = await gate.롯데홈쇼핑Signup.openSCI평가정보();
+      await gate.롯데홈쇼핑SignUp.goto("domcontentloaded");
+      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
       await page.expectPassAuthPage("MVNO");
 
       await page.prepare(rawProfile);
@@ -235,8 +235,8 @@ test.describe("from 롯데홈쇼핑", () => {
       await popupPage.addProfile(rawProfile);
       await popupPage.selectProfile(0);
 
-      await gate.롯데홈쇼핑Signup.goto("domcontentloaded");
-      const page = await gate.롯데홈쇼핑Signup.openSCI평가정보();
+      await gate.롯데홈쇼핑SignUp.goto("domcontentloaded");
+      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
       await page.expectQrAuthPage("MVNO");
     });
   });

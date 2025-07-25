@@ -20,7 +20,7 @@ export class Page {
   public async q<T extends HTMLElement>(selector: string): Promise<T | null> {
     for (let i = 0; i < this.retry; i++) {
       const element = document.querySelector(selector);
-      if (element) {
+      if (element && element.checkVisibility()) {
         return element as T;
       }
       await wait(this.wait);
@@ -42,7 +42,7 @@ export class Page {
   public async qById<T extends HTMLElement>(id: string): Promise<T | null> {
     for (let i = 0; i < this.retry; i++) {
       const element = document.getElementById(id);
-      if (element) {
+      if (element && element.checkVisibility()) {
         return element as T;
       }
       await wait(this.wait);

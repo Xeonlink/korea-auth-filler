@@ -11,7 +11,7 @@ export const 한국모바일인증_v3_1: Handler = {
     if (폼) {
       const 통신사Input = q<HTMLInputElement>("#reqCommIdStated");
       if (통신사Input) {
-        통신사Input.value = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
+        통신사Input.value = profile.map.통신사("SKT", "KTF", "LGT", "SKM", "KTM", "LGM");
         triggerEvent(통신사Input);
       }
 

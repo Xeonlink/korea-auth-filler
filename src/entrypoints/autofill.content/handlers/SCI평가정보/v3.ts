@@ -14,7 +14,7 @@ export const SCI평가정보_v3_1: Handler = {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/pcc_V\d_j10\.jsp$/g.test(url);
   },
   fill: async (_, profile) => {
-    const 통신사 = profile.map.통신사(["", "SKT", "KTF", "LGT", "SKM", "KTM", "LGM"]);
+    const 통신사 = profile.map.통신사("SKT", "KTF", "LGT", "SKM", "KTM", "LGM");
     const 통신사Button = q<HTMLButtonElement>(`button[onclick="submitForm('${통신사}')"]`);
     if (통신사Button) {
       통신사Button.click();
