@@ -279,7 +279,83 @@ export function waitForImageLoad(image: HTMLImageElement): Promise<void> {
       return;
     }
 
-    image.addEventListener("load", () => resolve());
-    image.addEventListener("error", () => reject(new Error("Image failed to load")));
+    const ctrl = new AbortController();
+    image.addEventListener(
+      "load",
+      () => {
+        resolve();
+        ctrl.abort();
+      },
+      { once: true, signal: ctrl.signal },
+    );
+    image.addEventListener(
+      "error",
+      () => {
+        reject(new Error("Image failed to load"));
+        ctrl.abort();
+      },
+      { once: true, signal: ctrl.signal },
+    );
   });
+}
+
+/**
+ * 이미지 src가 변경될 때까지 대기
+ * @param image - 이미지 요소
+ * @param oldSrc - 이전 src
+ * @param options - 옵션
+ * @returns 이미지 src가 변경될 때까지 대기
+ */
+export async function waitForSrcChange(
+  image: HTMLImageElement,
+  oldSrc: string,
+  options?: { delay?: number; retry?: number },
+): Promise<void> {
+  const { delay = 50, retry = 100 } = options ?? {};
+  for (let i = 0; i < retry; i++) {
+    if (image.src !== oldSrc) {
+      return;
+    }
+    await wait(delay);
+  }
+  throw new Error("Image src is not changed");
+}
+
+/**
+ * 이미지 data url이 변경될 때까지 대기
+ * @param image - 이미지 요소
+ * @param old_b64 - 이전 data url
+ * @param options - 옵션
+ * @returns 이미지 data url이 변경될 때까지 대기
+ */
+export async function waitForDataUrlChange(
+  image: HTMLImageElement,
+  old_b64: string,
+  options?: { delay?: number; retry?: number },
+): Promise<void> {
+  const { delay = 50, retry = 100 } = options ?? {};
+  for (let i = 0; i < retry; i++) {
+    if (getDataUrl(image) !== old_b64) {
+      return;
+    }
+    await wait(delay);
+  }
+  throw new Error("Image data url is not changed");
+}
+
+/**
+ * 이미지를 data url로 변환
+ * @param image - 이미지 요소
+ * @returns data url
+ */
+export function getDataUrl(image: HTMLImageElement) {
+  const canvas = document.createElement("canvas");
+  canvas.width = image.naturalWidth;
+  canvas.height = image.naturalHeight;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("Failed to get canvas context");
+  }
+  ctx.drawImage(image, 0, 0);
+  return canvas.toDataURL("image/png");
 }

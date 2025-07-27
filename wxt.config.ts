@@ -15,6 +15,7 @@ export default defineConfig({
             "captcha/kmcert.onnx",
             "captcha/sci.onnx",
             "captcha/nice.onnx",
+            "captcha/dream.onnx",
             "ort-wasm-simd-threaded.wasm",
             "ort-wasm-simd-threaded.mjs",
           ],

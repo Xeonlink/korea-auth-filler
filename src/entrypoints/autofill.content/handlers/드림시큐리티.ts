@@ -1,6 +1,7 @@
 import type { Handler, IProfile } from "@/utils/type";
 import type { Page } from "@/utils/Page";
-import { triggerEvent } from "@/utils/utils";
+import { getDataUrl, triggerEvent, waitForDataUrlChange } from "@/utils/utils";
+import { solveCaptch } from "@/utils/captcha";
 
 /**
  * 테스트 주소
@@ -102,9 +103,24 @@ async function fillSMSView(page: Page, profile: IProfile) {
     triggerEvent(전화번호Input);
   }
 
-  const 보안문자Input = await page.q<HTMLInputElement>(`#secureNo_sms`);
-  if (보안문자Input) {
-    보안문자Input.focus();
+  const 보안문자Image = await page.q<HTMLImageElement>(`#sms_01 #simpleCaptchaImg`);
+  const 보안문자ReloadButton = await page.q<HTMLButtonElement>(`#sms_01 #btnSimpleCaptchaReload`);
+  if (보안문자Image && 보안문자ReloadButton) {
+    const old_b64 = getDataUrl(보안문자Image);
+    보안문자ReloadButton.click();
+    await waitForDataUrlChange(보안문자Image, old_b64);
+
+    const captchaText = await solveCaptch("/captcha/dream.onnx", 보안문자Image);
+    const 보안문자Input = await page.q<HTMLInputElement>(`#secureNo_sms`);
+    if (captchaText && 보안문자Input) {
+      보안문자Input.value = captchaText;
+      triggerEvent(보안문자Input);
+    }
+  }
+
+  const 확인Button = await page.q<HTMLButtonElement>(`#sms_01 button.btnSubmit`);
+  if (확인Button) {
+    확인Button.click();
   }
 }
 
@@ -131,8 +147,23 @@ async function fillPASSView(page: Page, profile: IProfile) {
     triggerEvent(전화번호Input);
   }
 
-  const 보안문자Input = await page.q<HTMLInputElement>(`#secureNo_pass`);
-  if (보안문자Input) {
-    보안문자Input.focus();
+  const 보안문자Image = await page.q<HTMLImageElement>(`#pass_01 #simpleCaptchaImg`);
+  const 보안문자ReloadButton = await page.q<HTMLButtonElement>(`#pass_01 #btnSimpleCaptchaReload`);
+  if (보안문자Image && 보안문자ReloadButton) {
+    const old_b64 = getDataUrl(보안문자Image);
+    보안문자ReloadButton.click();
+    await waitForDataUrlChange(보안문자Image, old_b64);
+
+    const captchaText = await solveCaptch("/captcha/dream.onnx", 보안문자Image);
+    const 보안문자Input = await page.q<HTMLInputElement>(`#secureNo_pass`);
+    if (captchaText && 보안문자Input) {
+      보안문자Input.value = captchaText;
+      triggerEvent(보안문자Input);
+    }
+  }
+
+  const 확인Button = await page.q<HTMLButtonElement>(`#pass_01 button.btnSubmit`);
+  if (확인Button) {
+    확인Button.click();
   }
 }
