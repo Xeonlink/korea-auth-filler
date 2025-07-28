@@ -179,7 +179,6 @@ async function fillPASSView(profile: IProfile) {
 
   const 확인Button = q<HTMLButtonElement>(`#pass_01 button.btnSubmit`);
   if (확인Button) {
-    await waitForVisible(확인Button);
     확인Button.click();
   }
 }

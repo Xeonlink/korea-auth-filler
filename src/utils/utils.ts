@@ -381,3 +381,43 @@ export async function waitForVisible(
 
   throw new Error("Element is not visible");
 }
+
+/**
+ * 요소가 존재할 때까지 대기
+ * @param selector - 선택할 요소의 선택자
+ * @param options - 옵션
+ * @returns 요소가 존재할 때까지 대기
+ */
+export async function waitForElement(
+  selector: string,
+  options?: { delay?: number; retry?: number },
+): Promise<void> {
+  const { delay = 50, retry = 100 } = options ?? {};
+  for (let i = 0; i < retry; i++) {
+    if (q(selector) !== null) {
+      return;
+    }
+    await wait(delay);
+  }
+  throw new Error("Element is not found");
+}
+
+/**
+ * 조건이 충족될 때까지 대기
+ * @param checkFn - 조건 함수
+ * @param options - 옵션
+ * @returns 조건이 충족될 때까지 대기
+ */
+export async function waitFor(
+  checkFn: () => boolean,
+  options?: { delay?: number; retry?: number },
+) {
+  const { delay = 50, retry = 100 } = options ?? {};
+  for (let i = 0; i < retry; i++) {
+    if (checkFn()) {
+      return;
+    }
+    await wait(delay);
+  }
+  throw new Error("Condition is not met");
+}

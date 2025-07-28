@@ -21,19 +21,19 @@ export async function solveCaptch(modelPath: PublicPath, image: HTMLImageElement
     wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
     mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
   };
+  const { width, height } = image;
 
   const canvas = document.createElement("canvas");
-  canvas.width = image.naturalWidth;
-  canvas.height = image.naturalHeight;
+  canvas.width = width;
+  canvas.height = height;
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
-
   ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, image.width, image.height);
-  ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
-  const imageData = ctx.getImageData(0, 0, image.naturalWidth, image.naturalHeight);
-  // image.src = canvas.toDataURL();
-  const tensor = await ort.Tensor.fromImage(imageData);
+  ctx.fillRect(0, 0, width, height);
+  ctx.drawImage(image, 0, 0);
+
+  const base64 = canvas.toDataURL();
+  const tensor = await ort.Tensor.fromImage(base64);
   const url = browser.runtime.getURL(modelPath);
   const session = await ort.InferenceSession.create(url);
   const result = await session.run({ x: tensor });
