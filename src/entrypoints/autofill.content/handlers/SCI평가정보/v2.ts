@@ -5,8 +5,8 @@ export const SCI평가정보_v2_1: Handler = {
   isMatch: (url) => {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j10\.jsp$/g.test(url);
   },
-  fill: async (page, profile) => {
-    page.setInterval(() => {
+  fill: async (ctx, profile) => {
+    ctx.setInterval(() => {
       const 통신사Input = q<HTMLInputElement>("input[name='cellCorp']");
       if (통신사Input) {
         통신사Input.value = profile.map.통신사("SKT", "KTF", "LGT", "SKM", "KTM", "LGM");

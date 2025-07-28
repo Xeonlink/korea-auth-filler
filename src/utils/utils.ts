@@ -359,3 +359,25 @@ export function getDataUrl(image: HTMLImageElement) {
   ctx.drawImage(image, 0, 0);
   return canvas.toDataURL("image/png");
 }
+
+/**
+ * 요소가 보이는 상태가 될 때까지 대기
+ * @param element - 요소
+ * @param options - 옵션
+ * @returns 요소가 보이는 상태가 될 때까지 대기
+ */
+export async function waitForVisible(
+  element: HTMLElement,
+  options?: { delay?: number; retry?: number },
+): Promise<void> {
+  const { delay = 50, retry = 100 } = options ?? {};
+
+  for (let i = 0; i < retry; i++) {
+    if (element.checkVisibility()) {
+      return;
+    }
+    await wait(delay);
+  }
+
+  throw new Error("Element is not visible");
+}

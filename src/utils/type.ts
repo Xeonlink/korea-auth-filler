@@ -1,4 +1,4 @@
-import type { Page } from "./Page";
+import type { ContentScriptContext } from "wxt/client";
 
 export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6"; // SKT, KTF, LGT, SKM, KTM, LGM
 export type WayCode = "1" | "2" | "3"; // SMS, PASS, QR
@@ -62,5 +62,5 @@ export interface IProfile {
 
 export type Handler = {
   isMatch: (url: string) => boolean;
-  fill: (page: Page, profile: IProfile) => Promise<void>;
+  fill: (ctx: ContentScriptContext, profile: IProfile) => Promise<void>;
 };
