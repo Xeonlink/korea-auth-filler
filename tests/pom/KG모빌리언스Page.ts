@@ -46,7 +46,7 @@ export class KG모빌리언스Page extends BaseAuthPage<Page> {
     const 주민번호뒷자리Input = this.root.locator("#birthSF");
     {
       await expect(주민번호뒷자리Input).toBeVisible();
-      await expect(주민번호뒷자리Input).toHaveValue(this.profile!.주민번호.성별숫자 ?? "");
+      await expect(주민번호뒷자리Input).toHaveValue(this.profile!.주민번호.성별숫자);
     }
   }
 

@@ -1,4 +1,4 @@
-import type { ContentScriptContext } from "wxt/client";
+import { Page } from "./Page";
 
 export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6"; // SKT, KTF, LGT, SKM, KTM, LGM
 export type WayCode = "1" | "2" | "3"; // SMS, PASS, QR
@@ -29,7 +29,7 @@ export interface IProfile {
   생년월일: string;
   주민번호: {
     앞자리: string;
-    성별숫자: string | null;
+    성별숫자: string;
   };
   전화번호: {
     전체: string;
@@ -62,5 +62,5 @@ export interface IProfile {
 
 export type Handler = {
   isMatch: (url: string) => boolean;
-  fill: (ctx: ContentScriptContext, profile: IProfile) => Promise<void>;
+  fill: (page: Page, profile: IProfile) => Promise<void>;
 };

@@ -46,7 +46,7 @@ export class SCI평가정보Page extends BaseAuthPage<Page> {
     const 주민번호성별Input = this.root.locator(".myNum.myNum2");
     {
       await expect(주민번호성별Input).toBeVisible();
-      await expect(주민번호성별Input).toHaveValue(this.profile!.주민번호.성별숫자 ?? "");
+      await expect(주민번호성별Input).toHaveValue(this.profile!.주민번호.성별숫자);
     }
   }
 

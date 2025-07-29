@@ -16,7 +16,7 @@ function decodeDigitSequence(seq: number[]) {
   return out;
 }
 
-export async function solveCaptch(modelPath: PublicPath, image: HTMLImageElement) {
+export async function solveCaptcha(modelPath: PublicPath, image: HTMLImageElement) {
   ort.env.wasm.wasmPaths = {
     wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
     mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
@@ -27,7 +27,7 @@ export async function solveCaptch(modelPath: PublicPath, image: HTMLImageElement
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext("2d");
-  if (!ctx) return null;
+  if (!ctx) throw new Error("Failed to get canvas context");
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, width, height);
   ctx.drawImage(image, 0, 0);

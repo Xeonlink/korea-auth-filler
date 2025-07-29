@@ -57,7 +57,7 @@ export class 드림시큐리티Page extends BaseAuthPage {
       .filter({ visible: true });
     {
       await expect(주민번호뒷자리Input).toBeVisible();
-      await expect(주민번호뒷자리Input).toHaveValue(this.profile!.주민번호.성별숫자 ?? "");
+      await expect(주민번호뒷자리Input).toHaveValue(this.profile!.주민번호.성별숫자);
     }
   }
 

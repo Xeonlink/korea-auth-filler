@@ -87,7 +87,7 @@ function fill(profile: IProfile) {
   const 주민번호뒤Inputs = qAll<HTMLInputElement>("input[data-id='oacx_num2']");
   for (const 주민번호뒤Input of 주민번호뒤Inputs) {
     if (!주민번호뒤Input.readOnly) {
-      주민번호뒤Input.value = profile.주민번호.성별숫자 ?? "";
+      주민번호뒤Input.value = profile.주민번호.성별숫자;
       triggerEvent(주민번호뒤Input);
     }
   }

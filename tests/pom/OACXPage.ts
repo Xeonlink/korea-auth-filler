@@ -11,7 +11,10 @@ export class OACXPage extends BaseAuthPage {
     expect(this.profile).toBeDefined();
 
     // const 이름Input = this.root.locator(`input[data-id="oacx_name"]`);
-    const 이름Input = this.root.getByTitle("이름").filter({ visible: true });
+    const 이름Input = this.root
+      .getByTitle("이름")
+      .or(this.root.getByTitle("성명 입력"))
+      .filter({ visible: true });
     {
       await expect(이름Input).toBeVisible();
       await expect(이름Input).toHaveValue(this.profile!.이름);
@@ -89,7 +92,7 @@ export class OACXPage extends BaseAuthPage {
     const 주민번호성별Input = this.root.getByTitle("주민등록번호 뒷자리").filter({ visible: true });
     {
       await expect(주민번호성별Input).toBeVisible();
-      await expect(주민번호성별Input).toHaveValue(this.profile!.주민번호.성별숫자 ?? "");
+      await expect(주민번호성별Input).toHaveValue(this.profile!.주민번호.성별숫자);
     }
   }
 

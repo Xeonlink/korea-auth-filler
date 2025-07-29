@@ -43,7 +43,7 @@ export class OKnamePage extends BaseAuthPage<Page> {
     const 주민번호뒷자리Input = this.root.getByTitle("주민등록번호 뒤 첫번째자리");
     {
       await expect(주민번호뒷자리Input).toBeVisible();
-      await expect(주민번호뒷자리Input).toHaveValue(this.profile!.주민번호.성별숫자 ?? "");
+      await expect(주민번호뒷자리Input).toHaveValue(this.profile!.주민번호.성별숫자);
     }
   }
 

@@ -87,7 +87,7 @@ export function get_RRN_GenderNum(birth: string, gender: GenderCode, foreigner: 
   if (birthSub02 === "20" && foreigner === "1") {
     return String(Number(gender) + 6);
   }
-  return null;
+  throw new Error("Invalid birth");
 }
 
 /**

@@ -42,7 +42,7 @@ export class 한국모바일인증Page extends BaseAuthPage<Page> {
     const 주민번호성별Input = this.root.getByLabel("주민등록번호 뒤 첫번째 자리");
     {
       await expect(주민번호성별Input).toBeVisible();
-      await expect(주민번호성별Input).toHaveValue(this.profile!.주민번호.성별숫자 ?? "");
+      await expect(주민번호성별Input).toHaveValue(this.profile!.주민번호.성별숫자);
     }
   }
 
