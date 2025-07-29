@@ -145,11 +145,12 @@ export const NICE평가정보4: Handler = {
     }
 
     const 보안문자Image = q<HTMLImageElement>("#simpleCaptchaImg");
-    const 보안문자Input = q<HTMLInputElement>("#captchaAnswer");
-    if (보안문자Image && 보안문자Input) {
+    if (보안문자Image) {
       await waitForImageLoad(보안문자Image);
+
       const captchaText = await solveCaptch("/captcha/nice.onnx", 보안문자Image);
-      if (captchaText) {
+      const 보안문자Input = q<HTMLInputElement>("#captchaAnswer");
+      if (captchaText && 보안문자Input) {
         보안문자Input.value = captchaText;
         triggerEvent(보안문자Input);
       }

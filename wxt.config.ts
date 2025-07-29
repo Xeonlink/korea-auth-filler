@@ -13,9 +13,11 @@ export default defineConfig({
         {
           resources: [
             "captcha/kmcert.onnx",
+            "captcha/nhnkcp.onnx",
             "captcha/sci.onnx",
             "captcha/nice.onnx",
             "captcha/dream.onnx",
+            "captcha/kgmobilians.onnx",
             "ort-wasm-simd-threaded.wasm",
             "ort-wasm-simd-threaded.mjs",
           ],

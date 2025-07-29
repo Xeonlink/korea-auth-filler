@@ -1,5 +1,6 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { triggerEvent, q, waitForVisible } from "@/utils/utils";
+import { triggerEvent, q, waitForVisible, waitForImageLoad, waitFor } from "@/utils/utils";
+import { solveCaptch } from "@/utils/captcha";
 
 /**
  * 테스트 주소
@@ -48,11 +49,6 @@ export const KG모빌리언스: Handler = {
   },
 };
 
-/**
- * 시작 화면
- * @param page
- * @param profile
- */
 async function fillStartView(profile: IProfile) {
   if (!profile.통신3사) {
     const MVNOLabel = q<HTMLLabelElement>(`label[for="agency-and"]`);
@@ -100,10 +96,23 @@ async function fillPASSView(profile: IProfile) {
     triggerEvent(전화번호Input);
   }
 
-  const 보안문자Input = q<HTMLInputElement>(`#pushCaptchaCfm`);
-  if (보안문자Input) {
-    await waitForVisible(보안문자Input);
-    보안문자Input.focus();
+  await waitFor(() => q<HTMLImageElement>(`#captcha_number img`) !== null);
+  const 보안문자Image = q<HTMLImageElement>(`#captcha_number img`);
+  if (보안문자Image) {
+    await waitForImageLoad(보안문자Image);
+
+    const captchaText = await solveCaptch("/captcha/kgmobilians.onnx", 보안문자Image);
+    const 보안문자Input = q<HTMLInputElement>(`#pushCaptchaCfm`);
+    if (captchaText && 보안문자Input) {
+      await waitForVisible(보안문자Input);
+      보안문자Input.value = captchaText;
+      triggerEvent(보안문자Input);
+    }
+  }
+
+  const 확인Button = q<HTMLButtonElement>(`#pushBtn`);
+  if (확인Button) {
+    확인Button.focus();
   }
 }
 
@@ -136,9 +145,22 @@ async function fillSMSView(profile: IProfile) {
     triggerEvent(전화번호Input);
   }
 
-  const 보안문자Input = q<HTMLInputElement>(`#smsCaptchaCfm`);
-  if (보안문자Input) {
-    await waitForVisible(보안문자Input);
-    보안문자Input.focus();
+  await waitFor(() => q<HTMLImageElement>(`#captcha_number2 img`) !== null);
+  const 보안문자Image = q<HTMLImageElement>(`#captcha_number2 img`);
+  if (보안문자Image) {
+    await waitForImageLoad(보안문자Image);
+
+    const captchaText = await solveCaptch("/captcha/kgmobilians.onnx", 보안문자Image);
+    const 보안문자Input = q<HTMLInputElement>(`#smsCaptchaCfm`);
+    if (captchaText && 보안문자Input) {
+      await waitForVisible(보안문자Input);
+      보안문자Input.value = captchaText;
+      triggerEvent(보안문자Input);
+    }
+  }
+
+  const 확인Button = q<HTMLButtonElement>(`#smsBtn`);
+  if (확인Button) {
+    확인Button.focus();
   }
 }

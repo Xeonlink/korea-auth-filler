@@ -112,7 +112,7 @@ async function fillSMSView(profile: IProfile) {
   }
 
   const 보안문자Image = q<HTMLImageElement>(`#sms_01 #simpleCaptchaImg`);
-  const 보안문자ReloadButton = q<HTMLButtonElement>(`#sms_01 #btnSimpleCaptchaReload`);
+  const 보안문자ReloadButton = q<HTMLButtonElement>(`#sms_01 #simpleCaptchaReBtn`);
   if (보안문자Image && 보안문자ReloadButton) {
     const old_b64 = getDataUrl(보안문자Image);
     await waitForVisible(보안문자ReloadButton);
@@ -130,7 +130,7 @@ async function fillSMSView(profile: IProfile) {
 
   const 확인Button = q<HTMLButtonElement>(`#sms_01 button.btnSubmit`);
   if (확인Button) {
-    확인Button.click();
+    확인Button.focus();
   }
 }
 
@@ -179,6 +179,6 @@ async function fillPASSView(profile: IProfile) {
 
   const 확인Button = q<HTMLButtonElement>(`#pass_01 button.btnSubmit`);
   if (확인Button) {
-    확인Button.click();
+    확인Button.focus();
   }
 }

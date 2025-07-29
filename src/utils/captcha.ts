@@ -21,7 +21,7 @@ export async function solveCaptch(modelPath: PublicPath, image: HTMLImageElement
     wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
     mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
   };
-  const { width, height } = image;
+  const { naturalWidth: width, naturalHeight: height } = image;
 
   const canvas = document.createElement("canvas");
   canvas.width = width;

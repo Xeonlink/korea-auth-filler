@@ -77,6 +77,7 @@ export const 한국모바일인증_v5_2: Handler = {
     const 보안문자Input = q<HTMLInputElement>(".captchaAnswer");
     if (보안문자Image && 보안문자Input) {
       await waitForImageLoad(보안문자Image);
+
       const captchaText = await solveCaptch("/captcha/kmcert.onnx", 보안문자Image);
       if (captchaText) {
         보안문자Input.value = captchaText;

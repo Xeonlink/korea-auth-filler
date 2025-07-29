@@ -1,5 +1,6 @@
+import { solveCaptch } from "@/utils/captcha";
 import type { Handler } from "@/utils/type";
-import { triggerEvent, q } from "@/utils/utils";
+import { triggerEvent, q, waitForImageLoad } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -71,9 +72,16 @@ export const NHN_KCP2: Handler = {
       triggerEvent(전화번호Input);
     }
 
-    const 보안문자Input = q<HTMLInputElement>("#captcha_no");
-    if (보안문자Input) {
-      보안문자Input.focus();
+    const 보안문자Image = q<HTMLImageElement>("#CAPTCHA_CaptchaImage");
+    if (보안문자Image) {
+      await waitForImageLoad(보안문자Image);
+
+      const captchaText = await solveCaptch("/captcha/nhnkcp.onnx", 보안문자Image);
+      const 보안문자Input = q<HTMLInputElement>("#captcha_no");
+      if (captchaText && 보안문자Input) {
+        보안문자Input.value = captchaText;
+        triggerEvent(보안문자Input);
+      }
     }
 
     /**
