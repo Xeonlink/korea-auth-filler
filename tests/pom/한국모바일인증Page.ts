@@ -3,17 +3,30 @@ import { BaseAuthPage } from "./base";
 
 export class 한국모바일인증Page extends BaseAuthPage<Page> {
   public async expectSmsAuthPage() {
-    await expect(this.root).toHaveURL("https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp");
+    await expect(this.root).toHaveURL((url) => {
+      return [
+        "https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
+        "https://evt.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
+      ].some((l) => url.href.includes(l));
+    });
   }
 
   public async expectPassAuthPage() {
-    await expect(this.root).toHaveURL(
-      "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
-    );
+    await expect(this.root).toHaveURL((url) => {
+      return [
+        "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
+        "https://evt.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
+      ].some((l) => url.href.includes(l));
+    });
   }
 
   public async expectQrAuthPage() {
-    await expect(this.root).toHaveURL("https://www.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp");
+    await expect(this.root).toHaveURL((url) => {
+      return [
+        "https://www.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
+        "https://evt.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
+      ].some((l) => url.href.includes(l));
+    });
   }
 
   public async expect이름filled() {

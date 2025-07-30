@@ -261,4 +261,15 @@ export const createGate = defineGate<AuthMethod>()({
       },
     },
   },
+  인터파크티켓_본인인증: {
+    url: "https://member.interpark.com/mypage/enter-identity",
+    method: {
+      한국모바일인증: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("button", { name: "본인 인증" }).click();
+        const newPage = await pagePromise;
+        return new 한국모바일인증Page(newPage);
+      },
+    },
+  },
 });
