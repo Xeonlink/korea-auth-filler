@@ -3,7 +3,7 @@ import { nhnkcp1, nhnkcp2 } from "./nhnkcp";
 import { nice1, nice2, nice3, nice4 } from "./nice";
 import { sci_v2_1, sci_v2_3, sci_v3_1, sci_v3_2, sci_v3_3 } from "./sci";
 import { oacx } from "./oacx";
-import { okname1, okname2 } from "./okname";
+import { kcb1, kcb2 } from "./kcb";
 import { toss } from "./toss";
 import { nexonesoft } from "./nexonesoft";
 import { dream } from "./dream";
@@ -33,8 +33,8 @@ export const handlers: Handler[] = [
   sci_v3_1,
   sci_v3_2,
   sci_v3_3,
-  okname1,
-  okname2,
+  kcb1,
+  kcb2,
   kmcert_v2_1,
   kmcert_v2_2,
   kmcert_v3_1,

@@ -1,5 +1,4 @@
 import type { Handler } from "@/utils/type";
-import { q } from "@/utils/utils";
 
 /**
  * 금융인증서
@@ -8,8 +7,8 @@ import { q } from "@/utils/utils";
  * - 강원도 금융인증서 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
  */
 export const YESKEY: Handler = {
-  isMatch: (url) => {
-    return url.includes("yeskey.or.kr") && q("#__fincert_root__") !== null;
+  isMatch: (page) => {
+    return page.url.href.includes("yeskey.or.kr") && page.q("#__fincert_root__").element !== null;
   },
   fill: async (page, profile) => {
     await page.input("#CLOUD_ID_1").visible().fill(profile.이름);

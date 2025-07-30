@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { q, qAll, waitForElement } from "@/utils/utils";
+import { qAll } from "@/utils/utils";
 import { Page } from "@/utils/Page";
 
 /**
@@ -8,8 +8,8 @@ import { Page } from "@/utils/Page";
  * - 대한민국 국회 회원가입 : https://member.assembly.go.kr/member/join/joinSelectPage.do
  */
 export const nexonesoft: Handler = {
-  isMatch: (_) => {
-    return q(`#dsh-root form.ns-step1`) !== null;
+  isMatch: (page) => {
+    return page.q(`#dsh-root form.ns-step1`).element !== null;
   },
   fill: async (page, profile) => {
     await ready인증주체View(page, profile);
@@ -21,7 +21,7 @@ async function ready인증주체View(page: Page, profile: IProfile) {
 
   for (const anchor of 인증주체Anchor) {
     anchor.addEventListener("click", async () => {
-      await waitForElement(`#dsh-root form.ns-step2`);
+      await page.q(`#dsh-root form.ns-step2`).exists().run();
       await fill인증요청View(page, profile);
     });
   }
@@ -35,7 +35,7 @@ async function fill인증요청View(page: Page, profile: IProfile) {
 
   // ---------------------------------
   await page.q(`#dsh-root button.ns-pre`).on("click", async () => {
-    await waitForElement(`#dsh-root form.ns-step1`);
+    await page.q(`#dsh-root form.ns-step1`).exists().run();
     await ready인증주체View(page, profile);
   });
 }

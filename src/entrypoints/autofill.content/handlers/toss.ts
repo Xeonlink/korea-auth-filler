@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { qAll, qById, waitUntilDomIdle } from "@/utils/utils";
+import { qAll, waitUntilDomIdle } from "@/utils/utils";
 import { Page } from "@/utils/Page";
 
 /**
@@ -8,8 +8,8 @@ import { Page } from "@/utils/Page";
  */
 
 export const toss: Handler = {
-  isMatch: (url) => {
-    return url.includes("https://auth.cert.toss.im/type-info");
+  isMatch: (page) => {
+    return page.url.href.includes("https://auth.cert.toss.im/type-info");
   },
   fill: async (page, profile) => {
     const 탭Items = qAll<HTMLLIElement>(".tab__item");
@@ -28,5 +28,5 @@ async function fill(page: Page, profile: IProfile) {
   await page.input("#text-field-line-1").visible().fill(profile.이름);
   await page.input("#text-field-line-2").visible().fill(profile.전화번호.전체);
   await page.input("#text-field-line-3").visible().fill(profile.생년월일.substring(2));
-  qById("checkbox-circle-:r9:")?.click();
+  page.qById("checkbox-circle-:r9:")?.click();
 }

@@ -8,8 +8,8 @@ import { Page } from "@/utils/Page";
  */
 
 export const kgmobilians: Handler = {
-  isMatch: (url) => {
-    return url.includes("https://auth.mobilians.co.kr/goCashMain.mcash");
+  isMatch: (page) => {
+    return page.url.href.includes("https://auth.mobilians.co.kr/goCashMain.mcash");
   },
   fill: async (page, profile) => {
     await fillStartView(page, profile);
@@ -53,8 +53,10 @@ async function fillPASSView(page: Page, profile: IProfile) {
   await page.input(`#pushName`).visible().fill(profile.이름);
   await page.input(`#pushPhone`).visible().fill(profile.전화번호.전체);
 
-  const 보안문자Image = await page.image(`#captcha_number img`).loaded().run();
-  const captchaText = await solveCaptcha("/captcha/kgmobilians.onnx", 보안문자Image.element!);
+  const captchaText = await page
+    .image(`#captcha_number img`)
+    .loaded()
+    .solveCaptcha("/captcha/kgmobilians.onnx");
   await page.input(`#pushCaptchaCfm`).fill(captchaText);
 
   await page.button(`#pushBtn`).focus();

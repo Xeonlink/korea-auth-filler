@@ -1,5 +1,4 @@
 import type { Handler } from "@/utils/type";
-import { q } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -7,8 +6,8 @@ import { q } from "@/utils/utils";
  * 2. 홈택스 모바일 신분증
  */
 export const 모바일신분증1: Handler = {
-  isMatch: (_) => {
-    return q(".mid-crtfc #contents") !== null;
+  isMatch: (page) => {
+    return page.q(".mid-crtfc #contents").element !== null;
   },
   fill: async (page, profile) => {
     await page.input("input[name='name']").fill(profile.이름);
@@ -22,8 +21,8 @@ export const 모바일신분증1: Handler = {
  * 1. 고용24 -> 정부통합 로그인 -> 모바일신분증
  */
 export const 모바일신분증2: Handler = {
-  isMatch: (_) => {
-    return q("#mipEmbededContents") !== null;
+  isMatch: (page) => {
+    return page.q("#mipEmbededContents").element !== null;
   },
   fill: async (page, profile) => {
     await page.input(`input[data-id="name"]`).fill(profile.이름);

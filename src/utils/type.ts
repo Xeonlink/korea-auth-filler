@@ -61,6 +61,6 @@ export interface IProfile {
 }
 
 export type Handler = {
-  isMatch: (url: string) => boolean;
+  isMatch: (page: Page) => boolean;
   fill: (page: Page, profile: IProfile) => Promise<void>;
 };

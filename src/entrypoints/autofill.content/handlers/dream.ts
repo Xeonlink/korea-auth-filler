@@ -10,8 +10,8 @@ import { Page } from "@/utils/Page";
 
 // 드림시큐리티
 export const dream: Handler = {
-  isMatch: (url) => {
-    return url.includes("https://cert.mobile-ok.com/ptb_mokauth.html");
+  isMatch: (page) => {
+    return page.url.href.includes("https://cert.mobile-ok.com/ptb_mokauth.html");
   },
   fill: async (page, profile) => {
     await fill통신사선택View(page, profile);
@@ -30,12 +30,16 @@ export const dream: Handler = {
 
 async function fill통신사선택View(page: Page, profile: IProfile) {
   const 통신사 = profile.map.통신사("skt", "kt", "lgu", "skt", "kt", "lgu");
-  await page.button(`button[data-telco="${통신사}"][data-mvno="${!profile.통신3사}"]`).click();
+  await page
+    .button(`button[data-telco="${통신사}"][data-mvno="${!profile.통신3사}"]`)
+    .visible()
+    .click();
 }
 
 async function fill인증방식선택View(page: Page, profile: IProfile) {
   await page
     .q(`li[data-sign="${profile.map.인증방식(["", "sms", "pass", "qr"])}"] > button`)
+    .visible()
     .click();
 
   await page.input("#user_agree_checkbox").click();

@@ -8,11 +8,10 @@ import { solveCaptcha } from "@/utils/captcha";
 
 // NICE평가정보
 export const nice1: Handler = {
-  isMatch: (url) => {
-    return [
-      "https://nice.checkplus.co.kr/cert/main/menu",
-      "https://nice.checkplus.co.kr/cert/mobileCert/main",
-    ].some((t) => url.includes(t));
+  isMatch: (page) => {
+    const isHostnameValid = page.url.hostname === "nice.checkplus.co.kr";
+    const isPathnameValid = /\/cert\/(main\/menu|mobileCert\/main)/.test(page.url.pathname);
+    return isHostnameValid && isPathnameValid;
   },
   fill: async (page, profile) => {
     await page
@@ -27,8 +26,8 @@ export const nice1: Handler = {
 
 // 인증방식
 export const nice2: Handler = {
-  isMatch: (url) => {
-    return url.includes("https://nice.checkplus.co.kr/cert/mobileCert/method");
+  isMatch: ({ url }) => {
+    return url.href.includes("https://nice.checkplus.co.kr/cert/mobileCert/method");
   },
   fill: async (page, profile) => {
     await page.input("input[name='mobileCertAgree']").check();
@@ -42,10 +41,8 @@ export const nice2: Handler = {
 
 // SMS인증
 export const nice3: Handler = {
-  isMatch: (url) => {
-    return ["https://nice.checkplus.co.kr/cert/mobileCert/sms/certification"].some((t) =>
-      url.includes(t),
-    );
+  isMatch: ({ url }) => {
+    return url.href.includes("https://nice.checkplus.co.kr/cert/mobileCert/sms/certification");
   },
   fill: async (page, profile) => {
     await page.input("#userName").fill(profile.이름);
@@ -64,10 +61,8 @@ export const nice3: Handler = {
 
 // PASS 인증
 export const nice4: Handler = {
-  isMatch: (url) => {
-    return ["https://nice.checkplus.co.kr/cert/mobileCert/push/certification"].some((t) =>
-      url.includes(t),
-    );
+  isMatch: ({ url }) => {
+    return url.href.includes("https://nice.checkplus.co.kr/cert/mobileCert/push/certification");
   },
   fill: async (page, profile) => {
     await page.input("#userName").fill(profile.이름);

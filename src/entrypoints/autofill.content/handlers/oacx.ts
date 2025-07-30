@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { waitUntilDomIdle, triggerEvent, q, qAll } from "@/utils/utils";
+import { waitUntilDomIdle, triggerEvent, qAll } from "@/utils/utils";
 
 /**
  * **일반 테스트 주소**
@@ -20,8 +20,8 @@ import { waitUntilDomIdle, triggerEvent, q, qAll } from "@/utils/utils";
  * - 삼성서울병원 민간인증서 : https://www.samsunghospital.com/home/member/login.do
  */
 export const oacx: Handler = {
-  isMatch: (_) => {
-    return q("#oacxDiv #oacxEmbededContents") !== null;
+  isMatch: (page) => {
+    return page.q("#oacxDiv #oacxEmbededContents").element !== null;
   },
   fill: async (_, profile) => {
     let 인증주체Lis: HTMLLIElement[] = [];

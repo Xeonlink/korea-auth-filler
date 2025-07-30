@@ -49,7 +49,7 @@ async function main(ctx: ContentScriptContext) {
   while (true) {
     for (const handler of handlers) {
       try {
-        if (handler.isMatch(url.href)) {
+        if (handler.isMatch(page)) {
           await handler.fill(page, new Profile(rawProfile));
           return;
         }

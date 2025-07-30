@@ -2,8 +2,10 @@ import { solveCaptcha } from "@/utils/captcha";
 import type { Handler } from "@/utils/type";
 
 export const sci_v2_1: Handler = {
-  isMatch: (url) => {
-    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j10\.jsp$/g.test(url);
+  isMatch: (page) => {
+    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j10\.jsp$/g.test(
+      page.url.href,
+    );
   },
   fill: async (page, profile) => {
     await page
@@ -21,9 +23,9 @@ export const sci_v2_1: Handler = {
 };
 
 export const sci_v2_3: Handler = {
-  isMatch: (url) => {
+  isMatch: (page) => {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV2\/pcc_V\d_j30_certHp(Mvno)?Ti(App)?01\.jsp$/g.test(
-      url,
+      page.url.href,
     );
   },
   fill: async (page, profile) => {
@@ -42,8 +44,10 @@ export const sci_v2_3: Handler = {
  */
 
 export const sci_v3_1: Handler = {
-  isMatch: (url) => {
-    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/pcc_V\d_j10\.jsp$/g.test(url);
+  isMatch: (page) => {
+    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/pcc_V\d_j10\.jsp$/g.test(
+      page.url.href,
+    );
   },
   fill: async (page, profile) => {
     const 통신사 = profile.map.통신사("SKT", "KTF", "LGT", "SKM", "KTM", "LGM");
@@ -52,8 +56,10 @@ export const sci_v3_1: Handler = {
 };
 
 export const sci_v3_2: Handler = {
-  isMatch: (url) => {
-    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/bokdo(Mv)?\.jsp$/g.test(url);
+  isMatch: (page) => {
+    return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/bokdo(Mv)?\.jsp$/g.test(
+      page.url.href,
+    );
   },
   fill: async (page, profile) => {
     const 인증방식 = profile.map.인증방식(["", "문자(SMS) 인증", "pass 인증", "QR코드 인증"]);
@@ -64,9 +70,9 @@ export const sci_v3_2: Handler = {
 };
 
 export const sci_v3_3: Handler = {
-  isMatch: (url) => {
+  isMatch: (page) => {
     return /^https:\/\/pcc\.siren24\.com\/pcc_V\d\/passWebV3\/pcc_V\d_j30_certHp(Mvno)?Ti(App)?01\.jsp$/g.test(
-      url,
+      page.url.href,
     );
   },
   fill: async (page, profile) => {

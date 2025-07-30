@@ -8,7 +8,7 @@ type Options = {
 
 type Task = () => Promise<void>;
 
-export class Locator<T extends HTMLElement> {
+export class Locator<T extends HTMLElement = HTMLElement> {
   private readonly selector: string;
   private readonly delay: number;
   private readonly retry: number;
@@ -184,6 +184,7 @@ export class ImageLocator extends Locator<HTMLImageElement> {
 
   public async solveCaptcha(model: PublicPath) {
     await this.run();
-    return await solveCaptcha(model, this.element!);
+    const captchaText = await solveCaptcha(model, this.element!);
+    return captchaText;
   }
 }

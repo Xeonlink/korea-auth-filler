@@ -7,8 +7,8 @@ import type { Handler } from "@/utils/type";
  * - 카페24 회원가입 : https://user.cafe24.com/join/hosting/general/?page=step1&landTime=1751035289
  */
 export const nhnkcp1: Handler = {
-  isMatch: (url) => {
-    return url.includes("https://cert.kcp.co.kr/cert/pc/telcomSelect.jsp");
+  isMatch: (page) => {
+    return page.url.href.includes("https://cert.kcp.co.kr/cert/pc/telcomSelect.jsp");
   },
   fill: async (page, profile) => {
     await page
@@ -28,13 +28,10 @@ export const nhnkcp1: Handler = {
 };
 
 export const nhnkcp2: Handler = {
-  isMatch: (url) => {
-    return [
-      "https://cert.kcp.co.kr/cert/pc/smsForm.jsp",
-      "https://cert.kcp.co.kr/cert/pc/pushQRForm.jsp",
-      "https://cert.kcp.co.kr/cert/mo/smsForm.jsp",
-      "https://cert.kcp.co.kr/cert/mo/pushQRForm.jsp",
-    ].some((l) => url.includes(l));
+  isMatch: (page) => {
+    const isHostnameValid = page.url.hostname === "cert.kcp.co.kr";
+    const isPathnameValid = /\/cert\/(pc|mo)\/(sms|pushQR)Form\.jsp/.test(page.url.pathname);
+    return isHostnameValid && isPathnameValid;
   },
   fill: async (page, profile) => {
     /**
@@ -59,7 +56,7 @@ export const nhnkcp2: Handler = {
      * 2. a 태그라서 보안에러가 계속 발생함.
      */
     if (profile.인증방식.QR) {
-      // await page.button(".qrCodeLink").exists().visible().click();
+      // await page.q(".qrCodeLink").exists().visible().click();
     }
   },
 };

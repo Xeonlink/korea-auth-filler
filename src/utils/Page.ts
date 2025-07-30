@@ -5,7 +5,7 @@ export class Page {
   private readonly delay: number;
   private readonly retry: number;
   private readonly context: ContentScriptContext;
-  private readonly url: URL;
+  public readonly url: URL;
 
   constructor(
     context: ContentScriptContext,
@@ -22,6 +22,15 @@ export class Page {
     return new Locator<T>(selector);
   }
 
+  public qAll<T extends HTMLElement>(selector: string): T[] {
+    return Array.from(document.querySelectorAll(selector)) as T[];
+  }
+
+  public qById<T extends HTMLElement>(id: string): T | null {
+    return document.getElementById(id) as T | null;
+  }
+
+  // locators 모음 ------------------------------------------
   public input(selector: string) {
     return new InputLocator(selector);
   }
@@ -44,5 +53,10 @@ export class Page {
 
   public setTimeout(fn: () => void, delay: number) {
     return setTimeout(fn, delay);
+  }
+
+  // utils ------------------------------------------------
+  public async wait(delay: number = 100) {
+    return await new Promise((resolve) => setTimeout(resolve, delay));
   }
 }
