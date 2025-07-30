@@ -153,12 +153,16 @@ export const kmcert_v4_3: Handler = {
  * 테스트 주소
  * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
  * 2. kt 회원가입 : https://idmng.kt.com/identify/personal
+ * 3. 인터파크 이켓 - 계정로그인 - 아이디 찾기 : https://accounts.interpark.com/login/form/interpark?clientId=ticket-pc&postProc=FULLSCREEN
  */
 
 // 통신사 선택 & 약관동의 & 인증방식 선택
 export const kmcert_v5_1: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp");
+    return [
+      "https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp",
+      "https://evt.kmcert.com/kmcis/web_v5/kmcisHp00.jsp",
+    ].some((l) => page.url.href.includes(l));
   },
   fill: async (page, profile) => {
     await page
@@ -183,6 +187,8 @@ export const kmcert_v5_2: Handler = {
     return [
       "https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
       "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
+      "https://evt.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
+      "https://evt.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
     ].some((l) => page.url.href.includes(l));
   },
   fill: async (page, profile) => {
