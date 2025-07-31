@@ -10,8 +10,9 @@ import { NHN_KCPPage } from "./NHN_KCPPage";
 import { 넥스원소프트Page } from "./넥스원소프트Page";
 import { 드림시큐리티Page } from "./드림시큐리티";
 import { KG모빌리언스Page } from "./KG모빌리언스Page";
+import { type } from "@/utils/utils";
 
-type AuthMethod =
+const authMethod = type<
   | "OACX"
   | "모바일신분증"
   | "한국모바일인증"
@@ -23,9 +24,10 @@ type AuthMethod =
   | "NICE평가정보"
   | "넥스원소프트"
   | "드림시큐리티"
-  | "KG모빌리언스";
+  | "KG모빌리언스"
+>();
 
-export const createGate = defineGate<AuthMethod>()({
+export const createGate = defineGate(authMethod, {
   강원도Login: {
     url: "https://state.gwd.go.kr/portal/minwon/epeople/counsel",
     method: {

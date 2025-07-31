@@ -30,7 +30,7 @@ type GateUseMap<DM extends GateDefMap<string>> = {
 }
 
 // Methods -------------------------------------------------------------------------------------------------------
-export const defineGate = <K extends string>() => <D extends GateDefMap<K>>(defMap: D) => (page: Page) => {
+export const defineGate = <K extends string, D extends GateDefMap<K>>(_: K, defMap: D) => (page: Page) => {
   const gateMap: GateUseMap<D> = {} as unknown as GateUseMap<D>;
 
   for (const [key, value] of Object.entries(defMap)) {

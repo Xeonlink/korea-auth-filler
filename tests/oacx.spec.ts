@@ -6,10 +6,9 @@ test("normal, iframe", async ({ popupPage, gate, profile }) => {
 
   await gate.홈택스Login.goto();
   const page = await gate.홈택스Login.openOACX();
-  const root = await page.unvailRoot();
   await page.prepare(profile);
 
-  await test.step("드림인증", async () => {
+  await page.step("드림인증", async (root) => {
     await root.locator(".provider-list li", { hasText: "드림인증" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -18,7 +17,7 @@ test("normal, iframe", async ({ popupPage, gate, profile }) => {
     await page.expect모든동의Checked();
   });
 
-  await test.step("통신사PASS", async () => {
+  await page.step("통신사PASS", async (root) => {
     await root.locator(".provider-list li", { hasText: "통신사PASS" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -34,10 +33,9 @@ test("normal, _blank", async ({ popupPage, gate, profile }) => {
 
   await gate.자원봉사포털Login.goto();
   const page = await gate.자원봉사포털Login.openOACX();
-  const root = await page.unvailRoot();
   await page.prepare(profile);
 
-  await test.step("네이버", async () => {
+  await page.step("네이버", async (root) => {
     await root.locator(".provider-list li", { hasText: "네이버" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -46,7 +44,7 @@ test("normal, _blank", async ({ popupPage, gate, profile }) => {
     await page.expect모든동의Checked();
   });
 
-  await test.step("통신사PASS", async () => {
+  await page.step("통신사PASS", async (root) => {
     await root.locator(".provider-list li", { hasText: "통신사PASS" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -62,10 +60,9 @@ test("legacy, embeded", async ({ popupPage, gate, profile }) => {
 
   await gate.예비군Login.goto();
   const page = await gate.예비군Login.openOACX();
-  const root = await page.unvailRoot();
   await page.prepare(profile);
 
-  await test.step("네이버", async () => {
+  await page.step("네이버", async (root) => {
     await root.getByTitle("네이버 인증서").filter({ visible: true }).click();
     await page.expect이름filled();
     await page.expect주민번호앞자리filled();
@@ -75,7 +72,7 @@ test("legacy, embeded", async ({ popupPage, gate, profile }) => {
     await page.expect모든동의Checked();
   });
 
-  await test.step("통신사패스", async () => {
+  await page.step("통신사패스", async (root) => {
     await root.getByTitle("통신사패스 인증서").filter({ visible: true }).click();
     await page.expect이름filled();
     await page.expect주민번호앞자리filled();
@@ -98,17 +95,16 @@ test("normal, embeded, some filled", async ({ popupPage, gate, profile }) => {
     ssn2: dummy주민번호뒷자리,
   });
   const page = await gate.서울시평생교육원Login.openOACX();
-  const root = await page.unvailRoot();
   await page.prepare(profile);
 
-  await test.step("네이버", async () => {
+  await page.step("네이버", async (root) => {
     await root.locator(".provider-list li", { hasText: "네이버" }).click();
     await page.expect전화번호앞자리filled();
     await page.expect전화번호뒷자리filled();
     await page.expect모든동의Checked();
   });
 
-  await test.step("통신사PASS", async () => {
+  await page.step("통신사PASS", async (root) => {
     await root.locator(".provider-list li", { hasText: "통신사PASS" }).click();
     await page.expect통신사filled();
     await page.expect전화번호앞자리filled();
@@ -122,10 +118,9 @@ test("raon(noraml, _blank)", async ({ popupPage, gate, profile }) => {
 
   await gate.서울시Login.goto();
   const page = await gate.서울시Login.openOACX();
-  const root = await page.unvailRoot();
   await page.prepare(profile);
 
-  await test.step("우리인증서", async () => {
+  await page.step("우리인증서", async (root) => {
     await root.locator(".provider-list li", { hasText: "우리인증서" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -133,7 +128,7 @@ test("raon(noraml, _blank)", async ({ popupPage, gate, profile }) => {
     await page.expect모든동의Checked();
   });
 
-  await test.step("카카오뱅크", async () => {
+  await page.step("카카오뱅크", async (root) => {
     await root.locator(".provider-list li", { hasText: "카카오뱅크" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -147,10 +142,9 @@ test("raon(normal, _blank) has PASS", async ({ popupPage, gate, profile }) => {
 
   await gate.삼성서울병원Login.goto();
   const page = await gate.삼성서울병원Login.openOACX();
-  const root = await page.unvailRoot();
   await page.prepare(profile);
 
-  await test.step("신한인증서", async () => {
+  await page.step("신한인증서", async (root) => {
     await root.locator(".provider-list li", { hasText: "신한인증서" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();
@@ -158,7 +152,7 @@ test("raon(normal, _blank) has PASS", async ({ popupPage, gate, profile }) => {
     await page.expect모든동의Checked();
   });
 
-  await test.step("통신사PASS", async () => {
+  await page.step("통신사PASS", async (root) => {
     await root.locator(".provider-list li", { hasText: "통신사PASS" }).click();
     await page.expect이름filled();
     await page.expect생년원일filled();

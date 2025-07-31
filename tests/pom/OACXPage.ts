@@ -3,10 +3,6 @@ import { BaseAuthPage } from "./base";
 import { toHyphenPhone } from "@/utils/utils";
 
 export class OACXPage extends BaseAuthPage {
-  public async unvailRoot() {
-    return this.root;
-  }
-
   public async expect이름filled() {
     expect(this.profile).toBeDefined();
 

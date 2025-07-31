@@ -1,6 +1,12 @@
 import { Profile } from "@/utils/Profile";
-import type { RawProfile } from "@/utils/type";
-import type { FrameLocator, Locator, Page } from "@playwright/test";
+import {
+  expect,
+  test,
+  type FrameLocator,
+  type Locator,
+  type Page,
+  type TestStepInfo,
+} from "@playwright/test";
 
 export type WaitUntil = Required<Required<Parameters<Page["goto"]>>[1]>["waitUntil"];
 
@@ -34,18 +40,11 @@ export class BaseAuthPage<T extends RootType = RootType> {
     this.profile = profile;
   }
 
-  public async expect<T>(
-    rawProfile: Omit<RawProfile, "id">,
-    tester: (page: this) => Promise<T>,
-  ): Promise<T> {
-    const profile = new Profile(rawProfile);
-    this.profile = profile;
-    const result = await tester(this);
-    this.profile = null;
-    return result;
-  }
+  public async step(title: string, fn: (root: T, info: TestStepInfo) => Promise<void>) {
+    expect(this.profile).toBeDefined();
 
-  public async reload() {
-    await (this.root as Page).reload?.();
+    return test.step(title, async (info) => {
+      await fn(this.root, info);
+    });
   }
 }

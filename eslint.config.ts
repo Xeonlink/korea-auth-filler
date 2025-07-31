@@ -19,6 +19,7 @@ export default tseslint.config([
     rules: {
       "no-empty-pattern": "off",
       "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {

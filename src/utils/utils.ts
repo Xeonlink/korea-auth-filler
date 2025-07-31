@@ -224,3 +224,11 @@ export function waitUntilDomIdle(func: () => void, wait: number) {
     characterData: true,
   });
 }
+
+/**
+ * 타입 생성
+ * @returns 타입
+ */
+export function type<K>() {
+  return null as unknown as K;
+}
