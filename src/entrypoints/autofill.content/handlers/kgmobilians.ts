@@ -53,10 +53,8 @@ async function fillPASSView(page: Page, profile: IProfile) {
   await page.input(`#pushName`).visible().fill(profile.이름);
   await page.input(`#pushPhone`).visible().fill(profile.전화번호.전체);
 
-  const captchaText = await page
-    .image(`#captcha_number img`)
-    .loaded()
-    .solveCaptcha("/captcha/kgmobilians.onnx");
+  const captchaImage = await page.image(`#captcha_number img`).loaded().run();
+  const captchaText = await solveCaptcha("/captcha/kgmobilians.onnx", captchaImage.element!);
   await page.input(`#pushCaptchaCfm`).fill(captchaText);
 
   await page.button(`#pushBtn`).focus();

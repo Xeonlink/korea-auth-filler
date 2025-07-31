@@ -129,7 +129,6 @@ export class InputLocator extends Locator<HTMLInputElement> {
     target.dispatchEvent(new Event("keydown", { bubbles: true, cancelable: true }));
     target.dispatchEvent(new Event("keypress", { bubbles: true, cancelable: true }));
     target.dispatchEvent(new Event("keyup", { bubbles: true, cancelable: true }));
-    target.dispatchEvent(new Event("invalid", { bubbles: true, cancelable: true }));
   }
 }
 

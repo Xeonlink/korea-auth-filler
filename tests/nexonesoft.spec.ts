@@ -1,4 +1,4 @@
-import { carrier, way } from "@/utils/constants";
+import { way } from "@/utils/constants";
 import { test } from ".";
 
 test("normal", async ({ popupPage, gate, profile, poms }) => {
