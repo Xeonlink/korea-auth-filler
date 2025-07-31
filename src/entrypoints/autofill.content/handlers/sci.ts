@@ -39,8 +39,8 @@ export const sci_v2_3: Handler = {
 
 /**
  * 테스트 사이트
- * 1. 대전광역시 : https://www.daejeon.go.kr/integ/integNonmemberLoginProc.do?siteCd=drh&rtUrl=
- * 2. 롯데홈쇼핑 회원가입 : https://www.lotteimall.com/member/regist/forward.MemberRegist.lotte
+ * - 대전광역시 : https://www.daejeon.go.kr/integ/integNonmemberLoginProc.do?siteCd=drh&rtUrl=
+ * - 롯데홈쇼핑 회원가입 : https://www.lotteimall.com/member/regist/forward.MemberRegist.lotte
  */
 
 export const sci_v3_1: Handler = {

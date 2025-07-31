@@ -1,15 +1,15 @@
-import { carrier, way } from "@/utils/constants";
+import { way } from "@/utils/constants";
 import { test } from ".";
 import { poms } from "./pom/PomPage";
 
 test.describe("from 디지털원패스", () => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.SMS });
+    profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();
-    const root = await gate.디지털원패스FindId.openOKname();
-    const pom = poms.okname(root, profile);
+    const root = await gate.디지털원패스FindId.openKCB();
+    const pom = poms.kcb(root, profile);
 
     await pom.step("SMS인증View", async (expect) => {
       await expect.smsAuthView();
@@ -21,12 +21,12 @@ test.describe("from 디지털원패스", () => {
   });
 
   test("PASS", async ({ popupPage, gate, profile }) => {
-    profile.mod({ carrier: carrier.KT, way: way.PASS });
+    profile.mod({ way: way.PASS });
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();
-    const root = await gate.디지털원패스FindId.openOKname();
-    const pom = poms.okname(root, profile);
+    const root = await gate.디지털원패스FindId.openKCB();
+    const pom = poms.kcb(root, profile);
 
     await pom.step("PASS인증View", async (expect) => {
       await expect.passAuthView();
@@ -36,12 +36,12 @@ test.describe("from 디지털원패스", () => {
   });
 
   test("QR", async ({ popupPage, gate, profile }) => {
-    profile.mod({ carrier: carrier.KT, way: way.QR });
+    profile.mod({ way: way.QR });
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();
-    const root = await gate.디지털원패스FindId.openOKname();
-    const pom = poms.okname(root, profile);
+    const root = await gate.디지털원패스FindId.openKCB();
+    const pom = poms.kcb(root, profile);
 
     await pom.step("QR인증View", async (expect) => {
       await expect.qrAuthView();

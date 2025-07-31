@@ -1,10 +1,9 @@
 import { test } from ".";
-import { carrier } from "@/utils/constants";
 import { way } from "@/utils/constants";
 
 test.describe("from 디지털원패스", () => {
   test("-", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.SMS });
+    profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();

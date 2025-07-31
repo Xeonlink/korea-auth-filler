@@ -129,6 +129,7 @@ export class InputLocator extends Locator<HTMLInputElement> {
     target.dispatchEvent(new Event("keydown", { bubbles: true, cancelable: true }));
     target.dispatchEvent(new Event("keypress", { bubbles: true, cancelable: true }));
     target.dispatchEvent(new Event("keyup", { bubbles: true, cancelable: true }));
+    target.dispatchEvent(new Event("invalid", { bubbles: true, cancelable: true }));
   }
 }
 
@@ -156,7 +157,6 @@ export class ImageLocator extends Locator<HTMLImageElement> {
     return this;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public waitNew(refresher: (() => Promise<any> | any) | Locator<any>) {
     this.tasks.push(async () => {
       const old_b64 = this.dataUrl;

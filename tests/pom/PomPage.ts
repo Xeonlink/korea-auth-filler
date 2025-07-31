@@ -170,7 +170,7 @@ export const poms = {
       await expect(전화번호Input).toHaveValue(toHyphenPhone(profile.전화번호.전체));
     },
   }),
-  okname: definePage({
+  kcb: definePage({
     smsAuthView: async (root) => {
       await expect(root).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
       await expect(root.locator("section.certifyWrap")).toBeVisible();
@@ -336,7 +336,7 @@ export const poms = {
       await expect(휴대폰번호Input).toHaveValue(profile.전화번호.전체);
     },
   }),
-  모바일신분증: defineAny({
+  mobileid: defineAny({
     이름filled: async (root, profile) => {
       const 이름Input1 = root.locator("input[name='name']");
       const 이름Input2 = root.getByPlaceholder("홍길동");
@@ -424,6 +424,30 @@ export const poms = {
       const 보안문자Input = root.getByPlaceholder("보안문자");
       await expect(보안문자Input).toBeVisible();
       await expect(보안문자Input).toBeFocused();
+    },
+  }),
+  yeskey: definePage({
+    certViewByUrl: async (root) => {
+      await expect(root).toHaveURL("https://www.epeople.go.kr/nep/crtf/fictInfoCrtfPopup.npaid");
+    },
+    certView: async (root) => {
+      const locator = root.locator("#__fincert_root__");
+      await expect(locator).toBeVisible();
+    },
+    이름filled: async (root, profile) => {
+      const 이름Input = root.locator("#CLOUD_ID_1");
+      await expect(이름Input).toBeVisible();
+      await expect(이름Input).toHaveValue(profile.이름);
+    },
+    전화번호filled: async (root, profile) => {
+      const 전화번호Input = root.locator("#CLOUD_ID_2");
+      await expect(전화번호Input).toBeVisible();
+      await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
+    },
+    생년월일filled: async (root, profile) => {
+      const 생년월일Input = root.locator("#CLOUD_ID_3");
+      await expect(생년월일Input).toBeVisible();
+      await expect(생년월일Input).toHaveValue(profile.생년월일);
     },
   }),
 };

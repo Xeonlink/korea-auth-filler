@@ -7,7 +7,7 @@ import { kcb1, kcb2 } from "./kcb";
 import { toss } from "./toss";
 import { nexonesoft } from "./nexonesoft";
 import { dream } from "./dream";
-import { 모바일신분증1, 모바일신분증2 } from "./모바일신분증";
+import { mobileid1, mobileid2 } from "./mobileid";
 import {
   kmcert_v2_1,
   kmcert_v2_2,
@@ -20,7 +20,7 @@ import {
   kmcert_v5_2,
 } from "./kmcert";
 import { kgmobilians } from "./kgmobilians";
-import { YESKEY } from "./YESKEY";
+// import { yeskey } from "./yeskey";
 
 export const handlers: Handler[] = [
   oacx,
@@ -47,10 +47,10 @@ export const handlers: Handler[] = [
   toss,
   nhnkcp1,
   nhnkcp2,
-  모바일신분증1,
-  모바일신분증2,
+  mobileid1,
+  mobileid2,
   dream,
   nexonesoft,
   kgmobilians,
-  YESKEY,
+  // yeskey,
 ];

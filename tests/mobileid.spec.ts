@@ -1,14 +1,14 @@
-import { carrier, way } from "@/utils/constants";
+import { way } from "@/utils/constants";
 import { test } from "./index";
 
 test("새 창에 열기", async ({ popupPage, gate, profile, poms }) => {
-  profile.mod({ carrier: carrier.KT, way: way.SMS });
+  profile.mod({ way: way.SMS });
   await popupPage.prepare(profile);
 
   await gate.강원도Login.goto();
 
   const root = await gate.강원도Login.open모바일신분증();
-  const pom = poms.모바일신분증(root, profile);
+  const pom = poms.mobileid(root, profile);
 
   await pom.step("인증View", async (expect) => {
     await expect.이름filled();
@@ -18,13 +18,13 @@ test("새 창에 열기", async ({ popupPage, gate, profile, poms }) => {
 });
 
 test("iframe", async ({ popupPage, gate, profile, poms }) => {
-  profile.mod({ carrier: carrier.KT, way: way.SMS });
+  profile.mod({ way: way.SMS });
   await popupPage.prepare(profile);
 
   await gate.홈택스Login.goto();
 
   const root = await gate.홈택스Login.open모바일신분증();
-  const pom = poms.모바일신분증(root, profile);
+  const pom = poms.mobileid(root, profile);
 
   await pom.step("인증View", async (expect) => {
     await expect.이름filled();
@@ -34,13 +34,13 @@ test("iframe", async ({ popupPage, gate, profile, poms }) => {
 });
 
 test("embedded", async ({ popupPage, gate, profile, poms }) => {
-  profile.mod({ carrier: carrier.KT, way: way.SMS });
+  profile.mod({ way: way.SMS });
   await popupPage.prepare(profile);
 
   await gate.고용24Login.goto();
 
   const root = await gate.고용24Login.open모바일신분증();
-  const pom = poms.모바일신분증(root, profile);
+  const pom = poms.mobileid(root, profile);
 
   await pom.step("인증View", async (expect) => {
     await expect.이름filled();

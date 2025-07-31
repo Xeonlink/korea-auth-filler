@@ -2,10 +2,10 @@ import type { Handler } from "@/utils/type";
 
 /**
  * 테스트 주소
- * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
- * 2. 홈택스 모바일 신분증
+ * - 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
+ * - 홈택스 모바일 신분증
  */
-export const 모바일신분증1: Handler = {
+export const mobileid1: Handler = {
   isMatch: (page) => {
     return page.q(".mid-crtfc #contents").element !== null;
   },
@@ -18,9 +18,9 @@ export const 모바일신분증1: Handler = {
 
 /**
  * 테스트 주소
- * 1. 고용24 -> 정부통합 로그인 -> 모바일신분증
+ * - 고용24 -> 정부통합 로그인 -> 모바일신분증
  */
-export const 모바일신분증2: Handler = {
+export const mobileid2: Handler = {
   isMatch: (page) => {
     return page.q("#mipEmbededContents").element !== null;
   },

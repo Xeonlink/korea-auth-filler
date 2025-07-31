@@ -1,4 +1,21 @@
-import type { Handler } from "@/utils/type";
+import type { Handler, IProfile } from "@/utils/type";
+
+function getTcValue(profile: IProfile) {
+  let tcValue = "";
+  if (profile.통신3사 && (profile.인증방식.PASS || profile.인증방식.QR)) {
+    tcValue = "kcb.oknm.online.pass.popup.push.cmd.mno.PS02_PushMno011Cmd";
+  }
+  if (!profile.통신3사 && (profile.인증방식.PASS || profile.인증방식.QR)) {
+    tcValue = "kcb.oknm.online.pass.popup.push.cmd.mvno.PS02_PushMvno011Cmd";
+  }
+  if (profile.통신3사 && profile.인증방식.SMS) {
+    tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mno.PS02_SmsMno011Cmd";
+  }
+  if (!profile.통신3사 && profile.인증방식.SMS) {
+    tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mvno.PS02_SmsMvno011Cmd";
+  }
+  return tcValue;
+}
 
 /**
  * 테스트 주소
@@ -12,24 +29,11 @@ export const kcb1: Handler = {
     return isUrlMatch && isStep1;
   },
   fill: async (page, profile) => {
-    let tcValue = "";
-    if (profile.통신3사 && (profile.인증방식.PASS || profile.인증방식.QR)) {
-      tcValue = "kcb.oknm.online.pass.popup.push.cmd.mno.PS02_PushMno011Cmd";
-    }
-    if (!profile.통신3사 && (profile.인증방식.PASS || profile.인증방식.QR)) {
-      tcValue = "kcb.oknm.online.pass.popup.push.cmd.mvno.PS02_PushMvno011Cmd";
-    }
-    if (profile.통신3사 && profile.인증방식.SMS) {
-      tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mno.PS02_SmsMno011Cmd";
-    }
-    if (!profile.통신3사 && profile.인증방식.SMS) {
-      tcValue = "kcb.oknm.online.pass.popup.sms.cmd.mvno.PS02_SmsMvno011Cmd";
-    }
-
-    await page.input("input[name='tc']").fill(tcValue);
+    await page.input("input[name='tc']").fill(getTcValue(profile));
     await page
       .input("input[name='mbl_tel_cmm_cd']")
       .fill(profile.map.통신사("01", "02", "03", "04", "05", "06"));
+
     await page.form("#ct > form").submit();
   },
 };

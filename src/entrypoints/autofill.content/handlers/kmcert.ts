@@ -151,9 +151,9 @@ export const kmcert_v4_3: Handler = {
 
 /**
  * 테스트 주소
- * 1. 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
- * 2. kt 회원가입 : https://idmng.kt.com/identify/personal
- * 3. 인터파크 티켓 아이디찾기 : https://member.interpark.com/mypage/enter-identity
+ * - 강원도 : https://state.gwd.go.kr/portal/minwon/epeople/counsel
+ * - kt 회원가입 : https://idmng.kt.com/identify/personal
+ * - 인터파크 티켓 아이디찾기 : https://member.interpark.com/mypage/enter-identity
  */
 
 // 통신사 선택 & 약관동의 & 인증방식 선택

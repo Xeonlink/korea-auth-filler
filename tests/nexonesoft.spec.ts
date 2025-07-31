@@ -2,7 +2,7 @@ import { carrier, way } from "@/utils/constants";
 import { test } from ".";
 
 test("normal", async ({ popupPage, gate, profile, poms }) => {
-  profile.mod({ carrier: carrier.KT, way: way.SMS });
+  profile.mod({ way: way.SMS });
   await popupPage.prepare(profile);
 
   await gate.국회SignUp.goto();

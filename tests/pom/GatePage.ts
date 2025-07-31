@@ -6,25 +6,41 @@ const authMethod = type<
   | "모바일신분증"
   | "한국모바일인증"
   | "NHN_KCP"
-  | "모바일신분증"
   | "토스인증"
   | "SCI평가정보"
-  | "OKname"
+  | "KCB"
   | "NICE평가정보"
   | "넥스원소프트"
   | "드림시큐리티"
   | "KG모빌리언스"
+  | "YESKEY"
 >();
 
 export const createGate = defineGate(authMethod, {
   강원도Login: {
     url: "https://state.gwd.go.kr/portal/minwon/epeople/counsel",
     method: {
+      한국모바일인증: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        const frame = page.frames()[1]!;
+        await frame.waitForLoadState("networkidle");
+        await frame.locator("a.be_03").click();
+        const newPage = await pagePromise;
+        return newPage;
+      },
       모바일신분증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
         const frame = page.frames()[1]!;
         await frame.waitForLoadState("networkidle");
         await frame.locator("a.be_06").click();
+        const newPage = await pagePromise;
+        return newPage;
+      },
+      YESKEY: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        const frame = page.frames()[1]!;
+        await frame.waitForLoadState("networkidle");
+        await frame.locator("a.be_05").click();
         const newPage = await pagePromise;
         return newPage;
       },
@@ -66,7 +82,7 @@ export const createGate = defineGate(authMethod, {
   디지털원패스FindId: {
     url: "https://www.onepass.go.kr/membership/find/id",
     method: {
-      OKname: async (page) => {
+      KCB: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "휴대폰 인증" }).click();
         const newPage = await pagePromise;

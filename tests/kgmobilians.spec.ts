@@ -1,9 +1,9 @@
-import { carrier, way } from "@/utils/constants";
+import { way } from "@/utils/constants";
 import { test } from ".";
 
 test.describe("from 야놀자 회원가입", () => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.SMS });
+    profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
 
     await gate.야놀자SignUp.goto();
@@ -20,7 +20,7 @@ test.describe("from 야놀자 회원가입", () => {
   });
 
   test("PASS", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.PASS });
+    profile.mod({ way: way.PASS });
     await popupPage.prepare(profile);
 
     await gate.야놀자SignUp.goto();

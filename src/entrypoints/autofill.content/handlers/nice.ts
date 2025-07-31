@@ -3,7 +3,7 @@ import { solveCaptcha } from "@/utils/captcha";
 
 /**
  * 테스트 사이트
- * 1. 서울시 로그인 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
+ * - 서울시 로그인 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
  */
 
 // NICE평가정보

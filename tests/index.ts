@@ -57,7 +57,7 @@ export const test = base.extend<FixtureProps>({
   profile: async ({}, use) => {
     const profile = new Profile({
       name: "오지민",
-      carrier: carrier.KT_MVNO,
+      carrier: carrier.KT,
       phone_number: "01012345678",
       birth: "20010331",
       foreigner: isForeigner.NATIVE,

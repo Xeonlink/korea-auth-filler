@@ -1,9 +1,9 @@
 import { test } from ".";
-import { carrier, way } from "@/utils/constants";
+import { way } from "@/utils/constants";
 
 test.describe("from 서울시", () => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.SMS });
+    profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
 
     await gate.서울시Login.goto();
@@ -20,7 +20,7 @@ test.describe("from 서울시", () => {
   });
 
   test("PASS", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.PASS });
+    profile.mod({ way: way.PASS });
     await popupPage.prepare(profile);
 
     await gate.서울시Login.goto();
@@ -35,7 +35,7 @@ test.describe("from 서울시", () => {
   });
 
   test("QR", async ({ popupPage, gate, profile, poms }) => {
-    profile.mod({ carrier: carrier.KT, way: way.QR });
+    profile.mod({ way: way.QR });
     await popupPage.prepare(profile);
 
     await gate.서울시Login.goto();
