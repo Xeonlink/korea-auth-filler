@@ -1,9 +1,9 @@
 import { test as base, chromium, type BrowserContext } from "@playwright/test";
 import path from "path";
-import { RawProfile } from "@/utils/type";
-import { carrier, gender, isForeigner, way } from "@/utils/constants";
 import { PopupPage } from "./pom/PopupPage";
 import { createGate } from "./pom/GatePage";
+import { Profile } from "@/utils/Profile";
+import { carrier, gender, isForeigner, way } from "@/utils/constants";
 
 const pathToExtension = path.resolve(".output/chrome-mv3");
 
@@ -27,7 +27,7 @@ type FixtureProps = {
   extensionId: string;
   popupPage: PopupPage;
   gate: ReturnType<typeof createGate>;
-  mockRawProfile: Omit<RawProfile, "id">;
+  profile: Profile;
 };
 
 export const test = base.extend<FixtureProps>({
@@ -52,8 +52,8 @@ export const test = base.extend<FixtureProps>({
     const gate = createGate(page);
     await use(gate);
   },
-  mockRawProfile: async ({}, use) => {
-    const rawProfile: Omit<RawProfile, "id"> = {
+  profile: async ({}, use) => {
+    const profile = new Profile({
       name: "오지민",
       carrier: carrier.KT_MVNO,
       phone_number: "01012345678",
@@ -61,8 +61,8 @@ export const test = base.extend<FixtureProps>({
       foreigner: isForeigner.NATIVE,
       gender: gender.MALE,
       way: way.SMS,
-    };
-    await use(rawProfile);
+    });
+    await use(profile);
   },
 });
 

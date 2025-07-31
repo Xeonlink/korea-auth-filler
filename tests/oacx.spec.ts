@@ -1,17 +1,13 @@
 import { test } from ".";
-import type { RawProfile } from "@/utils/type";
 import jumin from "./utils/jumin";
 
-test("normal, iframe", async ({ popupPage, gate, mockRawProfile }) => {
-  const rawProfile: Omit<RawProfile, "id"> = mockRawProfile;
-  await popupPage.goto();
-  await popupPage.addProfile(rawProfile);
-  await popupPage.selectProfile(0);
+test("normal, iframe", async ({ popupPage, gate, profile }) => {
+  await popupPage.prepare(profile);
 
   await gate.홈택스Login.goto();
   const page = await gate.홈택스Login.openOACX();
   const root = await page.unvailRoot();
-  await page.prepare(rawProfile);
+  await page.prepare(profile);
 
   await test.step("드림인증", async () => {
     await root.locator(".provider-list li", { hasText: "드림인증" }).click();
@@ -33,16 +29,13 @@ test("normal, iframe", async ({ popupPage, gate, mockRawProfile }) => {
   });
 });
 
-test("normal, _blank", async ({ popupPage, gate, mockRawProfile }) => {
-  const rawProfile: Omit<RawProfile, "id"> = mockRawProfile;
-  await popupPage.goto();
-  await popupPage.addProfile(rawProfile);
-  await popupPage.selectProfile(0);
+test("normal, _blank", async ({ popupPage, gate, profile }) => {
+  await popupPage.prepare(profile);
 
   await gate.자원봉사포털Login.goto();
   const page = await gate.자원봉사포털Login.openOACX();
   const root = await page.unvailRoot();
-  await page.prepare(rawProfile);
+  await page.prepare(profile);
 
   await test.step("네이버", async () => {
     await root.locator(".provider-list li", { hasText: "네이버" }).click();
@@ -64,16 +57,13 @@ test("normal, _blank", async ({ popupPage, gate, mockRawProfile }) => {
   });
 });
 
-test("legacy, embeded", async ({ popupPage, gate, mockRawProfile }) => {
-  const rawProfile: Omit<RawProfile, "id"> = mockRawProfile;
-  await popupPage.goto();
-  await popupPage.addProfile(rawProfile);
-  await popupPage.selectProfile(0);
+test("legacy, embeded", async ({ popupPage, gate, profile }) => {
+  await popupPage.prepare(profile);
 
   await gate.예비군Login.goto();
   const page = await gate.예비군Login.openOACX();
   const root = await page.unvailRoot();
-  await page.prepare(rawProfile);
+  await page.prepare(profile);
 
   await test.step("네이버", async () => {
     await root.getByTitle("네이버 인증서").filter({ visible: true }).click();
@@ -97,11 +87,8 @@ test("legacy, embeded", async ({ popupPage, gate, mockRawProfile }) => {
   });
 });
 
-test("normal, embeded, some filled", async ({ popupPage, gate, mockRawProfile }) => {
-  const rawProfile: Omit<RawProfile, "id"> = mockRawProfile;
-  await popupPage.goto();
-  await popupPage.addProfile(rawProfile);
-  await popupPage.selectProfile(0);
+test("normal, embeded, some filled", async ({ popupPage, gate, profile }) => {
+  await popupPage.prepare(profile);
 
   await gate.서울시평생교육원Login.goto();
   const [dummy주민번호앞자리, dummy주민번호뒷자리] = jumin()[0].split("-");
@@ -112,7 +99,7 @@ test("normal, embeded, some filled", async ({ popupPage, gate, mockRawProfile })
   });
   const page = await gate.서울시평생교육원Login.openOACX();
   const root = await page.unvailRoot();
-  await page.prepare(rawProfile);
+  await page.prepare(profile);
 
   await test.step("네이버", async () => {
     await root.locator(".provider-list li", { hasText: "네이버" }).click();
@@ -130,16 +117,13 @@ test("normal, embeded, some filled", async ({ popupPage, gate, mockRawProfile })
   });
 });
 
-test("raon(noraml, _blank)", async ({ popupPage, gate, mockRawProfile }) => {
-  const rawProfile: Omit<RawProfile, "id"> = mockRawProfile;
-  await popupPage.goto();
-  await popupPage.addProfile(rawProfile);
-  await popupPage.selectProfile(0);
+test("raon(noraml, _blank)", async ({ popupPage, gate, profile }) => {
+  await popupPage.prepare(profile);
 
   await gate.서울시Login.goto();
   const page = await gate.서울시Login.openOACX();
   const root = await page.unvailRoot();
-  await page.prepare(rawProfile);
+  await page.prepare(profile);
 
   await test.step("우리인증서", async () => {
     await root.locator(".provider-list li", { hasText: "우리인증서" }).click();
@@ -158,16 +142,13 @@ test("raon(noraml, _blank)", async ({ popupPage, gate, mockRawProfile }) => {
   });
 });
 
-test("raon(normal, _blank) has PASS", async ({ popupPage, gate, mockRawProfile }) => {
-  const rawProfile: Omit<RawProfile, "id"> = mockRawProfile;
-  await popupPage.goto();
-  await popupPage.addProfile(rawProfile);
-  await popupPage.selectProfile(0);
+test("raon(normal, _blank) has PASS", async ({ popupPage, gate, profile }) => {
+  await popupPage.prepare(profile);
 
   await gate.삼성서울병원Login.goto();
   const page = await gate.삼성서울병원Login.openOACX();
   const root = await page.unvailRoot();
-  await page.prepare(rawProfile);
+  await page.prepare(profile);
 
   await test.step("신한인증서", async () => {
     await root.locator(".provider-list li", { hasText: "신한인증서" }).click();

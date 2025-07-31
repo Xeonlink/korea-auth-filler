@@ -30,8 +30,7 @@ export class BaseAuthPage<T extends RootType = RootType> {
     this.root = root;
   }
 
-  public async prepare(rawProfile: Omit<RawProfile, "id">) {
-    const profile = new Profile(rawProfile);
+  public async prepare(profile: Profile) {
     this.profile = profile;
   }
 
@@ -44,5 +43,9 @@ export class BaseAuthPage<T extends RootType = RootType> {
     const result = await tester(this);
     this.profile = null;
     return result;
+  }
+
+  public async reload() {
+    await (this.root as Page).reload?.();
   }
 }
