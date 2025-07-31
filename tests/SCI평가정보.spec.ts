@@ -1,162 +1,56 @@
 import { carrier, way } from "@/utils/constants";
 import { test } from "./index";
+import { poms } from "./pom/PomPage";
+import type { CarrierCode } from "@/utils/type";
 
 test.describe("from 대전시", () => {
-  test.describe("MNO", () => {
-    test("SMS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT, way: way.SMS });
+  const callback = (carrier: CarrierCode) => {
+    test("SMS", async ({ popupPage, gate, profile, poms }) => {
+      profile.mod({ carrier, way: way.SMS });
       await popupPage.prepare(profile);
 
       await gate.대전시Login.goto();
-      const page = await gate.대전시Login.openSCI평가정보();
-      await page.expectSmsAuthPage("MNO");
+      const root = await gate.대전시Login.openSCI평가정보();
+      const pom = poms.sci(root, profile);
 
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect주민번호앞자리filled();
-      await page.expect주민번호성별filled();
-      await page.expect전화번호filled();
+      await pom.step("SMS인증View", async (expect) => {
+        await expect.smsAuthView(profile.통신3사 ? "MNO" : "MVNO");
+        await expect.이름filled();
+        await expect.주민번호앞자리filled();
+        await expect.주민번호성별filled();
+        await expect.전화번호filled();
+      });
     });
 
     test("PASS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT, way: way.PASS });
+      profile.mod({ carrier, way: way.PASS });
       await popupPage.prepare(profile);
 
       await gate.대전시Login.goto();
-      const page = await gate.대전시Login.openSCI평가정보();
-      await page.expectPassAuthPage("MNO");
+      const root = await gate.대전시Login.openSCI평가정보();
+      const pom = poms.sci(root, profile);
 
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect전화번호filled();
+      await pom.step("PASS인증View", async (expect) => {
+        await expect.passAuthView(profile.통신3사 ? "MNO" : "MVNO");
+        await expect.이름filled();
+        await expect.전화번호filled();
+      });
     });
 
     test("QR", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT, way: way.QR });
+      profile.mod({ carrier, way: way.QR });
       await popupPage.prepare(profile);
 
       await gate.대전시Login.goto();
-      const page = await gate.대전시Login.openSCI평가정보();
-      await page.expectQrAuthPage("MNO");
+      const root = await gate.대전시Login.openSCI평가정보();
+      const pom = poms.sci(root, profile);
+
+      await pom.step("QR인증View", async (expect) => {
+        await expect.qrAuthView(profile.통신3사 ? "MNO" : "MVNO");
+      });
     });
-  });
+  };
 
-  test.describe("MVNO", () => {
-    test("SMS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT_MVNO, way: way.SMS });
-      await popupPage.prepare(profile);
-
-      await gate.대전시Login.goto();
-      const page = await gate.대전시Login.openSCI평가정보();
-      await page.expectSmsAuthPage("MVNO");
-
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect주민번호앞자리filled();
-      await page.expect주민번호성별filled();
-      await page.expect전화번호filled();
-    });
-
-    test("PASS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT_MVNO, way: way.PASS });
-      await popupPage.prepare(profile);
-
-      await gate.대전시Login.goto();
-      const page = await gate.대전시Login.openSCI평가정보();
-      await page.expectPassAuthPage("MVNO");
-
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect전화번호filled();
-    });
-
-    test("QR", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT_MVNO, way: way.QR });
-      await popupPage.prepare(profile);
-
-      await gate.대전시Login.goto();
-      const page = await gate.대전시Login.openSCI평가정보();
-      await page.expectQrAuthPage("MVNO");
-    });
-  });
-});
-
-test.describe("from 롯데홈쇼핑", () => {
-  test.describe("MNO", () => {
-    test("SMS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT, way: way.SMS });
-      await popupPage.prepare(profile);
-
-      await gate.롯데홈쇼핑SignUp.goto({ waitUntil: "domcontentloaded" });
-      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
-      await page.expectSmsAuthPage("MNO");
-
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect주민번호앞자리filled();
-      await page.expect주민번호성별filled();
-      await page.expect전화번호filled();
-    });
-
-    test("PASS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT, way: way.PASS });
-      await popupPage.prepare(profile);
-
-      await gate.롯데홈쇼핑SignUp.goto({ waitUntil: "domcontentloaded" });
-      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
-      await page.expectPassAuthPage("MNO");
-
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect전화번호filled();
-    });
-
-    test("QR", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT, way: way.QR });
-      await popupPage.prepare(profile);
-
-      await gate.롯데홈쇼핑SignUp.goto({ waitUntil: "domcontentloaded" });
-      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
-      await page.expectQrAuthPage("MNO");
-    });
-  });
-
-  test.describe("MVNO", () => {
-    test("SMS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT_MVNO, way: way.SMS });
-      await popupPage.prepare(profile);
-
-      await gate.롯데홈쇼핑SignUp.goto({ waitUntil: "domcontentloaded" });
-      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
-      await page.expectSmsAuthPage("MVNO");
-
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect주민번호앞자리filled();
-      await page.expect주민번호성별filled();
-      await page.expect전화번호filled();
-    });
-
-    test("PASS", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT_MVNO, way: way.PASS });
-      await popupPage.prepare(profile);
-
-      await gate.롯데홈쇼핑SignUp.goto({ waitUntil: "domcontentloaded" });
-      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
-      await page.expectPassAuthPage("MVNO");
-
-      await page.prepare(profile);
-      await page.expect이름filled();
-      await page.expect전화번호filled();
-    });
-
-    test("QR", async ({ popupPage, gate, profile }) => {
-      profile.mod({ carrier: carrier.KT_MVNO, way: way.QR });
-      await popupPage.prepare(profile);
-
-      await gate.롯데홈쇼핑SignUp.goto({ waitUntil: "domcontentloaded" });
-      const page = await gate.롯데홈쇼핑SignUp.openSCI평가정보();
-      await page.expectQrAuthPage("MVNO");
-    });
-  });
+  test.describe("MNO", () => callback(carrier.KT));
+  test.describe("MVNO", () => callback(carrier.KT_MVNO));
 });

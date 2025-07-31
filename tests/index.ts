@@ -1,9 +1,10 @@
-import { test as base, chromium, type BrowserContext } from "@playwright/test";
-import path from "path";
-import { PopupPage } from "./pom/PopupPage";
-import { createGate } from "./pom/GatePage";
 import { Profile } from "@/utils/Profile";
 import { carrier, gender, isForeigner, way } from "@/utils/constants";
+import { test as base, chromium, type BrowserContext } from "@playwright/test";
+import path from "path";
+import { createGate } from "./pom/GatePage";
+import { poms } from "./pom/PomPage";
+import { PopupPage } from "./pom/PopupPage";
 
 const pathToExtension = path.resolve(".output/chrome-mv3");
 
@@ -28,6 +29,7 @@ type FixtureProps = {
   popupPage: PopupPage;
   gate: ReturnType<typeof createGate>;
   profile: Profile;
+  poms: typeof poms;
 };
 
 export const test = base.extend<FixtureProps>({
@@ -64,6 +66,7 @@ export const test = base.extend<FixtureProps>({
     });
     await use(profile);
   },
+  poms: poms,
 });
 
 export const expect = test.expect;

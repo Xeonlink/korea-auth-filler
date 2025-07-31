@@ -1,15 +1,4 @@
 import { defineGate } from "../utils/gate";
-import { OKnamePage } from "./OKnamePage";
-import { SCI평가정보Page } from "./SCI평가정보Page";
-import { 토스인증Page } from "./토스인증Page";
-import { 모바일신분증Page } from "./모바일신분증Page";
-import { 한국모바일인증Page } from "./한국모바일인증Page";
-import { OACXPage } from "./OACXPage";
-import { NICE평가정보Page } from "./NICE평가정보Page";
-import { NHN_KCPPage } from "./NHN_KCPPage";
-import { 넥스원소프트Page } from "./넥스원소프트Page";
-import { 드림시큐리티Page } from "./드림시큐리티";
-import { KG모빌리언스Page } from "./KG모빌리언스Page";
 import { type } from "@/utils/utils";
 
 const authMethod = type<
@@ -37,7 +26,7 @@ export const createGate = defineGate(authMethod, {
         await frame.waitForLoadState("networkidle");
         await frame.locator("a.be_06").click();
         const newPage = await pagePromise;
-        return new 모바일신분증Page(newPage);
+        return newPage;
       },
     },
   },
@@ -49,7 +38,7 @@ export const createGate = defineGate(authMethod, {
         await page.getByRole("button", { name: "PASS 또는 아이핀으로 인증하기" }).click();
         await page.getByRole("button", { name: "PASS로 인증하기" }).click();
         const newPage = await pagePromise;
-        return new 한국모바일인증Page(newPage);
+        return newPage;
       },
     },
   },
@@ -59,7 +48,7 @@ export const createGate = defineGate(authMethod, {
       모바일신분증: async (page) => {
         await page.getByRole("link", { name: "모바일 신분증" }).first().click();
         const locator = page.locator("#mipEmbededContents");
-        return new 모바일신분증Page(locator);
+        return locator;
       },
     },
   },
@@ -70,7 +59,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "인증하기" }).first().click();
         const newPage = await pagePromise;
-        return new SCI평가정보Page(newPage);
+        return newPage;
       },
     },
   },
@@ -81,13 +70,13 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "휴대폰 인증" }).click();
         const newPage = await pagePromise;
-        return new OKnamePage(newPage);
+        return newPage;
       },
       토스인증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "토스인증" }).click();
         const newPage = await pagePromise;
-        return new 토스인증Page(newPage);
+        return newPage;
       },
     },
   },
@@ -99,7 +88,7 @@ export const createGate = defineGate(authMethod, {
         await page.getByLabel("동의하기").check();
         await page.getByText("휴대폰 인증").click();
         const newPage = await pagePromise;
-        return new SCI평가정보Page(newPage);
+        return newPage;
       },
     },
   },
@@ -110,7 +99,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "간편인증" }).click();
         const newPage = await pagePromise;
-        return new OACXPage(newPage);
+        return newPage;
       },
     },
   },
@@ -120,7 +109,7 @@ export const createGate = defineGate(authMethod, {
       OACX: async (page) => {
         await page.getByRole("button", { name: "간편인증" }).click();
         await page.getByRole("link", { name: "인증", exact: true }).click();
-        return new OACXPage(page);
+        return page;
       },
     },
     extra: {
@@ -139,14 +128,14 @@ export const createGate = defineGate(authMethod, {
         await page.getByRole("link", { name: "본인확인 로그인" }).click();
         await page.getByRole("button", { name: "민간인증서" }).click();
         const newPage = await pagePromise;
-        return new OACXPage(newPage);
+        return newPage;
       },
       NICE평가정보: async (page) => {
         await page.getByRole("link", { name: "본인확인 로그인" }).click();
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "휴대폰" }).click();
         const newPage = await pagePromise;
-        return new NICE평가정보Page(newPage);
+        return newPage;
       },
     },
   },
@@ -155,7 +144,7 @@ export const createGate = defineGate(authMethod, {
     method: {
       OACX: async (page) => {
         await page.getByRole("button", { name: "간편인증" }).click();
-        return new OACXPage(page);
+        return page;
       },
     },
   },
@@ -166,7 +155,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByText("간편인증", { exact: true }).click();
         const newPage = await pagePromise;
-        return new OACXPage(newPage);
+        return newPage;
       },
     },
   },
@@ -177,13 +166,14 @@ export const createGate = defineGate(authMethod, {
         const frameLocator = page.frameLocator("iframe[name='simple_iframeView']");
         await page.getByRole("button", { name: "간편 인증" }).filter({ visible: true }).click();
         await page.getByTitle("간편인증").filter({ visible: true }).click();
-        return new OACXPage(frameLocator);
+        return frameLocator;
       },
       모바일신분증: async (page) => {
+        await page.waitForLoadState("networkidle");
         await page.locator("#mf_txppWframe_anchor16").click();
         await page.locator("#mf_txppWframe_anchor24").click();
         const frameLocator = page.frameLocator("iframe[title='모바일신분증 인증']");
-        return new 모바일신분증Page(frameLocator);
+        return frameLocator;
       },
     },
   },
@@ -195,7 +185,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: " 휴대폰 인증" }).click();
         const newPage = await pagePromise;
-        return new NHN_KCPPage(newPage);
+        return newPage;
       },
     },
   },
@@ -207,7 +197,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.locator(`input[value="인증요청"]`).click();
         const newPage = await pagePromise;
-        return new NHN_KCPPage(newPage);
+        return newPage;
       },
     },
   },
@@ -223,7 +213,7 @@ export const createGate = defineGate(authMethod, {
         await page.getByRole("link", { name: "민간인증서 인증" }).click();
         await page.waitForLoadState("networkidle");
         const locator = page.locator(`#dsh-root`);
-        return new 넥스원소프트Page(locator);
+        return locator;
       },
     },
   },
@@ -234,7 +224,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "휴대폰 인증" }).click();
         const newPage = await pagePromise;
-        return new 드림시큐리티Page(newPage);
+        return newPage;
       },
     },
   },
@@ -245,7 +235,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "본인인증" }).click();
         const newPage = await pagePromise;
-        return new 드림시큐리티Page(newPage);
+        return newPage;
       },
     },
   },
@@ -259,7 +249,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "본인 인증하기" }).click();
         const newPage = await pagePromise;
-        return new KG모빌리언스Page(newPage);
+        return newPage;
       },
     },
   },
@@ -270,7 +260,7 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "본인 인증" }).click();
         const newPage = await pagePromise;
-        return new 한국모바일인증Page(newPage);
+        return newPage;
       },
     },
   },

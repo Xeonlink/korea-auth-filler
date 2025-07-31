@@ -1,20 +1,23 @@
 import { carrier, way } from "@/utils/constants";
 import { test } from ".";
+import { poms } from "./pom/PomPage";
 
 test.describe("from 디지털원패스", () => {
-  test("SMS", async ({ popupPage, gate, profile }) => {
+  test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ carrier: carrier.KT, way: way.SMS });
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();
-    const page = await gate.디지털원패스FindId.openOKname();
-    await page.expectSmsAuthPage();
+    const root = await gate.디지털원패스FindId.openOKname();
+    const pom = poms.okname(root, profile);
 
-    await page.prepare(profile);
-    await page.expect이름filled();
-    await page.expect주민번호앞자리filled();
-    await page.expect주민번호성별filled();
-    await page.expect전화번호filled();
+    await pom.step("SMS인증View", async (expect) => {
+      await expect.smsAuthView();
+      await expect.이름filled();
+      await expect.주민번호앞자리filled();
+      await expect.주민번호성별filled();
+      await expect.전화번호filled();
+    });
   });
 
   test("PASS", async ({ popupPage, gate, profile }) => {
@@ -22,12 +25,14 @@ test.describe("from 디지털원패스", () => {
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();
-    const page = await gate.디지털원패스FindId.openOKname();
-    await page.expectPassAuthPage();
+    const root = await gate.디지털원패스FindId.openOKname();
+    const pom = poms.okname(root, profile);
 
-    await page.prepare(profile);
-    await page.expect이름filled();
-    await page.expect전화번호filled();
+    await pom.step("PASS인증View", async (expect) => {
+      await expect.passAuthView();
+      await expect.이름filled();
+      await expect.전화번호filled();
+    });
   });
 
   test("QR", async ({ popupPage, gate, profile }) => {
@@ -35,7 +40,11 @@ test.describe("from 디지털원패스", () => {
     await popupPage.prepare(profile);
 
     await gate.디지털원패스FindId.goto();
-    const page = await gate.디지털원패스FindId.openOKname();
-    await page.expectQrAuthPage();
+    const root = await gate.디지털원패스FindId.openOKname();
+    const pom = poms.okname(root, profile);
+
+    await pom.step("QR인증View", async (expect) => {
+      await expect.qrAuthView();
+    });
   });
 });
