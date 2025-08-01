@@ -450,4 +450,36 @@ export const poms = {
       await expect(생년월일Input).toHaveValue(profile.생년월일);
     },
   }),
+  danal: definePage({
+    smsAuthView: async (root) => {
+      const locator = root.locator("#authTabSms");
+      await expect(locator).toBeVisible();
+      await expect(locator).toHaveClass(/(^|\s)on(\s|$)/);
+    },
+    passAuthView: async (root) => {
+      const locator = root.locator("#authTabPass");
+      await expect(locator).toBeVisible();
+      await expect(locator).toHaveClass(/(^|\s)on(\s|$)/);
+    },
+    이름filled: async (root, profile) => {
+      const 이름Input = root.getByPlaceholder("이름").filter({ visible: true });
+      await expect(이름Input).toBeVisible();
+      await expect(이름Input).toHaveValue(profile.이름);
+    },
+    주민번호앞자리filled: async (root, profile) => {
+      const 주민번호앞자리Input = root.getByTitle("주민등록번호 앞 6자리");
+      await expect(주민번호앞자리Input).toBeVisible();
+      await expect(주민번호앞자리Input).toHaveValue(profile.주민번호.앞자리);
+    },
+    주민번호성별filled: async (root, profile) => {
+      const 주민번호성별Input = root.getByTitle("주민등록번호 7번째 자리");
+      await expect(주민번호성별Input).toBeVisible();
+      await expect(주민번호성별Input).toHaveValue(profile.주민번호.성별숫자);
+    },
+    전화번호filled: async (root, profile) => {
+      const 전화번호Input = root.getByTitle("휴대폰번호 입력").filter({ visible: true });
+      await expect(전화번호Input).toBeVisible();
+      await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
+    },
+  }),
 };

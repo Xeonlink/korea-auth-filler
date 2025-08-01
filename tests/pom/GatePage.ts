@@ -14,6 +14,7 @@ const authMethod = type<
   | "드림시큐리티"
   | "KG모빌리언스"
   | "YESKEY"
+  | "다날"
 >();
 
 export const createGate = defineGate(authMethod, {
@@ -276,6 +277,28 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "본인 인증" }).click();
         const newPage = await pagePromise;
+        return newPage;
+      },
+    },
+  },
+  blank: {
+    url: "about:blank",
+    method: {
+      다날: async (page) => {
+        const newPage = await page.context().newPage();
+        await newPage.evaluate(() => {
+          const form = document.createElement("form");
+          form.setAttribute("method", "post");
+          form.setAttribute("action", "https://wauth.teledit.com/Danal/WebAuth/Web/Start.php");
+
+          const input = document.createElement("input");
+          input.setAttribute("name", "TID");
+          input.setAttribute("value", "202508011549039561634010");
+
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+        });
         return newPage;
       },
     },

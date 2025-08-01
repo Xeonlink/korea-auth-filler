@@ -1,13 +1,8 @@
 import type { Handler } from "@/utils/type";
-import { nhnkcp1, nhnkcp2 } from "./nhnkcp";
-import { nice1, nice2, nice3, nice4 } from "./nice";
-import { sci_v2_1, sci_v2_3, sci_v3_1, sci_v3_2, sci_v3_3 } from "./sci";
-import { oacx } from "./oacx";
-import { kcb1, kcb2 } from "./kcb";
-import { toss } from "./toss";
-import { nexonesoft } from "./nexonesoft";
+import { danal } from "./danal";
 import { dream } from "./dream";
-import { mobileid1, mobileid2 } from "./mobileid";
+import { kcb1, kcb2 } from "./kcb";
+import { kgmobilians } from "./kgmobilians";
 import {
   kmcert_v2_1,
   kmcert_v2_2,
@@ -19,7 +14,13 @@ import {
   kmcert_v5_1,
   kmcert_v5_2,
 } from "./kmcert";
-import { kgmobilians } from "./kgmobilians";
+import { mobileid1, mobileid2 } from "./mobileid";
+import { nexonesoft } from "./nexonesoft";
+import { nhnkcp1, nhnkcp2 } from "./nhnkcp";
+import { nice1, nice2, nice3, nice4 } from "./nice";
+import { oacx } from "./oacx";
+import { sci_v2_1, sci_v2_3, sci_v3_1, sci_v3_2, sci_v3_3 } from "./sci";
+import { toss } from "./toss";
 // import { yeskey } from "./yeskey";
 
 export const handlers: Handler[] = [
@@ -52,5 +53,6 @@ export const handlers: Handler[] = [
   dream,
   nexonesoft,
   kgmobilians,
+  danal,
   // yeskey,
 ];
