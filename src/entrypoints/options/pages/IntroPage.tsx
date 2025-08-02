@@ -1,9 +1,61 @@
-import extra2모바일인증Gif from "@/assets/gif/extra2-모바일인증.gif";
-import 대전시모바일인증Gif from "@/assets/gif/대전시-모바일인증.gif";
-import 부산시모바일인증Gif from "@/assets/gif/부산시-모바일인증.gif";
-import 서울시모바일인증Gif from "@/assets/gif/서울시-모바일인증.gif";
-import 홈택스OacxGif from "@/assets/gif/홈택스-oacx.gif";
+import nhnkcpGif from "@/assets/gif/nhnkcp.gif";
+import sciGif from "@/assets/gif/sci.gif";
+import niceGif from "@/assets/gif/nice.gif";
+import kmcertGif from "@/assets/gif/kmcert.gif";
+import oacxGif from "@/assets/gif/oacx.gif";
 import tossGif from "@/assets/gif/toss.gif";
+import dreamGif from "@/assets/gif/dream.gif";
+import danalGif from "@/assets/gif/danal.gif";
+import nexonesoftGif from "@/assets/gif/nexonesoft.gif";
+import kgmobiliansGif from "@/assets/gif/kgmobilians.gif";
+
+const images = [
+  {
+    name: "토스",
+    src: tossGif,
+    alt: "토스 자동 채우기 데모",
+  },
+  {
+    name: "NICE평가정보",
+    src: niceGif,
+    alt: "NICE평가정보 데모",
+  },
+  {
+    name: "한국모바일인증",
+    src: kmcertGif,
+    alt: "한국모바일인증 데모",
+  },
+  {
+    name: "SCI 평가정보",
+    src: sciGif,
+    alt: "SCI 평가정보 데모",
+  },
+  {
+    name: "NHN KCP",
+    src: nhnkcpGif,
+    alt: "NHN KCP 데모",
+  },
+  {
+    name: "드림시큐리티",
+    src: dreamGif,
+    alt: "드림시큐리티 데모",
+  },
+  {
+    name: "다날",
+    src: danalGif,
+    alt: "다날 데모",
+  },
+  {
+    name: "넥스원소프트",
+    src: nexonesoftGif,
+    alt: "넥스원소프트 데모",
+  },
+  {
+    name: "KG모빌리언스",
+    src: kgmobiliansGif,
+    alt: "KG모빌리언스 데모",
+  },
+];
 
 export function IntroPage() {
   return (
@@ -22,7 +74,7 @@ export function IntroPage() {
             <img
               alt="홈택스 OACX 자동 채우기 데모"
               className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
-              src={홈택스OacxGif}
+              src={oacxGif}
             />
             <div
               className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
@@ -34,77 +86,23 @@ export function IntroPage() {
           </div>
         </div>
         {/* Masonry Layout for Remaining Images */}
-        <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
-          <div className="group relative break-inside-avoid mb-6">
-            <img
-              alt="토스로 인증하기 데모"
-              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
-              src={tossGif}
-            />
-            <div
-              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6">
+          {images.map((image) => (
+            <div className="group relative break-inside-avoid mb-6" key={image.name}>
+              <img
+                alt={image.alt}
+                className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
+                src={image.src}
+              />
+              <div
+                className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
                  group-hover:opacity-100 transition-opacity duration-300 flex 
                  items-center justify-center rounded-xl"
-            >
-              <span className="text-white font-semibold text-lg">토스로 인증하기</span>
+              >
+                <span className="text-white font-semibold text-lg">{image.name}</span>
+              </div>
             </div>
-          </div>
-          <div className="group relative break-inside-avoid mb-6">
-            <img
-              alt="부산시 모바일 인증 데모"
-              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
-              src={부산시모바일인증Gif}
-            />
-            <div
-              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
-                 group-hover:opacity-100 transition-opacity duration-300 flex 
-                 items-center justify-center rounded-xl"
-            >
-              <span className="text-white font-semibold text-lg">부산시 모바일 인증</span>
-            </div>
-          </div>
-          <div className="group relative break-inside-avoid mb-6">
-            <img
-              alt="서울시 모바일 인증 데모"
-              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
-              src={서울시모바일인증Gif}
-            />
-            <div
-              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
-                 group-hover:opacity-100 transition-opacity duration-300 flex 
-                 items-center justify-center rounded-xl"
-            >
-              <span className="text-white font-semibold text-lg">서울시 모바일 인증</span>
-            </div>
-          </div>
-          <div className="group relative break-inside-avoid mb-6">
-            <img
-              alt="SCI 평가정보 데모"
-              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
-              src={대전시모바일인증Gif}
-            />
-            <div
-              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
-                 group-hover:opacity-100 transition-opacity duration-300 flex 
-                 items-center justify-center rounded-xl"
-            >
-              <span className="text-white font-semibold text-lg">SCI 평가정보</span>
-            </div>
-          </div>
-          <div className="group relative break-inside-avoid mb-6">
-            <img
-              alt="기타 모바일 인증 데모"
-              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
-              src={extra2모바일인증Gif}
-            />
-            <div
-              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
-                 group-hover:opacity-100 transition-opacity duration-300 flex 
-                 items-center justify-center rounded-xl"
-            >
-              <span className="text-white font-semibold text-lg">기타 모바일 인증</span>
-            </div>
-          </div>
+          ))}
         </div>
       </main>
     </div>

@@ -10,7 +10,7 @@
 
 ## 📋 개요
 
-<img src="publish/readme/홈택스-oacx.gif" width="500" />
+<img src="publish/readme/oacx.gif" width="500" />
 
 한국에서 사용되는 모바일 본인인증, 휴대폰 인증, 민간인증서 인증 등을 사용할 때 필요한 정보를 자동으로 채워주는 브라우저 확장프로그램 입니다.
 

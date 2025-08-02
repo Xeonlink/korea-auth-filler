@@ -4,7 +4,7 @@ import { Page } from "@/utils/Page";
 
 /**
  * 테스트 사이트
- * - 대한민국 국회 회원가입 : https://member.assembly.go.kr/member/join/joinSelectPage.do
+ * - 대한민국 국회 회원가입 민간인증서 : https://member.assembly.go.kr/member/join/joinSelectPage.do
  */
 export const nexonesoft: Handler = {
   isMatch: (page) => {
@@ -20,7 +20,7 @@ async function ready인증주체View(page: Page, profile: IProfile) {
 
   for (const anchor of 인증주체Anchor) {
     anchor.addEventListener("click", async () => {
-      await page.q(`#dsh-root form.ns-step2`).exists().run();
+      await page.q(`#dsh-root form.ns-step2`).visible().run();
       await fill인증요청View(page, profile);
     });
   }

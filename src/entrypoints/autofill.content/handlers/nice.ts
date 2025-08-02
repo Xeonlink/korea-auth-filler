@@ -4,6 +4,7 @@ import { solveCaptcha } from "@/utils/captcha";
 /**
  * 테스트 사이트
  * - 서울시 로그인 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
+ * - 부산시 아이디찾기 : https://www.busan.go.kr/member/findId
  */
 
 // NICE평가정보

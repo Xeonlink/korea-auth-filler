@@ -1,13 +1,20 @@
 import { test } from ".";
 import { way } from "@/utils/constants";
+import { allcase2 } from "./utils/testcase";
 
-test.describe("from 서울시", () => {
+type Var = {
+  gateKey: "서울시Login" | "부산시FindId";
+};
+
+const testcase = allcase2<Var>((variables) => {
+  const { gateKey } = variables;
+
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
 
-    await gate.서울시Login.goto();
-    const root = await gate.서울시Login.openNICE평가정보();
+    await gate[gateKey].goto();
+    const root = await gate[gateKey].openNICE평가정보();
     const pom = poms.nice(root, profile);
 
     await pom.step("SMS인증View", async (expect) => {
@@ -23,8 +30,8 @@ test.describe("from 서울시", () => {
     profile.mod({ way: way.PASS });
     await popupPage.prepare(profile);
 
-    await gate.서울시Login.goto();
-    const root = await gate.서울시Login.openNICE평가정보();
+    await gate[gateKey].goto();
+    const root = await gate[gateKey].openNICE평가정보();
     const pom = poms.nice(root, profile);
 
     await pom.step("PASS인증View", async (expect) => {
@@ -38,12 +45,19 @@ test.describe("from 서울시", () => {
     profile.mod({ way: way.QR });
     await popupPage.prepare(profile);
 
-    await gate.서울시Login.goto();
-    const root = await gate.서울시Login.openNICE평가정보();
+    await gate[gateKey].goto();
+    const root = await gate[gateKey].openNICE평가정보();
     const pom = poms.nice(root, profile);
 
     await pom.step("QR인증View", async (expect) => {
       await expect.qrAuthView();
     });
   });
+});
+
+testcase.regist({
+  gateKey: {
+    서울시Login: "from 서울시Login",
+    부산시FindId: "from 부산시FindId",
+  },
 });

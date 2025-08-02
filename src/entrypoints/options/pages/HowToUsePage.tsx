@@ -5,7 +5,7 @@ import AfterProfileAdd from "@/assets/readme/after-profile-add.png";
 import BeforeProfileAdd from "@/assets/readme/before-profile-add.png";
 import ExtensionPinImg from "@/assets/readme/extension-pin.png";
 import ProfileAddImg from "@/assets/readme/profile-add.png";
-import HomtaxGif from "@/assets/readme/홈택스-oacx.gif";
+import oacxGif from "@/assets/readme/oacx.gif";
 
 export function HowToUsePage() {
   return (
@@ -98,7 +98,7 @@ export function HowToUsePage() {
               설정에서 자동 채우기를 활성화/비활성화할 수 있습니다.
             </p>
             <div className="flex flex-col items-center mt-4">
-              <img alt="홈택스 자동 채우기 데모" className="mx-auto max-w-lg" src={HomtaxGif} />
+              <img alt="홈택스 자동 채우기 데모" className="mx-auto max-w-lg" src={oacxGif} />
               <p className="mt-2 text-center italic">
                 1. 홈택스 로그인 페이지에서 자동 채우기 기능이 작동하는 예시입니다.
               </p>

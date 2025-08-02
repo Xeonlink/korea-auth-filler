@@ -157,6 +157,17 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
+  부산시FindId: {
+    url: "https://www.busan.go.kr/member/findId",
+    method: {
+      NICE평가정보: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("link", { name: "휴대폰 인증하기" }).click();
+        const newPage = await pagePromise;
+        return newPage;
+      },
+    },
+  },
   예비군Login: {
     url: "https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do",
     method: {
