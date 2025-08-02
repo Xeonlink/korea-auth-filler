@@ -482,4 +482,43 @@ export const poms = {
       await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
     },
   }),
+  payco: defineAny({
+    gotoSmsAuthView: async (root) => {
+      await root.locator("#tabSms").click();
+    },
+    gotoPassAuthView: async (root) => {
+      await root.locator("#tabApp").click();
+    },
+    이름filled: async (root, profile) => {
+      const 이름Input = root.getByPlaceholder("이름");
+      await expect(이름Input).toBeVisible();
+      await expect(이름Input).toHaveValue(profile.이름);
+    },
+    전화번호filled: async (root, profile) => {
+      const 전화번호Input = root.getByPlaceholder("휴대폰 번호");
+      await expect(전화번호Input).toBeVisible();
+      await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
+    },
+    주민번호앞자리filled: async (root, profile) => {
+      const 주민번호앞자리Input = root.getByPlaceholder("주민번호");
+      await expect(주민번호앞자리Input).toBeVisible();
+      await expect(주민번호앞자리Input).toHaveValue(profile.주민번호.앞자리);
+    },
+    주민번호성별filled: async (root, profile) => {
+      const 주민번호성별Input = root.getByTitle("성별코드 첫번째 자리");
+      await expect(주민번호성별Input).toBeVisible();
+      await expect(주민번호성별Input).toHaveValue(profile.주민번호.성별숫자);
+    },
+    통신사selected: async (root, profile) => {
+      const 통신사button = root.getByTitle("통신사 선택");
+      await expect(통신사button).toBeVisible();
+      const 통신사 = profile.map.통신사("Skt", "Ktf", "Lgt", "Skr", "Ktr", "Lgr");
+      await expect(통신사button).toHaveAttribute("aria-labelledby", `telecomChoiceButton${통신사}`);
+    },
+    인증요청active: async (root) => {
+      const 인증요청Button = root.getByRole("button", { name: "인증요청" });
+      await expect(인증요청Button).toBeVisible();
+      await expect(인증요청Button).toBeEnabled();
+    },
+  }),
 };

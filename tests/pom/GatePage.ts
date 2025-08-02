@@ -15,6 +15,7 @@ const authMethod = type<
   | "KG모빌리언스"
   | "YESKEY"
   | "다날"
+  | "페이코"
 >();
 
 export const createGate = defineGate(authMethod, {
@@ -299,6 +300,52 @@ export const createGate = defineGate(authMethod, {
           document.body.appendChild(form);
           form.submit();
         });
+        return newPage;
+      },
+    },
+  },
+  paycoLogin: {
+    url: "https://www.payco.com/",
+    method: {
+      페이코: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("link", { name: "로그인" }).click();
+        const newPage = await pagePromise;
+
+        await newPage.getByRole("link", { name: "아이디 찾기" }).click();
+        await newPage.getByRole("button", { name: "휴대폰 인증" }).click();
+
+        return newPage;
+      },
+    },
+  },
+  paycoSignUp: {
+    url: "https://www.payco.com/",
+    method: {
+      페이코: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("link", { name: "회원가입" }).click();
+        const newPage = await pagePromise;
+
+        await newPage.locator("#checkboxAll").check();
+        await newPage.locator("#confirmButton").click();
+
+        return newPage;
+      },
+    },
+  },
+  고속도로통행료: {
+    url: "https://www.hipass.co.kr/comm/lginpg.do#",
+    method: {
+      페이코: async (page) => {
+        await page.getByRole("link", { name: "SNS 인증" }).click();
+
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByRole("link", { name: "페이코 로그인" }).click();
+        const newPage = await pagePromise;
+
+        await newPage.getByRole("link", { name: "아이디 찾기" }).click();
+        await newPage.getByRole("button", { name: "휴대폰 인증" }).click();
         return newPage;
       },
     },

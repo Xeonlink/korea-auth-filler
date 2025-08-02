@@ -16,26 +16,44 @@ function decodeDigitSequence(seq: number[]) {
   return out;
 }
 
+class SessionFactory {
+  private static cache = new Map<string, ort.InferenceSession>();
+
+  public static async create(url: string, options?: ort.InferenceSession.SessionOptions) {
+    const session = SessionFactory.cache.get(url);
+    if (session) return session;
+    const newSession = await ort.InferenceSession.create(url, options);
+    SessionFactory.cache.set(url, newSession);
+
+    document.addEventListener("close", () => {
+      SessionFactory.cache.delete(url);
+      newSession.release();
+    });
+
+    return newSession;
+  }
+}
+
 export async function solveCaptcha(modelPath: PublicPath, image: HTMLImageElement) {
   ort.env.wasm.wasmPaths = {
     wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
     mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
   };
-  const { naturalWidth: width, naturalHeight: height } = image;
+  const { naturalWidth, naturalHeight } = image;
 
   const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
+  canvas.width = naturalWidth;
+  canvas.height = naturalHeight;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Failed to get canvas context");
   ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, width, height);
+  ctx.fillRect(0, 0, naturalWidth, naturalHeight);
   ctx.drawImage(image, 0, 0);
 
   const base64 = canvas.toDataURL();
   const tensor = await ort.Tensor.fromImage(base64);
   const url = browser.runtime.getURL(modelPath);
-  const session = await ort.InferenceSession.create(url);
+  const session = await SessionFactory.create(url);
   const result = await session.run({ x: tensor });
 
   const y = Array.from(result.y.data as Float32Array);
@@ -45,7 +63,6 @@ export async function solveCaptcha(modelPath: PublicPath, image: HTMLImageElemen
   const out = decodeDigitSequence(seq);
 
   result.y.dispose();
-  session.release();
   tensor.dispose();
 
   return out;

@@ -21,6 +21,7 @@ import { nice1, nice2, nice3, nice4 } from "./nice";
 import { oacx } from "./oacx";
 import { sci_v2_1, sci_v2_3, sci_v3_1, sci_v3_2, sci_v3_3 } from "./sci";
 import { toss } from "./toss";
+import { payco } from "./payco";
 // import { yeskey } from "./yeskey";
 
 export const handlers: Handler[] = [
@@ -54,5 +55,6 @@ export const handlers: Handler[] = [
   nexonesoft,
   kgmobilians,
   danal,
+  payco,
   // yeskey,
 ];
