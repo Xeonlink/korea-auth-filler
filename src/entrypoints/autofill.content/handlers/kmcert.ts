@@ -4,7 +4,7 @@ import type { Handler } from "@/utils/type";
 // 통신사 선택 & 약관동의 & 인증방식 선택
 export const kmcert_v2_1: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://www.kmcert.com/kmcis/web_v2/kmcisHp00.jsp");
+    return page.url.href.startsWith("https://www.kmcert.com/kmcis/web_v2/kmcisHp00.jsp");
   },
   fill: async (page, profile) => {
     await page
@@ -66,7 +66,7 @@ export const kmcert_v2_2: Handler = {
 // 통신사 선택 & 약관동의 & 인증방식 선택
 export const kmcert_v3_1: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://www.kmcert.com/kmcis/web_v3/kmcisHp00.jsp");
+    return page.url.href.startsWith("https://www.kmcert.com/kmcis/web_v3/kmcisHp00.jsp");
   },
   fill: async (page, profile) => {
     await page
@@ -91,7 +91,7 @@ export const kmcert_v3_3: Handler = {
     return [
       "https://www.kmcert.com/kmcis/web_v3/kmcisSms01.jsp",
       "https://www.kmcert.com/kmcis/simpleCert_web_v2/kmcisApp01.jsp",
-    ].some((l) => page.url.href.includes(l));
+    ].some((l) => page.url.href.startsWith(l));
   },
   fill: async (page, profile) => {
     await page.input(`input[name="userName"]`).fill(profile.이름);
@@ -105,7 +105,7 @@ export const kmcert_v3_3: Handler = {
 // 통신사 선택 & 약관동의 & 인증방식 선택
 export const kmcert_v4_1: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://www.kmcert.com/kmcis/web_v4/kmcisHp00.jsp");
+    return page.url.href.startsWith("https://www.kmcert.com/kmcis/web_v4/kmcisHp00.jsp");
   },
   fill: async (page, profile) => {
     await page.q(".step1header").visible().click();
@@ -128,7 +128,7 @@ export const kmcert_v4_1: Handler = {
 // SMS 인증
 export const kmcert_v4_2: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp");
+    return page.url.href.startsWith("https://www.kmcert.com/kmcis/web_v4/kmcisSms01.jsp");
   },
   fill: async (page, profile) => {
     await page.input("#userName").visible().fill(profile.이름);
@@ -141,7 +141,9 @@ export const kmcert_v4_2: Handler = {
 // PASS 인증
 export const kmcert_v4_3: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp");
+    return page.url.href.startsWith(
+      "https://www.kmcert.com/kmcis/simpleCert_web_v3/kmcisApp01.jsp",
+    );
   },
   fill: async (page, profile) => {
     await page.input("#userName").visible().fill(profile.이름);
@@ -162,7 +164,7 @@ export const kmcert_v5_1: Handler = {
     return [
       "https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp",
       "https://evt.kmcert.com/kmcis/web_v5/kmcisHp00.jsp",
-    ].some((l) => page.url.href.includes(l));
+    ].some((l) => page.url.href.startsWith(l));
   },
   fill: async (page, profile) => {
     await page
@@ -189,7 +191,7 @@ export const kmcert_v5_2: Handler = {
       "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
       "https://evt.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
       "https://evt.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
-    ].some((l) => page.url.href.includes(l));
+    ].some((l) => page.url.href.startsWith(l));
   },
   fill: async (page, profile) => {
     await page.input(".userName").fill(profile.이름);

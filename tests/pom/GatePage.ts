@@ -16,6 +16,7 @@ const authMethod = type<
   | "YESKEY"
   | "다날"
   | "페이코"
+  | "KG이니시스"
 >();
 
 export const createGate = defineGate(authMethod, {
@@ -192,6 +193,7 @@ export const createGate = defineGate(authMethod, {
     url: "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&initPage=agitxLogin",
     method: {
       OACX: async (page) => {
+        await page.waitForLoadState("networkidle");
         const frameLocator = page.frameLocator("iframe[name='simple_iframeView']");
         await page.getByRole("button", { name: "간편 인증" }).filter({ visible: true }).click();
         await page.getByTitle("간편인증").filter({ visible: true }).click();
@@ -235,13 +237,11 @@ export const createGate = defineGate(authMethod, {
     method: {
       넥스원소프트: async (page) => {
         await page.getByText("일반회원", { exact: true }).first().click();
-        await page.waitForLoadState("load");
         await page.getByLabel("모든 약관에 동의합니다.").click();
         await page.getByRole("link", { name: "동의합니다", exact: true }).click();
-        await page.waitForLoadState("load");
         await page.getByRole("link", { name: "민간인증서 인증" }).click();
-        await page.waitForLoadState("networkidle");
         const locator = page.locator(`#dsh-root`);
+        await page.waitForLoadState("networkidle");
         return locator;
       },
     },
@@ -357,6 +357,19 @@ export const createGate = defineGate(authMethod, {
 
         await newPage.getByRole("link", { name: "아이디 찾기" }).click();
         await newPage.getByRole("button", { name: "휴대폰 인증" }).click();
+        return newPage;
+      },
+    },
+  },
+  kfcSignUp: {
+    url: "https://www.kfckorea.com/member/join",
+    method: {
+      KG이니시스: async (page) => {
+        await page.locator(".clause-all .agree").click();
+        await page.getByText("다음", { exact: true }).click();
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByText("본인 인증", { exact: true }).click();
+        const newPage = await pagePromise;
         return newPage;
       },
     },

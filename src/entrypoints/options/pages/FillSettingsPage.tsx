@@ -56,6 +56,25 @@ export function FillSettingsPage() {
             </p>
           </div>
         </div>
+        {/* <div className="flex items-start gap-8 bg-base-200 p-4 rounded-lg">
+          <div className="flex items-center gap-2 w-40">
+            <span className="font-bold text-base">OFF</span>
+            <input
+              checked={fullauto}
+              className="toggle"
+              onChange={toggleFullauto}
+              type="checkbox"
+            />
+            <span className="font-bold text-base">YOLO</span>
+          </div>
+          <div className="flex-1">
+            <p className="text-sm text-gray-500">
+              {t("fullauto_description_1")}
+              <br />
+              {t("fullauto_description_2")}
+            </p>
+          </div>
+        </div> */}
       </section>
     </main>
   );

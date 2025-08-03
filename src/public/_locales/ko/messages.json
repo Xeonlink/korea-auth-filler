@@ -206,5 +206,13 @@
   "check_period_description_3": {
     "message": "100ms ~ 10,000ms 사이의 값을 입력할 수 있습니다.",
     "description": "100ms ~ 10,000ms 사이의 값을 입력할 수 있습니다."
+  },
+  "fullauto_description_1": {
+    "message": "확장프로그램이 본인인증의 마지막 확인버튼까지 누를 수 있도록 권한을 부여합니다.",
+    "description": "확장프로그램이 본인인증의 마지막 확인버튼까지 누를 수 있도록 권한을 부여합니다."
+  },
+  "fullauto_description_2": {
+    "message": "주의: 이 기능을 사용할 때는 적절한 프로필을 선택했는지 확인하세요.",
+    "description": "주의: 이 기능을 사용할 때는 적절한 프로필을 선택했는지 확인하세요."
   }
 }

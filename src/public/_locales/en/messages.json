@@ -206,5 +206,13 @@
   "check_period_description_3": {
     "message": "You can enter a value between 100ms and 10,000ms.",
     "description": "You can enter a value between 100ms and 10,000ms."
+  },
+  "fullauto_description_1": {
+    "message": "Grant permission to the extension to click the last confirm button of the identity verification page.",
+    "description": "Grant permission to the extension to click the last confirm button of the identity verification page."
+  },
+  "fullauto_description_2": {
+    "message": "Caution: When using this feature, please check if the appropriate profile is selected.",
+    "description": "Caution: When using this feature, please check if the appropriate profile is selected."
   }
 }

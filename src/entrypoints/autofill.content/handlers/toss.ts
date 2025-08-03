@@ -9,7 +9,7 @@ import { Page } from "@/utils/Page";
 
 export const toss: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://auth.cert.toss.im/type-info");
+    return page.url.href.startsWith("https://auth.cert.toss.im/type-info");
   },
   fill: async (page, profile) => {
     const 탭Items = qAll<HTMLLIElement>(".tab__item");

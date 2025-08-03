@@ -11,7 +11,7 @@ import { Handler } from "@/utils/type";
 
 export const payco: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://id.payco.com/certificate/mobile/certify.nhn");
+    return page.url.href.startsWith("https://id.payco.com/certificate/mobile/certify.nhn");
   },
   fill: async (page, profile) => {
     const searchParams = page.url.searchParams;

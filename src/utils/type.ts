@@ -22,6 +22,7 @@ export type StorageData = {
   on: boolean;
   isSideMenuOpen: boolean;
   delay: number;
+  fullauto: boolean;
 };
 
 export interface IProfile {

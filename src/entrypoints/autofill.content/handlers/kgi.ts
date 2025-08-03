@@ -1,0 +1,19 @@
+/**
+ * 테스트 사이트
+ * - kfc 회원가입 : https://www.kfckorea.com/member/join
+ */
+
+import { Handler } from "@/utils/type";
+
+export const kgi: Handler = {
+  isMatch: (page) => {
+    return page.url.href.startsWith("https://kssa.inicis.com/request");
+  },
+  fill: async (page, profile) => {
+    await page.input("#name").visible().fill(profile.이름);
+    await page.input("#birth").visible().fill(profile.생년월일);
+    await page.input("#phone").visible().fill(profile.전화번호.전체);
+    await page.input("#all_check").visible().check();
+    await page.button("#JAuthBtn").visible().focus();
+  },
+};

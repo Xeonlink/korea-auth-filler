@@ -28,7 +28,7 @@ export const nice1: Handler = {
 // 인증방식
 export const nice2: Handler = {
   isMatch: ({ url }) => {
-    return url.href.includes("https://nice.checkplus.co.kr/cert/mobileCert/method");
+    return url.href.startsWith("https://nice.checkplus.co.kr/cert/mobileCert/method");
   },
   fill: async (page, profile) => {
     await page.input("input[name='mobileCertAgree']").check();
@@ -43,7 +43,7 @@ export const nice2: Handler = {
 // SMS인증
 export const nice3: Handler = {
   isMatch: ({ url }) => {
-    return url.href.includes("https://nice.checkplus.co.kr/cert/mobileCert/sms/certification");
+    return url.href.startsWith("https://nice.checkplus.co.kr/cert/mobileCert/sms/certification");
   },
   fill: async (page, profile) => {
     await page.input("#userName").fill(profile.이름);
@@ -63,7 +63,7 @@ export const nice3: Handler = {
 // PASS 인증
 export const nice4: Handler = {
   isMatch: ({ url }) => {
-    return url.href.includes("https://nice.checkplus.co.kr/cert/mobileCert/push/certification");
+    return url.href.startsWith("https://nice.checkplus.co.kr/cert/mobileCert/push/certification");
   },
   fill: async (page, profile) => {
     await page.input("#userName").fill(profile.이름);
@@ -79,3 +79,8 @@ export const nice4: Handler = {
     await page.button(".btn_confirm").focus();
   },
 };
+
+/**
+ * 테스트 사이트
+ * - 나이스ID : https://cert.vno.co.kr/ipin/identcert/method/request/mobile
+ */

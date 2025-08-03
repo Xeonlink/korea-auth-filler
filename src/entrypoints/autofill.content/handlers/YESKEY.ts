@@ -8,7 +8,7 @@ import type { Handler } from "@/utils/type";
  */
 export const yeskey: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("yeskey.or.kr") && page.q("#__fincert_root__").element !== null;
+    return page.url.href.startsWith("yeskey.or.kr") && page.q("#__fincert_root__").element !== null;
   },
   fill: async (page, profile) => {
     await page.input("#CLOUD_ID_1").visible().fill(profile.이름);

@@ -8,7 +8,7 @@ import type { Handler } from "@/utils/type";
  */
 export const nhnkcp1: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://cert.kcp.co.kr/cert/pc/telcomSelect.jsp");
+    return page.url.href.startsWith("https://cert.kcp.co.kr/cert/pc/telcomSelect.jsp");
   },
   fill: async (page, profile) => {
     await page

@@ -17,7 +17,7 @@ const captchaMap = [
 
 export const danal: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://wauth.teledit.com/Danal/WebAuth/Web/Start.php");
+    return page.url.href.startsWith("https://wauth.teledit.com/Danal/WebAuth/Web/Start.php");
   },
   fill: async (page, profile) => {
     await fillStartView(page, profile);

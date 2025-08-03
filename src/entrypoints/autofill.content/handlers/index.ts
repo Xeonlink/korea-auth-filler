@@ -22,6 +22,7 @@ import { oacx } from "./oacx";
 import { sci_v2_1, sci_v2_3, sci_v3_1, sci_v3_2, sci_v3_3 } from "./sci";
 import { toss } from "./toss";
 import { payco } from "./payco";
+import { kgi } from "./kgi";
 // import { yeskey } from "./yeskey";
 
 export const handlers: Handler[] = [
@@ -56,5 +57,6 @@ export const handlers: Handler[] = [
   kgmobilians,
   danal,
   payco,
+  kgi,
   // yeskey,
 ];

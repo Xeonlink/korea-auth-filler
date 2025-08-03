@@ -9,7 +9,7 @@ import { Page } from "@/utils/Page";
 
 export const kgmobilians: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://auth.mobilians.co.kr/goCashMain.mcash");
+    return page.url.href.startsWith("https://auth.mobilians.co.kr/goCashMain.mcash");
   },
   fill: async (page, profile) => {
     await fillStartView(page, profile);

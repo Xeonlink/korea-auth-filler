@@ -24,7 +24,7 @@ function getTcValue(profile: IProfile) {
 
 export const kcb1: Handler = {
   isMatch: (page) => {
-    const isUrlMatch = page.url.href.includes("https://safe.ok-name.co.kr/CommonSvl");
+    const isUrlMatch = page.url.href.startsWith("https://safe.ok-name.co.kr/CommonSvl");
     const isStep1 = !!page.q<HTMLElement>(".step1header").element;
     return isUrlMatch && isStep1;
   },
@@ -40,7 +40,7 @@ export const kcb1: Handler = {
 
 export const kcb2: Handler = {
   isMatch: (page) => {
-    const isUrlMatch = page.url.href.includes("https://safe.ok-name.co.kr/CommonSvl");
+    const isUrlMatch = page.url.href.startsWith("https://safe.ok-name.co.kr/CommonSvl");
     const isStep2 = !!page.q<HTMLElement>("section.certifyWrap").element;
     return isUrlMatch && isStep2;
   },

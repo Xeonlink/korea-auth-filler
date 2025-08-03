@@ -381,7 +381,7 @@ export const poms = {
         return [
           "https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
           "https://evt.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
-        ].some((l) => url.href.includes(l));
+        ].some((l) => url.href.startsWith(l));
       });
     },
     passAuthView: async (root) => {
@@ -389,7 +389,7 @@ export const poms = {
         return [
           "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
           "https://evt.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
-        ].some((l) => url.href.includes(l));
+        ].some((l) => url.href.startsWith(l));
       });
     },
     qrAuthView: async (root) => {
@@ -397,7 +397,7 @@ export const poms = {
         return [
           "https://www.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
           "https://evt.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
-        ].some((l) => url.href.includes(l));
+        ].some((l) => url.href.startsWith(l));
       });
     },
     이름filled: async (root, profile) => {
@@ -519,6 +519,31 @@ export const poms = {
       const 인증요청Button = root.getByRole("button", { name: "인증요청" });
       await expect(인증요청Button).toBeVisible();
       await expect(인증요청Button).toBeEnabled();
+    },
+  }),
+  kgi: defineAny({
+    gotoAuthView: async (root, _, name: "카카오톡 인증" | "네이버 인증" | "토스 인증") => {
+      await root.getByRole("link", { name }).click();
+    },
+    이름filled: async (root, profile) => {
+      const 이름Input = root.getByPlaceholder("이름");
+      await expect(이름Input).toBeVisible();
+      await expect(이름Input).toHaveValue(profile.이름);
+    },
+    생년월일filled: async (root, profile) => {
+      const 생년월일Input = root.getByTitle("생년월일");
+      await expect(생년월일Input).toBeVisible();
+      await expect(생년월일Input).toHaveValue(profile.생년월일);
+    },
+    전화번호filled: async (root, profile) => {
+      const 전화번호Input = root.getByTitle("전화번호");
+      await expect(전화번호Input).toBeVisible();
+      await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
+    },
+    모든동의Checked: async (root) => {
+      const 모든동의Input = root.getByLabel("전체동의");
+      await expect(모든동의Input).toBeVisible();
+      await expect(모든동의Input).toBeChecked();
     },
   }),
 };

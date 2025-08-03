@@ -8,6 +8,7 @@ import dreamGif from "@/assets/gif/dream.gif";
 import danalGif from "@/assets/gif/danal.gif";
 import nexonesoftGif from "@/assets/gif/nexonesoft.gif";
 import kgmobiliansGif from "@/assets/gif/kgmobilians.gif";
+import kgiGif from "@/assets/gif/kgi.gif";
 
 const images = [
   {
@@ -54,6 +55,11 @@ const images = [
     name: "KG모빌리언스",
     src: kgmobiliansGif,
     alt: "KG모빌리언스 데모",
+  },
+  {
+    name: "KG이니시스",
+    src: kgiGif,
+    alt: "KG이니시스 데모",
   },
 ];
 

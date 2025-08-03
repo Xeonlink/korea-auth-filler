@@ -10,7 +10,7 @@ import { Page } from "@/utils/Page";
 // 드림시큐리티
 export const dream: Handler = {
   isMatch: (page) => {
-    return page.url.href.includes("https://cert.mobile-ok.com/ptb_mokauth.html");
+    return page.url.href.startsWith("https://cert.mobile-ok.com/ptb_mokauth.html");
   },
   fill: async (page, profile) => {
     await fill통신사선택View(page, profile);

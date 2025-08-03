@@ -77,6 +77,7 @@ const defaultStorageData: StorageData = {
   on: true,
   isSideMenuOpen: false,
   delay: 1000,
+  fullauto: false,
 };
 
 async function initStorage() {
@@ -86,6 +87,13 @@ async function initStorage() {
   }
 
   await browser.storage.sync.set(defaultStorageData);
+}
+
+async function migrateStorage() {
+  const storageData = (await browser.storage.sync.get(null)) as StorageData;
+  if (storageData.fullauto === undefined) {
+    await browser.storage.sync.set({ fullauto: false });
+  }
 }
 
 function createContextMenu() {
@@ -117,6 +125,9 @@ function main() {
   browser.runtime.onInstalled.addListener((details) => {
     if (details.reason === "install") {
       initStorage();
+    }
+    if (details.reason === "update") {
+      migrateStorage();
     }
     createContextMenu();
   });
