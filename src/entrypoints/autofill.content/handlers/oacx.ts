@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { waitUntilDomIdle, triggerEvent, qAll } from "@/utils/utils";
+import { waitUntilDomIdle, triggerEvent, qAll, debounce } from "@/utils/utils";
 
 /**
  * **일반 테스트 주소**
@@ -23,37 +23,56 @@ export const oacx: Handler = {
   isMatch: (page) => {
     return page.q("#oacxDiv #oacxEmbededContents").element !== null;
   },
-  fill: async (_, profile) => {
-    let 인증주체Lis: HTMLLIElement[] = [];
-
-    // 대부분의 경우 .provider-list 를 사용함
-    if (인증주체Lis.length === 0) {
-      인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .provider-list li");
-    }
-    // 예비군, 숲나들e 홈페이지에서는 ul.oacx_providerList 를 사용함
-    if (인증주체Lis.length === 0) {
-      인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .oacx_providerList li");
+  fill: async (page, profile) => {
+    const oacxDiv = page.q("#oacxDiv").element;
+    if (!oacxDiv) {
+      return;
     }
 
-    for (const 인증주체Li of 인증주체Lis) {
-      인증주체Li.addEventListener("click", () => {
-        waitUntilDomIdle(() => fill(profile), 100);
-      });
-    }
+    const observer = new MutationObserver(
+      debounce((_) => {
+        console.log("debounced");
+        if (page.q("#oacxDiv #oacxEmbededContents").element != null) {
+          beforeFill(profile);
+        }
+      }, 100),
+    );
 
-    for (const 인증주체Li of 인증주체Lis) {
-      if (인증주체Li.click) {
-        인증주체Li.click();
-        return;
-      }
-    }
+    observer.observe(oacxDiv, {
+      childList: true,
+      subtree: true,
+    });
+
+    beforeFill(profile);
   },
 };
 
-/**
- * 인증주체 선택 후 자동으로 호출되는 함수
- * @param profile 프로필 정보
- */
+function beforeFill(profile: IProfile) {
+  let 인증주체Lis: HTMLLIElement[] = [];
+
+  // 대부분의 경우 .provider-list 를 사용함
+  if (인증주체Lis.length === 0) {
+    인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .provider-list li");
+  }
+  // 예비군, 숲나들e 홈페이지에서는 ul.oacx_providerList 를 사용함
+  if (인증주체Lis.length === 0) {
+    인증주체Lis = qAll<HTMLLIElement>("#oacxDiv .oacx_providerList li");
+  }
+
+  for (const 인증주체Li of 인증주체Lis) {
+    인증주체Li.addEventListener("click", () => {
+      waitUntilDomIdle(() => fill(profile), 100);
+    });
+  }
+
+  for (const 인증주체Li of 인증주체Lis) {
+    if (인증주체Li.click) {
+      인증주체Li.click();
+      return;
+    }
+  }
+}
+
 function fill(profile: IProfile) {
   /**
    * 중간중간 qAll인 이유는, 예비군 홈페이지처럼 오래된 oacx 페이지에서는 디바이스 사이즈에 따라 여러개의 인풋이 있을 수 있음.

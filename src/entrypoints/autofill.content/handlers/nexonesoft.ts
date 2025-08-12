@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { qAll } from "@/utils/utils";
+import { debounce } from "@/utils/utils";
 import { Page } from "@/utils/Page";
 
 /**
@@ -8,33 +8,34 @@ import { Page } from "@/utils/Page";
  */
 export const nexonesoft: Handler = {
   isMatch: (page) => {
-    return page.q(`#dsh-root form.ns-step1`).element !== null;
+    return page.q(`#dsh-root form.ns-step2`).element !== null;
   },
   fill: async (page, profile) => {
-    await ready인증주체View(page, profile);
+    const dshRoot = page.q("#dsh-root").element;
+    if (!dshRoot) {
+      return;
+    }
+
+    const observer = new MutationObserver(
+      debounce((_) => {
+        if (page.q("#dsh-root form.ns-step2").element != null) {
+          fill인증요청View(page, profile);
+        }
+      }, 100),
+    );
+
+    observer.observe(dshRoot, {
+      childList: true,
+      subtree: true,
+    });
+
+    await fill인증요청View(page, profile);
   },
 };
-
-async function ready인증주체View(page: Page, profile: IProfile) {
-  const 인증주체Anchor = qAll<HTMLAnchorElement>("#dsh-root .ns-provider a");
-
-  for (const anchor of 인증주체Anchor) {
-    anchor.addEventListener("click", async () => {
-      await page.q(`#dsh-root form.ns-step2`).visible().run();
-      await fill인증요청View(page, profile);
-    });
-  }
-}
 
 async function fill인증요청View(page: Page, profile: IProfile) {
   await page.input("#name").fill(profile.이름);
   await page.input("#birthday").fill(profile.생년월일);
   await page.input("#phone").fill(profile.전화번호.전체);
   await page.input("#allPolicy").check();
-
-  // ---------------------------------
-  await page.q(`#dsh-root button.ns-pre`).on("click", async () => {
-    await page.q(`#dsh-root form.ns-step1`).exists().run();
-    await ready인증주체View(page, profile);
-  });
 }

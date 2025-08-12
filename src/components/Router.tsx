@@ -77,7 +77,6 @@ class Router<T extends string> {
   }
 
   public getCurrentPath() {
-    console.log(this.currentPath);
     return this.currentPath;
   }
 }

@@ -1,4 +1,6 @@
-import type { Handler } from "@/utils/type";
+import { Page } from "@/utils/Page";
+import type { Handler, IProfile } from "@/utils/type";
+import { debounce } from "@/utils/utils";
 
 /**
  * 테스트 주소
@@ -22,16 +24,38 @@ export const mobileid1: Handler = {
  */
 export const mobileid2: Handler = {
   isMatch: (page) => {
-    return page.q("#mipEmbededContents").element !== null;
+    return page.q("#mipc #mipEmbededContents").element !== null;
   },
   fill: async (page, profile) => {
-    await page.input(`input[data-id="name"]`).fill(profile.이름);
-    await page
-      .input(`select[data-id="phone0"]`)
-      .fill(profile.map.통신사("S", "K", "L", "S", "K", "L"));
+    const mipc = page.q("#mipc").element;
+    if (!mipc) {
+      return;
+    }
 
-    await page.input(`select[data-id="phone1"]`).fill(profile.전화번호.앞3자리);
-    await page.input(`input[data-id="phone2"]`).fill(profile.전화번호.뒷8자리);
-    await page.input("#totalAgree").check();
+    const observer = new MutationObserver(
+      debounce((_) => {
+        if (page.q("#mipc #mipEmbededContents").element != null) {
+          fillMobileId2(page, profile);
+        }
+      }, 100),
+    );
+
+    observer.observe(mipc, {
+      childList: true,
+      subtree: true,
+    });
+
+    await fillMobileId2(page, profile);
   },
 };
+
+async function fillMobileId2(page: Page, profile: IProfile) {
+  await page.input(`input[data-id="name"]`).fill(profile.이름);
+  await page
+    .input(`select[data-id="phone0"]`)
+    .fill(profile.map.통신사("S", "K", "L", "S", "K", "L"));
+
+  await page.input(`select[data-id="phone1"]`).fill(profile.전화번호.앞3자리);
+  await page.input(`input[data-id="phone2"]`).fill(profile.전화번호.뒷8자리);
+  await page.input("#totalAgree").check();
+}

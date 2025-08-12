@@ -7,7 +7,11 @@ import { Handler } from "@/utils/type";
 
 export const kgi: Handler = {
   isMatch: (page) => {
-    return page.url.href.startsWith("https://kssa.inicis.com/request");
+    return [
+      //
+      "https://kssa.inicis.com/request",
+      "https://fcsa.inicis.com/request",
+    ].some((v) => page.url.href.startsWith(v));
   },
   fill: async (page, profile) => {
     await page.input("#name").visible().fill(profile.이름);

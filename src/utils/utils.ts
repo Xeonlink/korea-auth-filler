@@ -193,13 +193,15 @@ export function getWayCodeTranslationKey(wayCode: WayCode) {
  * @param wait - 디바운스 시간
  * @returns 디바운스 함수
  */
-export function debounce(func: () => void, wait: number) {
-  let timeoutId: ReturnType<typeof setTimeout>;
+export function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  return () => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(func, wait);
+  const debouncedFunc = (...args: Parameters<T>) => {
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), wait);
   };
+
+  return debouncedFunc as unknown as T;
 }
 
 /**
