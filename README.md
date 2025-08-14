@@ -20,17 +20,11 @@
 ![DaisyUI](https://img.shields.io/badge/DaisyUI-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white)
 ![Radix UI](https://img.shields.io/badge/Radix_UI-161618?style=for-the-badge&logo=radixui&logoColor=white)
 ![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)
-![React Error Boundary](https://img.shields.io/badge/React_Error_Boundary-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![React Helmet](https://img.shields.io/badge/React_Helmet-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![WXT](https://img.shields.io/badge/WXT-00DC82?style=for-the-badge&logoColor=white)
 ![Chrome Extension API](https://img.shields.io/badge/Chrome_Extension_API-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)
 ![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-5D3FD3?style=for-the-badge&logo=onnx&logoColor=white)
 ![Font Awesome](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
 ![tailwind-merge](https://img.shields.io/badge/tailwind--merge-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
-![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)
-![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)
-![Autoprefixer](https://img.shields.io/badge/Autoprefixer-DD3735?style=for-the-badge&logo=autoprefixer&logoColor=white)
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
 
 ## 🚀 주요기능
@@ -49,6 +43,10 @@
 간단한 캡챠의 경우에는 AI를 사용하여 자동으로 이미지를 인식하고 채워넣습니다. 인증회사별로 서로 다른 인식모델을 사용하고 있습니다. 자세한 사항은 [🧠 Kaptch](https://github.com/Xeonlink/kaptch)를 참고해주세요.
 
 ## 📖 설치 및 사용방법
+
+<img src="publish/readme/chrome-web-store.png" width="500" />
+
+[크롬 웹스토어](https://chromewebstore.google.com/detail/%ED%95%9C%EA%B5%AD%EC%9D%B8%EC%A6%9D%EC%B1%84%EC%9A%B0%EA%B8%B0/eonnjagalbjlklfjnfpgdeaajkghpnjc) 에 접속하여 크롬에 추가합니다.
 
 자세한 설치 및 사용방법은 [📖 사용방법 가이드](publish/사용방법.md)를 참고해주세요.
 
