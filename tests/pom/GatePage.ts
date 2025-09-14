@@ -374,4 +374,16 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
+  본인확인_즉시차단해제: {
+    url: "https://www.kmcert.com/kmcis/web_v2/kmcisBlockSelfClear_v2.jsp",
+    method: {
+      한국모바일인증: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByAltText("차단 해제하기 버튼").click();
+        const newPage = await pagePromise;
+        await newPage.getByText("휴대폰 본인확인", { exact: true }).click();
+        return newPage;
+      },
+    },
+  },
 });

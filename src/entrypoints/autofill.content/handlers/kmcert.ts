@@ -8,8 +8,11 @@ export const kmcert_v2_1: Handler = {
   },
   fill: async (page, profile) => {
     await page
-      .input("#reqCommIdStated")
+      .input("form[name='cplogn'] input[name='reqCommIdStated']")
       .fill(profile.map.통신사("SKT", "KTF", "LGT", "SKM", "KTM", "LGM"));
+    await page
+      .input("form[name='cplogn'] input[name='tabGubun']")
+      .fill(profile.map.인증방식(["", "sms", "app", "sms"]));
 
     const form = page.form("form[name='cplogn']");
     const actionHref = profile.map.인증방식([
@@ -59,7 +62,10 @@ export const kmcert_v2_2: Handler = {
     await page.input(`input[name="agree_list02"]`).check();
     await page.input(`input[name="agree_list03"]`).check();
     await page.input(`input[name="agree_list04"]`).check();
-    await page.input(`input[name="securityNum"]`).focus();
+
+    const image = await page.image("#captcha_div > img").loaded().run();
+    const captchaText = await solveCaptcha("/captcha/kmcert.onnx", image.element!);
+    await page.input("#securityNum").fill(captchaText);
   },
 };
 
