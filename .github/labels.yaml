@@ -1,0 +1,69 @@
+# icon reference: https://gist.github.com/rxaviers/7360908
+
+# ⏱️ status and progress
+- name: ":seedling: stat:new"
+  color: "70b322"
+  description: "Issue not yet reviewed by maintainer"
+
+- name: ":raising_hand: stat:resolving"
+  color: "aaaaaa"
+  description: "Lack of information to verify the issue. Cannot reproduce the issue"
+
+- name: ":hourglass_flowing_sand: stat:pending"
+  color: "935026"
+  description: "Successfully reproduced the issue. Waiting state before starting work."
+
+- name: ":hammer: stat:progress"
+  color: "afc0d0"
+  description: "Work has started to resolve the issue. A branch related to the issue has been created."
+
+- name: ":white_check_mark: stat:done"
+  color: "1cc828"
+  description: "The issue has been resolved and merged into the main branch."
+
+# 📌 type
+- name: ":no_entry_sign: type:bug"
+  color: "eb5637"
+  description: "Report of unexpected errors or incorrect behavior"
+
+- name: ":skull: type:vulnerability"
+  color: "f0f9fe"
+  description: "Security-related reports, CVE alerts, and security-related dependency alerts"
+
+- name: ":sparkles: type:feature"
+  color: "fbdd3a"
+  description: "Request for a new feature"
+
+- name: ":grey_question: type:qeustion"
+  color: "ecebeb"
+  description: "Questions about how to use a feature or technical inquiries"
+
+- name: ":book: type:documentation"
+  color: "2d7ba3"
+  description: "Requests for documentation-related work (mod, add etc.), typo, documentation incorrect"
+
+- name: ":pushpin: type:chore"
+  color: "889eab"
+  description: "Maintenance tasks such as code cleanup and dependency updates not related to security"
+
+# 📝 priority
+- name: ":rotating_light: priority:critical"
+  color: "f34b3a"
+  description: "Critical bugs and issues that must be resolved immediately"
+
+- name: ":fire: priority:high"
+  color: "f59e0b"
+  description: "High priority bugs and issues that should be resolved as soon as possible"
+
+- name: ":warning: priority:medium"
+  color: "f97316"
+  description: "Medium priority bugs and issues that should be resolved as soon as possible"
+
+- name: ":leaves: priority:low"
+  color: "22c55e"
+  description: "Low priority bugs and issues that can be resolved later"
+
+# 🙃 misc
+- name: ":loop: misc:duplicate"
+  color: "505255"
+  description: "When the content overlaps with another existing issue"

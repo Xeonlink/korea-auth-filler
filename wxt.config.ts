@@ -29,7 +29,7 @@ export default defineConfig({
   },
   imports: false,
   zip: {
-    excludeSources: ["tests/**", "test-results/**", "playwright-report/**", "publish/**"],
+    excludeSources: ["tests/**", "publish/**"],
   },
 
   // auto-icons
