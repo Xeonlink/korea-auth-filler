@@ -1,8 +1,8 @@
-import { test, TestDetails } from "@playwright/test";
+import { TestDetails, test } from "@playwright/test";
 
-// prettier-ignore
+// Prettier-ignore
 type Cases<T extends Record<string, any>> = {
-    [key in keyof T]: Partial<Record<T[key], string | (TestDetails & { title: string })>>;
+  [key in keyof T]: Partial<Record<T[key], string | (TestDetails & { title: string })>>;
 };
 
 function _allcase<T extends Record<string, any>>(

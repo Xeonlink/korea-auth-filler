@@ -108,9 +108,9 @@ const random = {
  * @returns 계산된 체크섬 자리수
  */
 function calculateLastDigit(...digits: number[]): number {
-  const multipliers = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5];
-  const sum = digits.reduce((acc, digit, index) => acc + digit * multipliers[index], 0);
-  const remainder = 11 - (sum % 11);
+  const multipliers = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5],
+   sum = digits.reduce((acc, digit, index) => acc + digit * multipliers[index], 0),
+   remainder = 11 - (sum % 11);
   return remainder > 9 ? remainder % 10 : remainder;
 }
 
@@ -138,30 +138,30 @@ function generateBackPart(...frontDigits: number[]): string {
  * @returns 생성된 주민번호 배열
  */
 const jumin: JuminGenerator = (options: JuminOptions = {}): string[] => {
-  const result: string[] = [];
-  const loop = options.loop || 1;
+  const result: string[] = [],
+   loop = options.loop || 1;
 
   for (let i = 0; i < loop; i++) {
-    const year = options.year || random.year();
-    const month = options.month || random.month();
-    const day = options.day || random.day();
-    const gender = options.gender || random.gender();
+    const year = options.year || random.year(),
+     month = options.month || random.month(),
+     day = options.day || random.day(),
+     gender = options.gender || random.gender(),
 
-    const date = new Date(year, month - 1, day);
-    const actualYear = date.getFullYear();
-    const actualMonth = date.getMonth() + 1;
-    const actualDay = date.getDate();
+     date = new Date(year, month - 1, day),
+     actualYear = date.getFullYear(),
+     actualMonth = date.getMonth() + 1,
+     actualDay = date.getDate(),
 
     // Generate front part (YYMMDD)
-    const frontPart = (
+     frontPart = (
       actualYear.toString() +
       pad(actualMonth, "0", 2) +
       pad(actualDay, "0", 2)
-    ).substring(2);
-    const frontDigits = frontPart.split("").map(Number);
+    ).substring(2),
+     frontDigits = frontPart.split("").map(Number),
 
     // Add gender digit (1-2 for 1900s, 3-4 for 2000s)
-    const genderDigit = gender + (actualYear > 1999 ? 2 : 0);
+     genderDigit = gender + (actualYear > 1999 ? 2 : 0);
     frontDigits.push(genderDigit);
 
     // Generate back part
@@ -198,19 +198,19 @@ jumin.verify = (juminNumber: string, secondPart?: string): boolean => {
     return false;
   }
 
-  const digits = fullJumin.split("").map(Number);
-  const genderDigit = digits[6];
+  const digits = fullJumin.split("").map(Number),
+   genderDigit = digits[6],
 
   // Determine century based on gender digit
-  const century = genderDigit > 2 ? "20" : "19";
-  const year = parseInt(century + fullJumin.substring(0, 2));
-  const month = parseInt(fullJumin.substring(2, 4));
-  const day = parseInt(fullJumin.substring(4, 6));
+   century = genderDigit > 2 ? "20" : "19",
+   year = parseInt(century + fullJumin.substring(0, 2)),
+   month = parseInt(fullJumin.substring(2, 4)),
+   day = parseInt(fullJumin.substring(4, 6)),
 
-  const date = new Date(year, month - 1, day);
+   date = new Date(year, month - 1, day),
 
   // Validate date
-  const expectedDateString = (
+   expectedDateString = (
     date.getFullYear().toString() +
     pad(date.getMonth() + 1, "0", 2) +
     pad(date.getDate(), "0", 2)

@@ -30,7 +30,7 @@ export class Page {
     return document.getElementById(id) as T | null;
   }
 
-  // locators 모음 ------------------------------------------
+  // Locators 모음 ------------------------------------------
   public input(selector: string) {
     return new InputLocator(selector);
   }
@@ -55,7 +55,7 @@ export class Page {
     return setTimeout(fn, delay);
   }
 
-  // utils ------------------------------------------------
+  // Utils ------------------------------------------------
   public async wait(delay: number = 100) {
     return await new Promise((resolve) => setTimeout(resolve, delay));
   }

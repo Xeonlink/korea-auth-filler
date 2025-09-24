@@ -1,7 +1,7 @@
 import { way } from "@/utils/constants";
 import { test } from "./index";
 
-test.describe("from about:blank", () => {
+test.describe("about:blank", () => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);

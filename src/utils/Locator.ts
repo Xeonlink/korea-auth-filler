@@ -25,7 +25,7 @@ export class Locator<T extends HTMLElement = HTMLElement> {
     return document.querySelector<T>(this.selector);
   }
 
-  // execute functions -----------------------------------------------
+  // Execute functions -----------------------------------------------
 
   public async run() {
     for (const task of this.tasks) {
@@ -67,7 +67,7 @@ export class Locator<T extends HTMLElement = HTMLElement> {
     return await this.run();
   }
 
-  // condition functions -----------------------------------------------
+  // Condition functions -----------------------------------------------
 
   public async effect(fn: () => Promise<void> | void) {
     this.tasks.push(async () => {
@@ -104,7 +104,7 @@ export class Locator<T extends HTMLElement = HTMLElement> {
 export class InputLocator extends Locator<HTMLInputElement> {
   public async check(value: boolean = true) {
     this.tasks.push(async () => {
-      const element = this.element;
+      const {element} = this;
       if (element && element.checked !== value) {
         element.click();
       }
@@ -114,7 +114,7 @@ export class InputLocator extends Locator<HTMLInputElement> {
 
   public async fill(value: string) {
     this.tasks.push(async () => {
-      const element = this.element;
+      const {element} = this;
       if (element) {
         element.value = value;
         this.triggerEvent(element);

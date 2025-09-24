@@ -1,17 +1,9 @@
 import { carrier, way } from "@/utils/constants";
 import type { CarrierCode } from "@/utils/type";
-import { allcase2 } from "./utils/testcase";
 import { test } from "./index";
 import { poms } from "./pom/PomPage";
 
-type Var = {
-  gateKey: "대전시Login" | "롯데홈쇼핑SignUp";
-  carrier: CarrierCode;
-};
-
-const testcase = allcase2<Var>((variables) => {
-  const { gateKey, carrier } = variables;
-
+const callback = (gateKey: "대전시Login", carrier: CarrierCode) => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ carrier, way: way.SMS });
     await popupPage.prepare(profile);
@@ -56,15 +48,9 @@ const testcase = allcase2<Var>((variables) => {
       await expect.qrAuthView(profile.통신3사 ? "MNO" : "MVNO");
     });
   });
-});
+};
 
-testcase.regist({
-  gateKey: {
-    대전시Login: "from 대전시Login",
-    롯데홈쇼핑SignUp: "from 롯데홈쇼핑SignUp",
-  },
-  carrier: {
-    [carrier.KT]: "MNO",
-    [carrier.KT_MVNO]: "MVNO",
-  },
+test.describe("normal", () => {
+  test.describe("MNO", () => callback("대전시Login", carrier.KT));
+  test.describe("MVNO", () => callback("대전시Login", carrier.KT_MVNO));
 });

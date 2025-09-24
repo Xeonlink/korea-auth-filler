@@ -13,12 +13,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Helmet } from "react-helmet";
 import { FillSettingsPage } from "./pages/FillSettingsPage";
 import { HowToUsePage } from "./pages/HowToUsePage";
 import { IntroPage } from "./pages/IntroPage";
 import { ProfilesPage } from "./pages/ProfilesPage";
-import { createRouter, RouteProvider, useLocation, useNavigate } from "@/components/Router";
+import { RouteProvider, createRouter, useLocation, useNavigate } from "@/components/Router";
 
 export const router = createRouter([
   {
@@ -51,15 +50,12 @@ export function Options() {
 
   return (
     <>
-      <Helmet>
-        <title>{t("extension_name")}</title>
-      </Helmet>
       <nav
-        className={cn("w-64 bg-base-200 h-full flex flex-col transition-all duration-500", {
+        className={cn("flex h-full w-64 flex-col bg-base-200 transition-all duration-500", {
           "w-16": !isNavOpen,
         })}
       >
-        <div className="p-2 text-center py-10">
+        <div className="p-2 py-10 text-center">
           <img
             alt="로고"
             className={cn("inline-block w-10 transition-all duration-500", {
@@ -68,14 +64,14 @@ export function Options() {
             src={Logo}
           />
         </div>
-        <div className="p-2 flex-1 pr-1">
+        <div className="flex-1 p-2 pr-1">
           <ul>
             <li className="flex items-center">
               <button
-                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                className="btn block flex-1 overflow-hidden text-start btn-ghost"
                 onClick={() => navigate("/intro")}
               >
-                <div className="w-32 space-x-4">
+                <div className="w-44 space-x-4">
                   <FontAwesomeIcon icon={faHouse} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
                     {t("intro")}
@@ -83,17 +79,17 @@ export function Options() {
                 </div>
               </button>
               <div
-                className={cn("w-1 h-4 rounded-full opacity-80", {
+                className={cn("h-4 w-1 rounded-full opacity-80", {
                   "bg-base-content": currentPath === "/intro",
                 })}
               ></div>
             </li>
             <li className="flex items-center">
               <button
-                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                className="btn block flex-1 overflow-hidden text-start btn-ghost"
                 onClick={() => navigate("/how-to-use")}
               >
-                <div className="w-32 space-x-4">
+                <div className="w-44 space-x-4">
                   <FontAwesomeIcon icon={faBookOpenReader} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
                     {t("how_to_use")}
@@ -101,17 +97,17 @@ export function Options() {
                 </div>
               </button>
               <div
-                className={cn("w-1 h-4 rounded-full opacity-80", {
+                className={cn("h-4 w-1 rounded-full opacity-80", {
                   "bg-base-content": currentPath === "/how-to-use",
                 })}
               ></div>
             </li>
             <li className="flex items-center">
               <button
-                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                className="btn block flex-1 overflow-hidden text-start btn-ghost"
                 onClick={() => navigate("/profiles")}
               >
-                <div className="w-32 space-x-4">
+                <div className="w-44 space-x-4">
                   <FontAwesomeIcon icon={faListUl} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
                     {t("profiles")}
@@ -119,17 +115,17 @@ export function Options() {
                 </div>
               </button>
               <div
-                className={cn("w-1 h-4 rounded-full opacity-80", {
+                className={cn("h-4 w-1 rounded-full opacity-80", {
                   "bg-base-content": currentPath === "/profiles",
                 })}
               ></div>
             </li>
             <li className="flex items-center">
               <button
-                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                className="btn block flex-1 overflow-hidden text-start btn-ghost"
                 onClick={() => navigate("/fill-settings")}
               >
-                <div className="w-32 space-x-4">
+                <div className="w-44 space-x-4">
                   <FontAwesomeIcon icon={faGear} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
                     {t("fill_settings")}
@@ -137,14 +133,14 @@ export function Options() {
                 </div>
               </button>
               <div
-                className={cn("w-1 h-4 rounded-full opacity-80", {
+                className={cn("h-4 w-1 rounded-full opacity-80", {
                   "bg-base-content": currentPath === "/fill-settings",
                 })}
               ></div>
             </li>
             <li className="flex items-center">
               <button
-                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                className="btn block flex-1 overflow-hidden text-start btn-ghost"
                 onClick={() => {
                   window.open(
                     "https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support",
@@ -152,18 +148,18 @@ export function Options() {
                   );
                 }}
               >
-                <div className="w-32 space-x-4">
+                <div className="w-44 space-x-4">
                   <FontAwesomeIcon className="h-4 w-4" icon={faBug} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
                     {t("bug_report")}
                   </span>
                 </div>
               </button>
-              <div className={cn("w-1 h-4 rounded-full opacity-80")}></div>
+              <div className={cn("h-4 w-1 rounded-full opacity-80")}></div>
             </li>
             <li className="flex items-center">
               <button
-                className="btn btn-ghost flex-1 block text-start overflow-hidden"
+                className="btn block flex-1 overflow-hidden text-start btn-ghost"
                 onClick={() => {
                   window.open(
                     "https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support",
@@ -171,23 +167,23 @@ export function Options() {
                   );
                 }}
               >
-                <div className="w-32 space-x-4">
+                <div className="w-44 space-x-4">
                   <FontAwesomeIcon className="h-4 w-4" icon={faQuestionCircle} />
                   <span className={cn("transition-all duration-500", { "opacity-0": !isNavOpen })}>
                     {t("ask_and_request")}
                   </span>
                 </div>
               </button>
-              <div className={cn("w-1 h-4 rounded-full opacity-80")}></div>
+              <div className={cn("h-4 w-1 rounded-full opacity-80")}></div>
             </li>
           </ul>
         </div>
         <div className="p-2">
           <button
-            className="btn btn-ghost w-full block text-start overflow-hidden"
+            className="btn block w-full overflow-hidden text-start btn-ghost"
             onClick={toggleNav}
           >
-            <div className="w-32 space-x-4">
+            <div className="w-44 space-x-4">
               <FontAwesomeIcon
                 className={cn("transition-transform duration-500", {
                   "rotate-180": !isNavOpen,

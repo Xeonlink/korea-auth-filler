@@ -1,11 +1,11 @@
 import type { StorageData } from "@/utils/type";
 import { carrier, gender, way } from "@/utils/constants";
-import { browser, type Runtime, type Tabs } from "wxt/browser";
+import { type Runtime, type Tabs, browser } from "wxt/browser";
 import { defineBackground } from "wxt/sandbox";
 
 export default defineBackground({
   type: "module",
-  main: main,
+  main,
 });
 
 const defaultStorageData: StorageData = {
@@ -75,7 +75,7 @@ const defaultStorageData: StorageData = {
     : [],
   selectedProfile: 0,
   on: true,
-  isSideMenuOpen: false,
+  isSideMenuOpen: true,
   delay: 1000,
   fullauto: false,
 };

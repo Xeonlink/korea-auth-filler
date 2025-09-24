@@ -136,7 +136,7 @@ export function HowToUsePage() {
           </div>
         </div>
 
-        <div className="alert">
+        <div role="alert" className="alert alert-soft">
           <p>
             <span className="font-bold">참고:</span> 본 확장 프로그램은 사용자의 개인정보를 브라우저
             내에만 저장하며, 외부로 전송하지 않습니다.

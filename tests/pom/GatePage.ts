@@ -23,14 +23,6 @@ export const createGate = defineGate(authMethod, {
   강원도Login: {
     url: "https://state.gwd.go.kr/portal/minwon/epeople/counsel",
     method: {
-      한국모바일인증: async (page) => {
-        const pagePromise = page.context().waitForEvent("page");
-        const frame = page.frames()[1]!;
-        await frame.waitForLoadState("networkidle");
-        await frame.locator("a.be_03").click();
-        const newPage = await pagePromise;
-        return newPage;
-      },
       모바일신분증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
         const frame = page.frames()[1]!;
@@ -99,18 +91,6 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
-  롯데홈쇼핑SignUp: {
-    url: "https://www.lotteimall.com/member/regist/forward.MemberRegist.lotte",
-    method: {
-      SCI평가정보: async (page) => {
-        const pagePromise = page.context().waitForEvent("page");
-        await page.getByLabel("동의하기").check();
-        await page.getByText("휴대폰 인증").click();
-        const newPage = await pagePromise;
-        return newPage;
-      },
-    },
-  },
   삼성서울병원Login: {
     url: "https://www.samsunghospital.com/home/member/login.do",
     method: {
@@ -146,13 +126,6 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "본인확인 로그인" }).click();
         await page.getByRole("button", { name: "민간인증서" }).click();
-        const newPage = await pagePromise;
-        return newPage;
-      },
-      NICE평가정보: async (page) => {
-        await page.getByRole("link", { name: "본인확인 로그인" }).click();
-        const pagePromise = page.context().waitForEvent("page");
-        await page.getByRole("button", { name: "휴대폰" }).click();
         const newPage = await pagePromise;
         return newPage;
       },
@@ -208,18 +181,6 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
-  cafe24SignUp: {
-    url: "https://user.cafe24.com/join/hosting/general/?page=step1&landTime=1751035289",
-    method: {
-      NHN_KCP: async (page) => {
-        await page.locator("#agreeAll").check({ force: true });
-        const pagePromise = page.context().waitForEvent("page");
-        await page.getByRole("link", { name: " 휴대폰 인증" }).click();
-        const newPage = await pagePromise;
-        return newPage;
-      },
-    },
-  },
   goldenBrownTest: {
     url: "https://www.goldenbrown.co.kr/_api/_nhnkcp/kcpcert_api/sample/make_hash.php",
     method: {
@@ -252,17 +213,6 @@ export const createGate = defineGate(authMethod, {
       드림시큐리티: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("link", { name: "휴대폰 인증" }).click();
-        const newPage = await pagePromise;
-        return newPage;
-      },
-    },
-  },
-  make샵SignUp: {
-    url: "https://www.makeshop.co.kr/newmakeshop/home/create_shop.html",
-    method: {
-      드림시큐리티: async (page) => {
-        const pagePromise = page.context().waitForEvent("page");
-        await page.getByRole("button", { name: "본인인증" }).click();
         const newPage = await pagePromise;
         return newPage;
       },
@@ -330,37 +280,6 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
-  paycoSignUp: {
-    url: "https://www.payco.com/",
-    method: {
-      페이코: async (page) => {
-        const pagePromise = page.context().waitForEvent("page");
-        await page.getByRole("link", { name: "회원가입" }).click();
-        const newPage = await pagePromise;
-
-        await newPage.locator("#checkboxAll").check();
-        await newPage.locator("#confirmButton").click();
-
-        return newPage;
-      },
-    },
-  },
-  고속도로통행료: {
-    url: "https://www.hipass.co.kr/comm/lginpg.do#",
-    method: {
-      페이코: async (page) => {
-        await page.getByRole("link", { name: "SNS 인증" }).click();
-
-        const pagePromise = page.context().waitForEvent("page");
-        await page.getByRole("link", { name: "페이코 로그인" }).click();
-        const newPage = await pagePromise;
-
-        await newPage.getByRole("link", { name: "아이디 찾기" }).click();
-        await newPage.getByRole("button", { name: "휴대폰 인증" }).click();
-        return newPage;
-      },
-    },
-  },
   kfcSignUp: {
     url: "https://www.kfckorea.com/member/join",
     method: {
@@ -379,9 +298,9 @@ export const createGate = defineGate(authMethod, {
     method: {
       한국모바일인증: async (page) => {
         const pagePromise = page.context().waitForEvent("page");
-        await page.getByAltText("차단 해제하기 버튼").click();
+        await page.getByRole("button", { name: "서비스 차단 해제 하기" }).click();
+        await page.locator("a.auth").click();
         const newPage = await pagePromise;
-        await newPage.getByText("휴대폰 본인확인", { exact: true }).click();
         return newPage;
       },
     },

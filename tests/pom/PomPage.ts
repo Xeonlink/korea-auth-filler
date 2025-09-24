@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import type { Page, Locator, FrameLocator } from "@playwright/test";
+import type { FrameLocator, Locator, Page } from "@playwright/test";
 import { rootType } from "../utils/pom";
 import { toHyphenPhone } from "@/utils/utils";
 
@@ -39,31 +39,31 @@ export const poms = {
   }),
   nhnkcp: definePage({
     smsAuthView: async (root) => {
-      await expect(root).toHaveURL("https://cert.kcp.co.kr/cert/pc/smsForm.jsp");
+      await expect(root).toHaveURL("https://cert.kcp.co.kr/smsForm.do");
     },
     passAuthView: async (root) => {
-      await expect(root).toHaveURL("https://cert.kcp.co.kr/cert/pc/pushQRForm.jsp");
+      await expect(root).toHaveURL("https://cert.kcp.co.kr/pushForm.do");
     },
     qrAuthView: async (root) => {
-      await expect(root).toHaveURL("https://cert.kcp.co.kr/cert/pc/pushQRForm.jsp");
+      await expect(root).toHaveURL("https://cert.kcp.co.kr/qrAuthForm.do");
     },
     이름filled: async (root, profile) => {
-      const 이름Input = root.getByPlaceholder("성명입력");
+      const 이름Input = root.getByPlaceholder("이름");
       await expect(이름Input).toBeVisible();
       await expect(이름Input).toHaveValue(profile.이름);
     },
     주민번호앞자리filled: async (root, profile) => {
-      const 주민번호앞자리Input = root.getByTitle("주민등록번호 앞 6자리");
+      const 주민번호앞자리Input = root.getByPlaceholder("생년월일 6자리");
       await expect(주민번호앞자리Input).toBeVisible();
       await expect(주민번호앞자리Input).toHaveValue(profile.주민번호.앞자리);
     },
     주민번호성별filled: async (root, profile) => {
-      const 주민번호성별Input = root.getByTitle("주민등록번호 뒤 첫번째 자리");
+      const 주민번호성별Input = root.locator("#myNum2");
       await expect(주민번호성별Input).toBeVisible();
       await expect(주민번호성별Input).toHaveValue(profile.주민번호.성별숫자);
     },
     전화번호filled: async (root, profile) => {
-      const 전화번호Input = root.getByPlaceholder("숫자만 입력").filter({ visible: true });
+      const 전화번호Input = root.getByPlaceholder("휴대폰번호");
       await expect(전화번호Input).toBeVisible();
       await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
     },
@@ -135,9 +135,9 @@ export const poms = {
       await expect(전화번호앞자리Select).toHaveValue(profile.전화번호.앞3자리);
     },
     전화번호뒷자리filled: async (root, profile) => {
-      const legacyPhoneInput = root.getByTitle("휴대폰번호 뒷자리 일곱 또는 여덟자리");
-      const normalPhoneInput = root.getByTitle("휴대폰번호 뒷자리 여덟자리");
-      const 전화번호뒷자리Input = legacyPhoneInput.or(normalPhoneInput).filter({ visible: true });
+      const legacyPhoneInput = root.getByTitle("휴대폰번호 뒷자리 일곱 또는 여덟자리"),
+        normalPhoneInput = root.getByTitle("휴대폰번호 뒷자리 여덟자리"),
+        전화번호뒷자리Input = legacyPhoneInput.or(normalPhoneInput).filter({ visible: true });
       await expect(전화번호뒷자리Input).toBeVisible();
       await expect(전화번호뒷자리Input).toHaveValue(profile.전화번호.뒷8자리);
     },
@@ -162,7 +162,7 @@ export const poms = {
       }
     },
     /**
-     * raon 전용
+     * Raon 전용
      */
     전화번호filled: async (root, profile) => {
       const 전화번호Input = root.getByTitle("휴대폰번호 숫자11자리입력").filter({ visible: true });
@@ -338,9 +338,9 @@ export const poms = {
   }),
   mobileid: defineAny({
     이름filled: async (root, profile) => {
-      const 이름Input1 = root.locator("input[name='name']");
-      const 이름Input2 = root.getByPlaceholder("홍길동");
-      const 이름Input = 이름Input1.or(이름Input2);
+      const 이름Input1 = root.locator("input[name='name']"),
+        이름Input2 = root.getByPlaceholder("홍길동"),
+        이름Input = 이름Input1.or(이름Input2);
       await expect(이름Input).toBeVisible();
       await expect(이름Input).toHaveValue(profile.이름);
     },
@@ -377,28 +377,28 @@ export const poms = {
   }),
   kmcert: definePage({
     smsAuthView: async (root) => {
-      await expect(root).toHaveURL((url) => {
-        return [
+      await expect(root).toHaveURL((url) =>
+        [
           "https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
           "https://evt.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
-        ].some((l) => url.href.startsWith(l));
-      });
+        ].some((l) => url.href.startsWith(l)),
+      );
     },
     passAuthView: async (root) => {
-      await expect(root).toHaveURL((url) => {
-        return [
+      await expect(root).toHaveURL((url) =>
+        [
           "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
           "https://evt.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
-        ].some((l) => url.href.startsWith(l));
-      });
+        ].some((l) => url.href.startsWith(l)),
+      );
     },
     qrAuthView: async (root) => {
-      await expect(root).toHaveURL((url) => {
-        return [
+      await expect(root).toHaveURL((url) =>
+        [
           "https://www.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
           "https://evt.kmcert.com/kmcis/qr_web_v5/kmcisQr01.jsp",
-        ].some((l) => url.href.startsWith(l));
-      });
+        ].some((l) => url.href.startsWith(l)),
+      );
     },
     이름filled: async (root, profile) => {
       const 이름Input = root.getByPlaceholder("이름");

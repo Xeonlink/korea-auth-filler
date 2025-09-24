@@ -8,9 +8,7 @@ import { debounce } from "@/utils/utils";
  * - 홈택스 모바일 신분증
  */
 export const mobileid1: Handler = {
-  isMatch: (page) => {
-    return page.q(".mid-crtfc #contents").element !== null;
-  },
+  isMatch: (page) => page.q(".mid-crtfc #contents").element !== null,
   fill: async (page, profile) => {
     await page.input("input[name='name']").fill(profile.이름);
     await page.input("input[name='telno']").fill(profile.전화번호.전체);
@@ -28,9 +26,7 @@ export const mobileid2: Handler = {
   },
   fill: async (page, profile) => {
     const mipc = page.q("#mipc").element;
-    if (!mipc) {
-      return;
-    }
+    if (!mipc) return;
 
     const observer = new MutationObserver(
       debounce((_) => {

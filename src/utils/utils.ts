@@ -35,9 +35,9 @@ export function toDotBirth(str: string) {
  * @returns 생년월일 형식으로 변환된 문자열
  */
 export function toBirth(str: string, country?: Intl.LocalesArgument) {
-  const dotBirth = toDotBirth(str);
-  const [year, month, day] = dotBirth.split(".").map(Number);
-  const date = new Date();
+  const dotBirth = toDotBirth(str),
+    [year, month, day] = dotBirth.split(".").map(Number),
+    date = new Date();
   date.setFullYear(year);
   date.setMonth(month - 1);
   date.setDate(day);
@@ -185,7 +185,7 @@ export function getWayCodeTranslationKey(wayCode: WayCode) {
   }
 }
 
-// export const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
+// Export const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));
 
 /**
  * 디바운스 함수
@@ -197,7 +197,9 @@ export function debounce<T extends (...args: any[]) => void>(func: T, wait: numb
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   const debouncedFunc = (...args: Parameters<T>) => {
-    if (timeoutId) clearTimeout(timeoutId);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
     timeoutId = setTimeout(() => func(...args), wait);
   };
 

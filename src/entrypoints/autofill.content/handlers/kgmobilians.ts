@@ -2,11 +2,6 @@ import type { Handler, IProfile } from "@/utils/type";
 import { solveCaptcha } from "@/utils/captcha";
 import { Page } from "@/utils/Page";
 
-/**
- * 테스트 주소
- * - 야놀자 회원가입 : https://accounts.yanolja.com/?service=yanolja
- */
-
 export const kgmobilians: Handler = {
   isMatch: (page) => {
     return page.url.href.startsWith("https://auth.mobilians.co.kr/goCashMain.mcash");

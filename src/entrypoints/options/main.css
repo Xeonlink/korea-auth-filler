@@ -1,6 +1,101 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+}
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+
+  --color-primary: "#dc00d2";
+  --color-primary-content: "#110010";
+  --color-secondary: "#00ca7f";
+  --color-secondary-content: "#000f06";
+  --color-accent: "#007cb4";
+  --color-accent-content: "#d3e5f1";
+  --color-neutral: "#050f14";
+  --color-neutral-content: "#c5c8ca";
+  --color-base-100: "#edffff";
+  --color-base-200: "#cedede";
+  --color-base-300: "#b0bebe";
+  --color-base-content: "#141616";
+  --color-info: "#0067e3";
+  --color-info-content: "#d1e2fd";
+  --color-success: "#00e37d";
+  --color-success-content: "#001205";
+  --color-warning: "#b53d00";
+  --color-warning-content: "#f4d9d0";
+  --color-error: "#d20048";
+  --color-error-content: "#fdd6d8";
+}
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: "dark";
+
+  --color-primary: "#7300ff";
+  --color-primary-content: "#ded9ff";
+  --color-secondary: "#ff7000";
+  --color-secondary-content: "#160400";
+  --color-accent: "#e50000";
+  --color-accent-content: "#ffd8d1";
+  --color-neutral: "#01090c";
+  --color-neutral-content: "#c3c7c7";
+  --color-base-100: "#262d2c";
+  --color-base-200: "#202625";
+  --color-base-300: "#191f1e";
+  --color-base-content: "#cfd1d0";
+  --color-info: "#00b1e0";
+  --color-info-content: "#000c12";
+  --color-success: "#00c653";
+  --color-success-content: "#000e02";
+  --color-warning: "#ba6200";
+  --color-warning-content: "#0d0300";
+  --color-error: "#ff0060";
+  --color-error-content: "#160003";
+}
+
+:root {
+  font-size: 16px;
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.3125rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+
+  .btn {
+    @apply border-none shadow-none outline-0;
+    transition: all 200ms;
+
+    &:active {
+      scale: 0.95;
+      translate: 0px;
+    }
+  }
+  .input {
+    font-size: 0.9375rem;
+    @apply shadow-none;
+  }
+  .select {
+    font-size: 0.9375rem;
+    @apply shadow-none;
+  }
+}
 
 .scrollbar-hidden {
   -ms-overflow-style: none; /* IE and Edge */

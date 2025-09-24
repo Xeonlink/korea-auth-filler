@@ -2,7 +2,7 @@ import { way } from "@/utils/constants";
 import { test } from ".";
 import { poms } from "./pom/PomPage";
 
-test.describe("from 디지털원패스", () => {
+test.describe("normal", () => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);

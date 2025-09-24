@@ -11,7 +11,7 @@ export default defineContentScript({
   matches: ["https://*/*"],
   runAt: "document_idle",
   allFrames: true,
-  main: main,
+  main,
 });
 
 async function main(ctx: ContentScriptContext) {
@@ -25,7 +25,7 @@ async function main(ctx: ContentScriptContext) {
     return;
   }
 
-  const profiles = data.profiles;
+  const { profiles } = data;
   if (profiles.length === 0) {
     log("No profiles");
     return;

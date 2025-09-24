@@ -1,5 +1,5 @@
 import type { Handler, IProfile } from "@/utils/type";
-import { waitUntilDomIdle, triggerEvent, qAll, debounce } from "@/utils/utils";
+import { debounce, qAll, triggerEvent, waitUntilDomIdle } from "@/utils/utils";
 
 /**
  * **일반 테스트 주소**
@@ -25,9 +25,7 @@ export const oacx: Handler = {
   },
   fill: async (page, profile) => {
     const oacxDiv = page.q("#oacxDiv").element;
-    if (!oacxDiv) {
-      return;
-    }
+    if (!oacxDiv) return;
 
     const observer = new MutationObserver(
       debounce((_) => {
@@ -126,7 +124,7 @@ function fill(profile: IProfile) {
   const 전화번호Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone2']");
   for (const 전화번호Input of 전화번호Inputs) {
     /**
-     * maxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
+     * MaxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
      * ** 테스트 주소 **
      * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
      */
@@ -141,7 +139,7 @@ function fill(profile: IProfile) {
   const 전화번호2Inputs = qAll<HTMLInputElement>("input[data-id='oacx_phone3']");
   for (const 전화번호Input of 전화번호2Inputs) {
     /**
-     * maxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
+     * MaxLength Attribute가 없거나 0보다 작을 경우, placeholder의 길이를 사용
      * ** 테스트 주소 **
      * - 예비군 : https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do
      */

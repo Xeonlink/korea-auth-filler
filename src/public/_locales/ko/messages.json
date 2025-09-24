@@ -214,5 +214,21 @@
   "fullauto_description_2": {
     "message": "주의: 이 기능을 사용할 때는 적절한 프로필을 선택했는지 확인하세요.",
     "description": "주의: 이 기능을 사용할 때는 적절한 프로필을 선택했는지 확인하세요."
+  },
+  "delete": {
+    "message": "삭제하기",
+    "description": "삭제하기"
+  },
+  "select": {
+    "message": "선택",
+    "description": "선택"
+  },
+  "method": {
+    "message": "방법",
+    "description": "방법"
+  },
+  "Delete": {
+    "message": "삭제",
+    "description": "삭제"
   }
 }

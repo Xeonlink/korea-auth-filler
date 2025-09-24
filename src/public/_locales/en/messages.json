@@ -214,5 +214,21 @@
   "fullauto_description_2": {
     "message": "Caution: When using this feature, please check if the appropriate profile is selected.",
     "description": "Caution: When using this feature, please check if the appropriate profile is selected."
+  },
+  "delete": {
+    "message": "delete",
+    "description": "delete"
+  },
+  "select": {
+    "message": "",
+    "description": "select"
+  },
+  "method": {
+    "message" : "Method",
+    "description": "Method"
+  },
+  "Delete": {
+    "message": "Delete",
+    "description": "Delete"
   }
 }

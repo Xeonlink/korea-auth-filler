@@ -1,7 +1,7 @@
 import { way } from "@/utils/constants";
 import { test } from ".";
 
-test.describe("from 야놀자 회원가입", () => {
+test.describe("normal", () => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);

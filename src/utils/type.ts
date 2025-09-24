@@ -18,7 +18,7 @@ export type RawProfile = {
 
 export type StorageData = {
   profiles: RawProfile[];
-  selectedProfile: number; // profiles의 index
+  selectedProfile: number; // Profiles의 index
   on: boolean;
   isSideMenuOpen: boolean;
   delay: number;

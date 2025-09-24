@@ -1,6 +1,6 @@
 import { Profile } from "@/utils/Profile";
 import { carrier, gender, isForeigner, way } from "@/utils/constants";
-import { test as base, chromium, type BrowserContext } from "@playwright/test";
+import { type BrowserContext, test as base, chromium } from "@playwright/test";
 import path from "path";
 import { createGate } from "./pom/GatePage";
 import { poms } from "./pom/PomPage";
@@ -13,11 +13,15 @@ async function getExtensionId(context: BrowserContext, manifestVersion: "mv2" | 
 
   if (manifestVersion === "mv3") {
     [background] = context.serviceWorkers();
-    if (!background) background = await context.waitForEvent("serviceworker");
+    if (!background) {
+      background = await context.waitForEvent("serviceworker");
+    }
   }
   if (manifestVersion === "mv2") {
     [background] = context.backgroundPages();
-    if (!background) background = await context.waitForEvent("backgroundpage");
+    if (!background) {
+      background = await context.waitForEvent("backgroundpage");
+    }
   }
 
   return background!.url().split("/")[2];
@@ -66,7 +70,7 @@ export const test = base.extend<FixtureProps>({
     });
     await use(profile);
   },
-  poms: poms,
+  poms,
 });
 
-export const expect = test.expect;
+export const { expect } = test;

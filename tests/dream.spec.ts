@@ -1,7 +1,7 @@
 import { way } from "@/utils/constants";
 import { test } from ".";
 
-const callback = (gateKey: "hPointSignUp" | "make샵SignUp") => {
+const callback = (gateKey: "hPointSignUp") => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
@@ -48,5 +48,4 @@ const callback = (gateKey: "hPointSignUp" | "make샵SignUp") => {
   });
 };
 
-test.describe("from h.point signup", () => callback("hPointSignUp"));
-test.describe("from make# signup", () => callback("make샵SignUp"));
+test.describe("normal", () => callback("hPointSignUp"));

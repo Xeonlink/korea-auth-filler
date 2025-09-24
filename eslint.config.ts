@@ -1,18 +1,13 @@
-import { globalIgnores } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 
-export default tseslint.config([
-  globalIgnores([
-    "**/node_modules/**",
-    ".wxt/**",
-    ".output/**",
-    // "wxt.config.ts"
-  ]),
+export default defineConfig([
+  globalIgnores(["**/node_modules/**", ".wxt/**", ".output/**", "wxt.config.ts"]),
   eslint.configs.recommended,
-  jsxA11y.flatConfigs.recommended,
+  jsxA11y.flatConfigs.strict,
   react.configs.flat.recommended,
   tseslint.configs.recommended,
   {
@@ -32,6 +27,13 @@ export default tseslint.config([
           ignoreRestSiblings: true,
         },
       ],
+    },
+  },
+  {
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
 ]);

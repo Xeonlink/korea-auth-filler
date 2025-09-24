@@ -14,12 +14,11 @@ export const payco: Handler = {
     return page.url.href.startsWith("https://id.payco.com/certificate/mobile/certify.nhn");
   },
   fill: async (page, profile) => {
-    const searchParams = page.url.searchParams;
-
+    const { searchParams } = page.url;
     const provisionAgreeYn = searchParams.get("provisionAgreeYn");
     if (provisionAgreeYn === null) {
       await page.input("#terms_all").visible().click();
-      await page.input("#provisionAgreeConfirmBtn").visible().click();
+      await page.button("#provisionAgreeConfirmBtn").visible().click();
     }
 
     const certifyType = searchParams.get("certifyType");

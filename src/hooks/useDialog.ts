@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 export function useDialog() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false),
 
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+   open = () => setIsOpen(true),
+   close = () => setIsOpen(false);
 
   return { isOpen, open, close };
 }

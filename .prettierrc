@@ -1,5 +1,0 @@
-{
-  "printWidth": 100,
-  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-jsxattribute-sort"],
-  "tailwindConfig": "./tailwind.config.ts"
-}

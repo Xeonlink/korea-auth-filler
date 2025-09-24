@@ -1,12 +1,6 @@
 import { Profile } from "@/utils/Profile";
-import {
-  expect,
-  test,
-  type FrameLocator,
-  type Locator,
-  type Page,
-  type TestStepInfo,
-} from "@playwright/test";
+import type { FrameLocator, Locator, Page, TestStepInfo } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 export type WaitUntil = Required<Required<Parameters<Page["goto"]>>[1]>["waitUntil"];
 

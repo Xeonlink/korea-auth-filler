@@ -93,12 +93,11 @@ export const kmcert_v3_1: Handler = {
 
 // SMS 인증 & PASS 인증
 export const kmcert_v3_3: Handler = {
-  isMatch: (page) => {
-    return [
+  isMatch: (page) =>
+    [
       "https://www.kmcert.com/kmcis/web_v3/kmcisSms01.jsp",
       "https://www.kmcert.com/kmcis/simpleCert_web_v2/kmcisApp01.jsp",
-    ].some((l) => page.url.href.startsWith(l));
-  },
+    ].some((l) => page.url.href.startsWith(l)),
   fill: async (page, profile) => {
     await page.input(`input[name="userName"]`).fill(profile.이름);
     await page.input(`input[name="Birth"]`).fill(profile.주민번호.앞자리);
@@ -166,12 +165,11 @@ export const kmcert_v4_3: Handler = {
 
 // 통신사 선택 & 약관동의 & 인증방식 선택
 export const kmcert_v5_1: Handler = {
-  isMatch: (page) => {
-    return [
+  isMatch: (page) =>
+    [
       "https://www.kmcert.com/kmcis/web_v5/kmcisHp00.jsp",
       "https://evt.kmcert.com/kmcis/web_v5/kmcisHp00.jsp",
-    ].some((l) => page.url.href.startsWith(l));
-  },
+    ].some((l) => page.url.href.startsWith(l)),
   fill: async (page, profile) => {
     await page
       .input("#reqCommIdStated")
@@ -191,17 +189,16 @@ export const kmcert_v5_1: Handler = {
 
 // SMS 인증 & PASS 인증
 export const kmcert_v5_2: Handler = {
-  isMatch: (page) => {
-    return [
+  isMatch: (page) =>
+    [
       "https://www.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
       "https://www.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
       "https://evt.kmcert.com/kmcis/web_v5/kmcisSms01.jsp",
       "https://evt.kmcert.com/kmcis/simpleCert_web_v5/kmcisApp01.jsp",
-    ].some((l) => page.url.href.startsWith(l));
-  },
+    ].some((l) => page.url.href.startsWith(l)),
   fill: async (page, profile) => {
     await page.input(".userName").fill(profile.이름);
-    await page.button(".btnUserName").click();
+    await page.button(".btn_pass.btn_next.btnUserName.show").click();
     await page.input(".myNum1").fill(profile.주민번호.앞자리);
     await page.input(".myNum2").fill(profile.주민번호.성별숫자);
     await page.input(".mobileNo").fill(profile.전화번호.전체);

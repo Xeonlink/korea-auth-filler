@@ -1,4 +1,4 @@
-import { useEffect, useState, createElement } from "react";
+import { createElement, useEffect, useState } from "react";
 
 type PathString<T extends string> = T extends `${infer U}/${infer V}`
   ? U extends string
@@ -82,18 +82,17 @@ class Router<T extends string> {
 }
 
 export function createRouter<T extends string, R extends Route<T>[] = Route<T>[]>(routes: R) {
-  const routeMap = new Map<string, () => React.ReactNode>();
-
-  const dfs = (basePath: string, routes: Route<string>[]) => {
-    for (const route of routes) {
-      if ("render" in route) {
-        routeMap.set(`${basePath}/${route.path}`, route.render);
+  const routeMap = new Map<string, () => React.ReactNode>(),
+    dfs = (basePath: string, routes: Route<string>[]) => {
+      for (const route of routes) {
+        if ("render" in route) {
+          routeMap.set(`${basePath}/${route.path}`, route.render);
+        }
+        if ("routes" in route) {
+          dfs(`${basePath}/${route.path}`, route.routes);
+        }
       }
-      if ("routes" in route) {
-        dfs(`${basePath}/${route.path}`, route.routes);
-      }
-    }
-  };
+    };
   dfs("", routes);
 
   return new Router(routeMap as Map<InferPath<R>, () => React.ReactNode>);
@@ -130,7 +129,6 @@ type RouterProps<T extends string> = {
 
 export function RouteProvider<T extends string>(props: RouterProps<T>) {
   const { router, defaultPath } = props;
-
   const routeMap = router.getRouteMap();
   const [currentPath, setCurrentPath] = useState<T>(defaultPath);
 

@@ -12,9 +12,7 @@ export const nexonesoft: Handler = {
   },
   fill: async (page, profile) => {
     const dshRoot = page.q("#dsh-root").element;
-    if (!dshRoot) {
-      return;
-    }
+    if (!dshRoot) return;
 
     const observer = new MutationObserver(
       debounce((_) => {

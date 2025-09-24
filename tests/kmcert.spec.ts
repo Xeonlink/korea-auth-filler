@@ -2,7 +2,7 @@ import { gender, way } from "@/utils/constants";
 import { test } from "./index";
 import { expect } from "@playwright/test";
 
-const callback = (gateKey: "ktSignUp" | "인터파크티켓_본인인증" | "강원도Login") => {
+const callback = (gateKey: "ktSignUp" | "인터파크티켓_본인인증") => {
   test("SMS", async ({ gate, popupPage, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
@@ -59,7 +59,7 @@ test.describe("kmcert v5", () => {
 });
 
 test.describe("kmcert v2", () => {
-  test.describe("from 본인확인 즉시차단해제", () => {
+  test.describe("normal", () => {
     test("SMS", async ({ gate, popupPage, profile }) => {
       profile.mod({ way: way.SMS });
       await popupPage.prepare(profile);

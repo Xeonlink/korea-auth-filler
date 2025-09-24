@@ -2,7 +2,6 @@ import Logo from "@/assets/icon.png";
 import { ProfileForm } from "@/components/ProfileForm";
 import { Anchor } from "@/components/ui/anchor";
 import { ScrollArea } from "@/components/ui/scrollarea";
-import { Tooltip } from "@/components/ui/tooltip";
 import { useStorage } from "@/hooks/useStorage";
 import { useTranslation } from "@/hooks/useTranslation";
 import {
@@ -14,8 +13,6 @@ import {
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faBug, faGear, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import { browser } from "wxt/browser";
 
 export function Popup() {
@@ -27,10 +24,12 @@ export function Popup() {
     storage.mutate({ on: e.target.checked });
   };
   const removeProfile = (index: number) => {
+    const newProfiles = profiles.filter((_, i) => i !== index);
     storage.mutate({
-      profiles: profiles.filter((_, i) => i !== index),
+      profiles: newProfiles,
       selectedProfile:
-        profiles.length - 1 === selectedProfile ? selectedProfile - 1 : selectedProfile,
+        newProfiles.length - 1 === selectedProfile ? selectedProfile - 1 : selectedProfile,
+      isSideMenuOpen: newProfiles.length === 0 ? true : isSideMenuOpen,
     });
   };
   const selectProfile = (index: number) => {
@@ -47,29 +46,12 @@ export function Popup() {
     browser.runtime.openOptionsPage();
   };
 
-  useEffect(() => {
-    if (profiles.length === 0) {
-      storage.mutate({ isSideMenuOpen: true });
-    }
-  }, [profiles.length]);
-
-  // const onThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.checked) {
-  //     document.documentElement.setAttribute("data-theme", "light");
-  //   } else {
-  //     document.documentElement.setAttribute("data-theme", "night");
-  //   }
-  // };
-
   return (
     <>
-      <Helmet>
-        <title>{t("extension_name")}</title>
-      </Helmet>
-      <header className="w-full bg-base-200 flex p-2">
-        <div className="flex-1 flex justify-start">
+      <header className="flex w-full bg-base-200 p-2">
+        <div className="flex flex-1 justify-start">
           <label className="label cursor-pointer gap-2 pl-4" htmlFor="onoff">
-            <span className="font-bold text-base">OFF</span>
+            <span className="text-base font-bold">OFF</span>
             <input
               checked={on}
               className="toggle toggle-sm"
@@ -77,31 +59,34 @@ export function Popup() {
               onChange={onEnabledChange}
               type="checkbox"
             />
-            <span className="font-bold text-base">ON</span>
+            <span className="text-base font-bold">ON</span>
           </label>
         </div>
         <div className="flex items-center">
-          <img alt="logo" className="w-10 h-10" src={Logo} />
+          <img alt="logo" className="h-10 w-10" src={Logo} />
         </div>
-        <div className="flex-1 flex justify-end">
+        <div className="flex flex-1 justify-end">
           {/* <label className="btn btn-ghost swap swap-rotate">
             <input onChange={onThemeChange} type="checkbox" />
             <FontAwesomeIcon className="swap-off h-4 w-4" icon={faSun} />
             <FontAwesomeIcon className="swap-on h-4 w-4" icon={faMoon} />
           </label> */}
-          <Tooltip dir="left" tip={isSideMenuOpen ? "닫기" : t("add_profile")}>
-            <label className="btn btn-ghost swap swap-rotate">
+          <div
+            className="tooltip tooltip-left"
+            data-tip={isSideMenuOpen ? t("close") : t("add_profile")}
+          >
+            <label className="btn swap swap-rotate btn-ghost">
               <input checked={isSideMenuOpen} onChange={toggleSideMenu} type="checkbox" />
-              <FontAwesomeIcon className="h-4 w-4 swap-on" icon={faMinus} />
-              <FontAwesomeIcon className="h-4 w-4 swap-off" icon={faPlus} />
+              <FontAwesomeIcon className="swap-on h-4 w-4" icon={faMinus} />
+              <FontAwesomeIcon className="swap-off h-4 w-4" icon={faPlus} />
             </label>
-          </Tooltip>
+          </div>
         </div>
       </header>
       <main className="flex">
-        <ScrollArea className="w-96 h-96">
+        <ScrollArea className="h-96 w-96">
           {profiles.length < 1 ? (
-            <div className="p-4 text-center space-y-2">
+            <div className="space-y-2 p-4 text-center">
               <h4 className="text-center text-base">{t("no_profile")}</h4>
               <button className="btn btn-ghost" onClick={openSideMenu} type="button">
                 <FontAwesomeIcon className="h-4 w-4" icon={faPlus} /> {t("add_profile")}
@@ -110,29 +95,29 @@ export function Popup() {
           ) : null}
           <ul className="w-96 p-2 pl-3">
             {profiles.map((profile, index) => (
-              <li className="w-full flex items-center" key={profile.id}>
+              <li className="flex w-full items-center" key={profile.id}>
                 <div
-                  className={cn("w-1 h-4 rounded-full opacity-80", {
+                  className={cn("h-4 w-1 rounded-full opacity-80", {
                     "bg-base-content": selectedProfile === index,
                   })}
                 ></div>
                 <button
-                  className="flex-1 btn btn-ghost font-normal justify-start gap-1"
+                  className="btn flex-1 justify-start gap-1 font-normal btn-ghost"
                   onClick={() => selectProfile(index)}
                   type="button"
                 >
                   <h5 className="text-sm">{profile.name}</h5>
-                  <span className="badge badge-sm border-none">
+                  <span className="badge border-none badge-sm">
                     {toHyphenPhone(profile.phone_number).slice(4)}
                   </span>
-                  <span className="badge badge-sm border-none">
+                  <span className="badge border-none badge-sm">
                     {t(getCarrierCodeTranslationKey(profile.carrier))}
                   </span>
-                  <span className="badge badge-sm border-none">
+                  <span className="badge border-none badge-sm">
                     {t(getWayCodeTranslationKey(profile.way))}
                   </span>
                 </button>
-                <Tooltip dir="left" tip="삭제하기">
+                <div className="tooltip tooltip-left" data-tip={t("delete")}>
                   <button
                     className="btn btn-ghost"
                     onClick={() => removeProfile(index)}
@@ -140,14 +125,14 @@ export function Popup() {
                   >
                     <FontAwesomeIcon className="h-4 w-4" icon={faTrash} />
                   </button>
-                </Tooltip>
+                </div>
               </li>
             ))}
           </ul>
         </ScrollArea>
 
         <ScrollArea
-          className={cn("w-96 h-96", {
+          className={cn("h-96 w-96", {
             "w-0": !isSideMenuOpen,
           })}
         >
@@ -157,14 +142,14 @@ export function Popup() {
       <footer className="w-full bg-base-200">
         <ul className="flex p-2">
           <li className="contents">
-            <button className="btn btn-ghost min-h-0 h-10 flex-grow" onClick={openOptions}>
+            <button className="btn h-10 flex-grow btn-ghost" onClick={openOptions}>
               <FontAwesomeIcon className="h-4 w-4" icon={faGear} />
               {t("options")}
             </button>
           </li>
           <li className="contents">
             <Anchor
-              className="btn btn-ghost min-h-0 h-10 flex-grow"
+              className="btn h-10 flex-grow btn-ghost"
               href="https://github.com/Xeonlink/korea-auth-filler"
             >
               <FontAwesomeIcon className="h-4 w-4" icon={faGithub} />
@@ -173,7 +158,7 @@ export function Popup() {
           </li>
           <li className="contents">
             <Anchor
-              className="btn btn-ghost min-h-0 h-10 flex-grow"
+              className="btn h-10 flex-grow btn-ghost"
               href="https://chromewebstore.google.com/detail/eonnjagalbjlklfjnfpgdeaajkghpnjc/support"
             >
               <FontAwesomeIcon className="h-4 w-4" icon={faBug} />

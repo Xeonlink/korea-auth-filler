@@ -25,7 +25,7 @@ function getTcValue(profile: IProfile) {
 export const kcb1: Handler = {
   isMatch: (page) => {
     const isUrlMatch = page.url.href.startsWith("https://safe.ok-name.co.kr/CommonSvl");
-    const isStep1 = !!page.q<HTMLElement>(".step1header").element;
+    const isStep1 = Boolean(page.q<HTMLElement>(".step1header").element);
     return isUrlMatch && isStep1;
   },
   fill: async (page, profile) => {
@@ -41,7 +41,7 @@ export const kcb1: Handler = {
 export const kcb2: Handler = {
   isMatch: (page) => {
     const isUrlMatch = page.url.href.startsWith("https://safe.ok-name.co.kr/CommonSvl");
-    const isStep2 = !!page.q<HTMLElement>("section.certifyWrap").element;
+    const isStep2 = Boolean(page.q<HTMLElement>("section.certifyWrap").element);
     return isUrlMatch && isStep2;
   },
   fill: async (page, profile) => {
@@ -73,7 +73,7 @@ export const kcb2: Handler = {
      * QR인증 창을 닫으면 refresh 되어서 다시 QR인증 창이 떠버리는 문제가 있음.
      */
     if (profile.인증방식.QR) {
-      // await page.button("#qr_auth").visible().click();
+      // Await page.button("#qr_auth").visible().click();
     }
   },
 };

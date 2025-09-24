@@ -1,10 +1,14 @@
+import tailwindcss from "@tailwindcss/vite";
+import type { WxtViteConfig } from "wxt";
 import { defineConfig } from "wxt";
 
 export default defineConfig({
   srcDir: "src",
   modules: ["@wxt-dev/auto-icons"],
-  manifest: async (_) => {
-    return {
+  vite: async (_) => ({
+      plugins: [tailwindcss()],
+    } as WxtViteConfig),
+  manifest: async (_) => ({
       name: "__MSG_extension_name__",
       description: "__MSG_extension_description__",
       default_locale: "ko",
@@ -25,14 +29,13 @@ export default defineConfig({
           matches: ["<all_urls>"],
         },
       ],
-    };
-  },
+    }),
   imports: false,
   zip: {
     excludeSources: ["tests/**", "docs/**"],
   },
 
-  // auto-icons
+  // Auto-icons
   autoIcons: {
     sizes: [128, 48, 32, 16],
   },

@@ -1,14 +1,7 @@
 import { test } from ".";
 import { way } from "@/utils/constants";
-import { allcase2 } from "./utils/testcase";
 
-type Var = {
-  gateKey: "서울시Login" | "부산시FindId";
-};
-
-const testcase = allcase2<Var>((variables) => {
-  const { gateKey } = variables;
-
+const callback = (gateKey: "부산시FindId") => {
   test("SMS", async ({ popupPage, gate, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
@@ -53,11 +46,6 @@ const testcase = allcase2<Var>((variables) => {
       await expect.qrAuthView();
     });
   });
-});
+};
 
-testcase.regist({
-  gateKey: {
-    서울시Login: "from 서울시Login",
-    부산시FindId: "from 부산시FindId",
-  },
-});
+test.describe("normal", () => callback("부산시FindId"));

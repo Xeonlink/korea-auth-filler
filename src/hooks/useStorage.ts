@@ -3,7 +3,7 @@ import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-q
 import { browser } from "wxt/browser";
 
 /**
- * browser.storage.sync에서 스토리지 데이터를 가져오는 훅
+ * Browser.storage.sync에서 스토리지 데이터를 가져오는 훅
  *
  * @returns 스토리지 데이터를 포함하는 쿼리 결과
  */
@@ -30,14 +30,10 @@ function useUpdateStorage() {
 
   return useMutation({
     mutationKey: ["storage"],
-    mutationFn: (items: Partial<StorageData>) => {
-      return browser.storage.sync.set(items);
-    },
+    mutationFn: (items: Partial<StorageData>) => browser.storage.sync.set(items),
     onMutate: (items: Partial<StorageData>) => {
       const oldData = queryClient.getQueryData(["storage"]);
-      queryClient.setQueryData(["storage"], (oldData: StorageData) => {
-        return { ...oldData, ...items };
-      });
+      queryClient.setQueryData(["storage"], (oldData: StorageData) => ({ ...oldData, ...items }));
       return { oldData };
     },
     onError: (_, __, context) => {
@@ -53,7 +49,7 @@ function useUpdateStorage() {
 }
 
 export function useStorage() {
-  const { data } = useStorageData();
-  const { mutate, isPending } = useUpdateStorage();
+  const { data } = useStorageData(),
+    { mutate, isPending } = useUpdateStorage();
   return { data, mutate, isPending };
 }

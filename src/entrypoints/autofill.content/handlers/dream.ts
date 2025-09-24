@@ -1,13 +1,6 @@
 import type { Handler, IProfile } from "@/utils/type";
 import { Page } from "@/utils/Page";
 
-/**
- * 테스트 주소
- * - h.point 회원가입 : https://www.h-point.co.kr/cu/join/start.nhd
- * - make# 회원가입 : https://www.makeshop.co.kr/newmakeshop/home/create_shop.html
- */
-
-// 드림시큐리티
 export const dream: Handler = {
   isMatch: (page) => {
     return page.url.href.startsWith("https://cert.mobile-ok.com/ptb_mokauth.html");
@@ -42,12 +35,12 @@ async function fill인증방식선택View(page: Page, profile: IProfile) {
     .click();
 
   await page.input("#user_agree_checkbox").click();
-  await page.button("button.btn_selsign").click();
+  await page.button(".btn_pass.btn_selsign.show").click();
 }
 
 async function fillSMSView(page: Page, profile: IProfile) {
   await page.input("#userName_sms").visible().fill(profile.이름);
-  await page.button("button.btnUserName_sms").visible().click();
+  await page.button("#sms_01 button.btnUserName_sms").visible().click();
   await page.input("#myNum1").visible().fill(profile.주민번호.앞자리);
   await page.input("#myNum2").visible().fill(profile.주민번호.성별숫자);
   await page.input("#mobileNo_sms").visible().fill(profile.전화번호.전체);
@@ -63,7 +56,7 @@ async function fillSMSView(page: Page, profile: IProfile) {
 
 async function fillPASSView(page: Page, profile: IProfile) {
   await page.input("#userName_pass").visible().fill(profile.이름);
-  await page.button("button.btnUserName_pass").visible().click();
+  await page.button("#pass_01 button.btnUserName_pass").visible().click();
   await page.input("#mobileNo_pass").visible().fill(profile.전화번호.전체);
 
   const captchaText = await page

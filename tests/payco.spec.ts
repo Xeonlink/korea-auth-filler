@@ -1,14 +1,7 @@
 import { way } from "@/utils/constants";
 import { test } from ".";
-import { allcase2 } from "./utils/testcase";
 
-type Var = {
-  gateKey: "paycoLogin" | "paycoSignUp" | "고속도로통행료";
-};
-
-const testcase = allcase2<Var>((variables) => {
-  const { gateKey } = variables;
-
+const callback = (gateKey: "paycoLogin") => {
   test("SMS | PASS", async ({ gate, popupPage, profile, poms }) => {
     profile.mod({ way: way.SMS });
     await popupPage.prepare(profile);
@@ -37,12 +30,6 @@ const testcase = allcase2<Var>((variables) => {
       });
     }
   });
-});
+};
 
-testcase.regist({
-  gateKey: {
-    paycoLogin: "from paycoLogin",
-    paycoSignUp: "from paycoSignUp",
-    고속도로통행료: "from 고속도로통행료",
-  },
-});
+test.describe("normal", () => callback("paycoLogin"));
