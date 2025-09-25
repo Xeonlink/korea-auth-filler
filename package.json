@@ -12,7 +12,7 @@
     "zip": "wxt zip",
     "postinstall": "wxt prepare",
     "package": "rm -rf .output && wxt build && wxt zip && wxt build -b firefox && wxt zip -b firefox",
-    "test": "playwright test"
+    "test": "playwright test --ui"
   },
   "keywords": [],
   "author": {
