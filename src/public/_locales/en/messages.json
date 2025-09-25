@@ -226,9 +226,5 @@
   "method": {
     "message": "Method",
     "description": "Method"
-  },
-  "Delete": {
-    "message": "Delete",
-    "description": "Delete"
   }
 }

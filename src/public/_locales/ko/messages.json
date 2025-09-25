@@ -226,9 +226,5 @@
   "method": {
     "message": "방법",
     "description": "방법"
-  },
-  "Delete": {
-    "message": "삭제",
-    "description": "삭제"
   }
 }
