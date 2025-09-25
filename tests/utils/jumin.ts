@@ -109,8 +109,8 @@ const random = {
  */
 function calculateLastDigit(...digits: number[]): number {
   const multipliers = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5],
-   sum = digits.reduce((acc, digit, index) => acc + digit * multipliers[index], 0),
-   remainder = 11 - (sum % 11);
+    sum = digits.reduce((acc, digit, index) => acc + digit * multipliers[index], 0),
+    remainder = 11 - (sum % 11);
   return remainder > 9 ? remainder % 10 : remainder;
 }
 
@@ -139,29 +139,26 @@ function generateBackPart(...frontDigits: number[]): string {
  */
 const jumin: JuminGenerator = (options: JuminOptions = {}): string[] => {
   const result: string[] = [],
-   loop = options.loop || 1;
+    loop = options.loop || 1;
 
   for (let i = 0; i < loop; i++) {
     const year = options.year || random.year(),
-     month = options.month || random.month(),
-     day = options.day || random.day(),
-     gender = options.gender || random.gender(),
-
-     date = new Date(year, month - 1, day),
-     actualYear = date.getFullYear(),
-     actualMonth = date.getMonth() + 1,
-     actualDay = date.getDate(),
-
-    // Generate front part (YYMMDD)
-     frontPart = (
-      actualYear.toString() +
-      pad(actualMonth, "0", 2) +
-      pad(actualDay, "0", 2)
-    ).substring(2),
-     frontDigits = frontPart.split("").map(Number),
-
-    // Add gender digit (1-2 for 1900s, 3-4 for 2000s)
-     genderDigit = gender + (actualYear > 1999 ? 2 : 0);
+      month = options.month || random.month(),
+      day = options.day || random.day(),
+      gender = options.gender || random.gender(),
+      date = new Date(year, month - 1, day),
+      actualYear = date.getFullYear(),
+      actualMonth = date.getMonth() + 1,
+      actualDay = date.getDate(),
+      // Generate front part (YYMMDD)
+      frontPart = (
+        actualYear.toString() +
+        pad(actualMonth, "0", 2) +
+        pad(actualDay, "0", 2)
+      ).substring(2),
+      frontDigits = frontPart.split("").map(Number),
+      // Add gender digit (1-2 for 1900s, 3-4 for 2000s)
+      genderDigit = gender + (actualYear > 1999 ? 2 : 0);
     frontDigits.push(genderDigit);
 
     // Generate back part
@@ -199,22 +196,19 @@ jumin.verify = (juminNumber: string, secondPart?: string): boolean => {
   }
 
   const digits = fullJumin.split("").map(Number),
-   genderDigit = digits[6],
-
-  // Determine century based on gender digit
-   century = genderDigit > 2 ? "20" : "19",
-   year = parseInt(century + fullJumin.substring(0, 2)),
-   month = parseInt(fullJumin.substring(2, 4)),
-   day = parseInt(fullJumin.substring(4, 6)),
-
-   date = new Date(year, month - 1, day),
-
-  // Validate date
-   expectedDateString = (
-    date.getFullYear().toString() +
-    pad(date.getMonth() + 1, "0", 2) +
-    pad(date.getDate(), "0", 2)
-  ).substring(2);
+    genderDigit = digits[6],
+    // Determine century based on gender digit
+    century = genderDigit > 2 ? "20" : "19",
+    year = parseInt(century + fullJumin.substring(0, 2)),
+    month = parseInt(fullJumin.substring(2, 4)),
+    day = parseInt(fullJumin.substring(4, 6)),
+    date = new Date(year, month - 1, day),
+    // Validate date
+    expectedDateString = (
+      date.getFullYear().toString() +
+      pad(date.getMonth() + 1, "0", 2) +
+      pad(date.getDate(), "0", 2)
+    ).substring(2);
 
   if (fullJumin.substring(0, 6) !== expectedDateString) {
     console.error("not valid date (yyMMdd).");

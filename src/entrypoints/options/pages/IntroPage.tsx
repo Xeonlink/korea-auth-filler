@@ -65,11 +65,11 @@ const images = [
 
 export function IntroPage() {
   return (
-    <div className="w-full flex">
+    <div className="flex w-full">
       <main className="container mx-auto p-10">
         {/* Hero Section */}
-        <div className="text-center mb-10">
-          <h1 className="text-2xl font-bold mb-4">한국인증채우기 확장프로그램</h1>
+        <div className="mb-10 text-center">
+          <h1 className="mb-4 text-2xl font-bold">한국인증채우기 확장프로그램</h1>
           <p className="text-sm">
             모바일 본인인증 자동 채우기 기능을 통해 귀하의 인증 절차를 간편하게 만들어드립니다.
           </p>
@@ -79,33 +79,25 @@ export function IntroPage() {
           <div className="group relative mx-auto max-w-md">
             <img
               alt="홈택스 OACX 자동 채우기 데모"
-              className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
+              className="h-auto w-full rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
               src={oacxGif}
             />
-            <div
-              className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
-                 group-hover:opacity-40 transition-opacity duration-300 flex 
-                 items-center justify-center rounded-xl"
-            >
-              <span className="text-white font-semibold text-lg">홈택스 (OACX)</span>
+            <div className="bg-opacity-40 absolute inset-0 flex items-center justify-center rounded-xl bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">
+              <span className="text-lg font-semibold text-white">홈택스 (OACX)</span>
             </div>
           </div>
         </div>
         {/* Masonry Layout for Remaining Images */}
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6">
+        <div className="columns-1 gap-6 sm:columns-2 md:columns-3 lg:columns-4">
           {images.map((image) => (
-            <div className="group relative break-inside-avoid mb-6" key={image.name}>
+            <div className="group relative mb-6 break-inside-avoid" key={image.name}>
               <img
                 alt={image.alt}
-                className="w-full h-auto rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
+                className="h-auto w-full rounded-xl border shadow-md transition-transform duration-300 group-hover:scale-105"
                 src={image.src}
               />
-              <div
-                className="absolute inset-0 bg-black bg-opacity-40 opacity-0 
-                 group-hover:opacity-40 transition-opacity duration-300 flex 
-                 items-center justify-center rounded-xl"
-              >
-                <span className="text-white font-semibold text-lg">{image.name}</span>
+              <div className="bg-opacity-40 absolute inset-0 flex items-center justify-center rounded-xl bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">
+                <span className="text-lg font-semibold text-white">{image.name}</span>
               </div>
             </div>
           ))}

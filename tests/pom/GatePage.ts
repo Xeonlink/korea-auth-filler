@@ -219,12 +219,9 @@ export const createGate = defineGate(authMethod, {
     },
   },
   야놀자SignUp: {
-    url: "https://accounts.yanolja.com/?service=yanolja",
+    url: "https://accounts.yanolja.com/recovery/email?service=yanolja",
     method: {
       KG모빌리언스: async (page) => {
-        await page.getByRole("button", { name: "이메일로 시작하기" }).click();
-        await page.getByRole("button", { name: "이메일로 가입하기" }).click();
-        await page.getByRole("button", { name: "전체 동의" }).click();
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "본인 인증하기" }).click();
         const newPage = await pagePromise;
@@ -262,6 +259,10 @@ export const createGate = defineGate(authMethod, {
           form.submit();
         });
         return newPage;
+      },
+      드림시큐리티: async (page) => {
+        await page.goto("https://cert.mobile-ok.com/ptb_mokauth.html");
+        return page;
       },
     },
   },

@@ -104,7 +104,7 @@ export class Locator<T extends HTMLElement = HTMLElement> {
 export class InputLocator extends Locator<HTMLInputElement> {
   public async check(value: boolean = true) {
     this.tasks.push(async () => {
-      const {element} = this;
+      const { element } = this;
       if (element && element.checked !== value) {
         element.click();
       }
@@ -114,7 +114,7 @@ export class InputLocator extends Locator<HTMLInputElement> {
 
   public async fill(value: string) {
     this.tasks.push(async () => {
-      const {element} = this;
+      const { element } = this;
       if (element) {
         element.value = value;
         this.triggerEvent(element);

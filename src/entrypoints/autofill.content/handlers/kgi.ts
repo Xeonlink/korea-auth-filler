@@ -1,8 +1,3 @@
-/**
- * 테스트 사이트
- * - kfc 회원가입 : https://www.kfckorea.com/member/join
- */
-
 import { Handler } from "@/utils/type";
 
 export const kgi: Handler = {

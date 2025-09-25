@@ -224,7 +224,7 @@
     "description": "select"
   },
   "method": {
-    "message" : "Method",
+    "message": "Method",
     "description": "Method"
   },
   "Delete": {

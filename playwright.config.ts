@@ -27,7 +27,7 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
-      testMatch: "**/!(yeskey).spec.ts",
+      testMatch: "**/!(yeskey|toss).spec.ts",
     },
     // {
     //   name: "no check",

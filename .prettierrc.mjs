@@ -2,7 +2,7 @@
 const config = {
   printWidth: 100,
   plugins: ["prettier-plugin-tailwindcss"],
-  tailwindFunctions: ["cn", "cva"],
+  tailwindFunctions: ["cn"],
   tailwindStylesheet: "./src/entrypoints/popup/main.css",
 };
 
