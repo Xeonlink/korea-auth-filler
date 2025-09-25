@@ -9,17 +9,9 @@
   color: "aaaaaa"
   description: "Lack of information to verify the issue. Cannot reproduce the issue"
 
-- name: ":hourglass_flowing_sand: stat:pending"
+- name: ":hourglass_flowing_sand: stat:resolved"
   color: "935026"
-  description: "Successfully reproduced the issue. Waiting state before starting work."
-
-- name: ":hammer: stat:progress"
-  color: "afc0d0"
-  description: "Work has started to resolve the issue. A branch related to the issue has been created."
-
-- name: ":white_check_mark: stat:done"
-  color: "1cc828"
-  description: "The issue has been resolved and merged into the main branch."
+  description: "Successfully reproduced the issue."
 
 # 📌 type
 - name: ":no_entry_sign: type:bug"
@@ -62,6 +54,10 @@
 - name: ":leaves: priority:low"
   color: "22c55e"
   description: "Low priority bugs and issues that can be resolved later"
+
+- name: ":construction: priority:no-plan"
+  color: "e4d826"
+  description: "No plan to proceed with the issue"
 
 # 🙃 misc
 - name: ":loop: misc:duplicate"
