@@ -1,4 +1,5 @@
-import type { Handler, IProfile } from "@/utils/type";
+import { defineHandler } from ".";
+import type { IProfile } from "@/utils/type";
 import { debounce } from "@/utils/utils";
 import { Page } from "@/utils/Page";
 
@@ -6,11 +7,11 @@ import { Page } from "@/utils/Page";
  * 테스트 사이트
  * - 대한민국 국회 회원가입 민간인증서 : https://member.assembly.go.kr/member/join/joinSelectPage.do
  */
-export const nexonesoft: Handler = {
+defineHandler("nexonesoft", {
   isMatch: (page) => {
     return page.q(`#dsh-root form.ns-step2`).element !== null;
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     const dshRoot = page.q("#dsh-root").element;
     if (!dshRoot) return;
 
@@ -29,7 +30,7 @@ export const nexonesoft: Handler = {
 
     await fill인증요청View(page, profile);
   },
-};
+});
 
 async function fill인증요청View(page: Page, profile: IProfile) {
   await page.input("#name").fill(profile.이름);

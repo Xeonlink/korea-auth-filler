@@ -49,7 +49,14 @@ function useUpdateStorage() {
 }
 
 export function useStorage() {
-  const { data } = useStorageData(),
-    { mutate, isPending } = useUpdateStorage();
-  return { data, mutate, isPending };
+  const { data } = useStorageData();
+  const { mutate, isPending } = useUpdateStorage();
+
+  const change = (changer: (data: StorageData) => void) => {
+    const copiedData = JSON.parse(JSON.stringify(data));
+    changer(copiedData);
+    mutate(copiedData);
+  };
+
+  return { data, mutate, isPending, change };
 }

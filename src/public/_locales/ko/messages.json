@@ -226,5 +226,17 @@
   "method": {
     "message": "방법",
     "description": "방법"
+  },
+  "oacx_preferred_providers": {
+    "message": "OACX 선호 인증사",
+    "description": "OACX 선호 인증사"
+  },
+  "oacx_preferred_providers_description": {
+    "message": "OACX 인증 시 선호하는 인증사를 순서대로 입력하세요. 입력한 순서대로 우선 선택됩니다.",
+    "description": "OACX 인증 시 선호하는 인증사를 순서대로 입력하세요. 입력한 순서대로 우선 선택됩니다."
+  },
+  "oacx_provider_input_placeholder": {
+    "message": "인증사 입력...",
+    "description": "인증사 입력..."
   }
 }

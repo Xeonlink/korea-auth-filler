@@ -1,4 +1,5 @@
-import type { Handler, IProfile } from "@/utils/type";
+import { defineHandler } from ".";
+import type { IProfile } from "@/utils/type";
 
 function getTcValue(profile: IProfile) {
   let tcValue = "";
@@ -22,13 +23,13 @@ function getTcValue(profile: IProfile) {
  * - 디지털원패스 : https://www.onepass.go.kr/membership/find/id
  */
 
-export const kcb1: Handler = {
+defineHandler("kcb", {
   isMatch: (page) => {
     const isUrlMatch = page.url.href.startsWith("https://safe.ok-name.co.kr/CommonSvl");
     const isStep1 = Boolean(page.q<HTMLElement>(".step1header").element);
     return isUrlMatch && isStep1;
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     await page.input("input[name='tc']").fill(getTcValue(profile));
     await page
       .input("input[name='mbl_tel_cmm_cd']")
@@ -36,15 +37,15 @@ export const kcb1: Handler = {
 
     await page.form("#ct > form").submit();
   },
-};
+});
 
-export const kcb2: Handler = {
+defineHandler("kcb", {
   isMatch: (page) => {
     const isUrlMatch = page.url.href.startsWith("https://safe.ok-name.co.kr/CommonSvl");
     const isStep2 = Boolean(page.q<HTMLElement>("section.certifyWrap").element);
     return isUrlMatch && isStep2;
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     /**
      * 인증방식 PASS | SMS 일 때
      */
@@ -76,4 +77,4 @@ export const kcb2: Handler = {
       // Await page.button("#qr_auth").visible().click();
     }
   },
-};
+});

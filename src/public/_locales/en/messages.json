@@ -226,5 +226,17 @@
   "method": {
     "message": "Method",
     "description": "Method"
+  },
+  "oacx_preferred_providers": {
+    "message": "OACX Preferred Providers",
+    "description": "OACX Preferred Providers"
+  },
+  "oacx_preferred_providers_description": {
+    "message": "Enter preferred providers in order of priority. They will be selected in the order you specify.",
+    "description": "Enter preferred providers in order of priority. They will be selected in the order you specify."
+  },
+  "oacx_provider_input_placeholder": {
+    "message": "Enter provider...",
+    "description": "Enter provider..."
   }
 }

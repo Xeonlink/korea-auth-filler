@@ -1,11 +1,11 @@
 import { solveCaptcha } from "@/utils/captcha";
-import type { Handler } from "@/utils/type";
+import { defineHandler } from ".";
 
-export const nhnkcp1: Handler = {
+defineHandler("nhnkcp", {
   isMatch: (page) => {
     return page.url.href.startsWith("https://cert.kcp.co.kr/telcomSelect.do");
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     await page
       .input("input[name='commId']")
       .fill(profile.map.통신사("SKT", "KTF", "LGU", "SKM", "KTM", "LGM"));
@@ -16,15 +16,15 @@ export const nhnkcp1: Handler = {
     await form.setAttribute("action", actionHref);
     await form.submit();
   },
-};
+});
 
-export const nhnkcp2: Handler = {
+defineHandler("nhnkcp", {
   isMatch: (page) => {
     const isHostnameValid = page.url.hostname === "cert.kcp.co.kr";
     const isPathnameValid = /\/(sms|push)Form\.do/.test(page.url.pathname);
     return isHostnameValid && isPathnameValid;
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     await page.input("#userName").fill(profile.이름);
     await page.button("button.btnUserName").click();
     // 인증방식 SMS 일 때
@@ -38,4 +38,4 @@ export const nhnkcp2: Handler = {
     const captchaText = await solveCaptcha("/captcha/nhnkcp.onnx", 보안문자Image.element!);
     await page.input("#inputCaptcha").fill(captchaText);
   },
-};
+});

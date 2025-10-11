@@ -1,8 +1,8 @@
-import type { Handler } from "@/utils/type";
 import { solveCaptcha } from "@/utils/captcha";
+import { defineHandler } from ".";
 
 // NICE평가정보
-export const nice1: Handler = {
+defineHandler("nice", {
   isMatch: (page) => {
     const isHostnameValid = page.url.hostname === "nice.checkplus.co.kr";
     const isPathnameValid = /\/cert\/(main\/menu|mobileCert\/main)/.test(page.url.pathname);
@@ -17,10 +17,10 @@ export const nice1: Handler = {
     await form.setAttribute("action", "/cert/mobileCert/method");
     await form.submit();
   },
-};
+});
 
 // 인증방식
-export const nice2: Handler = {
+defineHandler("nice", {
   isMatch: ({ url }) => {
     return url.href.startsWith("https://nice.checkplus.co.kr/cert/mobileCert/method");
   },
@@ -32,10 +32,10 @@ export const nice2: Handler = {
     await form.setAttribute("action", actionHref);
     await form.submit();
   },
-};
+});
 
 // SMS인증
-export const nice3: Handler = {
+defineHandler("nice", {
   isMatch: ({ url }) => {
     return url.href.startsWith("https://nice.checkplus.co.kr/cert/mobileCert/sms/certification");
   },
@@ -52,10 +52,10 @@ export const nice3: Handler = {
 
     await page.button(".btn_confirm").focus();
   },
-};
+});
 
 // PASS 인증
-export const nice4: Handler = {
+defineHandler("nice", {
   isMatch: ({ url }) => {
     return url.href.startsWith("https://nice.checkplus.co.kr/cert/mobileCert/push/certification");
   },
@@ -72,4 +72,4 @@ export const nice4: Handler = {
 
     await page.button(".btn_confirm").focus();
   },
-};
+});

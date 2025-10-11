@@ -9,8 +9,8 @@ test("normal, iframe", async ({ popupPage, gate, profile, poms }) => {
   const root = await gate.홈택스Login.openOACX();
   const pom = poms.oacx(root, profile);
 
-  await pom.step("드림인증", async (expect) => {
-    await root.locator(".provider-list li", { hasText: "드림인증" }).click();
+  await pom.step("네이버", async (expect) => {
+    await root.locator(".provider-list li", { hasText: "네이버" }).click();
     await expect.이름filled();
     await expect.생년원일filled();
     await expect.전화번호앞자리filled();
