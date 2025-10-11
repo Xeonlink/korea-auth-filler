@@ -1,6 +1,6 @@
+import { defineHandler } from ".";
 import { Page } from "@/utils/Page";
 import type { IProfile } from "@/utils/type";
-import { Handler } from "@/utils/type";
 
 /**
  * 테스트 주소
@@ -9,11 +9,11 @@ import { Handler } from "@/utils/type";
  * - 페이코 회원가입 : https://www.payco.com/
  */
 
-export const payco: Handler = {
+defineHandler("payco", {
   isMatch: (page) => {
     return page.url.href.startsWith("https://id.payco.com/certificate/mobile/certify.nhn");
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     const { searchParams } = page.url;
     const provisionAgreeYn = searchParams.get("provisionAgreeYn");
     if (provisionAgreeYn === null) {
@@ -36,7 +36,7 @@ export const payco: Handler = {
         throw new Error(`Unknown certifyType: ${certifyType}`);
     }
   },
-};
+});
 
 async function fillSMSView(page: Page, profile: IProfile) {
   await page.input("#name").visible().fill(profile.이름);

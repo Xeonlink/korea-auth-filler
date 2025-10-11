@@ -1,3 +1,4 @@
+import * as z from "zod";
 import { Page } from "./Page";
 
 export type CarrierCode = "1" | "2" | "3" | "4" | "5" | "6"; // SKT, KTF, LGT, SKM, KTM, LGM
@@ -5,25 +6,50 @@ export type WayCode = "1" | "2" | "3"; // SMS, PASS, QR
 export type GenderCode = "1" | "2"; // 남자, 여자
 export type IsForeigner = "0" | "1"; // 내국인, 외국인
 
-export type RawProfile = {
-  id: `${string}-${string}-${string}-${string}-${string}`;
-  name: string;
-  carrier: CarrierCode;
-  phone_number: string;
-  birth: string;
-  gender: GenderCode;
-  foreigner: IsForeigner;
-  way: WayCode;
-};
+export const rawProfileSchame = z.object({
+  id: z.uuid(),
+  name: z.string(),
+  carrier: z.string(),
+  phone_number: z.string(),
+  birth: z.string(),
+  gender: z.string(),
+  foreigner: z.string(),
+  way: z.string(),
+});
 
-export type StorageData = {
-  profiles: RawProfile[];
-  selectedProfile: number; // Profiles의 index
-  on: boolean;
-  isSideMenuOpen: boolean;
-  delay: number;
-  fullauto: boolean;
-};
+export type RawProfile = z.infer<typeof rawProfileSchame>;
+
+export const storageDataSchema = z.object({
+  profiles: z.array(rawProfileSchame).default([]),
+  selectedProfile: z.number().default(0),
+  on: z.boolean().default(true),
+  isSideMenuOpen: z.boolean().default(true),
+  delay: z.number().default(1000),
+  globalOptoins: z
+    .object({
+      fullauto: z.boolean().default(false),
+    })
+    .default({
+      fullauto: false,
+    }),
+  vendorOptions: z
+    .object({
+      oacx: z
+        .object({
+          preferences: z.array(z.string()).default([]),
+        })
+        .default({
+          preferences: [],
+        }),
+    })
+    .default({
+      oacx: {
+        preferences: [],
+      },
+    }),
+});
+
+export type StorageData = z.infer<typeof storageDataSchema>;
 
 export interface IProfile {
   이름: string;
@@ -61,7 +87,18 @@ export interface IProfile {
   };
 }
 
-export type Handler = {
+type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+
+type InferOptions<T extends string> = Prettify<
+  T extends keyof StorageData["vendorOptions"]
+    ? StorageData["vendorOptions"][T] & StorageData["globalOptoins"]
+    : StorageData["globalOptoins"]
+>;
+
+export type Handler<T extends string = string> = {
+  name: T;
   isMatch: (page: Page) => boolean;
-  fill: (page: Page, profile: IProfile) => Promise<void>;
+  fill: (page: Page, profile: IProfile, options: InferOptions<T>) => Promise<void>;
 };

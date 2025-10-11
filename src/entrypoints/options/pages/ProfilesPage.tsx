@@ -20,7 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function getWayIcon(wayCode: WayCode) {
+function getWayIcon(wayCode: WayCode | ({} & string)) {
   switch (wayCode) {
     case way.SMS:
       return faEnvelope;
@@ -29,6 +29,8 @@ function getWayIcon(wayCode: WayCode) {
     case way.QR:
       return faQrcode;
   }
+
+  throw new Error("Invalid way code");
 }
 
 export function ProfilesPage() {

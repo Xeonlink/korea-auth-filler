@@ -1,12 +1,13 @@
-import type { Handler, IProfile } from "@/utils/type";
+import { defineHandler } from ".";
+import type { IProfile } from "@/utils/type";
 import { solveCaptcha } from "@/utils/captcha";
 import { Page } from "@/utils/Page";
 
-export const kgmobilians: Handler = {
+defineHandler("kgmobilians", {
   isMatch: (page) => {
     return page.url.href.startsWith("https://auth.mobilians.co.kr/goCashMain.mcash");
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     await fillStartView(page, profile);
 
     if (profile.인증방식.PASS) {
@@ -24,7 +25,7 @@ export const kgmobilians: Handler = {
     const SMS로인증Anchor = page.q(`#sms_auth`).visible();
     await SMS로인증Anchor.on("click", () => fillSMSView(page, profile));
   },
-};
+});
 
 async function fillStartView(page: Page, profile: IProfile) {
   if (!profile.통신3사) {

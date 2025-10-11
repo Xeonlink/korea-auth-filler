@@ -1,5 +1,4 @@
-import type { StorageData } from "@/utils/type";
-import { carrier, gender, way } from "@/utils/constants";
+import { storageDataSchema, type StorageData } from "@/utils/type";
 import { type Runtime, type Tabs, browser } from "wxt/browser";
 import { defineBackground } from "wxt/sandbox";
 
@@ -8,92 +7,16 @@ export default defineBackground({
   main,
 });
 
-const defaultStorageData: StorageData = {
-  profiles: import.meta.env.DEV
-    ? [
-        {
-          id: "a-a-a-a-b",
-          name: "오지민",
-          carrier: carrier.KT,
-          phone_number: "01012345678",
-          birth: "19900101",
-          gender: gender.FEMALE,
-          foreigner: "0",
-          way: way.SMS,
-        },
-        {
-          id: "a-a-a-a-c",
-          name: "오지민",
-          carrier: carrier.KT_MVNO,
-          phone_number: "01012345678",
-          birth: "19900101",
-          gender: gender.FEMALE,
-          foreigner: "0",
-          way: way.PASS,
-        },
-        {
-          id: "a-a-a-a-d",
-          name: "오지민",
-          carrier: carrier.SKT,
-          phone_number: "01012345678",
-          birth: "19900101",
-          gender: gender.FEMALE,
-          foreigner: "0",
-          way: way.QR,
-        },
-        {
-          id: "a-a-a-a-e",
-          name: "오지민",
-          carrier: carrier.SKT_MVNO,
-          phone_number: "01012345678",
-          birth: "19900101",
-          gender: gender.FEMALE,
-          foreigner: "0",
-          way: way.SMS,
-        },
-        {
-          id: "a-a-a-a-f",
-          name: "오지민",
-          carrier: carrier.LGU,
-          phone_number: "01012345678",
-          birth: "19900101",
-          gender: gender.FEMALE,
-          foreigner: "0",
-          way: way.SMS,
-        },
-        {
-          id: "a-a-a-a-g",
-          name: "오지민",
-          carrier: carrier.LGU_MVNO,
-          phone_number: "01012345678",
-          birth: "19900101",
-          gender: gender.FEMALE,
-          foreigner: "0",
-          way: way.PASS,
-        },
-      ]
-    : [],
-  selectedProfile: 0,
-  on: true,
-  isSideMenuOpen: true,
-  delay: 1000,
-  fullauto: false,
-};
-
 async function initStorage() {
-  const storageData = await browser.storage.sync.get(null);
-  if (Object.keys(storageData).length !== 0) {
-    return;
-  }
-
-  await browser.storage.sync.set(defaultStorageData);
+  const rawStorageData = await browser.storage.sync.get(null);
+  const storageData = storageDataSchema.parse(rawStorageData);
+  await browser.storage.sync.set(storageData);
 }
 
 async function migrateStorage() {
-  const storageData = (await browser.storage.sync.get(null)) as StorageData;
-  if (storageData.fullauto === undefined) {
-    await browser.storage.sync.set({ fullauto: false });
-  }
+  const rawStorageData = await browser.storage.sync.get(null);
+  const storageData = storageDataSchema.parse(rawStorageData);
+  await browser.storage.sync.set(storageData);
 }
 
 function createContextMenu() {
@@ -164,12 +87,8 @@ function main() {
     });
   });
 
-  browser.runtime.onMessage.addListener((message, _, sendResponse) => {
+  browser.runtime.onMessage.addListener((message, _, _sendResponse) => {
     const messageData = message as Action;
-    if (messageData.type === "get-storage-data") {
-      browser.runtime.openOptionsPage();
-      sendResponse(defaultStorageData);
-    }
 
     if (messageData.type === "open-options-page") {
       browser.runtime.openOptionsPage();

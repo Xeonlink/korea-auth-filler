@@ -157,7 +157,7 @@ export const events =
     fns.forEach((fn) => fn(e));
   };
 
-export function getCarrierCodeTranslationKey(carrierCode: CarrierCode) {
+export function getCarrierCodeTranslationKey(carrierCode: CarrierCode | ({} & string)) {
   switch (carrierCode) {
     case "1":
       return "carrier_SKT";
@@ -172,9 +172,11 @@ export function getCarrierCodeTranslationKey(carrierCode: CarrierCode) {
     case "6":
       return "carrier_LGU_MVNO";
   }
+
+  throw new Error("Invalid carrier code");
 }
 
-export function getWayCodeTranslationKey(wayCode: WayCode) {
+export function getWayCodeTranslationKey(wayCode: WayCode | ({} & string)) {
   switch (wayCode) {
     case "1":
       return "sms";
@@ -183,6 +185,8 @@ export function getWayCodeTranslationKey(wayCode: WayCode) {
     case "3":
       return "qr";
   }
+
+  throw new Error("Invalid way code");
 }
 
 // Export const YYYYMMDD = Number(dayjs().format("YYYYMMDD"));

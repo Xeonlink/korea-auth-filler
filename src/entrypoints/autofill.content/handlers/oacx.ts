@@ -1,5 +1,6 @@
-import type { Handler, IProfile } from "@/utils/type";
+import type { IProfile } from "@/utils/type";
 import { debounce, qAll, triggerEvent, waitUntilDomIdle } from "@/utils/utils";
+import { defineHandler } from ".";
 
 /**
  * **일반 테스트 주소**
@@ -19,19 +20,21 @@ import { debounce, qAll, triggerEvent, waitUntilDomIdle } from "@/utils/utils";
  * - 서울시 민간인증서 : https://www.seoul.go.kr/member/userlogin/loginCheck.do
  * - 삼성서울병원 민간인증서 : https://www.samsunghospital.com/home/member/login.do
  */
-export const oacx: Handler = {
+defineHandler("oacx", {
   isMatch: (page) => {
     return page.q("#oacxDiv #oacxEmbededContents").element !== null;
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, options) => {
     const oacxDiv = page.q("#oacxDiv").element;
     if (!oacxDiv) return;
+
+    const preferredProviders = options?.preferences || [];
 
     const observer = new MutationObserver(
       debounce((_) => {
         console.log("debounced");
         if (page.q("#oacxDiv #oacxEmbededContents").element != null) {
-          beforeFill(profile);
+          beforeFill(profile, preferredProviders);
         }
       }, 100),
     );
@@ -41,11 +44,11 @@ export const oacx: Handler = {
       subtree: true,
     });
 
-    beforeFill(profile);
+    beforeFill(profile, preferredProviders);
   },
-};
+});
 
-function beforeFill(profile: IProfile) {
+function beforeFill(profile: IProfile, preferredProviders: string[]) {
   let 인증주체Lis: HTMLLIElement[] = [];
 
   // 대부분의 경우 .provider-list 를 사용함
@@ -63,6 +66,27 @@ function beforeFill(profile: IProfile) {
     });
   }
 
+  // Try to find and click preferred provider
+  if (preferredProviders.length > 0) {
+    for (const preferredProvider of preferredProviders) {
+      const normalizedPreference = preferredProvider.toLowerCase().trim();
+
+      for (const 인증주체Li of 인증주체Lis) {
+        const providerText = 인증주체Li.textContent?.toLowerCase().trim() || "";
+        const providerTitle = 인증주체Li.title?.toLowerCase().trim() || "";
+
+        if (
+          providerText.includes(normalizedPreference) ||
+          providerTitle.includes(normalizedPreference)
+        ) {
+          인증주체Li.click();
+          return;
+        }
+      }
+    }
+  }
+
+  // Fallback to first available provider if no preferred provider matched
   for (const 인증주체Li of 인증주체Lis) {
     if (인증주체Li.click) {
       인증주체Li.click();

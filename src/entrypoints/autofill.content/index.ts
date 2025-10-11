@@ -1,11 +1,11 @@
+import { Page } from "@/utils/Page";
+import { Profile } from "@/utils/Profile";
 import type { StorageData } from "@/utils/type";
 import { log, wait } from "@/utils/utils";
 import { browser } from "wxt/browser";
 import type { ContentScriptContext } from "wxt/client";
 import { defineContentScript } from "wxt/sandbox";
-import { handlers } from "./handlers";
-import { Profile } from "@/utils/Profile";
-import { Page } from "@/utils/Page";
+import { importHandlers } from "./handlers";
 
 export default defineContentScript({
   matches: ["https://*/*"],
@@ -43,6 +43,7 @@ async function main(ctx: ContentScriptContext) {
 
   log("Korea Auth Filler");
 
+  const handlers = await importHandlers();
   const url = new URL(window.location.href);
   const page = new Page(ctx, url);
 
@@ -50,7 +51,14 @@ async function main(ctx: ContentScriptContext) {
     for (const handler of handlers) {
       try {
         if (handler.isMatch(page)) {
-          await handler.fill(page, new Profile(rawProfile));
+          const vendorOptions = data.vendorOptions[handler.name as keyof typeof data.vendorOptions];
+          const globalOptions = data.globalOptoins;
+          const options = {
+            ...globalOptions,
+            ...vendorOptions,
+          };
+
+          await handler.fill(page, new Profile(rawProfile), options);
           return;
         }
       } catch (error) {

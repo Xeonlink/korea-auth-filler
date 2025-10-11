@@ -1,11 +1,12 @@
-import type { Handler, IProfile } from "@/utils/type";
+import { defineHandler } from ".";
+import type { IProfile } from "@/utils/type";
 import { Page } from "@/utils/Page";
 
-export const dream: Handler = {
+defineHandler("dream", {
   isMatch: (page) => {
     return page.url.href.startsWith("https://cert.mobile-ok.com/ptb_mokauth.html");
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     await fill통신사선택View(page, profile);
     await fill인증방식선택View(page, profile);
 
@@ -18,7 +19,7 @@ export const dream: Handler = {
       return;
     }
   },
-};
+});
 
 async function fill통신사선택View(page: Page, profile: IProfile) {
   const 통신사 = profile.map.통신사("skt", "kt", "lgu", "skt", "kt", "lgu");

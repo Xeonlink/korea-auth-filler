@@ -1,4 +1,5 @@
-import type { Handler, IProfile } from "@/utils/type";
+import { defineHandler } from ".";
+import type { IProfile } from "@/utils/type";
 import { Page } from "@/utils/Page";
 
 const captchaMap = [
@@ -15,11 +16,11 @@ const captchaMap = [
  * - 접속 코드 : danal.spec.ts 참고
  */
 
-export const danal: Handler = {
+defineHandler("danal", {
   isMatch: (page) => {
     return page.url.href.startsWith("https://wauth.teledit.com/Danal/WebAuth/Web/Start.php");
   },
-  fill: async (page, profile) => {
+  fill: async (page, profile, _options) => {
     await fillStartView(page, profile);
 
     if (profile.인증방식.PASS) {
@@ -37,7 +38,7 @@ export const danal: Handler = {
     const SMS로인증Anchor = page.q(`#authTabSms`).visible();
     await SMS로인증Anchor.on("click", () => fillSMSView(page, profile));
   },
-};
+});
 
 async function fillStartView(page: Page, profile: IProfile) {
   if (profile.통신3사) {
