@@ -52,12 +52,12 @@ export function FillSettingsPage() {
       return;
     }
 
-    storage.change((data) => data.vendorOptions.oacx.preferences.push(trimmed));
+    storage.mutableChange((data) => data.vendorOptions.oacx.preferences.push(trimmed));
 
     if (inputRef.current) inputRef.current.value = "";
   };
   const removeOacxPreference = (index: number) => {
-    storage.change((data) => data.vendorOptions.oacx.preferences.toSpliced(index, 1));
+    storage.mutableChange((data) => data.vendorOptions.oacx.preferences.splice(index, 1));
   };
   const onOacxPreferenceKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

@@ -1,4 +1,5 @@
 import type { StorageData } from "@/utils/type";
+import { deepCopyByJSON } from "@/utils/utils";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { browser } from "wxt/browser";
 
@@ -52,11 +53,11 @@ export function useStorage() {
   const { data } = useStorageData();
   const { mutate, isPending } = useUpdateStorage();
 
-  const change = (changer: (data: StorageData) => void) => {
-    const copiedData = JSON.parse(JSON.stringify(data));
+  const mutableChange = (changer: (data: StorageData) => void) => {
+    const copiedData = deepCopyByJSON(data);
     changer(copiedData);
     mutate(copiedData);
   };
 
-  return { data, mutate, isPending, change };
+  return { data, mutate, isPending, mutableChange };
 }

@@ -240,3 +240,12 @@ export function waitUntilDomIdle(func: () => void, wait: number) {
 export function type<K>() {
   return null as unknown as K;
 }
+
+/**
+ * 객체 깊은 복사
+ * @param obj - 복사할 객체
+ * @returns
+ */
+export function deepCopyByJSON<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj));
+}
