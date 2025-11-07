@@ -1,65 +1,98 @@
 # icon reference: https://gist.github.com/rxaviers/7360908
 
-# ⏱️ status and progress
-- name: ":seedling: stat:new"
+## Issue Labels
+
+### ⏱️ status and progress
+- name: "🌱 stat:new"
   color: "70b322"
   description: "Issue not yet reviewed by maintainer"
 
-- name: ":raising_hand: stat:resolving"
+- name: "🤝 stat:resolving"
   color: "aaaaaa"
   description: "Lack of information to verify the issue. Cannot reproduce the issue"
 
-- name: ":hourglass_flowing_sand: stat:resolved"
+- name: "⏳ stat:resolved"
   color: "935026"
   description: "Successfully reproduced the issue."
 
-# 📌 type
-- name: ":no_entry_sign: type:bug"
+### 📌 type
+- name: "❌ type:bug"
   color: "eb5637"
   description: "Report of unexpected errors or incorrect behavior"
 
-- name: ":skull: type:vulnerability"
+- name: "💀 type:vulnerability"
   color: "f0f9fe"
   description: "Security-related reports, CVE alerts, and security-related dependency alerts"
 
-- name: ":sparkles: type:feature"
+- name: "✨ type:feature"
   color: "fbdd3a"
   description: "Request for a new feature"
 
-- name: ":grey_question: type:qeustion"
+- name: "💡 type:qeustion"
   color: "ecebeb"
   description: "Questions about how to use a feature or technical inquiries"
 
-- name: ":book: type:documentation"
+- name: "📋 type:documentation"
   color: "2d7ba3"
   description: "Requests for documentation-related work (mod, add etc.), typo, documentation incorrect"
 
-- name: ":pushpin: type:chore"
+- name: "🧹 type:chore"
   color: "889eab"
   description: "Maintenance tasks such as code cleanup and dependency updates not related to security"
 
-# 📝 priority
-- name: ":rotating_light: priority:critical"
+### 📝 priority
+- name: "🚨 priority:critical"
   color: "f34b3a"
   description: "Critical bugs and issues that must be resolved immediately"
 
-- name: ":fire: priority:high"
+- name: "🔥 priority:high"
   color: "f59e0b"
   description: "High priority bugs and issues that should be resolved as soon as possible"
 
-- name: ":warning: priority:medium"
+- name: "⚠️ priority:medium"
   color: "f97316"
   description: "Medium priority bugs and issues that should be resolved as soon as possible"
 
-- name: ":leaves: priority:low"
+- name: "🍃 priority:low"
   color: "22c55e"
   description: "Low priority bugs and issues that can be resolved later"
 
-- name: ":construction: priority:no-plan"
+- name: "🚧 priority:no-plan"
   color: "e4d826"
   description: "No plan to proceed with the issue"
 
-# 🙃 misc
-- name: ":loop: misc:duplicate"
+### 🙃 misc
+- name: "🔁 misc:duplicate"
   color: "505255"
   description: "When the content overlaps with another existing issue"
+
+## Pull Request Labels
+
+### 🧹 type
+- name: "🧹 pr:chore"
+  color: "889eab"
+  description: "Maintenance tasks such as code cleanup and dependency updates not related to security"
+
+- name: "🧼 pr:refactor"
+  color: "a1b5ae"
+  description: "Code cleanup and refactoring"
+
+- name: "🪄 pr:setting"
+  color: "c5b5e3"
+  description: "Setting changes"
+
+- name: "🎫 pr:test"
+  color: "ffd580"
+  description: "Test code changes"
+
+- name: "✨ pr:feature"
+  color: "7dd3fc"
+  description: "Deployment changes"
+
+- name: "📋 pr:docs"
+  color: "2d7ba3"
+  description: "Documentation changes"
+
+- name: "🩹 pr:fix"
+  color: "eb5637"
+  description: "Bug fixes"

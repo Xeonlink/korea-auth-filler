@@ -142,6 +142,18 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
+  경기학교통합로그인: {
+    url: "https://www.goeyi.kr/goeyi/lo/login/loginTotalPage.do",
+    method: {
+      NICE평가정보: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByText("일반사용자(비회원) 로그인").click();
+        await page.getByAltText("휴대폰 로그인").click();
+        const newPage = await pagePromise;
+        return newPage;
+      },
+    },
+  },
   예비군Login: {
     url: "https://www.yebigun1.mil.kr/dmobis/uat/uia/LoginUsr.do",
     method: {

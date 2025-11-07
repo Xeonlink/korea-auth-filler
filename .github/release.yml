@@ -1,0 +1,16 @@
+changelog:
+  categories:
+    - title: "✨ New Features"
+      labels:
+        - "✨ pr:feature"
+    - title: "🩹 Bug Fixes"
+      labels:
+        - "🩹 pr:fix"
+    - title: "🐬 Others"
+      labels:
+        - "📋 pr:docs"
+        - "🧼 pr:refactor"
+        - "🪄 pr:setting"
+        - "🎫 pr:test"
+        - "🧹 pr:chore"
+        - "*"
