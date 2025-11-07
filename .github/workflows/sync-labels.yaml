@@ -16,15 +16,19 @@ on:
       - .github/labels.yaml
       - .github/workflows/sync-labels.yaml
 
-permissions:
-  issues: write
-
 jobs:
   sync-labels:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      issues: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sync Labels
         uses: crazy-max/ghaction-github-labeler@v5
