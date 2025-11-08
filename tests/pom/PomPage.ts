@@ -102,7 +102,7 @@ export const poms = {
       await expect(전화번호Input).toBeVisible();
       await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
     },
-    보안문자Focuced: async (root) => {
+    보안문자Focused: async (root) => {
       const 보안문자Input = root.getByPlaceholder("보안문자 입력");
       await expect(보안문자Input).toBeVisible();
       await expect(보안문자Input).toBeFocused();
@@ -420,7 +420,7 @@ export const poms = {
       await expect(전화번호Input).toBeVisible();
       await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
     },
-    보안문자Focuced: async (root) => {
+    보안문자Focused: async (root) => {
       const 보안문자Input = root.getByPlaceholder("보안문자");
       await expect(보안문자Input).toBeVisible();
       await expect(보안문자Input).toBeFocused();

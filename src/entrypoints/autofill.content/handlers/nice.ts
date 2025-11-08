@@ -47,7 +47,16 @@ defineHandler("nice", {
     await page.input("#mobileNo").fill(profile.전화번호.전체);
 
     const 보안문자Image = await page.image("#simpleCaptchaImg").loaded().run();
-    const captchaText = await solveCaptcha("/captcha/nice.onnx", 보안문자Image.element!);
+    let captchaText = await solveCaptcha("/captcha/nice.onnx", 보안문자Image.element!);
+    console.log(captchaText);
+    if (captchaText.length < 6) {
+      captchaText = await solveCaptcha(
+        "/captcha/nice_en.onnx",
+        보안문자Image.element!,
+        "ALPHADIGIT",
+      );
+      console.log(captchaText);
+    }
     await page.input("#captchaAnswer").fill(captchaText);
 
     await page.button(".btn_confirm").focus();
@@ -67,7 +76,14 @@ defineHandler("nice", {
     await page.input("#myNum2").fill(profile.주민번호.성별숫자);
 
     const 보안문자Image = await page.image("#simpleCaptchaImg").loaded().run();
-    const captchaText = await solveCaptcha("/captcha/nice.onnx", 보안문자Image.element!);
+    let captchaText = await solveCaptcha("/captcha/nice.onnx", 보안문자Image.element!);
+    if (captchaText.length < 6) {
+      captchaText = await solveCaptcha(
+        "/captcha/nice_en.onnx",
+        보안문자Image.element!,
+        "ALPHADIGIT",
+      );
+    }
     await page.input("#captchaAnswer").fill(captchaText);
 
     await page.button(".btn_confirm").focus();
