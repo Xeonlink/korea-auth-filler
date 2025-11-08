@@ -1,6 +1,5 @@
 /**
  * 주요 상수 및 enum 정의
- * TODO : utils에서 constants로 상수들 이동 및 관련 type을 type.ts에서 수정
  */
 
 // 인증방식
@@ -30,4 +29,9 @@ export const carrier = {
   SKT_MVNO: "4",
   KT_MVNO: "5",
   LGU_MVNO: "6",
+} as const;
+
+export const DECODABLE_CHARSETS = {
+  DIGIT: "0123456789",
+  ALPHADIGIT: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
 } as const;

@@ -1,15 +1,14 @@
 import ort from "onnxruntime-web";
 import { PublicPath, browser } from "wxt/browser";
+import { DECODABLE_CHARSETS } from "./constants";
 
-const BLANK_CLASS = 10,
-  NUM_CLASSES = 11;
-
-function decodeDigitSequence(seq: number[]) {
+function decodeDigitSequence(seq: number[], charsetChars: string) {
+  const blankClass = charsetChars.length;
   let out = "",
     prev = -1;
   for (const p of seq) {
-    if (p !== prev && p !== BLANK_CLASS) {
-      out += p.toString();
+    if (p !== prev && p !== blankClass) {
+      out += charsetChars[p];
     }
     prev = p;
   }
@@ -36,7 +35,11 @@ class SessionFactory {
   }
 }
 
-export async function solveCaptcha(modelPath: PublicPath, image: HTMLImageElement) {
+export async function solveCaptcha(
+  modelPath: PublicPath,
+  image: HTMLImageElement,
+  charset: keyof typeof DECODABLE_CHARSETS = "DIGIT",
+) {
   ort.env.wasm.wasmPaths = {
     wasm: browser.runtime.getURL("/ort-wasm-simd-threaded.wasm"),
     mjs: browser.runtime.getURL("/ort-wasm-simd-threaded.mjs"),
@@ -53,16 +56,19 @@ export async function solveCaptcha(modelPath: PublicPath, image: HTMLImageElemen
   ctx.fillRect(0, 0, naturalWidth, naturalHeight);
   ctx.drawImage(image, 0, 0);
 
-  const base64 = canvas.toDataURL(),
-    tensor = await ort.Tensor.fromImage(base64),
-    url = browser.runtime.getURL(modelPath),
-    session = await SessionFactory.create(url),
-    result = await session.run({ x: tensor }),
-    y = Array.from(result.y.data as Float32Array),
-    seq = Array.from({ length: y.length / NUM_CLASSES })
-      .map(() => y.splice(0, NUM_CLASSES))
-      .map((row) => row.indexOf(Math.max(...row))),
-    out = decodeDigitSequence(seq);
+  const charsetChars = DECODABLE_CHARSETS[charset];
+  const numClasses = charsetChars.length + 1;
+
+  const base64 = canvas.toDataURL();
+  const tensor = await ort.Tensor.fromImage(base64);
+  const url = browser.runtime.getURL(modelPath);
+  const session = await SessionFactory.create(url);
+  const result = await session.run({ x: tensor });
+  const y = Array.from(result.y.data as Float32Array);
+  const seq = Array.from({ length: y.length / numClasses })
+    .map(() => y.splice(0, numClasses))
+    .map((row) => row.indexOf(Math.max(...row)));
+  const out = decodeDigitSequence(seq, charsetChars);
 
   result.y.dispose();
   tensor.dispose();
