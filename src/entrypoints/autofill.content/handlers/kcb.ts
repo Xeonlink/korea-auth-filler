@@ -90,7 +90,7 @@ function getTcValueV2(profile: IProfile) {
     tcValue = `kcb.oknm.online.pass.popup2.sms.cmd.PS02_Sms011Cmd`;
   }
   if (profile.인증방식.PASS) {
-    tcValue = `kcb.oknm.online.pass.popup2.pass.cmd.PS02_Pass011Cmd`;
+    tcValue = `kcb.oknm.online.pass.popup2.push.cmd.PS02_Push011Cmd`;
   }
   if (profile.인증방식.QR) {
     tcValue = `kcb.oknm.online.pass.popup2.qr.cmd.PS03_Qr021Cmd`;
@@ -123,7 +123,7 @@ defineHandler("kcb", {
   fill: async (page, profile, _options) => {
     await page.input("#nm").visible().fill(profile.이름);
     await page.button("button.btnUserName").click();
-    await page.input("#mbphn_no").fill(profile.주민번호.앞자리);
+    await page.input("#mbphn_no").fill(profile.전화번호.전체);
   },
 });
 

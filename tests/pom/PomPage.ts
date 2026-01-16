@@ -170,7 +170,7 @@ export const poms = {
       await expect(전화번호Input).toHaveValue(toHyphenPhone(profile.전화번호.전체));
     },
   }),
-  kcb: definePage({
+  kcbPopup: definePage({
     smsAuthView: async (root) => {
       await expect(root).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
       await expect(root.locator("section.certifyWrap")).toBeVisible();
@@ -202,6 +202,40 @@ export const poms = {
       const 전화번호Input = root.getByPlaceholder("숫자만 입력");
       await expect(전화번호Input).toBeVisible();
       await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
+    },
+  }),
+  kcbPopup2: definePage({
+    smsAuthView: async (root) => {
+      await expect(root).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
+      await expect(root.locator("section.certWay_content.sms")).toBeVisible();
+    },
+    passAuthView: async (root) => {
+      await expect(root).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
+      await expect(root.locator("section.certWay_content.pass")).toBeVisible();
+    },
+    qrAuthView: async (root) => {
+      await expect(root).toHaveURL("https://safe.ok-name.co.kr/CommonSvl");
+      await expect(root.locator("section.qr_content")).toBeVisible();
+    },
+    이름filled: async (root, profile) => {
+      const 이름Input = root.getByPlaceholder("이름");
+      await expect(이름Input).toBeVisible();
+      await expect(이름Input).toHaveValue(profile.이름);
+    },
+    전화번호filled: async (root, profile) => {
+      const 전화번호Input = root.getByPlaceholder("휴대폰번호");
+      await expect(전화번호Input).toBeVisible();
+      await expect(전화번호Input).toHaveValue(profile.전화번호.전체);
+    },
+    주민번호앞자리filled: async (root, profile) => {
+      const 주민번호앞자리Input = root.getByPlaceholder("생년월일 6자리");
+      await expect(주민번호앞자리Input).toBeVisible();
+      await expect(주민번호앞자리Input).toHaveValue(profile.주민번호.앞자리);
+    },
+    주민번호성별filled: async (root, profile) => {
+      const 주민번호성별Input = root.locator(".myNum.myNum2");
+      await expect(주민번호성별Input).toBeVisible();
+      await expect(주민번호성별Input).toHaveValue(profile.주민번호.성별숫자);
     },
   }),
   sci: definePage({
