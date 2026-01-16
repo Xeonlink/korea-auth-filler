@@ -74,6 +74,9 @@ export const createGate = defineGate(authMethod, {
       },
     },
   },
+  /**
+   * 서비스 종료됨. 대체 사이트가 발견될 경우, 삭제 예정
+   */
   디지털원패스FindId: {
     url: "https://www.onepass.go.kr/membership/find/id",
     method: {
@@ -313,6 +316,18 @@ export const createGate = defineGate(authMethod, {
         const pagePromise = page.context().waitForEvent("page");
         await page.getByRole("button", { name: "서비스 차단 해제 하기" }).click();
         await page.locator("a.auth").click();
+        const newPage = await pagePromise;
+        return newPage;
+      },
+    },
+  },
+  다음계정찾기: {
+    url: "https://member.daum.net/find/account/home",
+    method: {
+      KCB: async (page) => {
+        const pagePromise = page.context().waitForEvent("page");
+        await page.getByText("휴대폰 본인인증").click();
+        await page.getByRole("button", { name: "다음" }).click();
         const newPage = await pagePromise;
         return newPage;
       },
