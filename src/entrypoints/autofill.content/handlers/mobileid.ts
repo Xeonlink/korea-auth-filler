@@ -11,9 +11,22 @@ import { debounce } from "@/utils/utils";
 defineHandler("mobileid", {
   isMatch: (page) => page.q(".mid-crtfc #contents").element !== null,
   fill: async (page, profile, _options) => {
-    await page.input("input[name='name']").fill(profile.이름);
-    await page.input("input[name='telno']").fill(profile.전화번호.전체);
-    await page.input("#allAgree").check();
+    const contents = page.q(".mid-crtfc #contents").element;
+    if (!contents) return;
+
+    const observer = new MutationObserver(
+      debounce(async (_) => {
+        await page.input("input[name='name']").fill(profile.이름);
+        await page.input("input[name='telno']").fill(profile.전화번호.전체);
+        await page.input("#allAgree").check();
+      }, 100),
+    );
+
+    observer.observe(contents, {
+      subtree: true,
+      attributeFilter: ["class"],
+      attributes: true,
+    });
   },
 });
 
