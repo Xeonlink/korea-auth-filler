@@ -1,4 +1,4 @@
-import type { IProfile, RawProfile } from "./type";
+import type { CarrierCode, GenderCode, IProfile, IsForeigner, RawProfile } from "./type";
 import { get_RRN_GenderNum, is_MNO } from "./utils";
 import { way } from "./constants";
 
@@ -35,8 +35,8 @@ export class Profile implements IProfile {
       앞자리: this.rawProfile.birth.substring(2),
       성별숫자: get_RRN_GenderNum(
         this.rawProfile.birth,
-        this.rawProfile.gender,
-        this.rawProfile.foreigner,
+        this.rawProfile.gender as GenderCode,
+        this.rawProfile.foreigner as IsForeigner,
       ),
     };
   }
@@ -62,7 +62,7 @@ export class Profile implements IProfile {
   }
 
   public get 통신3사(): boolean {
-    return is_MNO(this.rawProfile.carrier);
+    return is_MNO(this.rawProfile.carrier as CarrierCode);
   }
 
   public get 내국인(): boolean {

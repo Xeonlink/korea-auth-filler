@@ -68,3 +68,29 @@ async function fillPASSView(page: Page, profile: IProfile) {
   await page.input("#secureNo_pass").visible().fill(captchaText);
   await page.button("#pass_01 button.btnSubmit").focus();
 }
+
+defineHandler("dream", {
+  isMatch: (page) => {
+    return page.url.href.startsWith("https://cert.ez-iok.com/stdauth/ds_auth_ptb/ptb_ezauth.html");
+  },
+  fill: async (page, profile, _options) => {
+    await page.q("#providerList").visible().run();
+    const lis = page.qAll("#providerList li");
+    for (const li of lis) {
+      li.addEventListener("click", () => {
+        fill_ptb_ezauth(page, profile);
+      });
+    }
+  },
+});
+
+async function fill_ptb_ezauth(page: Page, profile: IProfile) {
+  await page.input("input[name='username']").fill(profile.이름);
+  await page.input("input[name='birthday']").fill(profile.생년월일);
+  await page.input("input[name='telnum']").fill(profile.전화번호.전체);
+  await page.input("input[name='telnum_full']").fill(profile.전화번호.전체);
+  await page
+    .input("select[name='telcobox']")
+    .fill(profile.map.통신사("SKT", "KT", "LGU", "SKT", "KT", "LGU"));
+  await page.input("#chk_all").click();
+}
