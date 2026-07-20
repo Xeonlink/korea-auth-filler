@@ -1,0 +1,6 @@
+allowBuilds:
+  "@tailwindcss/oxide": true
+  esbuild: true
+  protobufjs: true
+  sharp: true
+  spawn-sync: true

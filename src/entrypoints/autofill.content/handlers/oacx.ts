@@ -32,7 +32,6 @@ defineHandler("oacx", {
 
     const observer = new MutationObserver(
       debounce((_) => {
-        console.log("debounced");
         if (page.q("#oacxDiv #oacxEmbededContents").element != null) {
           beforeFill(profile, preferredProviders);
         }
@@ -102,6 +101,7 @@ function fill(profile: IProfile) {
    */
 
   const 이름Inputs = qAll<HTMLInputElement>("input[data-id='oacx_name']");
+  if (이름Inputs.length === 0) return alert("이름Inputs not found");
   for (const 이름Input of 이름Inputs) {
     if (!이름Input.readOnly) {
       이름Input.value = profile.이름;

@@ -1,5 +1,4 @@
 import tailwindcss from "@tailwindcss/vite";
-import type { WxtViteConfig } from "wxt";
 import { defineConfig } from "wxt";
 import { readdirSync, statSync } from "node:fs";
 import { resolve, extname, sep } from "node:path";
@@ -10,7 +9,7 @@ export default defineConfig({
   vite: async (_) => {
     return {
       plugins: [tailwindcss()],
-    } as WxtViteConfig;
+    };
   },
   manifest: async (_) => {
     const captchaDir = resolve(import.meta.dirname, "src", "public", "captcha");
